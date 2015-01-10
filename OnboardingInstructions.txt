@@ -1,0 +1,10 @@
+TODO:
+Install PyCharm (community edition) if you want - it's a python/django specific ide
+	https://www.jetbrains.com/pycharm/download/
+    Clone git repository either upon setup or after by going to VCS -> Checkout from Version Control -> Git
+
+Python 2.7
+
+PostreSQL 9.4
+    http://www.enterprisedb.com/products-services-training/pgdownload#osx
+

@@ -1,0 +1,1 @@
+web: gunicorn snakd.wsgi --log-file -

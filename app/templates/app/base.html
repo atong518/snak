@@ -1,0 +1,29 @@
+<script src="https://code.jquery.com/jquery.js"></script>
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+<!--
+This is the basic template for all pages on the snakd site
+Coontains scripts/stylesheets, a navbar, footer, and block tags for content to be added 
+in between.  To use, simply add
+    { \% extends "app/base.html" \% } (without \ and spaces between % and {})
+to the top of any template file.  *NOTE* this must be the FIRST line in the template!
+Then surround all code with
+    { \% block content \% }
+    { \% endblock \%} 
+         (again without '\' and spaces between '%' and '{}')
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'app/css/base.css' %}" />
+</head>
+{% block content %}{% endblock %}
+
+</html>

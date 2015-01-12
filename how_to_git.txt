@@ -48,4 +48,3 @@ temporarily stores all modified files that are tracked in your current git branc
 
 git stash pop 
 restores the files from the most recent stash
-

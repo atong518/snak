@@ -1,0 +1,50 @@
+IMPORTANT NOTES
+--DO NOT commit files in BIN folders
+--DO NOT do any work on a local master branch - ALWAYS BRANCH
+--DO NOT do any work until you "git pull origin master" FIRST
+--DO NOT push to global master until pulling those changes into your local repository using "git merge origin master" and testing thoroughly
+--DO NOT use "git add" to add entire folders of files: be sure of every single file you're committing
+
+--DO use git merge to combine another branch into your current working local branch
+
+
+GIT COMMANDS
+
+git push origin master
+pushes committed changes from your branch to master
+
+git pull origin master
+pulls changes from origin to your current branch
+
+git status 
+tells you which files you've added/removed/modified
+
+git add [file]
+adds the file or file modification to your commit
+
+git rm [file]
+removes a file from git (does not remove locally)
+
+git commit
+commits all of of the files you've added
+
+git branch
+lists all local branches
+
+git branch [branch name] 
+creates a new local branch
+
+git checkout [branch name]
+switches to a different branch and updates your files to match that branch
+
+git merge [branch name]
+merges another branch's code into your current branch and lets you know if there's conflicts
+
+git branch -d [branch name]
+deletes a branch, should be used if you're done working on a branch and/or have merged that branch's changes to your current one
+
+git stash
+temporarily stores all modified files that are tracked in your current git branch - useful if there are changes you don't want to commit
+
+git stash pop 
+restores the files from the most recent stash

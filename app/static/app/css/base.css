@@ -1,0 +1,47 @@
+body {
+  height: 100%;
+  font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif; 
+}
+
+.header-row {
+  height: 5%;
+}
+
+.buffer-row {
+  height: 15%;
+}
+
+#logo {
+  text-align: center;
+  font-size: 75px;
+}
+
+#slogan {
+  text-align: center;
+  font-size: 28px;
+  font-style: italic;
+}
+
+.snak-divider {
+  border-top-color: rgb(0, 0, 0);
+  border-top-width: 3px;
+}
+
+.btn-row {
+  height: 15%;
+}
+
+.centered {
+  text-align: center;
+}
+
+#btn-signup {
+  width: 80%;
+  margin-left: 10%;
+  padding: 32px 28px;
+  font-size: 28px;
+  line-height: normal;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+     	  border-radius: 8px;
+}

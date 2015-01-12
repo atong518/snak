@@ -1,10 +1,42 @@
 TODO:
-Install PyCharm (community edition) if you want - it's a python/django specific ide
+(Optional) Install PyCharm (community edition) if you want - it's a python/django specific ide
 	https://www.jetbrains.com/pycharm/download/
     Clone git repository either upon setup or after by going to VCS -> Checkout from Version Control -> Git
 
-Python 2.7
+Get Pip
+	https://pip.pypa.io/en/latest/installing.html
+	Download get-pip.py and run it from the command line with the following command:
+	$ sudo python get-pip.py
 
-PostreSQL 9.4
-    http://www.enterprisedb.com/products-services-training/pgdownload#osx
+Get virtualenv
+	Download your virtual environment with the following command
+	$ sudo pip install virtualenv
+
+Go to your git source directory in the terminal (/some/path/snak/snakd) - make sure to go to the second directory snake
+
+Run command to create your virtual environment:
+$ virtualenv venv
+
+Activate your virtual environment (you will use this command a lot - every time you need to set up your virtual environment so make an alias to it if you want)
+	$ source venv/bin/activate
+
+Install homebrew:
+	$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+Install Postgres using brew:
+	$ brew install postgresql
+
+Install your dependencies
+	$ cd .. (You should be in /snak/ not /snak/snakd)
+	$ sudo pip install -r requirements.txt
+
+Install Heroku
+	Make a free heroku account if you don’t have one yet:
+		https://signup.heroku.com/dc
+	Download the toolbar
+		https://toolbelt.heroku.com/
+	$ heroku login
+		Fill in name and password
+
+
 

@@ -26,11 +26,11 @@ function toggleStudentType() {
 
 <div class="row">
   <div class="col-md-4"></div>
-  <div class="col-md-4">
+  <div class="col-md-4" style="padding: 0;">
     <form class="form-horizontal">
-      <div class="form-group">
-	<div class="btn-group" data-toggle="buttons" style="width: 100%;">
-	  <label class="btn btn-success col-sm-6 active">
+      <div class="form-group" style="margin: 15px 0">
+	<div class="btn-group btn-group-justified" data-toggle="buttons" >
+	  <label class="btn btn-success active col-sm-6">
 	    <input onchange="javascript:toggleStudentType();" type="radio" name="student_type" id="prospie" autocomplete="off" checked> Prospie (HS)
 	  </label>
 	  <label class="btn btn-success col-sm-6">
@@ -76,7 +76,7 @@ function toggleStudentType() {
 	<label for="max_match_rate" class="col-sm-8 control-label">I want to be matched with a prospie AT MOST once every...</label>
 	<div class="col-sm-4">
 	  <select class="form-control">
-	    <option>Day</option>
+	    <option>Unlimited</option>
 	    <option>3 Days</option>
 	    <option>Week</option>
 	    <option>2 Weeks</option>

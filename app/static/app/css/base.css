@@ -46,3 +46,4 @@ body {
      	  border-radius: 8px;
 }
 
+#footer { position: fixed; bottom: 0; }

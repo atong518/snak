@@ -54,6 +54,7 @@ ROOT_URLCONF = 'snakd.urls'
 
 WSGI_APPLICATION = 'snakd.wsgi.application'
 
+AUTHENTICATION_BACKENDS = ('app.backends.EmailAuthBackend',)
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases

@@ -15,7 +15,7 @@ class GenericSignupForm(UserCreationForm):
                  ]
 
     def clean(self):
-        cleaned_data = super(ProspieSignupForm, self).clean()
+        cleaned_data = super(GenericSignupForm, self).clean()
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
 

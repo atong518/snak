@@ -340,12 +340,12 @@ function TrimString(sInString) {
 }
 
 // Populates the country selected with the counties from the country list
-function populateCountry(defaultCountry) {
+function populateCountry(defaultCountry, selectId) {
   if ( postCountry != '' ) {
     defaultCountry = postCountry;
   }
   var countryLineArray = country.split('|');  // Split into lines
-  var selObj = document.getElementById('countrySelect');
+  var selObj = document.getElementById(selectId);
   selObj.options[0] = new Option('Select Country','');
   selObj.selectedIndex = 0;
   for (var loop = 0; loop < countryLineArray.length; loop++) {
@@ -359,10 +359,11 @@ function populateCountry(defaultCountry) {
       selObj.selectedIndex = loop + 1;
     }
   }
+  var temp = "tralalala";
 }
 
-function populateState() {
-  var selObj = document.getElementById('stateSelect');
+function populateState(selectId, countrySelectId) {
+  var selObj = document.getElementById(selectId);
   var foundState = false;
   // Empty options just in case new drop down is shorter
   if ( selObj.type == 'select-one' ) {
@@ -380,16 +381,16 @@ function populateState() {
     countryCode  = TrimString(lineArray[0]);
     stateCode    = TrimString(lineArray[1]);
     stateName    = TrimString(lineArray[2]);
-  if (document.getElementById('countrySelect').value == countryCode && countryCode != '' ) {
+  if (document.getElementById(countrySelectId).value == countryCode && countryCode != '' ) {
     // If it's a input element, change it to a select
       if ( selObj.type == 'text' ) {
-        parentObj = document.getElementById('stateSelect').parentNode;
+        parentObj = document.getElementById(selectId).parentNode;
         parentObj.removeChild(selObj);
         var inputSel = document.createElement("SELECT");
         inputSel.setAttribute("name","state");
-        inputSel.setAttribute("id","stateSelect");
+        inputSel.setAttribute("id","stateSelect" + selectId);
         parentObj.appendChild(inputSel) ;
-        selObj = document.getElementById('stateSelect');
+        selObj = document.getElementById(selectId);
         selObj.options[0] = new Option('Select State','');
         selObj.selectedIndex = 0;
       }
@@ -401,17 +402,17 @@ function populateState() {
         selObj.selectedIndex = optionCntr;
       }
       foundState = true;
-      document.getElementById('stateSelect').style.display = '';
+      document.getElementById(selectId).style.display = '';
       optionCntr++
     }
   }
   // If the country has no states, change the select to a text box
   if ( ! foundState ) {
-    document.getElementById('stateSelect').style.display = 'none';
+    document.getElementById(selectId).style.display = 'none';
   }
 }
 
-function initCountry(country) {
-  populateCountry(country);
-  populateState();
+function initCountry(country, countrySelectId, stateSelectId) {
+  populateCountry(country, countrySelectId);
+  populateState(stateSelectId, countrySelectId);
 }

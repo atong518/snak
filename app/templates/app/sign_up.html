@@ -9,6 +9,8 @@
 window.onload = function() {
   document.getElementById('prospie_form').style.display = '';
   document.getElementById('college_form').style.display = 'none';
+  initCountry('', 'countrySelect2', 'stateSelect2'); 
+  initCountry('', 'countrySelect1', 'stateSelect1'); 
 }
 
 function toggleStudentType() {
@@ -22,6 +24,8 @@ function toggleStudentType() {
     document.getElementById('college_form').style.display = '';
   }
 }
+</script>
+<script type="text/javascript">
 </script>
 
 <div class="row">
@@ -39,7 +43,8 @@ function toggleStudentType() {
 	</div>
       </div>
     </form>
-    <form class="form-horizontal" id="prospie_form">
+    <form class="form-horizontal" id="prospie_form" method="post" action=".">
+      {% csrf_token %}
       {% for field in prospie_form %}
       <div class="form-group">
 	<div class="col-sm-12">
@@ -47,9 +52,10 @@ function toggleStudentType() {
 	</div>
       </div>
       {% endfor %}
-      <script type="text/javascript">initCountry(''); </script>
+      <input type="submit" class="btn btn-primary" value="Submit">
     </form>
-    <form class="form-horizontal" id="college_form">
+    <form class="form-horizontal" id="college_form" method="post" action=".">
+      {% csrf_token %}
       {% for field in college_form %}
       <div class="form-group">
 	<div class="col-sm-12">
@@ -57,6 +63,7 @@ function toggleStudentType() {
 	</div>
       </div>
       {% endfor %}
+      <input type="submit" class="btn btn-primary" value="Submit">
     </form>
 
   </div>

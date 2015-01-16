@@ -32,12 +32,12 @@ class CollegeSignupForm(UserCreationForm):
             'class': 'form-control',
             'placeholder': 'Password again'})
         self.fields['homecountry'].widget = Select(attrs={
-             'id': 'countrySelect',
+             'id': 'countrySelect1',
              'name': 'country',
-             'onchange': 'populateState()',
+             'onchange': "populateState(\'stateSelect1\', \'countrySelect1\')",
              'class': 'form-control'})
         self.fields['homestate'].widget = Select(attrs={
-             'id': 'stateSelect',
+             'id': 'stateSelect1',
              'name': 'state',
              'class': 'form-control'})
         self.fields['bio'].widget = Textarea(attrs={
@@ -55,6 +55,19 @@ class ProspieSignupForm(UserCreationForm):
                   'lastname', 
                   'homecountry',
                   'homestate']
+
+    def clean(self):
+        cleaned_data = super(ProspieSignupForm, self).clean()
+        password1 = cleaned_data.get("password1")
+        password2 = cleaned_data.get("password2")
+
+        if password1 and password2 and password1 == password2:
+            print "pwd ok"
+        else:
+            raise forms.ValidationError("Your passwords do not appear to match :(")
+
+        # always return the cleaned data
+        return cleaned_data
 
     def __init__(self, *args, **kwargs):
         super(ProspieSignupForm, self).__init__(*args, **kwargs)
@@ -74,12 +87,12 @@ class ProspieSignupForm(UserCreationForm):
             'class': 'form-control',
             'placeholder': 'Password again'})
         self.fields['homecountry'].widget = Select(attrs={
-             'id': 'countrySelect',
-             'name': 'country',
-             'onchange': 'populateState()',
-             'class': 'form-control'})
+            'id': 'countrySelect2',
+            'name': 'country',
+            'onchange': "populateState(\'stateSelect2\', \'countrySelect2\')",
+            'class': 'form-control'})
         self.fields['homestate'].widget = Select(attrs={
-             'id': 'stateSelect',
-             'name': 'state',
-             'class': 'form-control'})
+            'id': 'stateSelect2',
+            'name': 'state',
+            'class': 'form-control'})
         self.fields.pop('username')

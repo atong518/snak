@@ -54,6 +54,7 @@ ROOT_URLCONF = 'snakd.urls'
 
 WSGI_APPLICATION = 'snakd.wsgi.application'
 
+AUTHENTICATION_BACKENDS = ('app.backends.EmailAuthBackend',)
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -100,7 +101,11 @@ import dj_database_url
 # DATABASES['default'] =  dj_database_url.config()
 
 # TODO HERE
-DATABASES['default'] = dj_database_url.config(default='postgres://USERNAME:PASSWORD@localhost/DBNAME')
+# DATABASES['default'] = dj_database_url.config(default='postgres://USERNAME:PASSWORD@localhost/DBNAME')
+
+DATABASES = {
+    'default': dj_database_url.config(default='postgres://nznobbvumguuzd:6m8WRiKTl_Ze3d9mOPhaSuZ6Vy@ec2-50-16-190-77.compute-1.amazonaws.com:5432/dabedq5i48j024')
+}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

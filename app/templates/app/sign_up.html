@@ -7,30 +7,34 @@
 <script type="text/javascript">
 // logic to hide/show fields for Dartmouth Student vs. 'Prospie' signup
 window.onload = function() {
-  document.getElementById('max_match_group').style.display = 'none';
-  document.getElementById('bio_group').style.display = 'none';
+  document.getElementById('prospie_form').style.display = '';
+  document.getElementById('college_form').style.display = 'none';
+  initCountry('', 'countrySelect2', 'stateSelect2'); 
+  initCountry('', 'countrySelect1', 'stateSelect1'); 
 }
 
 function toggleStudentType() {
   console.log("as;dl");
-  if (document.getElementById('college_student').checked) {
-    document.getElementById('max_match_group').style.display = '';
-    document.getElementById('bio_group').style.display = '';
-  }
   if (document.getElementById('prospie').checked) {
-    document.getElementById('max_match_group').style.display = 'none';
-    document.getElementById('bio_group').style.display = 'none';
+    document.getElementById('prospie_form').style.display = '';
+    document.getElementById('college_form').style.display = 'none';
+  }
+  if (document.getElementById('college_student').checked) {
+    document.getElementById('prospie_form').style.display = 'none';
+    document.getElementById('college_form').style.display = '';
   }
 }
+</script>
+<script type="text/javascript">
 </script>
 
 <div class="row">
   <div class="col-md-4"></div>
-  <div class="col-md-4">
+  <div class="col-md-4" style="padding: 0;">
     <form class="form-horizontal">
-      <div class="form-group">
-	<div class="btn-group" data-toggle="buttons" style="width: 100%;">
-	  <label class="btn btn-success col-sm-6 active">
+      <div class="form-group" style="margin: 15px 0">
+	<div class="btn-group btn-group-justified" data-toggle="buttons" >
+	  <label class="btn btn-success active col-sm-6">
 	    <input onchange="javascript:toggleStudentType();" type="radio" name="student_type" id="prospie" autocomplete="off" checked> Prospie (HS)
 	  </label>
 	  <label class="btn btn-success col-sm-6">
@@ -38,58 +42,31 @@ function toggleStudentType() {
 	  </label>
 	</div>
       </div>
-      <div class="form-group">
-	<div class="col-sm-12">
-	  <input type="text" class="form-control" id="first_name" placeholder="First Name">
-	</div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-12">
-          <input type="text" class="form-control" id="last_name" placeholder="Last Name">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-12">
-          <input type="email" class="form-control" id="email" placeholder="Email">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-12">
-          <input type="password" class="form-control" id="password1" placeholder="Password">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-12">
-          <input type="password" class="form-control" id="password2" placeholder="Password Again">
-        </div>
-      </div>
-      <div class="form-group">
-	<div class="col-sm-8">
-	  <select class="form-control" id='countrySelect' name='country' onchange='populateState()'></select>
-	</div>
-	<div class="col-sm-4">
-	  <select class="form-control" id='stateSelect' name='state'></select>
-	  <script type="text/javascript">initCountry('US'); </script>
-	</div>
-      </div>
-      <div class="form-group" id="max_match_group">
-	<label for="max_match_rate" class="col-sm-8 control-label">I want to be matched with a prospie AT MOST once every...</label>
-	<div class="col-sm-4">
-	  <select class="form-control">
-	    <option>Day</option>
-	    <option>3 Days</option>
-	    <option>Week</option>
-	    <option>2 Weeks</option>
-	    <option>Month</option>
-	  </select>
-	</div>
-      </div>
-      <div class="form-group" id="bio_group">
-	<div class="col-sm-12">
-	  <textarea rows="4" class="form-control" id="bio" placeholder="Bio (optional)"></textarea>
-	</div>
-      </div>
     </form>
+    <form class="form-horizontal" id="prospie_form" method="post" action=".">
+      {% csrf_token %}
+      {% for field in prospie_form %}
+      <div class="form-group">
+	<div class="col-sm-12">
+	  {{ field }}
+	</div>
+      </div>
+      {% endfor %}
+      <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+    <form class="form-horizontal" id="college_form" method="post" action=".">
+      {% csrf_token %}
+      {% for field in college_form %}
+      <div class="form-group">
+	<div class="col-sm-12">
+	  {{ field }}
+	</div>
+      </div>
+      {% endfor %}
+      <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+
+    <a href="{% url 'splash' %}">Back</a>
   </div>
   <div class="col-md-4"></div>
 </div>

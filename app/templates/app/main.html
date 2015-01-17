@@ -1,0 +1,22 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+
+{% if user.is_authenticated %}
+<div class="row">
+<div class="col-sm-4"></div>
+<div class="col-sm-4">
+  <h1>'Sup {{ user.firstname }}, you're logged in wahoo!</h1>
+
+  <a href="{% url 'logout' %}">logout</a>
+</div>
+<div class="col-sm-4"></div>
+<h3>
+{% else %}
+
+{% endif %}
+
+
+
+{% endblock %}

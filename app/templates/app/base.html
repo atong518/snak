@@ -37,4 +37,16 @@ Then surround all code with
 
 {% block content %}{% endblock %}
 
+
+<div class="row">
+  <div class="col-md-9"></div>
+  <div class="col-md-3">
+    <ul class="nav nav-pills" id="footer">
+      <li><a href="{% url 'splash' %}">Home</a></li>
+      <li><a href="{% url 'howto' %}">How It Works</a></li>
+      <li><a href="{% url 'aboutus' %}">About Us</a></li>
+    </ul>
+  </div>
+</div>
+
 </html>

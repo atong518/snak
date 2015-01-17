@@ -12,15 +12,6 @@ def splash(request):
     return render(request, 'app/splash.html', {})
 
 def sign_up(request):
-
-    return render(request, 'app/sign_up.html', {})
-
-def howto(request):
-    return render(request, 'app/howto.html', {})
-
-def aboutus(request):
-    return render(request, 'app/aboutus.html', {})
-
     if request.method == "POST":
         prospieform = ProspieSignupForm(request.POST)
         collegeform = CollegeSignupForm(request.POST)
@@ -47,6 +38,12 @@ def aboutus(request):
                   'app/sign_up.html', 
                   {'prospie_form': prospieform, 
                    'college_form': collegeform})
+
+def howto(request):
+    return render(request, 'app/howto.html', {})
+
+def aboutus(request):
+    return render(request, 'app/aboutus.html', {})
 
 def login(request):
     email = password = ''

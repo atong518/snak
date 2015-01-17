@@ -66,16 +66,6 @@ AUTHENTICATION_BACKENDS = ('app.backends.EmailAuthBackend',)
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'nickjoung',                      
-        'USER': 'nickjoung',
-        'PASSWORD': 'letitbe',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

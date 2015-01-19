@@ -1,0 +1,80 @@
+{% extends "app/base.html" %}
+{% block content %}
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="../../static/app/css/signup.css">
+
+
+<script type="text/javascript" src="{% static 'app/js/country_states.js' %}"></script>
+<script type="text/javascript">
+// logic to hide/show fields for Dartmouth Student vs. 'Prospie' signup
+window.onload = function() {
+  document.getElementById('prospie_form').style.display = '';
+  document.getElementById('college_form').style.display = 'none';
+  initCountry('', 'countrySelect2', 'stateSelect2'); 
+  initCountry('', 'countrySelect1', 'stateSelect1'); 
+}
+
+function toggleStudentType() {
+  console.log("as;dl");
+  if (document.getElementById('prospie').checked) {
+    document.getElementById('prospie_form').style.display = '';
+    document.getElementById('college_form').style.display = 'none';
+  }
+  if (document.getElementById('college_student').checked) {
+    document.getElementById('prospie_form').style.display = 'none';
+    document.getElementById('college_form').style.display = '';
+  }
+}
+</script>
+<script type="text/javascript">
+</script>
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4" style="padding: 0;">
+    <form class="form-horizontal">
+      <div class="form-group" style="margin: 15px 0">
+	<div class="btn-group btn-group-justified" data-toggle="buttons" >
+	  <label class="btn btn-success active col-sm-6">
+	    <input onchange="javascript:toggleStudentType();" type="radio" name="student_type" id="prospie" autocomplete="off" checked> Prospie (HS)
+	  </label>
+	  <label class="btn btn-success col-sm-6">
+	    <input onchange="javascript:toggleStudentType();" type="radio" name="student_type" id="college_student" autocomplete="off"> College Student
+	  </label>
+	</div>
+      </div>
+    </form>
+    <form class="form-horizontal" id="prospie_form" method="post" action=".">
+      {% csrf_token %}
+      {% for field in prospie_form %}
+      <div class="form-group">
+	<div class="col-sm-12">
+	  {{ field }}
+	</div>
+      </div>
+      {% endfor %}
+      <div class = "signup-submit-holder">
+        <input type="submit" class="btn btn-primary" value="Submit">
+      </div>
+    </form>
+    <form class="form-horizontal" id="college_form" method="post" action=".">
+      {% csrf_token %}
+      {% for field in college_form %}
+      <div class="form-group">
+	<div class="col-sm-12">
+	  {{ field }}
+	</div>
+      </div>
+      {% endfor %}
+      <div class = "signup-submit-holder">
+        <input type="submit class="btn btn-primary" value="Submit">
+      </div>
+    </form>
+
+<!--    <a href="{% url 'splash' %}">Back</a>-->
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+{% endblock %}

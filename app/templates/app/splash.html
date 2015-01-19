@@ -1,15 +1,6 @@
 {% extends "app/base.html" %}
 
 {% block content %}
-<div class="row header-row"></div>
-<div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-    <h1 id="logo">SnakDartmouth</h1>
-  </div>
-  <div class="col-md-2"></div>
-</div>
-
 <div class="row">
   <div class="col-md-2"></div>
   <div class="col-md-8">
@@ -24,9 +15,9 @@
 <div class="row">
   <div class="col-md-4"></div>
   <div class="col-md-4">
-    <div id="btn-signup" class="btn btn-success btn-large">Sign Up Now</div>
+    <a href="{% url 'sign_up' %}"> <div id="btn-signup" class="btn btn-success btn-large">Sign Up Now</div></a>
     <br>
-    <div class="centered">Been there, done that? <a href="#">Login</a></div>
+    <div class="centered">Been there, done that? <a href="{% url 'login' %}">Login</a></div>
   </div>
   <div class="col-md-4"></div>
 </div>

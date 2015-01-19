@@ -1,0 +1,8 @@
+Commands:
+
+load_db: Renews database and runs a migration
+
+TODO
+load_dummy: Will eventually load dummy data (users, interests, matches, conversations etc) once we have scripts to populate the db
+
+start: Starts the server with the command python manage.py runserver - Better than foreman start as far as I can tell because it's a native Django command

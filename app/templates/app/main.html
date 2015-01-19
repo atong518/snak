@@ -9,6 +9,10 @@
 <div class="col-sm-4">
   <h1>'Sup {{ user.firstname }}, you're logged in wahoo!</h1>
 
+
+  {% if user.is_active == False %}
+  <h3>You need to activate your account though :(</h3>
+  {% endif %}
   <a href="{% url 'logout' %}">logout</a>
 </div>
 <div class="col-sm-4"></div>

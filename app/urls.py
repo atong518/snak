@@ -14,7 +14,6 @@ urlpatterns = patterns('',
     # about us page
     url(r'^aboutus/$', views.aboutus, name='aboutus'),
 
-
     # login page
     url(r'^login/$', views.login, name='login'),
 
@@ -24,4 +23,6 @@ urlpatterns = patterns('',
     # main/index page
     url(r'^main/$', views.main, name='main'),
 
+    # user authentication pate
+    url(r'^confirm_email/(?P<activation_code>\w+)/(?P<email>([a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+)/', views.confirm_email, name="confirm_email"),
 )

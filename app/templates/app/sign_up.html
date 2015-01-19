@@ -2,6 +2,8 @@
 {% block content %}
 {% load staticfiles %}
 
+<link rel="stylesheet" type="text/css" href="../../static/app/css/signup.css">
+
 
 <script type="text/javascript" src="{% static 'app/js/country_states.js' %}"></script>
 <script type="text/javascript">
@@ -52,7 +54,9 @@ function toggleStudentType() {
 	</div>
       </div>
       {% endfor %}
-      <input type="submit" class="btn btn-primary" value="Submit">
+      <div class = "signup-submit-holder">
+        <input type="submit" class="btn btn-primary" value="Submit">
+      </div>
     </form>
     <form class="form-horizontal" id="college_form" method="post" action=".">
       {% csrf_token %}
@@ -63,10 +67,12 @@ function toggleStudentType() {
 	</div>
       </div>
       {% endfor %}
-      <input type="submit" class="btn btn-primary" value="Submit">
+      <div class = "signup-submit-holder">
+        <input type="submit class="btn btn-primary" value="Submit">
+      </div>
     </form>
 
-    <a href="{% url 'splash' %}">Back</a>
+<!--    <a href="{% url 'splash' %}">Back</a>-->
   </div>
   <div class="col-md-4"></div>
 </div>

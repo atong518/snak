@@ -24,4 +24,6 @@ urlpatterns = patterns('',
     # main/index page
     url(r'^main/$', views.main, name='main'),
 
+    url(r'^interests/$', views.interests, name="interests"),
+
 )

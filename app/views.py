@@ -67,3 +67,8 @@ def main(request):
                   "app/main.html",
                   {})
 
+def interests(request):
+    return render(request,
+                  "app/interests.html",
+                  {})
+

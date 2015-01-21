@@ -1,0 +1,61 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+
+<div class="row">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-4">
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="Search">
+			<span class "input-group-btn">
+				<button class="btn btn-success" type="button">Add</button>
+			</span>
+		</div>
+	</div>
+	<div class="col-sm-4"></div>
+</div>
+
+<div class="buffer-row"></div>
+
+<div class="row">
+	<div class="col-sm-2"></div>
+	<div class="col-sm-1">
+		<div class="btn-group-vertical" data-toggle="buttons">
+			<label class="btn btn-success active">
+    			<input type="radio" autocomplete="off" id="academics" checked> Academics
+  			</label>
+  			<label class="btn btn-success">
+    			<input type="radio" autocomplete="off" id="exracurriculars"> Extracurriculars
+  			</label>
+  			<label class="btn btn-success">
+    			<input type="radio" autocomplete="off" id="athleics"> Athletics
+  			</label>
+  			<label class="btn btn-success">
+    			<input type="radio" autocomplete="off" id="social"> Social Life
+  			</label>
+  		</div>
+	</div>
+	<div class="col-sm-1"></div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-default">
+  			<div class="panel-body">
+				<p> greek life frats coeds sororities other social life </p>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-2">
+		<p> chosen interests </p>
+	</div>
+	<div class="col-sm-2"></div>
+
+</div>
+			
+
+
+
+
+
+
+{% endblock %}

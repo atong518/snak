@@ -1,18 +1,29 @@
+from django.utils.crypto import get_random_string
 from django.forms import ModelForm, EmailInput, TextInput, PasswordInput, Textarea, Select
-from django.contrib.auth.forms import UserCreationForm
 from app.models import GenericUser, CollegeUser, ProspieUser
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
 
 class GenericSignupForm(UserCreationForm):
     class Meta:
         model = GenericUser
         fields = ['email', 
-                  'password1', 
-                  'password2', 
+                  'password1',
+                  'password2',
                   'firstname', 
                   'lastname', 
                   'homecountry',
                   'homestate',
                  ]
+
+    def save_user(self, data):
+        user = GenericUser.objects.create_user(email=data['email'],
+                                               firstname=data['firstname'],
+                                               lastname=data['lastname'],
+                                               homecountry=data['homecountry'],
+                                               homestate=data['homestate'],
+                                               password=data['password1'])
+        return user
 
     def clean(self):
         cleaned_data = super(GenericSignupForm, self).clean()
@@ -52,6 +63,18 @@ class CollegeSignupForm(GenericSignupForm):
         model = CollegeUser
         fields = GenericSignupForm.Meta.fields + ['bio']
 
+
+    def save_user(self, data):
+        user = CollegeUser.objects.create_user(email=data['email'],
+                                               firstname=data['firstname'],
+                                               lastname=data['lastname'],
+                                               homecountry=data['homecountry'],
+                                               homestate=data['homestate'],
+                                               password=data['password1'],
+                                               bio=data['bio'])
+        user.save()
+        return user
+ 
     def __init__(self, *args, **kwargs):
         super(CollegeSignupForm, self).__init__(*args, **kwargs)
         self.fields['homecountry'].widget = Select(attrs={
@@ -71,6 +94,16 @@ class ProspieSignupForm(GenericSignupForm):
     class Meta(GenericSignupForm.Meta):
         model = ProspieUser
         fields = GenericSignupForm.Meta.fields
+
+    def save_user(self, data):
+        user = ProspieUser.objects.create_user(email=data['email'],
+                                               firstname=data['firstname'],
+                                               lastname=data['lastname'],
+                                               homecountry=data['homecountry'],
+                                               homestate=data['homestate'],
+                                               password=data['password1'])
+        user.save()
+        return user
 
     def __init__(self, *args, **kwargs):
         super(ProspieSignupForm, self).__init__(*args, **kwargs)

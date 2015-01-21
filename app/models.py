@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.crypto import get_random_string
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
@@ -12,17 +13,16 @@ class GenericUserManager(BaseUserManager):
         if not email:
             raise ValueError('Users must have an email')
 
-        user = self.model(
-            email=email,
-            firstname=firstname,
-            lastname=lastname,
-            homecountry=homecountry,
-            homestate=homestate
-            )
-
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
+        data = {
+            'email': email,
+            'firstname': firstname,
+            'lastname': lastname,
+            'homecountry': homecountry,
+            'homestate': homestate,
+            'password': password,
+            'is_active': False
+            }
+        return data
 
     def create_superuser(self, email, firstname, lastname, homecountry, homestate, password):
         """
@@ -44,27 +44,34 @@ class CollegeUserManager(GenericUserManager):
         """
         Creates and saves a CollegeUser by creating a GenericUser and adding appropriate fields
         """
-        user = super(CollegeUserManager, self).create_user(email=email, 
-                                                           firstname=firstname, 
-                                                           lastname=lastname, 
-                                                           homecountry=homecountry,
-                                                           homestate=homestate,
-                                                           password=password)
-        user.bio = bio
-        user.save(using=self._db)
+        user = self.model(
+                email=email,
+                firstname=firstname,
+                homecountry=homecountry,
+                homestate=homestate,
+                bio=bio)
+        user.set_password(password)
+        user.is_active = False
+        user.activation_code = get_random_string(250)
+        user.save()
         return user
+
 
 class ProspieUserManager(GenericUserManager):
     def create_user(self, email, firstname, lastname, homecountry, homestate, password=None):
         """
         Creates and saves a CollegeUser by creating a GenericUser and adding appropriate fields
         """
-        user = super(ProspieUserManager, self).create_user(email=email, 
-                                                           firstname=firstname, 
-                                                           lastname=lastname, 
-                                                           homecountry=homecountry,
-                                                           homestate=homestate,
-                                                           password=password)
+
+        user = self.model(
+                email=email,
+                firstname=firstname,
+                homecountry=homecountry,
+                homestate=homestate)
+        user.set_password(password)
+        user.is_active = False
+        user.activation_code = get_random_string(250)
+        user.save()
         return user
 
 class GenericUser(AbstractBaseUser):
@@ -73,11 +80,13 @@ class GenericUser(AbstractBaseUser):
     lastname = models.CharField(max_length=200)
     homecountry = models.CharField(max_length=200)
     homestate = models.CharField(max_length=200, null=True, blank=True)
+    activation_code = models.CharField(max_length=250)
+    is_active = models.NullBooleanField(default=False)
 
     objects = GenericUserManager()
     
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['email', 'firstname', 'lastname']
+    REQUIRED_FIELDS = ['firstname', 'lastname']
 
     def get_fullname(self):
         return self.firstname + "" + self.lastname

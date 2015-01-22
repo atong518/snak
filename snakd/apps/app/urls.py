@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from app import views
+from snakd.apps.app import views
 
 urlpatterns = patterns('',
     # splash page
@@ -23,11 +23,8 @@ urlpatterns = patterns('',
     # main/index page
     url(r'^main/$', views.main, name='main'),
 
-<<<<<<< HEAD
     url(r'^interests/$', views.interests, name="interests"),
 
-=======
-    # user authentication pate
+    # user authentication page
     url(r'^confirm_email/(?P<activation_code>\w+)/(?P<email>([a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+)/', views.confirm_email, name="confirm_email"),
->>>>>>> cfde78248e9b1ae2394f170d2887c8e0f4e158f2
 )

@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+PROJECT_APP_ROOT = os.path.abspath(BASE_DIR)
+PROJECT_ROOT = os.path.abspath(os.path.dirname(PROJECT_APP_ROOT))
+PUBLIC_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, 'public'))
 
+# STATIC_ROOT = 'staticfiles'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -37,7 +41,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
-    'app',
+    'snakd.apps.app',
+    'snakd.apps.interest',
+    'snakd.apps.relation',
+    'snakd.apps.user'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -54,7 +61,7 @@ ROOT_URLCONF = 'snakd.urls'
 
 WSGI_APPLICATION = 'snakd.wsgi.application'
 
-AUTHENTICATION_BACKENDS = ('app.backends.EmailAuthBackend',)
+AUTHENTICATION_BACKENDS = ('snakd.apps.app.backends.EmailAuthBackend',)
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -103,17 +110,12 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
-# Static asset configuration
-import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+# Static files (CSS, JavaScript, Images)
+STATICFILES_DIRS = [os.path.join(PROJECT_APP_ROOT, 'static')]
 
-TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+# template asset configuration
+TEMPLATE_DIRS = [os.path.join(PROJECT_APP_ROOT, 'templates')]
 
 # Email confirmation stuffs
 from .email_settings import *

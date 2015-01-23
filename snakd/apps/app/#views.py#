@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from app.models import ProspieUser, CollegeUser
-from app.forms import ProspieSignupForm, CollegeSignupForm
+from snakd.apps.app.models import ProspieUser, CollegeUser
+from snakd.apps.app.forms import ProspieSignupForm, CollegeSignupForm
 from django.shortcuts import render_to_response, redirect
 from django.http import HttpResponse
 from django.template import RequestContext, loader
@@ -67,7 +67,7 @@ def sign_up(request):
 def howto(request):
     return render(request, 'app/howto.html', {})
 
-def aboutus(request):
+ def aboutus(request):
     return render(request, 'app/aboutus.html', {})
 
 def main(request):
@@ -105,14 +105,10 @@ def confirm_email(request, activation_code, email):
     if user is not None and user.activation_code == activation_code:
         user.is_active = True
         user.save()
+    
+    return redirect(main)
 
-<<<<<<< HEAD
 def interests(request):
     return render(request,
                   "app/interests.html",
                   {})
-
-=======
-    return redirect(main)
-    
->>>>>>> cfde78248e9b1ae2394f170d2887c8e0f4e158f2

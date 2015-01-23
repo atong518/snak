@@ -1,0 +1,80 @@
+[
+	{
+		"name": "academics",
+		"tooltip": "hard",
+		"weight": 1,
+		"children": [
+			{
+				"name": "arts",
+				"tooltip": "drawing 'n shit",
+				"weight": 1,
+				"children": [
+					{
+						"name": "studio art",
+						"tooltip": "drawing naked people",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "art history",
+						"tooltip": "history of drawing naked people",
+						"weight": 1,
+						"children": []
+					}
+
+				]
+			},
+			{
+				"name": "science",
+				"tooltip": "numbers live here",
+				"weight": 1,
+				"children": [
+					{
+						"name": "biology",
+						"tooltip": "gooey insides and sex",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "chemistry",
+						"tooltip": "really tiny stuff",
+						"weight": 1,
+						"children": []
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "social",
+		"tooltip": "the pursuit of a sidedness",
+		"weight": 1,
+		"children": [
+			{
+				"name": "greek life",
+				"tooltip": "how to be a side",
+				"weight": 1,
+				"children": [
+					{
+						"name": "fr@ts",
+						"tooltip": "hazing and fun",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "sororities",
+						"tooltip": "no hazing, still fun",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "coeds",
+						"tooltip": "unknown",
+						"weight": 1,
+						"children": []
+					}
+				]
+			}
+		]
+	}
+]

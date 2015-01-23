@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'snakd.apps.interest',
     'snakd.apps.relation',
     'snakd.apps.user'
+    # 'scripts.db_data',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
 
 
 # Quick-start development settings - unsuitable for production
@@ -110,11 +112,6 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(PROJECT_APP_ROOT))
 PUBLIC_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, 'public'))
 
 # Static asset configuration
-import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/static/'
-
 PROJECT_APP_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(PROJECT_APP_ROOT))
 PUBLIC_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, 'public'))

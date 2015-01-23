@@ -1,6 +1,6 @@
 from django.utils.crypto import get_random_string
 from django.forms import ModelForm, EmailInput, TextInput, PasswordInput, Textarea, Select
-from app.models import GenericUser, CollegeUser, ProspieUser
+from snakd.apps.app.models import GenericUser, CollegeUser, ProspieUser
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 

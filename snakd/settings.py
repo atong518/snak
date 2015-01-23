@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
-    'app',
+    'snakd.apps.app',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -54,7 +54,7 @@ ROOT_URLCONF = 'snakd.urls'
 
 WSGI_APPLICATION = 'snakd.wsgi.application'
 
-AUTHENTICATION_BACKENDS = ('app.backends.EmailAuthBackend',)
+AUTHENTICATION_BACKENDS = ('snakd.apps.app.backends.EmailAuthBackend',)
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -103,17 +103,30 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
+
+# Static files (CSS, JavaScript, Images)
+PROJECT_APP_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+PROJECT_ROOT = os.path.abspath(os.path.dirname(PROJECT_APP_ROOT))
+PUBLIC_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, 'public'))
+
 # Static asset configuration
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
+PROJECT_APP_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+PROJECT_ROOT = os.path.abspath(os.path.dirname(PROJECT_APP_ROOT))
+PUBLIC_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, 'public'))
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(PROJECT_ROOT, 'snak/static'),
 )
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'static'),
+#)
 
-TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+# template asset configuration
+TEMPLATE_DIRS = [os.path.join(PROJECT_ROOT, 'snak/templates')]
 
 # Email confirmation stuffs
 from .email_settings import *

@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/static/'
+PROJECT_APP_ROOT = os.path.abspath(BASE_DIR)
+PROJECT_ROOT = os.path.abspath(os.path.dirname(PROJECT_APP_ROOT))
+PUBLIC_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, 'public'))
 
+# STATIC_ROOT = 'staticfiles'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -107,23 +109,11 @@ ALLOWED_HOSTS = ['*']
 
 
 # Static files (CSS, JavaScript, Images)
-PROJECT_APP_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-PROJECT_ROOT = os.path.abspath(os.path.dirname(PROJECT_APP_ROOT))
-PUBLIC_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, 'public'))
 
-# Static asset configuration
-PROJECT_APP_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-PROJECT_ROOT = os.path.abspath(os.path.dirname(PROJECT_APP_ROOT))
-PUBLIC_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, 'public'))
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'snak/static'),
-)
-#STATICFILES_DIRS = (
-#    os.path.join(BASE_DIR, 'static'),
-#)
+STATICFILES_DIRS = (os.path.join(PROJECT_APP_ROOT, 'static'))
 
 # template asset configuration
-TEMPLATE_DIRS = [os.path.join(PROJECT_ROOT, 'snak/templates')]
+TEMPLATE_DIRS = [os.path.join(PROJECT_APP_ROOT, 'templates')]
 
 # Email confirmation stuffs
 from .email_settings import *

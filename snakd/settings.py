@@ -110,7 +110,7 @@ ALLOWED_HOSTS = ['*']
 
 # Static files (CSS, JavaScript, Images)
 
-STATICFILES_DIRS = (os.path.join(PROJECT_APP_ROOT, 'static'))
+STATICFILES_DIRS = [os.path.join(PROJECT_APP_ROOT, 'static')]
 
 # template asset configuration
 TEMPLATE_DIRS = [os.path.join(PROJECT_APP_ROOT, 'templates')]

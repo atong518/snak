@@ -4,7 +4,6 @@
 
 <link rel="stylesheet" type="text/css" href="../../static/app/css/signup.css">
 
-
 <script type="text/javascript" src="{% static 'app/js/country_states.js' %}"></script>
 <script type="text/javascript">
 // logic to hide/show fields for Dartmouth Student vs. 'Prospie' signup
@@ -45,12 +44,13 @@ function toggleStudentType() {
 	</div>
       </div>
     </form>
-    <form class="form-horizontal" id="prospie_form" method="post" action=".">
+    <form class="form-horizontal" data-toggle="validator" role="form" id="prospie_form" method="post" action=".">
       {% csrf_token %}
       {% for field in prospie_form %}
       <div class="form-group">
 	<div class="col-sm-12">
 	  {{ field }}
+	  <div class="help-block with-errors"></div>
 	</div>
       </div>
       {% endfor %}
@@ -58,17 +58,18 @@ function toggleStudentType() {
         <input type="submit" class="btn btn-primary" value="Submit">
       </div>
     </form>
-    <form class="form-horizontal" id="college_form" method="post" action=".">
+    <form class="form-horizontal" data-toggle="validator" role="form" id="college_form" method="post" action=".">
       {% csrf_token %}
       {% for field in college_form %}
       <div class="form-group">
 	<div class="col-sm-12">
 	  {{ field }}
+	  <div class="help-block with-errors"></div>
 	</div>
       </div>
       {% endfor %}
       <div class = "signup-submit-holder">
-        <input type="submit class="btn btn-primary" value="Submit">
+        <input type="submit" class="btn btn-primary" value="Submit">
       </div>
     </form>
 

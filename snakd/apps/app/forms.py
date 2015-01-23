@@ -42,19 +42,28 @@ class GenericSignupForm(UserCreationForm):
         super(GenericSignupForm, self).__init__(*args, **kwargs)
         self.fields['firstname'].widget = TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'First Name'})
+            'placeholder': 'First Name',
+            'required': 'true'})
         self.fields['lastname'].widget = TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Last Name'})
+            'placeholder': 'Last Name',
+            'required': 'true'})
         self.fields['email'].widget = EmailInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Email'})
+            'placeholder': 'Email',
+            'data-error': "Yikes, that email address is invalid",
+            'required': 'true'})
         self.fields['password1'].widget = PasswordInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Password'})
+            'placeholder': 'Password',
+            'required': 'true'})
         self.fields['password2'].widget = PasswordInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Password again'})
+            'placeholder': 'Password again',
+            'required': 'true',
+            'data-match': '#password1',
+            'data-error': 'Whoops, these passwords don\'t match'})
+
         self.fields.pop('username')
 
 
@@ -81,7 +90,8 @@ class CollegeSignupForm(GenericSignupForm):
              'id': 'countrySelect1',
              'name': 'country',
              'onchange': "populateState(\'stateSelect1\', \'countrySelect1\')",
-             'class': 'form-control'})
+             'class': 'form-control',
+             'required': 'true'})
         self.fields['homestate'].widget = Select(attrs={
              'id': 'stateSelect1',
              'name': 'state',
@@ -112,7 +122,8 @@ class ProspieSignupForm(GenericSignupForm):
             'id': 'countrySelect2',
             'name': 'country',
             'onchange': "populateState(\'stateSelect2\', \'countrySelect2\')",
-            'class': 'form-control'})
+            'class': 'form-control',
+            'required': 'true'})
         self.fields['homestate'].widget = Select(attrs={
             'id': 'stateSelect2',
             'name': 'state',

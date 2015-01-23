@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap3',
     'snakd.apps.app',
+    # 'scripts.db_data',
 )
 
 MIDDLEWARE_CLASSES = (

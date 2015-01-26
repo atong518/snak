@@ -42,6 +42,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap3',
     'snakd.apps.app',
+    'snakd.apps.interest',
+    'snakd.apps.relation',
+    'snakd.apps.user'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -109,7 +112,6 @@ ALLOWED_HOSTS = ['*']
 
 
 # Static files (CSS, JavaScript, Images)
-
 STATICFILES_DIRS = [os.path.join(PROJECT_APP_ROOT, 'static')]
 
 # template asset configuration

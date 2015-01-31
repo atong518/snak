@@ -25,7 +25,7 @@ class GenericSignupForm(UserCreationForm):
                                                password=data['password1'])
         return user
 
-    def clean(self):
+    def clean_password(self):
         cleaned_data = super(GenericSignupForm, self).clean()
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
@@ -36,7 +36,7 @@ class GenericSignupForm(UserCreationForm):
             raise forms.ValidationError("Your passwords do not appear to match :(")
 
         # always return the cleaned data
-        return cleaned_data
+        return super().clean()
 
     def __init__(self, *args, **kwargs):
         super(GenericSignupForm, self).__init__(*args, **kwargs)
@@ -51,7 +51,7 @@ class GenericSignupForm(UserCreationForm):
         self.fields['email'].widget = EmailInput(attrs={
             'class': 'form-control',
             'placeholder': 'Email',
-            'data-error': "Yikes, that email address is invalid",
+            'data-valid-error': "Yikes, that email address is invalid",
             'required': 'true'})
         self.fields['password1'].widget = PasswordInput(attrs={
             'class': 'form-control',
@@ -71,6 +71,14 @@ class CollegeSignupForm(GenericSignupForm):
     class Meta(GenericSignupForm.Meta):
         model = CollegeUser
         fields = GenericSignupForm.Meta.fields + ['bio']
+
+
+    def clean_email(self):
+        data = self.cleaned_data.get['email']
+        if "@dartmouth.edu" not in data:
+            msg = "ERROR"
+            raise forms.ValidationError("ERROR")
+        return super().clean()
 
 
     def save_user(self, data):
@@ -99,6 +107,14 @@ class CollegeSignupForm(GenericSignupForm):
         self.fields['bio'].widget = Textarea(attrs={
             'class': 'form-control',
             'placeholder': 'Tell us about yourself!'})
+        self.fields['email'].widget = EmailInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Email',
+            'pattern':'^[a-zA-Z0-9._-]+@'+'dartmouth.edu'+'$',
+            'data-error': "A @dartmouth.edu email address is required",
+            'required': 'true'})
+
+
 
 class ProspieSignupForm(GenericSignupForm):
     class Meta(GenericSignupForm.Meta):

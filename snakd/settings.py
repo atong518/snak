@@ -44,6 +44,10 @@ INSTALLED_APPS = (
     'bootstrap3',
     'snakd',
     'snakd.apps',
+    # 'snakd.apps.app',
+    # 'snakd.apps.interest',
+    # 'snakd.apps.relation',
+    # 'snakd.apps.user'
     'snakd.apps.app',
     'snakd.apps.interest',
     'snakd.apps.relation',

@@ -40,12 +40,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'bootstrap3',
+    'snakd',
+    'snakd.apps',
     'snakd.apps.app',
     'snakd.apps.interest',
     'snakd.apps.relation',
-    'snakd.apps.user',
-    'scripts.db_data',
+    'snakd.apps.user'
 )
 
 MIDDLEWARE_CLASSES = (

@@ -110,8 +110,8 @@ class CollegeSignupForm(GenericSignupForm):
         self.fields['email'].widget = EmailInput(attrs={
             'class': 'form-control',
             'placeholder': 'Email',
-            'pattern':'^[a-zA-Z0-9._-]+@'+'dartmouth.edu'+'$',
-            'data-error': "A @dartmouth.edu email address is required",
+            'pattern':'^[a-zA-Z0-9._\'-]+[0-9]@'+'dartmouth.edu'+'$',
+            'data-error': "A full first.m.last.##@dartmouth.edu email address is required",
             'required': 'true'})
 
 

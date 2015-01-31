@@ -61,7 +61,7 @@ class GenericSignupForm(UserCreationForm):
             'class': 'form-control',
             'placeholder': 'Password again',
             'required': 'true',
-            'data-match': '#password1',
+            'data-match': '#id_password1',
             'data-error': 'Whoops, these passwords don\'t match'})
 
         self.fields.pop('username')

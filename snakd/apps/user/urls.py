@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from snakd.apps.app import views
+from snakd.apps.user import views
 
 urlpatterns = patterns('',
     # splash page

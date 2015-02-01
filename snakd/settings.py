@@ -43,15 +43,9 @@ INSTALLED_APPS = (
     'django_extensions',
     'bootstrap3',
     'snakd',
-    'snakd.apps',
-    # 'snakd.apps.app',
-    # 'snakd.apps.interest',
-    # 'snakd.apps.relation',
-    # 'snakd.apps.user'
-    'snakd.apps.app',
-    'snakd.apps.interest',
+    'snakd.apps.user',
     'snakd.apps.relation',
-    'snakd.apps.user'
+    'snakd.apps.interest',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -68,7 +62,7 @@ ROOT_URLCONF = 'snakd.urls'
 
 WSGI_APPLICATION = 'snakd.wsgi.application'
 
-AUTHENTICATION_BACKENDS = ('snakd.apps.app.backends.EmailAuthBackend',)
+AUTHENTICATION_BACKENDS = ('snakd.apps.user.backends.EmailAuthBackend',)
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -132,4 +126,4 @@ EMAIL_HOST_USER = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 EMAIL_PORT = EMAIL_PORT
 
-AUTH_USER_MODEL = "app.GenericUser"
+AUTH_USER_MODEL = "user.GenericUser"

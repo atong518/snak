@@ -8,6 +8,7 @@ createuser snakd -s
 createdb master -O snakd -w
 
 echo "MIGRATING..."
+python $ROOT_DIR/manage.py makemigrations
 python $ROOT_DIR/manage.py migrate
 
 

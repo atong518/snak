@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from snakd.apps.app.models import ProspieUser, CollegeUser
-from snakd.apps.app.forms import ProspieSignupForm, CollegeSignupForm
+from snakd.apps.user.models import ProspieUser, CollegeUser
+from snakd.apps.user.forms import ProspieSignupForm, CollegeSignupForm
 from django.shortcuts import render_to_response, redirect
 from django.http import HttpResponse
 from django.template import RequestContext, loader
@@ -13,7 +13,7 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 
 # Create your views here.
 def splash(request):
-    return render(request, 'app/splash.html', {})
+    return render(request, 'user/splash.html', {})
 
 def _send_mail(email, activation_code):
     # Email shenanigans
@@ -43,7 +43,7 @@ def sign_up(request):
             user = authenticate(email=new_student.email, password=prospieform.cleaned_data["password1"])
             auth_login(request, user)
             return render(request,
-                          "app/main.html",
+                          "user/main.html",
                           {})
 
         if collegeform.is_valid():
@@ -52,7 +52,7 @@ def sign_up(request):
             user = authenticate(email=new_student.email, password=collegeform.cleaned_data["password1"])
             auth_login(request, user)
             return render(request,
-                          "app/main.html",
+                          "user/main.html",
                           {})
 
     else:
@@ -60,19 +60,19 @@ def sign_up(request):
         collegeform = CollegeSignupForm()
 
     return render(request, 
-                  'app/sign_up.html', 
+                  'user/sign_up.html', 
                   {'prospie_form': prospieform, 
                    'college_form': collegeform})
 
 def howto(request):
-    return render(request, 'app/howto.html', {})
+    return render(request, 'user/howto.html', {})
 
 def aboutus(request):
-    return render(request, 'app/aboutus.html', {})
+    return render(request, 'user/aboutus.html', {})
 
 def main(request):
     return render(request,
-                  "app/main.html",
+                  "user/main.html",
                   {})
 
 def login(request):
@@ -87,7 +87,7 @@ def login(request):
             return redirect(main)
 
     return render(request,
-                  'app/login.html',
+                  'user/login.html',
                   {'email': email})
 
 def confirm_email(request, activation_code, email):
@@ -110,5 +110,5 @@ def confirm_email(request, activation_code, email):
 
 def interests(request):
     return render(request,
-                  "app/interests.html",
+                  "user/interests.html",
                   {})

@@ -1,5 +1,5 @@
 from django.contrib.auth.models import check_password
-from snakd.apps.app.models import GenericUser
+from snakd.apps.user.models import GenericUser
 
 class EmailAuthBackend(object):
     """

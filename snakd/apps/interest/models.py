@@ -19,11 +19,12 @@ class Interest(models.Model):
 	# tooltip = models.CharField(max_length = 20, null = True) # or blank=True?
 	# weight  = models.IntegerField(default = 0)
 	# parent  = models.ForeignKey('self', null=True)
-	# parent_id = models.ForeignKey('self', null=True, related_name='children', db_column="id")
+	parent = models.ForeignKey('self', null=True, related_name='children')
 	
 	# user = models.ForeignKey(FakeUser, null=True, db_index=False)
-	user = models.ForeignKey(Fake)
-	
+	# interest = models.ForeignKey(Fake, null=True)
+	# pass
+
 	# parent = relationship("self", null=True)
 	# id = Column(Integer, primary_key=True)
 	# parent needs to be manytomany with symmetrical = false

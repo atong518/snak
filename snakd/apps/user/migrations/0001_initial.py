@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 import django.utils.timezone
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
@@ -21,7 +22,9 @@ class Migration(migrations.Migration):
                 ('firstname', models.CharField(max_length=200)),
                 ('lastname', models.CharField(max_length=200)),
                 ('homecountry', models.CharField(max_length=200)),
-                ('homestate', models.CharField(max_length=200)),
+                ('homestate', models.CharField(max_length=200, null=True, blank=True)),
+                ('activation_code', models.CharField(max_length=250)),
+                ('is_active', models.NullBooleanField(default=False)),
             ],
             options={
                 'abstract': False,
@@ -31,22 +34,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CollegeUser',
             fields=[
-                ('genericuser_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='app.GenericUser')),
+                ('genericuser_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
                 ('bio', models.CharField(max_length=500)),
             ],
             options={
                 'abstract': False,
             },
-            bases=('app.genericuser',),
+            bases=('user.genericuser',),
         ),
         migrations.CreateModel(
             name='ProspieUser',
             fields=[
-                ('genericuser_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='app.GenericUser')),
+                ('genericuser_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'abstract': False,
             },
-            bases=('app.genericuser',),
+            bases=('user.genericuser',),
         ),
     ]

@@ -7,14 +7,14 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0005_remove_genericuser_activation_code'),
+        ('interest', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='genericuser',
-            name='activation_code',
-            field=models.CharField(default='blank', max_length=250),
-            preserve_default=False,
+            model_name='interest',
+            name='interest',
+            field=models.ForeignKey(to='interest.Fake', null=True),
+            preserve_default=True,
         ),
     ]

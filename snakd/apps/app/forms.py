@@ -111,7 +111,7 @@ class CollegeSignupForm(GenericSignupForm):
             'class': 'form-control',
             'placeholder': 'Email',
             'pattern':'^[a-zA-Z0-9._\'-]+[0-9]@'+'dartmouth.edu'+'$',
-            'data-error': "A full first.m.last.##@dartmouth.edu email address is required",
+            'data-error': "Please provide a full first.m.last.##@dartmouth.edu email address",
             'required': 'true'})
 
 

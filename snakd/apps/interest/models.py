@@ -1,18 +1,5 @@
 from django.db import models
-# from snakd.apps.user.models import User
-
-
-class FakeUser(models.Model):
-	pass
-	# name = models.CharField(max_length=20)
-	#USERNAME_FIELD = name
-	
-
-class Fake(models.Model):
-	pass
-	# name = models.CharField(max_length=20)
-	#USERNAME_FIELD = name
-	
+from snakd.apps.user.models import GenericUser
 
 class Interest(models.Model):
 	# name    = models.CharField(max_length = 20, blank = False)

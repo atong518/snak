@@ -9,5 +9,5 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
 
-#    url(r'^/signup$', inclu
+    url(r'^messages/', include("postman.urls")),
 )

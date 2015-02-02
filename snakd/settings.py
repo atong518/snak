@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
+    'postman',
     'snakd',
     'snakd.apps.user',
     'snakd.apps.relation',
@@ -127,3 +128,15 @@ EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 EMAIL_PORT = EMAIL_PORT
 
 AUTH_USER_MODEL = "user.GenericUser"
+
+
+# Django Postman Settings
+POSTMAN_DISALLOW_ANONYMOUS = True # restrict messaging to a user-to-user exchange
+POSTMAN_DISABLE_USER_EMAILING = True # change this eventually plz -DS
+POSTMAN_AUTO_MODERATE_AS = True
+AJAX_LOOKUP_CHANNELS = {
+    'postman_users': dict(model="user.GenericUser", search_field='email'),
+}
+POSTMAN_AUTOCOMPLETER_APP = {
+    'arg_default': 'postman_users',
+}

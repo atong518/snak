@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from snakd import views
 
 urlpatterns = patterns('',
     # Examples:
@@ -10,5 +11,8 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
 
-    # url(r'^messages/', include("postman.urls")),
+    url(r'^messages/', include("postman.urls")),
+
+    url(r'^chat/$', views.chat, name='chat'),
+
 )

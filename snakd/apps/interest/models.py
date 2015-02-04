@@ -1,13 +1,14 @@
 from django.db import models
 from snakd.apps.user.models import GenericUser
 
+
 class Interest(models.Model):
-	name    = models.CharField(max_length = 20, blank = False)
+	name    = models.CharField(max_length = 20, blank = False, default="Test")
 	tooltip = models.CharField(max_length = 20, null = True) # or blank=True?
 	weight  = models.IntegerField(default = 0)
 	# parent  = models.ForeignKey('self', null=True)
 	parent = models.ForeignKey('self', null=True, related_name='children')
-	
+	hidden = models.BooleanField(default=False)
 	# user = models.ForeignKey(FakeUser, null=True, db_index=False)
 	# interest = models.ForeignKey(Fake, null=True)
 	# pass
@@ -27,3 +28,7 @@ class Interest(models.Model):
 
 	# def __str__(self):
 	# 	return self.name
+
+
+	def ChildList():
+		import pdb; pdb.set_trace()

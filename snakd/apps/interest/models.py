@@ -2,9 +2,9 @@ from django.db import models
 from snakd.apps.user.models import GenericUser
 
 class Interest(models.Model):
-	# name    = models.CharField(max_length = 20, blank = False)
-	# tooltip = models.CharField(max_length = 20, null = True) # or blank=True?
-	# weight  = models.IntegerField(default = 0)
+	name    = models.CharField(max_length = 20, blank = False)
+	tooltip = models.CharField(max_length = 20, null = True) # or blank=True?
+	weight  = models.IntegerField(default = 0)
 	# parent  = models.ForeignKey('self', null=True)
 	parent = models.ForeignKey('self', null=True, related_name='children')
 	

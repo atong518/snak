@@ -13,11 +13,11 @@ def GetInterestTree():
 	def GetSubtree(node):
 		if not node:
 			return {}
-		l = []
+		l = {}
 		children = node.ChildList()
 		for child in children:
-			l.append(GetSubtree(child))
-		return {node: l}
+			l[child] = GetSubtree(child)
+		return l
 
 	root = GetInterestRoot()
 	return GetSubtree(root)

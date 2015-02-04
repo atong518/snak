@@ -30,5 +30,5 @@ class Interest(models.Model):
 	# 	return self.name
 
 
-	def ChildList():
-		import pdb; pdb.set_trace()
+	def ChildList(self):
+		return self.children.all()

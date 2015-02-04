@@ -11,6 +11,7 @@ ONEWEEK = 6048000
 TWOWEEKS = 12096000
 
 MAX_MATCH_FREQS = [
+        (THREEDAYS, 'How often can we match you? - Default=1 every 3 days'),
         (UNLIMITED, 'Unlimited'),
         (ONEDAY, '1 per day'),
         (THREEDAYS, '1 every 3 days'),
@@ -112,7 +113,8 @@ class CollegeSignupForm(GenericSignupForm):
             'required': 'true'})
         self.fields['max_match_frequency'].widget = Select(attrs={
             'class': 'form-control',
-            'required': 'true'})
+            'required': 'true',
+            'placeholder': 'How often can we match you?'})
         self.fields['max_match_frequency'].widget.choices = MAX_MATCH_FREQS
         self.fields['password1'].widget = PasswordInput(attrs={
             'class': 'form-control',

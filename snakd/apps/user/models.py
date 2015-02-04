@@ -109,7 +109,7 @@ class CollegeUser(GenericUser):
     )
 
     bio = models.CharField(max_length=500)
-    max_match_frequency = models.IntegerField(max_length=200, null=False, default=THREEDAYS)
+    max_match_frequency = models.IntegerField(max_length=200, null=False)
 
     objects = CollegeUserManager()
 

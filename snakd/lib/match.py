@@ -6,15 +6,13 @@ from matrix import * # includes inporting Interest
 def match(current, other, matrix):
 	score = 0
 
-	#interest_order = 
-
 	current_interests = getInterests(user)
 	other_interests = getInterests(other)
 
 	for int1 in current_interests:
 		for int2 in other_interests:
 
-			# can't iterate into matrix like this
+			# need interest order list to iterate into matrix
 			score += 1 / (matrix[my_int, other_int) * my_int.get_freq())
 
 	return score / len(current_interests)

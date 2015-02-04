@@ -10,7 +10,7 @@
 This is the basic template for all pages on the snakd site
 Coontains scripts/stylesheets, a navbar, footer, and block tags for content to be added 
 in between.  To use, simply add
-    { \% extends "app/base.html" \% } (without \ and spaces between % and {})
+    { \% extends "user/base.html" \% } (without \ and spaces between % and {})
 to the top of any template file.  *NOTE* this must be the FIRST line in the template!
 Then surround all code with
     { \% block content \% }
@@ -21,9 +21,9 @@ Then surround all code with
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="{% static 'app/css/base.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'user/css/base.css' %}" />
 
-  <script type="text/javascript" src="{% static 'app/js/validator.js' %}"></script>
+  <script type="text/javascript" src="{% static 'user/js/validator.js' %}"></script>
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 </head>
 

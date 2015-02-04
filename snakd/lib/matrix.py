@@ -1,18 +1,21 @@
-def buildAdjacencyGraph(node, graph):
-    if node.children == None:
-        return graph
+import orm
 
-    for child in node.children:
-        graph = buildAdjacencyGraph(child, graph) # why does this work?
+# def buildAdjacencyMatrix(node, graph):
+#     children = node.ChildList() # only have to call it once each time
+#     if children == None:
+#         return graph
 
-    graph[node] = node.children
-    return graph
+#     for child in children:
+#         graph = buildAdjacencyMatrix(child, graph) # why does this work?
+
+#     graph[node] = children
+#     return graph
 
 def interestList(node):
     new_list = [node]
 
-    if node.children != None: # base case
-        for child in node.children:
+    if node.ChildList() != None: # base case
+        for child in node.ChildList():
 
             # append nodes themselves, not the lists
             for temp in interestList(child): 
@@ -24,8 +27,8 @@ def adjList(graph, node):
     adj = []
 
     # append children
-    if node.children != None:
-        for temp in node.children:
+    if node.ChildList() != None:
+        for temp in node.ChildList():
             adj.append(temp)
 
     # append parent
@@ -39,7 +42,6 @@ def adjList(graph, node):
 def bfs(graph, rows, start_node):
     # queue represented by a list
     queue = [start_node]
-
     visited = []
 
     depth = 0
@@ -53,7 +55,7 @@ def bfs(graph, rows, start_node):
 
         rows[start_node.ID][node.ID] = depth
 
-        for adj in adjList(graph, node):#graph.get(node, []) for only children
+        for adj in adjList(graph, node):#in graph.get(node, []) for only children
             if adj not in visited:
                 queue.append(adj)
 
@@ -63,7 +65,9 @@ def bfs(graph, rows, start_node):
 
     return rows
 
-def build_matrix(root):
+def build_matrix():
+    root = orm.GetInterestRoot()
+
     # holds arbitrary order of interest references, parallels rows/columns of the matrix
     int_list = interestList(root)
     total = len(int_list)
@@ -73,8 +77,7 @@ def build_matrix(root):
     for i in range(total):
         rows.append([0] * total)
 
-    # create the adjacency matrix for the tree
-    graph = buildAdjacencyGraph(root, {})
+    tree = orm.GetInterestTree()
 
     for interest in int_list:
         rows = bfs(graph, rows, interest)

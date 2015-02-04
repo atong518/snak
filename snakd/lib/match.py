@@ -1,11 +1,20 @@
-from matrix import *
+from matrix import * # includes inporting Interest
 
-def match(me, other, matrix):
+# get all user's interests from relation objects
+# need user or relation orm first to write this
+
+def match(current, other, matrix):
 	score = 0
 
-	for each my_int in myinterests # need to get interests from user relations
-		for each other_int in othersinterests
+	#interest_order = 
 
-			score += 1 / ( matrix.dist(my_int, other_int) * my_int.get_freq()
+	current_interests = getInterests(user)
+	other_interests = getInterests(other)
 
-	return score / myinterests
+	for int1 in current_interests:
+		for int2 in other_interests:
+
+			# can't iterate into matrix like this
+			score += 1 / (matrix[my_int, other_int) * my_int.get_freq())
+
+	return score / len(current_interests)

@@ -4,6 +4,15 @@ from snakd.apps.user.models import GenericUser, CollegeUser, ProspieUser
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 
+MAX_MATCH_FREQS = [
+        ('UNLIMITED', 'Unlimited'),
+        ('ONEDAY', '1 per day'),
+        ('THREEDAYS', '1 every 3 days'),
+        ('ONEWEEK', '1 per week'),
+        ('TWOWEEKS', '1 every 2 weeks'),
+    ]
+
+
 class GenericSignupForm(UserCreationForm):
     class Meta:
         model = GenericUser
@@ -53,16 +62,6 @@ class GenericSignupForm(UserCreationForm):
             'placeholder': 'Email',
             'data-valid-error': "Yikes, that email address is invalid",
             'required': 'true'})
-        self.fields['password1'].widget = PasswordInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'Password',
-            'required': 'true'})
-        self.fields['password2'].widget = PasswordInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'Password again',
-            'required': 'true',
-            'data-match': '#id_password1',
-            'data-error': 'Whoops, these passwords don\'t match'})
 
         self.fields.pop('username')
 
@@ -70,16 +69,7 @@ class GenericSignupForm(UserCreationForm):
 class CollegeSignupForm(GenericSignupForm):
     class Meta(GenericSignupForm.Meta):
         model = CollegeUser
-        fields = GenericSignupForm.Meta.fields + ['bio']
-
-
-    def clean_email(self):
-        data = self.cleaned_data.get['email']
-        if "@dartmouth.edu" not in data:
-            msg = "ERROR"
-            raise forms.ValidationError("ERROR")
-        return super().clean()
-
+        fields = GenericSignupForm.Meta.fields + ['bio']# + ['max_match_frequency']
 
     def save_user(self, data):
         user = CollegeUser.objects.create_user(email=data['email'],
@@ -88,7 +78,8 @@ class CollegeSignupForm(GenericSignupForm):
                                                homecountry=data['homecountry'],
                                                homestate=data['homestate'],
                                                password=data['password1'],
-                                               bio=data['bio'])
+                                               bio=data['bio'],)
+#                                               max_match_frequency=['max_match_frequency'])
         user.save()
         return user
  
@@ -113,6 +104,20 @@ class CollegeSignupForm(GenericSignupForm):
             'pattern':'^[a-zA-Z0-9._\'-]+[0-9]@'+'dartmouth.edu'+'$',
             'data-error': "Please provide a full first.m.last.##@dartmouth.edu email address",
             'required': 'true'})
+#        self.fields['max_match_frequency'].widget = Select(attrs={
+#            'class': 'form-control',
+#            'required': 'true'})
+#        self.fields['max_match_frequency'].choices = MAX_MATCH_FREQS
+        self.fields['password1'].widget = PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Password',
+            'required': 'true'})
+        self.fields['password2'].widget = PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Password again',
+            'required': 'true',
+            'data-match': '#id_password1',
+            'data-error': 'Whoops, these passwords don\'t match'})
 
 
 
@@ -144,3 +149,14 @@ class ProspieSignupForm(GenericSignupForm):
             'id': 'stateSelect2',
             'name': 'state',
             'class': 'form-control'})
+        self.fields['password1'].widget = PasswordInput(attrs={
+            'id': 'prospie_password1',
+            'class': 'form-control',
+            'placeholder': 'Password',
+            'required': 'true'})
+        self.fields['password2'].widget = PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Password again',
+            'required': 'true',
+            'data-match': '#prospie_password1',
+            'data-error': 'Whoops, these passwords don\'t match'})

@@ -107,8 +107,3 @@ def confirm_email(request, activation_code, email):
         user.save()
     
     return redirect(main)
-
-def interests(request):
-    return render(request,
-                  "user/interests.html",
-                  {})

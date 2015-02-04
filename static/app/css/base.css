@@ -46,6 +46,6 @@ body {
      	  border-radius: 8px;
 }
 
-#top-footer { position: fixed; bottom: 40; width: 75%; }
+#top-footer { position: fixed; bottom: 40; }
 
-#footer { position: fixed; bottom: 0; right: 0; height: 40 }
+#footer { position: fixed; bottom: 0; height: 40; }

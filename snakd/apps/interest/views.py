@@ -9,8 +9,9 @@ from django.contrib import messages
 from django.core.mail import send_mail, EmailMultiAlternatives
 from snakd.apps.user.models import GenericUser
 from snakd.apps.interest.models import Interest
-from snakd.lib.orm import GetInterestRoot
+from snakd.lib.orm import *
 
 def show(request):
-	import pdb; pdb.set_trace()
+	i_tree = GetInterestTree()
+
 	return render(request, 'interests/show.html', {})

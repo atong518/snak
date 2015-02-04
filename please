@@ -5,20 +5,17 @@ ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 if [ "$ACTION" = "drop_db" ]; then
 	. $ROOT_DIR/scripts/db_data/drop_db.sh
-fi
-
-if [ "$ACTION" = "load_db" ]; then
+elif [ "$ACTION" = "load_db" ]; then
 	. $ROOT_DIR/please drop_db
 	. $ROOT_DIR/scripts/db_data/create_db.sh
-fi
-
-if [ "$ACTION" = "load_dummy" ]; then
+elif [ "$ACTION" = "load_dummy" ]; then
 	. $ROOT_DIR/scripts/db_data/load_dummy.sh
-fi
-
-if [ "$ACTION" = "start" ]; then
+elif [ "$ACTION" = "start" ]; then
 	python manage.py runserver
-
+else
+	echo "Error: Please enter a valid command.."
+	exit -1
 fi
 
 echo "FINISHED!"
+exit 0

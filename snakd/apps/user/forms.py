@@ -4,14 +4,19 @@ from snakd.apps.user.models import GenericUser, CollegeUser, ProspieUser
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 
-MAX_MATCH_FREQS = [
-        ('UNLIMITED', 'Unlimited'),
-        ('ONEDAY', '1 per day'),
-        ('THREEDAYS', '1 every 3 days'),
-        ('ONEWEEK', '1 per week'),
-        ('TWOWEEKS', '1 every 2 weeks'),
-    ]
+UNLIMITED = 0
+ONEDAY = 864000
+THREEDAYS = 2592000
+ONEWEEK = 6048000
+TWOWEEKS = 12096000
 
+MAX_MATCH_FREQS = [
+        (UNLIMITED, 'Unlimited'),
+        (ONEDAY, '1 per day'),
+        (THREEDAYS, '1 every 3 days'),
+        (ONEWEEK, '1 per week'),
+        (TWOWEEKS, '1 every 2 weeks'),
+    ]
 
 class GenericSignupForm(UserCreationForm):
     class Meta:
@@ -24,6 +29,7 @@ class GenericSignupForm(UserCreationForm):
                   'homecountry',
                   'homestate',
                  ]
+            
 
     def save_user(self, data):
         user = GenericUser.objects.create_user(email=data['email'],
@@ -69,7 +75,7 @@ class GenericSignupForm(UserCreationForm):
 class CollegeSignupForm(GenericSignupForm):
     class Meta(GenericSignupForm.Meta):
         model = CollegeUser
-        fields = GenericSignupForm.Meta.fields + ['bio']# + ['max_match_frequency']
+        fields = GenericSignupForm.Meta.fields + ['bio'] + ['max_match_frequency']
 
     def save_user(self, data):
         user = CollegeUser.objects.create_user(email=data['email'],
@@ -78,8 +84,8 @@ class CollegeSignupForm(GenericSignupForm):
                                                homecountry=data['homecountry'],
                                                homestate=data['homestate'],
                                                password=data['password1'],
-                                               bio=data['bio'],)
-#                                               max_match_frequency=['max_match_frequency'])
+                                               bio=data['bio'],
+                                               max_match_frequency=data['max_match_frequency'])
         user.save()
         return user
  
@@ -104,10 +110,10 @@ class CollegeSignupForm(GenericSignupForm):
             'pattern':'^[a-zA-Z0-9._\'-]+[0-9]@'+'dartmouth.edu'+'$',
             'data-error': "Please provide a full first.m.last.##@dartmouth.edu email address",
             'required': 'true'})
-#        self.fields['max_match_frequency'].widget = Select(attrs={
-#            'class': 'form-control',
-#            'required': 'true'})
-#        self.fields['max_match_frequency'].choices = MAX_MATCH_FREQS
+        self.fields['max_match_frequency'].widget = Select(attrs={
+            'class': 'form-control',
+            'required': 'true'})
+        self.fields['max_match_frequency'].widget.choices = MAX_MATCH_FREQS
         self.fields['password1'].widget = PasswordInput(attrs={
             'class': 'form-control',
             'placeholder': 'Password',

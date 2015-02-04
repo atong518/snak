@@ -9,6 +9,9 @@ urlpatterns = patterns('',
     # sign up page
     url(r'^signup/$', views.sign_up, name='sign_up'),
 
+    # college signup
+#    url(r'^college_sign_up/$', views.college_sign_up, name="college_sign_up"),
+
     # how to page
     url(r'^howto/$', views.howto, name='howto'),
     # about us page

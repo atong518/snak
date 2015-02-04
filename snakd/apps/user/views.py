@@ -36,7 +36,7 @@ def sign_up(request):
         collegeform = CollegeSignupForm(request.POST)
 
 
-        if prospieform.is_valid():
+        if  request.POST.get("prospie_signup") is not None and prospieform.is_valid():
             new_student = prospieform.save_user(prospieform.cleaned_data)
             _send_mail(new_student.email, new_student.activation_code)
             # log in the new user and redirect to main page
@@ -46,7 +46,7 @@ def sign_up(request):
                           "user/main.html",
                           {})
 
-        if collegeform.is_valid():
+        if request.POST.get("college_signup") is not None and collegeform.is_valid():
             new_student = collegeform.save_user(collegeform.cleaned_data)
             _send_mail(new_student.email, new_student.activation_code)
             user = authenticate(email=new_student.email, password=collegeform.cleaned_data["password1"])

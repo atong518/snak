@@ -40,7 +40,7 @@ class GenericUserManager(BaseUserManager):
         return user
 
 class CollegeUserManager(GenericUserManager):
-    def create_user(self, email, firstname, lastname, homecountry, homestate, bio, password=None):
+    def create_user(self, email, firstname, lastname, homecountry, homestate, bio, max_match_frequency, password=None):
         """
         Creates and saves a CollegeUser by creating a GenericUser and adding appropriate fields
         """
@@ -49,7 +49,8 @@ class CollegeUserManager(GenericUserManager):
                 firstname=firstname,
                 homecountry=homecountry,
                 homestate=homestate,
-                bio=bio)
+                bio=bio,
+                max_match_frequency=max_match_frequency)
         user.set_password(password)
         user.is_active = False
         user.activation_code = get_random_string(250)
@@ -92,7 +93,23 @@ class GenericUser(AbstractBaseUser):
         return self.firstname + "" + self.lastname
 
 class CollegeUser(GenericUser):
+    # Match frequencies in seconds (for countdown)
+    UNLIMITED = 0
+    ONEDAY = 864000
+    THREEDAYS = 2592000
+    ONEWEEK = 6048000
+    TWOWEEKS = 12096000
+
+    MAX_MATCH_FREQS = (
+        (UNLIMITED, 'UNLIMITED'),
+        (ONEDAY, 'ONEDAY'),
+        (THREEDAYS, '3DAYS'),
+        (ONEWEEK, 'ONEWEEK'),
+        (TWOWEEKS, 'TWOWEEKS'),
+    )
+
     bio = models.CharField(max_length=500)
+    max_match_frequency = models.IntegerField(max_length=200, null=False, default=THREEDAYS)
 
     objects = CollegeUserManager()
 

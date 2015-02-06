@@ -1,6 +1,7 @@
 body {
   height: 100%;
   font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif; 
+  padding: 10px;
 }
 
 .header-row {

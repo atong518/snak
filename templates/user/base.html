@@ -1,5 +1,6 @@
 <script src="https://code.jquery.com/jquery.js"></script>
 {% load bootstrap3 %}
+{% load static %}
 {% load staticfiles %}
 
 {# Load CSS and JavaScript #}
@@ -22,12 +23,12 @@ Then surround all code with
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="{% static 'user/css/base.css' %}" />
-
   <script type="text/javascript" src="{% static 'user/js/validator.js' %}"></script>
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+  {% block extrastyle %}{% endblock %}
 </head>
 
-<div class="row header-row"></div>
 <div class="row">
   <div class="col-md-2"></div>
   <div class="col-md-8">
@@ -35,8 +36,6 @@ Then surround all code with
   </div>
   <div class="col-md-2"></div>
 </div>
-
-<div class="row buffer-row"></div>
 
 {% block content %}{% endblock %}
 

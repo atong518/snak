@@ -1,0 +1,35 @@
+#inbox {
+  height: 75%;
+  position: relative;
+  padding: 0;
+}
+
+#btn-chat-menu {
+  width: 100%;
+  margin: 0;
+}
+
+#btn-match-me {
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+}
+
+#message-box {
+  height: 75%;
+  position: relative;
+  padding: 0;
+  background-color: white;
+}
+
+#send-message-row {
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+}
+
+#message-content {
+  padding: 30px;
+}

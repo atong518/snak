@@ -1,4 +1,10 @@
-from matrix import * # includes inporting Interest
+import sys, os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'snakd.settings'
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+
+from snakd.apps.interest.models import Interest
+
+from matrix import *
 
 # get all user's interests from relation objects
 # need user or relation orm first to write this

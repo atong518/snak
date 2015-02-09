@@ -1,4 +1,11 @@
-import orm
+import sys, os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'snakd.settings'
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+
+from snakd.apps.interest.models import Interest
+
+from orm import GetInterestRoot
+from orm import GetInterestTree
 
 # def buildAdjacencyMatrix(node, graph):
 #     children = node.ChildList() # only have to call it once each time

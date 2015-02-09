@@ -7,17 +7,6 @@ from snakd.apps.interest.models import Interest
 from orm import GetInterestRoot
 from orm import GetInterestTree
 
-# def buildAdjacencyMatrix(node, graph):
-#     children = node.ChildList() # only have to call it once each time
-#     if children == None:
-#         return graph
-
-#     for child in children:
-#         graph = buildAdjacencyMatrix(child, graph) # why does this work?
-
-#     graph[node] = children
-#     return graph
-
 def interestList(node):
     new_list = [node]
 
@@ -29,6 +18,12 @@ def interestList(node):
                 new_list.append(temp)
 
     return new_list
+
+# could just be stored as a dictionary instead of this
+def getInterestIndex(int_list, find_interest):
+    for ind, interest in enumerate(int_list):
+        if find_interest == interest:
+            return ind
 
 def adjList(graph, node):
     adj = []
@@ -46,7 +41,7 @@ def adjList(graph, node):
 
     return adj
 
-def bfs(graph, rows, start_node):
+def bfs(graph, rows, start_node, int_list):
     # queue represented by a list
     queue = [start_node]
     visited = []
@@ -60,7 +55,8 @@ def bfs(graph, rows, start_node):
         visited.append(node)
         timetodepth -= 1
 
-        rows[start_node.ID][node.ID] = depth
+        #rows[start_node.id][node.id] = depth
+        rows[getInterestIndex(start_node, int_list)][getInterestIndex(node, int_list)] = depth
 
         for adj in adjList(graph, node):#in graph.get(node, []) for only children
             if adj not in visited:
@@ -86,7 +82,7 @@ def build_matrix():
 
     tree = orm.GetInterestTree()
 
-    for interest in int_list:
-        rows = bfs(graph, rows, interest)
+    for i, interest in enumerate(int_list):
+        rows[i] = bfs(graph, rows, interest, int_list)
             
     return rows

@@ -1,34 +1,17 @@
 from django.db import models
-from snakd.apps.user.models import GenericUser
+#from snakd.apps.user.models import GenericUser
 
 
 class Interest(models.Model):
 	name    = models.CharField(max_length = 20, blank = False, default="Test")
-	tooltip = models.CharField(max_length = 20, null = True) # or blank=True?
+	tooltip = models.CharField(max_length = 20, null = True)
 	weight  = models.IntegerField(default = 0)
-	# parent  = models.ForeignKey('self', null=True)
 	parent = models.ForeignKey('self', null=True, related_name='children')
 	hidden = models.BooleanField(default=False)
-	# user = models.ForeignKey(FakeUser, null=True, db_index=False)
-	# interest = models.ForeignKey(Fake, null=True)
-	# pass
-
-	# parent = relationship("self", null=True)
-	# id = Column(Integer, primary_key=True)
-	# parent needs to be manytomany with symmetrical = false
-
-
-	# def build_subtree(self, ID):
-	# 	if ID.parent == None:
-	# 		return tree.make_head()
-
-	# 	tree.add( build_subtree(ID.parent) )
-		
-	# 	return tree
-
-	# def __str__(self):
-	# 	return self.name
-
 
 	def ChildList(self):
 		return self.children.all()
+
+	# https://docs.djangoproject.com/en/1.7/topics/db/examples/many_to_many/
+	def getFrequency(self):
+		return len(self.objects.all()) # will this also get parents/children?

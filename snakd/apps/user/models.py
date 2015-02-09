@@ -4,6 +4,8 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
 
+from snakd.apps.interest.models import Interest
+
 # Create your models here.
 class GenericUserManager(BaseUserManager):
     def create_user(self, email, firstname, lastname, homecountry, homestate=None, password=None):
@@ -84,6 +86,8 @@ class GenericUser(AbstractBaseUser):
     activation_code = models.CharField(max_length=250)
     is_active = models.NullBooleanField(default=False)
 
+    interests = models.ManyToManyField(Interest, null=True)
+
     objects = GenericUserManager()
     
     USERNAME_FIELD = 'email'
@@ -91,6 +95,12 @@ class GenericUser(AbstractBaseUser):
 
     def get_fullname(self):
         return self.firstname + "" + self.lastname
+
+    def set_interest(self, interest_reference):
+        self.interests.add(interest_reference)
+
+    def getInterestList(self):
+        return self.interest.all()
 
 class CollegeUser(GenericUser):
     # Match frequencies in seconds (for countdown)

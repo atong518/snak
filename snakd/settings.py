@@ -41,11 +41,11 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
-    'postman',
     'snakd',
     'snakd.apps.user',
     'snakd.apps.relation',
     'snakd.apps.interest',
+    'snakd.apps.chat',
     'scripts',
     'scripts.db_data'
 )

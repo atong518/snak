@@ -7,43 +7,12 @@
 
 
 {% block content %}
-<script type="text/javascript">
-$(document).ready(function(){
-
-  // disable scroll on this page
-  $('#chat-room').on({
-      'mousewheel': function(e) {
-          if (e.target.id == 'el') return;
-          e.preventDefault();
-          e.stopPropagation();
-      }
-  });
-
-  // send message
-  $('#send-message-form').submit(function () {
-    var message = $('#message-input-box').val();
-    var prev_messages = $('#message-content').html();
-
-    if (message) {
-      $('#message-content').html(prev_messages + '<div class="row" style="margin-bottom: 10px;"><div class="btn btn-primary pull-right disabled">' + message + '</div></div>');
-    }
-
-    return false;
-  });
-
-  // hit submit button on 'enter' keypress
-  $('#message-input-box').keypress(function (e) {
-    if (e.which == 13) {
-      $('#btn-send-message').click();
-      $('#message-input-box').val("");
-    }
-  });
-});
-</script>
+<script type="text/javascript" src="{% static 'messages/js/chat.js' %}"></script>
 
 <div class="row" style="height:100%; padding: 10px;" id="chat-room">
-  <!--inbox-->
+  <!--left navbar-->
   <div class="col-md-2 well" id="inbox">    
+    <!--chat menu dropdown-->
     <div class="btn-group btn-group-justified" id="btn-chat-menu">
       <div class="btn-group" id="btn-chat-menu">
 	<button type="button" class="btn btn-success btn-large dropdown-toggle" id="chatmenu" data-toggle="dropdown" aria-expanded="false">
@@ -58,6 +27,13 @@ $(document).ready(function(){
 	</ul>
       </div>
     </div>      
+    <!--inbox-->
+    <ul class="nav nav-pills nav-stacked">
+    {% for thread in inbox_threads %}
+      <li role="presentation"><a class="inbox-message" href="#">{{ thread }}</a></li>
+    {% endfor %}
+    </ul>
+
     <div class="btn btn-danger btn-large" id="btn-match-me">Match Me!</div>
   </div>
   <!--current message-->
@@ -72,7 +48,18 @@ $(document).ready(function(){
 	</ul>
       </div>
     </div>
-    <div id="message-content"></div>
+    <!--previously sent/received messages-->
+    <div id="message-content">
+      {% for thread in inbox_threads %}
+      {% for message in thread.message_set.all %}
+      {% if message.sender == user %}
+      <div class="btn btn-primary disabled pull-right">{{ message }}</div>
+      {% else %}
+      <div class="btn btn-default disabled">{{ message }}</div>
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+    </div>
     <form id="send-message-form">
       <div class="input-group" id="send-message-row">
 	<input class="form-control" type="text" id="message-input-box">

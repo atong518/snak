@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from snakd import views
+from snakd.apps.chat import views as chatviews
 
 urlpatterns = patterns('',
     # Examples:
@@ -13,6 +13,6 @@ urlpatterns = patterns('',
 
     url(r'^messages/', include("postman.urls")),
 
-    url(r'^chat/$', views.chat, name='chat'),
+    url(r'^chat/$', chatviews.chat, name='chat'),
 
 )

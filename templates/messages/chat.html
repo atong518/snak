@@ -20,11 +20,15 @@ $(document).ready(function(){
   });
 
   // send message
-  $('#btn-send-message').click(function() {
+  $('#send-message-form').submit(function () {
     var message = $('#message-input-box').val();
     var prev_messages = $('#message-content').html();
 
-    $('#message-content').html(prev_messages + '<div class="row" style="margin-bottom: 10px;"><div class="btn btn-primary pull-right">' + message + '</div></div>');
+    if (message) {
+      $('#message-content').html(prev_messages + '<div class="row" style="margin-bottom: 10px;"><div class="btn btn-primary pull-right disabled">' + message + '</div></div>');
+    }
+
+    return false;
   });
 
   // hit submit button on 'enter' keypress
@@ -69,12 +73,14 @@ $(document).ready(function(){
       </div>
     </div>
     <div id="message-content"></div>
-    <div class="input-group" id="send-message-row">
-      <input class="form-control" type="text" id="message-input-box">
-      <span class="input-group-btn">
-	<button id="btn-send-message" class="btn btn-success" type="button" default="on">Send</button>
-      </span>
-    </div>
+    <form id="send-message-form">
+      <div class="input-group" id="send-message-row">
+	<input class="form-control" type="text" id="message-input-box">
+	<span class="input-group-btn">
+	  <input type="submit" id="btn-send-message" class="btn btn-success" value="Send Message!" />
+	</span>
+      </div>
+    </form>
   </div>
 </div>
 

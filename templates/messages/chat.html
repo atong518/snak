@@ -8,6 +8,17 @@
 
 {% block content %}
 <script type="text/javascript" src="{% static 'messages/js/chat.js' %}"></script>
+<script>
+  function populateThread(threadId) {
+    $('.thread').each(function() {
+      $(this).hide();
+    });
+
+    id = "#thread-" + threadId;
+    $(id).show();
+  }
+</script>
+
 
 <div class="row" style="height:100%; padding: 10px;" id="chat-room">
   <!--left navbar-->
@@ -30,7 +41,7 @@
     <!--inbox-->
     <ul class="nav nav-pills nav-stacked">
     {% for thread in inbox_threads %}
-      <li role="presentation"><a class="inbox-message" href="#">{{ thread }}</a></li>
+      <li role="presentation"><a class="inbox-message" href="#" onclick="populateThread({{ thread.pk }})">{{ thread }}</a></li>
     {% endfor %}
     </ul>
 
@@ -51,13 +62,17 @@
     <!--previously sent/received messages-->
     <div id="message-content">
       {% for thread in inbox_threads %}
-      {% for message in thread.message_set.all %}
-      {% if message.sender == user %}
-      <div class="btn btn-primary disabled pull-right">{{ message }}</div>
-      {% else %}
-      <div class="btn btn-default disabled">{{ message }}</div>
-      {% endif %}
-      {% endfor %}
+      <div id="thread-{{ thread.pk }}" class="thread">
+        {% for message in thread.message_set.all %}
+	<div class="row">
+          {% if message.sender == user %}
+	  <div class="btn btn-primary disabled pull-right">{{ message }}</div>
+          {% else %}
+          <div class="btn btn-default disabled">{{ message }}</div>
+          {% endif %}
+	</div>
+	{% endfor %}
+      </div>
       {% endfor %}
     </div>
     <form id="send-message-form">

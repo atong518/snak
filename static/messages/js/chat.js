@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+  
   // disable scroll on this page
 	//  $('#chat-room').on({
 	//      'mousewheel': function(e) {
@@ -28,4 +28,14 @@ $(document).ready(function(){
       $('#message-input-box').val("");
     }
   });
+
+
+  // start all threads as hidden
+  $('.thread').each(function() {
+    $(this).hide();
+  });
 });
+
+function showThread(threadId) {
+
+}

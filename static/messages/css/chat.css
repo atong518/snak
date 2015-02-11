@@ -38,3 +38,8 @@
 .inbox-message {
   background-color: white;
 }
+
+.active-link {
+  background-color: #337ab7;
+  color: white;
+}

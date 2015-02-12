@@ -17,9 +17,9 @@
 }
 
 #message-box {
-  height: 75%;
+  height: 90%;
   position: relative;
-  padding: 0;
+  padding: 30px;
   background-color: white;
   overflow-y: scroll;
 }
@@ -32,7 +32,12 @@
 }
 
 #message-content {
-  padding: 30px;
+
+}
+
+.box {
+  height: 75%;
+  background-color: white;     
 }
 
 .inbox-message {

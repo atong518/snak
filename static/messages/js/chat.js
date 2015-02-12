@@ -61,12 +61,12 @@ $(document).ready(function(){
   
   // disable scroll on this page
 	//  $('#chat-room').on({
-	//      'mousewheel': function(e) {
-	//          if (e.target.id == 'el') return;
-	//          e.preventDefault();
-	//          e.stopPropagation();
-	//      }
-	//  });
+	  //     'mousewheel': function(e) {
+	 //       if (e.target.id == 'el') return;
+       //       e.preventDefault();
+       //       e.stopPropagation();
+       //     }
+     // });
 
   // hit submit button on 'enter' keypress
   $('#message-input-box').keypress(function (e) {
@@ -82,6 +82,9 @@ $(document).ready(function(){
     $(this).hide();
   });
 
+  // open first thread
+  populateThread($('.thread').first().attr("id").split("-")[1]);
+
   // send message
   $("#send-message-form").on('submit', function(event) {
     event.preventDefault(); // prevent page refresh
@@ -89,12 +92,25 @@ $(document).ready(function(){
     var message = $('#message-input-box').val();
     var prev_messages = $('#message-content').html();
 
-    if (message) {
-      $('#message-content').html(prev_messages + '<div class="row" style="margin-bottom: 10px;"><div class="btn btn-primary pull-right disabled">' + message + '</div></div>');
-    }
-
     return false;
   });  
 
+  // listen for received messages
+  //  setInterval(function() {
+  // url: "send_chat_message/", // the endpoint
+	 // type: "POST", // the http method
+		//
+  //
+  //});
 
+
+  // scroll down!
+  scrollDown();
 });
+
+function scrollDown() {
+    // scroll to bottom of chat screen
+    var chat_box = $('#message-box');
+    var height = chat_box[0].scrollHeight;
+    chat_box.scrollTop(height);
+}

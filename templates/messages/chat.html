@@ -8,83 +8,10 @@
 
 {% block content %}
 <script>
-  function populateThread(threadId) {
-    // hide all threads
-    $('.thread').each(function() {
-      $(this).hide();
-    });
+function getLoggedInUserEmail() {
+  return "{{ user.email }}";
+}
 
-    // show individual thread
-    id = "#thread-" + threadId;
-    $(id).show();
-
-    // deactivate all thread links
-    $('.inbox-message').each(function() {
-      $(this).removeClass("active-link");
-    });
-
-    // activate individual thread link
-    thread_link = "#thread-link-" + threadId;
-    $(thread_link).addClass("active-link");
-  
-    // scroll down
-    scrollDown();
-  }
-
-  function sendMessage() {
-    // get id of the thread that is activated
-    var selectedThreadId = $(".active-link").attr("id");
-
-    // ensure that there is a thread activated
-    if (typeof selectedThreadId == "undefined") {
-      alert(selectedThreadId);
-    }
-    else {
-      selectedThreadId = selectedThreadId.split("-")[2];
-    }
-
-    // get text of message to be sent
-    var message_text = $("#message-input-box").val();
-
-    $.ajax({
-        url : "send_chat_message/", // the endpoint
-        type : "POST", // http method
-        data : { message_text : message_text,
-                 thread_id : selectedThreadId }, // data sent with the post request
-
-        // handle a successful response
-        success : function(json) {
-            if (typeof json.ignore != "undefined") return;
-            var prev_messages = $('#thread-' + selectedThreadId).html();
-            var append = '<div class="row" style="margin-top: 10px;">';
-
-            if (json.sender == "{{ user.email }}") {
-              append += '<div class="btn btn-primary pull-right disabled">';
-            }
-            else {
-              append += '<div class="btn btn-default disabled">';
-	    }
-	    append += json.text + '</div></div>';
-            console.log("append:" + append);
-            $('#thread-' + selectedThreadId).html(prev_messages + append);
-
-            $('#message-input-box').val(''); // remove the value from the input
-            $('#message-content').html();
-            console.log(json); // log the returned json to the console
-            console.log("huzzah"); // another sanity check
-    
-            // scroll down!
-            scrollDown();
-        },
-
-        // handle a non-successful response
-        error : function(xhr,errmsg,err) {
-            $('#message-content').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-        }
-    });
-  }
 </script>
 <script type="text/javascript" src="{% static 'messages/js/chat.js' %}"></script>
 

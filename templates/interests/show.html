@@ -40,30 +40,50 @@
 	</div>
 	<div class="col-sm-1"></div>
 
-	<div class="col-sm-4">
-		<div class="panel panel-default">
-  			<div class="panel-body">
-				<p> greek life frats coeds sororities other social life </p>
-			</div>
-		</div>
+	<div class="col-sm-4 panel panel-default panel-body">
+		<ul>
+			{% for interest in i_list.children %} 
+			    {%include "interests/interest_template.html" %}
+			{% endfor %}
+		</ul>
 	</div>
-	<div class="col-sm-2">
-		<div class="panel panel-default">
-  			<div class="panel-body">
-				<p> chosen interests </p>
-			</div>
-		</div>
+	
+	<div class="col-sm-2 panel panel-default">
+			<ul class="panel-body" id="interest-name-list"></ul>
 	</div>
+
 	<div class="col-sm-2"></div>
 
 </div>
-			
-<ul class="row">
-	{% for athlete in athlete_list %}
-	    <li>{{ athlete.name }}</li>
-	{% endfor %}
-</ul>
 
+
+
+<script> 
+	var interestlist = []
+
+	UpdateInterestList = function() {
+		$.each(interestlist, function(i, val) {
+			var li = $('<li/>').text(val.name).appendTo('#interest-name-list')
+		});
+	}
+
+	AddToInterestList = function(interest) {
+		interestlist = interestlist.concat(interest)
+		UpdateInterestList()
+	}
+
+	ButtonClick = function(interest) {
+		AddToInterestList(interest)
+	}
+
+	user_interests = {{user_interests|safe}}
+
+	user_interests.forEach(function(interest) {
+		AddToInterestList(interest)		
+	})
+
+
+</script>
 
 
 

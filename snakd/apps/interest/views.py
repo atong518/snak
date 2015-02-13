@@ -10,8 +10,17 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 from snakd.apps.user.models import GenericUser
 from snakd.apps.interest.models import Interest
 from snakd.lib.orm import *
+import json
+
 
 def show(request):
-	i_tree = GetInterestTree()
+	responsedict = {}
+	responsedict["i_list"] = GetInterestTree()
+	responsedict["user_interests"] = json.dumps([{
+		"name": 5,
+		"id": 44,
+		"tooltip": "testing 1 2 3",
+		"weight": 1,
+	}])
 
-	return render(request, 'interests/show.html', {})
+	return render(request, 'interests/show.html', responsedict)

@@ -7,41 +7,59 @@ from snakd.apps.interest.models import Interest
 from orm import GetInterestRoot
 from orm import GetInterestTree
 
-def interestList(node):
-    new_list = [node]
+class Matrix:
+    def __init__(self, root):
+        self.root = root
+        self.order_list = self.interestList(self.root) 
+        self.order_dict = self.setOrderDict(self.order_list)
+        self.length = len(self.order_list)
 
-    if node.ChildList() != None: # base case
-        for child in node.ChildList():
+        self.rows = []
+        for i in range(self.length):
+            self.rows.append([0] * self.length)
 
-            # append nodes themselves, not the lists
-            for temp in interestList(child): 
-                new_list.append(temp)
+    def getIntAtIndex(self, index):
+        return self.order_list[index]
 
-    return new_list
+    def getIndexFromInt(self, interest):
+        return self.order_dict[interest]
 
-# could just be stored as a dictionary instead of this
-def getInterestIndex(int_list, find_interest):
-    for ind, interest in enumerate(int_list):
-        if find_interest == interest:
-            return ind
+    def getOrderList(self):
+        return self.order_list
 
-def adjList(graph, node):
-    adj = []
+    def setValFromInts(self, int1, int2, value):
+        self.setValue(self.getIndexFromInt(int1), self.getIndexFromInt(int2), value)
 
-    # append children
-    if node.ChildList() != None:
-        for temp in node.ChildList():
-            adj.append(temp)
+    def setValue(self, row, column, value):
+        self.rows[row][column] = value
 
-    # append parent
-    for parent, child_list in graph.items():
-        if node in child_list:
-            adj.append(parent)
-            break # only has one parent
+    def getValFromInts(self, int1, int2):
+        return self.getValue(self.getIndexFromInt(int1), self.getIndexFromInt(int2))
 
-    return adj
+    def getValue(self, row, column):
+        return self.rows[row][column]
 
-def bfs(graph, rows, start_node, int_list):
+    def interestList(self, node):
+        new_list = [node]
+
+        if node.ChildList() != None: # base case
+            for child in node.ChildList():
+
+                # append nodes themselves, not the lists
+                for temp in self.interestList(child): 
+                    new_list.append(temp)
+
+        return new_list
+
+    def setOrderDict(self, order_list):
+        d = {}
+
+        for i, interest in enumerate(order_list):
+            d[interest] = i
+
+        return d
+
+def bfs(graph, matrix, start_node):
     # queue represented by a list
     queue = [start_node]
     visited = []
@@ -51,14 +69,14 @@ def bfs(graph, rows, start_node, int_list):
     timetodepth = len(queue)
 
     while len(queue) > 0:
-        node = queue.pop(0)
+        node = queue.pop(0) 
         visited.append(node)
         timetodepth -= 1
 
-        #rows[start_node.id][node.id] = depth
-        rows[getInterestIndex(start_node, int_list)][getInterestIndex(node, int_list)] = depth
+        matrix.setValFromInts(start_node, node, depth)
 
-        for adj in adjList(graph, node):#in graph.get(node, []) for only children
+        adjList = [node.ChildList(), node.getParent()]
+        for adj in adjList:
             if adj not in visited:
                 queue.append(adj)
 
@@ -66,23 +84,15 @@ def bfs(graph, rows, start_node, int_list):
             depth += 1
             timetodepth = len(queue)
 
-    return rows
+    return matrix
 
-def build_matrix():
-    root = orm.GetInterestRoot()
-
-    # holds arbitrary order of interest references, parallels rows/columns of the matrix
-    int_list = interestList(root)
-    total = len(int_list)
-
-    # distance matrix (square of size total by total)
-    rows = []
-    for i in range(total):
-        rows.append([0] * total)
-
+def buildMatrix():
+    m = Matrix(orm.GetInterestRoot())
     tree = orm.GetInterestTree()
 
-    for i, interest in enumerate(int_list):
-        rows[i] = bfs(graph, rows, interest, int_list)
+    for interest in m.getOrderList():
+        m = bfs(tree, m, interest)
             
-    return rows
+    return m
+
+

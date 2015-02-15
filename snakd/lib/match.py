@@ -6,29 +6,26 @@ from snakd.apps.interest.models import Interest
 from snakd.apps.user.models import GenericUser
 
 from matrix import *
-from orm import GetInterestRoot
 
 def match(matrix, user1, user2):
-	score = 0
+    score = 0.0
 
-	ints1 = user1.getInterestList()
-	ints2 = user2.getInterestList()
+    ints1 = user1.getInterestList()
+    ints2 = user2.getInterestList()
 
-	root = orm.GetInterestRoot()
-	# slightly worried about calling interestList in two places
-    int_list = interestList(root)
+    for int1 in ints1:
+        for int2 in ints2:
 
-	for int1 in ints1:
-		for int2 in ints2:
+        	# watch out for dividing by 0
+            score += 100 / ((matrix.getValFromInts(int1, int2) + 3) * int1.freq)
 
-			# need interest order list to iterate into matrix
-			score += 1 / matrix[getInterestIndex(int1, int_list)][getInterestIndex(int2, int_list)]  # * int1.getFrequency())
-
-	return score / len(ints1)
+    return score / len(ints1)
 
 '''
-TO DO:
-make the matrix a class with an interest ID list that lines up with the 2D matrix
-this will get rid of getInterestIndex and interestList, which are stupid and add to the time complexity
-double check getFrequency() in interest models, because it probably won't just return number of users pointing to it
+		### TO DO ###
+- double check getFrequency() in interest models, because it probably won't just 
+    return number of users pointing to it
+- matrix needs to be built and potentially stored in the database, need to structure
+	it so it can be easily stored and queried
+- take priorities into account when user-interest relation model is rebuilt
 '''

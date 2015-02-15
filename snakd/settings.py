@@ -44,7 +44,6 @@ INSTALLED_APPS = (
     'postman',
     'snakd',
     'snakd.apps.user',
-    'snakd.apps.relation',
     'snakd.apps.interest',
     'scripts',
     'scripts.db_data'

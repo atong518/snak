@@ -23,8 +23,6 @@ def match(matrix, user1, user2):
 
 '''
 		### TO DO ###
-- double check getFrequency() in interest models, because it probably won't just 
-    return number of users pointing to it
 - matrix needs to be built and potentially stored in the database, need to structure
 	it so it can be easily stored and queried
 - take priorities into account when user-interest relation model is rebuilt

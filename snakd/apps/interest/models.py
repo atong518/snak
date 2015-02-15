@@ -16,5 +16,6 @@ class Interest(models.Model):
 		return self.parent
 
 	# https://docs.djangoproject.com/en/1.7/topics/db/examples/many_to_many/
+	# http://stackoverflow.com/questions/13341173/django-get-objects-from-a-many-to-many-field
 	def getFrequency(self):
-		return len(self.objects.all()) # will this also get parents/children?
+		return len(self.related.all())

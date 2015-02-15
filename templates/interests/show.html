@@ -2,8 +2,10 @@
 
 {% block content %}
 {% load staticfiles %}
+{% load customtags %}
 
 <!-- TODO: (maybe?) CLEAN THIS UP WITH CSS INSTEAD OF BUFFER ROWS -->
+
 
 <div class="row">
 	<div class="col-sm-4"></div>
@@ -40,16 +42,14 @@
 	</div>
 	<div class="col-sm-1"></div>
 
-	<div class="col-sm-4 panel panel-default panel-body">
-		<ul>
-			{% for interest in i_list.children %} 
-			    {%include "interests/interest_template.html" %}
-			{% endfor %}
-		</ul>
-	</div>
+	<ul class="col-sm-4 panel panel-default panel-body">
+		{% for interest in i_list.children %} 
+		    {%include "interests/interest_template.html" %}
+		{% endfor %}
+	</ul>
 	
 	<div class="col-sm-2 panel panel-default">
-			<ul class="panel-body" id="interest-name-list"></ul>
+		<ul class="panel-body" id="interest-name-list"></ul>
 	</div>
 
 	<div class="col-sm-2"></div>
@@ -62,8 +62,9 @@
 	var interestlist = []
 
 	UpdateInterestList = function() {
+		$('#interest-name-list').empty()
 		$.each(interestlist, function(i, val) {
-			var li = $('<li/>').text(val.name).appendTo('#interest-name-list')
+			$('#interest-name-list').append($('<li/>').text(val.name))
 		});
 	}
 
@@ -81,6 +82,12 @@
 	user_interests.forEach(function(interest) {
 		AddToInterestList(interest)		
 	})
+
+	$(".selectbtn").click(function(element) {
+		jsn = JSON.parse(element.toElement.firstElementChild.textContent)
+		AddToInterestList(jsn)
+	})
+
 
 
 </script>

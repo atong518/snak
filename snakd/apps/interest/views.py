@@ -22,5 +22,5 @@ def show(request):
 		"tooltip": "testing 1 2 3",
 		"weight": 1,
 	}])
-
+	# import pdb; pdb.set_trace()
 	return render(request, 'interests/show.html', responsedict)

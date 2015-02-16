@@ -13,4 +13,5 @@ urlpatterns = patterns('',
     # chat urls - TODO: move these to a chat urls.py file if this gets too cluttered
     url(r'^chat/$', chatviews.chat, name='chat'),
     url(r'^chat/send_chat_message/$', chatviews.send_chat_message, name="send_chat_message"),
+    url(r'^chat/check_for_new_messages/$', chatviews.check_for_new_messages, name="check_for_new_messages"),
 )

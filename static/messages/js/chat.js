@@ -57,6 +57,8 @@ $.ajaxSetup({
 // END CODE SNIPPET
 // -------------------------------------------------------------------------------------------------
 
+var SET_INTERVAL;
+
 $(document).ready(function(){
   
   // disable scroll on this page
@@ -82,8 +84,11 @@ $(document).ready(function(){
     $(this).hide();
   });
 
+  // get id of first thread
+  var firstThreadId = $('.thread').first().attr("id").split("-")[1];
+
   // open first thread
-  populateThread($('.thread').first().attr("id").split("-")[1]);
+  populateThread(firstThreadId);
 
   // send message
   $("#send-message-form").on('submit', function(event) {
@@ -95,23 +100,58 @@ $(document).ready(function(){
     return false;
   });  
 
-  // listen for received messages
-  //  setInterval(function() {
-  // url: "send_chat_message/", // the endpoint
-	 // type: "POST", // the http method
-		//
-  //
-  //});
-
-
   // scroll down!
   scrollDown();
+
+  // long polling to query for new messages in current thread
+  longPollForThread(firstThreadId);
 });
+
+function _poll(threadId) {
+    $.ajax({
+	    url : "check_for_new_messages/",
+		type : "POST",
+		data : { thread_id : threadId },
+
+		success : function(json) {
+		var messages_html = "";
+		// for each message
+		$.each(json, function(index, val) {
+			text = val[0];
+			sender_email = val[1];
+
+			messages_html += '<div class="row" style="margin-top: 10px">';
+			if (sender_email == getLoggedInUserEmail()) 
+			    messages_html += '<div class="btn btn-primary disabled pull-right">';
+			else
+			    messages_html += '<div class="btn btn-default disabled">';			    
+			messages_html += text + '</div></div>';
+		    });
+
+		$("#thread-" + threadId).html(messages_html);
+		console.log("checked...");
+		scrollDown();
+	    },
+
+		error : function(xhr, errmsg, err) {
+		$('#message-content').html("<div class= 'alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+					   " <a href='#' class='close'>&times;</a></div>");
+		console.log(xhr.status + ": " + xhr.responseText);
+	    }
+	});    
+}
+
+function longPollForThread(threadId) {
+    if (typeof SET_INTERVAL != 'undefined')
+	clearInterval(SET_INTERVAL);
+
+    SET_INTERVAL = setInterval(_poll, 5000, threadId);
+}
 
 function scrollDown() {
     // scroll to bottom of chat screen
     var chat_box = $('#message-box');
-    var height = chat_box[0].scrollHeight;
+    var height = chat_box[0].scrollHeight+50;
     chat_box.scrollTop(height);
 }
 
@@ -136,6 +176,9 @@ function populateThread(threadId) {
     
     // scroll down
     scrollDown();
+
+    // begin long polling for the newly selected thread
+    longPollForThread(threadId);
 }
 function sendMessage() {
     // get id of the thread that is activated
@@ -161,7 +204,9 @@ function sendMessage() {
 	      // handle a successful response
 	      success : function(json) {
 		if (typeof json.ignore != "undefined") return;
-		_sendMessageToDjango(json, selectedThreadId);
+		_sentMessageToDjango(json, selectedThreadId);
+		// scroll down!
+		scrollDown();
 	    },
 		
 	      // handle a non-successful response
@@ -173,7 +218,7 @@ function sendMessage() {
 	});
 }
 
-function _sendMessageToDjango(json, selectedThreadId) {
+function _sentMessageToDjango(json, selectedThreadId) {
     var prev_messages = $('#thread-' + selectedThreadId).html();
     var append = '<div class="row" style="margin-top: 10px;">';
     
@@ -193,6 +238,5 @@ function _sendMessageToDjango(json, selectedThreadId) {
     console.log(json); // log the returned json to the console
     console.log("huzzah"); // another sanity check
     
-    // scroll down!
     scrollDown();
 }

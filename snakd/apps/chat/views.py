@@ -25,6 +25,26 @@ def chat(request):
                   {'inbox_threads' : inbox,
                    'messages' : messages})
 
+def check_for_new_messages(request):
+#    import pdb; pdb.set_trace()
+    if request.method == 'POST' and len(request.POST.get('thread_id')) > 0:
+        thread_id = request.POST.get('thread_id')
+        response_data = []
+        thread = get_object_or_404(Thread, pk=thread_id)
+        
+        messages = thread.message_set.all()
+        for message in messages:
+            response_data.append([message.text, message.sender.email])
+
+
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json")
+    else:
+        return HttpResponse(
+            json.dumps({"ignore": "this isn't happening"}),
+            content_type = "application/json")
+
 def send_chat_message(request):
 #    import pdb; pdb.set_trace();
     if request.method == 'POST' and len(request.POST.get('message_text')) > 0:
@@ -43,11 +63,6 @@ def send_chat_message(request):
         return HttpResponse(
             json.dumps(response_data),
             content_type="application/json")
-
-#        return HttpResponse(
-#            json.dumps(response_data),
-#            content_type="application/json"
-#        )
 
     else:
         return HttpResponse(

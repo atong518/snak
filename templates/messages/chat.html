@@ -7,39 +7,17 @@
 
 
 {% block content %}
-<script type="text/javascript">
-$(document).ready(function(){
-
-  // disable scroll on this page
-  $('#chat-room').on({
-      'mousewheel': function(e) {
-          if (e.target.id == 'el') return;
-          e.preventDefault();
-          e.stopPropagation();
-      }
-  });
-
-  // send message
-  $('#btn-send-message').click(function() {
-    var message = $('#message-input-box').val();
-    var prev_messages = $('#message-content').html();
-
-    $('#message-content').html(prev_messages + '<div class="row" style="margin-bottom: 10px;"><div class="btn btn-primary pull-right">' + message + '</div></div>');
-  });
-
-  // hit submit button on 'enter' keypress
-  $('#message-input-box').keypress(function (e) {
-    if (e.which == 13) {
-      $('#btn-send-message').click();
-      $('#message-input-box').val("");
-    }
-  });
-});
+<script>
+function getLoggedInUserEmail() {
+  return "{{ user.email }}";
+}
 </script>
+<script type="text/javascript" src="{% static 'messages/js/chat.js' %}"></script>
 
 <div class="row" style="height:100%; padding: 10px;" id="chat-room">
-  <!--inbox-->
+  <!--left navbar-->
   <div class="col-md-2 well" id="inbox">    
+    <!--chat menu dropdown-->
     <div class="btn-group btn-group-justified" id="btn-chat-menu">
       <div class="btn-group" id="btn-chat-menu">
 	<button type="button" class="btn btn-success btn-large dropdown-toggle" id="chatmenu" data-toggle="dropdown" aria-expanded="false">
@@ -54,11 +32,21 @@ $(document).ready(function(){
 	</ul>
       </div>
     </div>      
+    <!--inbox-->
+    <ul class="nav nav-pills nav-stacked">
+    {% for thread in inbox_threads %}
+      <li role="presentation"><a class="inbox-message" href="#" 
+				 onclick="populateThread({{ thread.pk }})" 
+				 id="thread-link-{{ thread.pk }}">{{ thread }}</a></li>
+    {% endfor %}
+    </ul>
+
     <div class="btn btn-danger btn-large" id="btn-match-me">Match Me!</div>
   </div>
   <!--current message-->
-  <div class="col-md-10 well" id="message-box" >
-    <div class="row" style="padding-right: 20px; padding-top: 5px;">
+  <div class="col-md-10 well box">
+    <!--plus menu-->
+    <div class="row" style="padding-right: 20px; padding-top: 5px; margin-bottom: 5px;">
       <div class="dropdown">
 	<button class="btn btn-success dropdown-toggle pull-right" type="button" id="plusmenu" data-toggle="dropdown" aria-expanded="false">+</button>
 	<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="plusmenu">
@@ -66,15 +54,35 @@ $(document).ready(function(){
 	  <li><a href="#">Report Conversation</a></li>
 	  <li><a href="#">Nudge Person</a></li>
 	</ul>
+	</div>
+    </div>
+    <div id="message-box" >
+      <!--previously sent/received messages-->
+      <div id="message-content">
+	{% for thread in inbox_threads %}
+ 	<div id="thread-{{ thread.pk }}" class="thread">
+          {% for message in thread.message_set.all %}
+	  <div class="row" style="margin-top: 10px">
+            {% if message.sender == user %}
+	    <div class="btn btn-primary disabled pull-right">{{ message }}</div>
+            {% else %}
+            <div class="btn btn-default disabled">{{ message }}</div>
+            {% endif %}
+	  </div>
+	  {% endfor %}
+	</div>
+	{% endfor %}
       </div>
     </div>
-    <div id="message-content"></div>
-    <div class="input-group" id="send-message-row">
-      <input class="form-control" type="text" id="message-input-box">
-      <span class="input-group-btn">
-	<button id="btn-send-message" class="btn btn-success" type="button" default="on">Send</button>
-      </span>
-    </div>
+    <form id="send-message-form" method="POST">
+      {% csrf_token %}
+      <div class="input-group" id="send-message-row">
+	<input class="form-control" type="text" id="message-input-box">
+	<span class="input-group-btn">
+	  <input type="submit" id="btn-send-message" class="btn btn-success" value="Send"/>
+	</span>
+      </div>
+    </form>
   </div>
 </div>
 

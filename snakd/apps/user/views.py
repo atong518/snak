@@ -10,7 +10,6 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail, EmailMultiAlternatives
 
-
 # Create your views here.
 def splash(request):
     return render(request, 'user/splash.html', {})
@@ -39,21 +38,17 @@ def sign_up(request):
         if  request.POST.get("prospie_signup") is not None and prospieform.is_valid():
             new_student = prospieform.save_user(prospieform.cleaned_data)
             _send_mail(new_student.email, new_student.activation_code)
-            # log in the new user and redirect to main page
+            # log in the new user and redirect to chat page
             user = authenticate(email=new_student.email, password=prospieform.cleaned_data["password1"])
             auth_login(request, user)
-            return render(request,
-                          "user/main.html",
-                          {})
+            return redirect("/chat/")
 
         if request.POST.get("college_signup") is not None and collegeform.is_valid():
             new_student = collegeform.save_user(collegeform.cleaned_data)
             _send_mail(new_student.email, new_student.activation_code)
             user = authenticate(email=new_student.email, password=collegeform.cleaned_data["password1"])
             auth_login(request, user)
-            return render(request,
-                          "user/main.html",
-                          {})
+            return redirect("/chat/")
 
     else:
         prospieform = ProspieSignupForm()
@@ -84,7 +79,7 @@ def login(request):
         user = authenticate(email=email, password=password)
         if user is not None:
             auth_login(request, user)
-            return redirect(main)
+            return redirect("/chat/")
 
     return render(request,
                   'user/login.html',
@@ -106,4 +101,4 @@ def confirm_email(request, activation_code, email):
         user.is_active = True
         user.save()
     
-    return redirect(main)
+    return redirect("/chat/")

@@ -77,6 +77,7 @@ class ProspieUserManager(GenericUserManager):
         user.save()
         return user
 
+
 class GenericUser(AbstractBaseUser):
     email = models.EmailField(max_length=222, unique=True)
     firstname = models.CharField(max_length=200)
@@ -102,6 +103,22 @@ class GenericUser(AbstractBaseUser):
     def getInterestList(self):
         return self.interest.all()
 
+    def editableFields(self):
+        return {
+            "email": self.email,
+            "firstname": self.firstname,
+            "lastname": self.lastname,
+            "homecountry": self.homecountry,
+            "homestate": self.homestate,
+        }
+
+    def updateUser(self, **kwargs):
+        if kwargs.get("password"):
+            kwargs["password"] = self.model.set_password(kwargs.get("password"))
+        for k, v in kwargs.items():
+            setattr(self, k, v)
+        self.save()
+
 class CollegeUser(GenericUser):
     # Match frequencies in seconds (for countdown)
     UNLIMITED = 0
@@ -122,6 +139,12 @@ class CollegeUser(GenericUser):
     max_match_frequency = models.IntegerField(max_length=200, null=False)
 
     objects = CollegeUserManager()
+
+    def editableFields(self):
+        dic = super(CollegeUser, self).editableFields()
+        dic["bio"] = self.bio
+        dic["max_match_frequency"] = self.max_match_frequency
+        return dic
 
 class ProspieUser(GenericUser):
     objects = ProspieUserManager()

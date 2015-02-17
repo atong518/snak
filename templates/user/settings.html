@@ -9,8 +9,8 @@
   <form class="form-horizontal col-md-4" 
           data-toggle="validator" 
           role="form"  
-          name="LoginForm" 
-          action="/login/" 
+          name="SettingsForm" 
+          action="/settings/" 
           method="post">
     
     {% csrf_token %}
@@ -24,8 +24,7 @@
     <input type="text" name="lastname" 
            id="lastname" value="{{lastname}}" 
            placeholder="Last Name" 
-           class="form-control form-group col-sm-12" 
-           required>
+           class="form-control form-group col-sm-12">
 
     <input type="text" name="homecountry" 
            id="homecountry" value="{{homecountry}}" 
@@ -54,16 +53,10 @@
          style="margin-bottom: 5px; text-align: center;">
     	<button type="submit" class="btn btn-success">Submit</button>
     </div>
-      <!--a class="" href="{% url 'splash' %}" >Back</a-->
   </form>
 
   <div class="col-md-4"></div>
 </div>
 
-<!-- <form action="" method="post">
-    <label for="your_name">Your name: </label>
-    <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
-    <input type="submit" value="OK">
-</form> -->
 
 {% endblock %}

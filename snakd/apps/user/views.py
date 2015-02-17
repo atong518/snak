@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from snakd.apps.user.models import ProspieUser, CollegeUser
+from snakd.apps.user.models import ProspieUser, CollegeUser, GenericUser
 from snakd.apps.user.forms import ProspieSignupForm, CollegeSignupForm, GenericSignupForm
 from django.shortcuts import render_to_response, redirect
 from django.http import HttpResponse
@@ -104,17 +104,20 @@ def confirm_email(request, activation_code, email):
     return redirect("/chat/")
 
 def edit(request):
-    import pdb; pdb.set_trace()
-    if request.method == "POST":
-        pass
-        # form = GenericSignupForm()
-    elif request.method == "GET":
-        pass
-    else:
-        import pdb; pdb.set_trace()
+    uid = request.session.get("_auth_user_id")
+    if uid:
+        user = GenericUser.objects.get(id=uid)
+        if user:
+            user = user.collegeuser if user.collegeuser else user.prospieuser
+            if request.method == "POST":
+                dic = user.editableFields()
+            elif request.method == "GET":
+                dic = user.editableFields()
+            else:  # Will need a delete method here
+                import pdb; pdb.set_trace()
 
-    return render(request, 'user/settings.html', {})
-
+            return render(request, 'user/settings.html', dic)
+    return render(request, 'user/sign_up')
 
 
 

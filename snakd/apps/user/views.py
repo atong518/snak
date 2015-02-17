@@ -15,6 +15,13 @@ from django.contrib.auth import update_session_auth_hash
 def splash(request):
     return render(request, 'user/splash.html', {})
 
+def _specify_class(user):
+    try:
+        user = user.collegeuser
+    except:
+        user = user.prospieuser
+    return user
+
 def _send_mail(email, activation_code):
     # Email shenanigans
     subject = "SnakDartmouth Email Verification"
@@ -105,21 +112,22 @@ def confirm_email(request, activation_code, email):
 
 def edit(request):
     uid = request.session.get("_auth_user_id")
-    import pdb; pdb.set_trace()
     if uid:
         user = GenericUser.objects.get(id=uid)
         if user:
-            try:
-                user = user.collegeuser
-            except:
-                user = user.prospieuser
+            user = _specify_class(user)
             if request.method == "POST":
-                user.updateUser(**request.POST.dict())
-                update_session_auth_hash(request, user)
-                dic = user.editableFields()
+                params = request.POST.dict()
+                if user.check_password(params.pop('password')):
+                    user.updateUser(**params)
+                    update_session_auth_hash(request, user)
+                    dic = user.editableFields()
+                else:
+                    # TODO?: What should happen here?
+                    dic = user.editableFields()
             elif request.method == "GET":
                 dic = user.editableFields()
-            else:  # Will need a delete method here
+            else:  # TODO: Will need a delete method here
                 import pdb; pdb.set_trace()
 
             return render(request, 'user/settings.html', dic)

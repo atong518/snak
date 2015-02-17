@@ -113,16 +113,9 @@ class GenericUser(AbstractBaseUser):
         }
 
     def updateUser(self, **kwargs):
-        # TODO: Compare password w/ hashed one on the server, notify 
-        # user if the password is incorrect
-        if kwargs.get("password"):
-            kwargs.pop("password")
-            # self.set_password(kwargs.pop("password"))
         for k, v in kwargs.items():
             setattr(self, k, v)
         self.save()
-
-
 
 class CollegeUser(GenericUser):
     # Match frequencies in seconds (for countdown)

@@ -74,7 +74,6 @@ def aboutus(request):
     return render(request, 'user/aboutus.html', {})
 
 def main(request):
-    import pdb; pdb.set_trace()
     return render(request, "user/main.html", {})
 
 def login(request):

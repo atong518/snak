@@ -41,18 +41,6 @@ class GenericSignupForm(UserCreationForm):
                                                password=data['password1'])
         return user
 
-    def update_user(self, user, data):
-        user = CollegeUser.objects.create_user(email=data['email'],
-                                               firstname=data['firstname'],
-                                               lastname=data['lastname'],
-                                               homecountry=data['homecountry'],
-                                               homestate=data['homestate'],
-                                               password=data['password1'],
-                                               bio=data['bio'],
-                                               max_match_frequency=data['max_match_frequency'])
-        user.save()
-        return user
-
     def clean_password(self):
         cleaned_data = super(GenericSignupForm, self).clean()
         password1 = cleaned_data.get("password1")
@@ -102,18 +90,6 @@ class CollegeSignupForm(GenericSignupForm):
         user.save()
         return user
 
-    def update_user(self, user, data):
-        user = CollegeUser.objects.create_user(email=data['email'],
-                                               firstname=data['firstname'],
-                                               lastname=data['lastname'],
-                                               homecountry=data['homecountry'],
-                                               homestate=data['homestate'],
-                                               password=data['password1'],
-                                               bio=data['bio'],
-                                               max_match_frequency=data['max_match_frequency'])
-        user.save()
-        return user
- 
     def __init__(self, *args, **kwargs):
         super(CollegeSignupForm, self).__init__(*args, **kwargs)
         self.fields['homecountry'].widget = Select(attrs={
@@ -152,7 +128,6 @@ class CollegeSignupForm(GenericSignupForm):
             'data-error': 'Whoops, these passwords don\'t match'})
 
 
-
 class ProspieSignupForm(GenericSignupForm):
     class Meta(GenericSignupForm.Meta):
         model = ProspieUser
@@ -165,18 +140,6 @@ class ProspieSignupForm(GenericSignupForm):
                                                homecountry=data['homecountry'],
                                                homestate=data['homestate'],
                                                password=data['password1'])
-        user.save()
-        return user
-
-    def update_user(self, user, data):
-        user = CollegeUser.objects.create_user(email=data['email'],
-                                               firstname=data['firstname'],
-                                               lastname=data['lastname'],
-                                               homecountry=data['homecountry'],
-                                               homestate=data['homestate'],
-                                               password=data['password1'],
-                                               bio=data['bio'],
-                                               max_match_frequency=data['max_match_frequency'])
         user.save()
         return user
 

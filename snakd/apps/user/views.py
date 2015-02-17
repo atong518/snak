@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail, EmailMultiAlternatives
+from django.contrib.auth import update_session_auth_hash
 
 # Create your views here.
 def splash(request):
@@ -66,9 +67,8 @@ def aboutus(request):
     return render(request, 'user/aboutus.html', {})
 
 def main(request):
-    return render(request,
-                  "user/main.html",
-                  {})
+    import pdb; pdb.set_trace()
+    return render(request, "user/main.html", {})
 
 def login(request):
     email = password = ''
@@ -105,11 +105,17 @@ def confirm_email(request, activation_code, email):
 
 def edit(request):
     uid = request.session.get("_auth_user_id")
+    import pdb; pdb.set_trace()
     if uid:
         user = GenericUser.objects.get(id=uid)
         if user:
-            user = user.collegeuser if user.collegeuser else user.prospieuser
+            try:
+                user = user.collegeuser
+            except:
+                user = user.prospieuser
             if request.method == "POST":
+                user.updateUser(**request.POST.dict())
+                update_session_auth_hash(request, user)
                 dic = user.editableFields()
             elif request.method == "GET":
                 dic = user.editableFields()
@@ -117,7 +123,7 @@ def edit(request):
                 import pdb; pdb.set_trace()
 
             return render(request, 'user/settings.html', dic)
-    return render(request, 'user/sign_up')
+    return render(request, 'user/splash.html')
 
 
 

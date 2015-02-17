@@ -1,10 +1,9 @@
 from django.db import models
 from django.utils.crypto import get_random_string
+from snakd.apps.interest.models import Interest
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
-
-from snakd.apps.interest.models import Interest
 
 # Create your models here.
 class GenericUserManager(BaseUserManager):
@@ -40,6 +39,7 @@ class GenericUserManager(BaseUserManager):
         user.is_admin = True
         user.save(using=self._db)
         return user
+
 
 class CollegeUserManager(GenericUserManager):
     def create_user(self, email, firstname, lastname, homecountry, homestate, bio, max_match_frequency, password=None):
@@ -113,11 +113,16 @@ class GenericUser(AbstractBaseUser):
         }
 
     def updateUser(self, **kwargs):
+        # TODO: Compare password w/ hashed one on the server, notify 
+        # user if the password is incorrect
         if kwargs.get("password"):
-            kwargs["password"] = self.model.set_password(kwargs.get("password"))
+            kwargs.pop("password")
+            # self.set_password(kwargs.pop("password"))
         for k, v in kwargs.items():
             setattr(self, k, v)
         self.save()
+
+
 
 class CollegeUser(GenericUser):
     # Match frequencies in seconds (for countdown)

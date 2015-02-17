@@ -5,13 +5,13 @@
 		{{interest.name}}
 		<div style="display: none;">{{interest|dumpsjs}}</div>
 	</button>
-	    {%if interest.children %}
-	        <ul>
-	         {%for ch in interest.children %}
-	              {%with interest=ch template_name="interests/interest_template.html" %}
-	                   {% include template_name %}
-	              {%endwith%}
-	         {%endfor%}
-	         </ul>
-	    {%endif%}
+    {%if interest.children %}
+        <ul>
+         {%for ch in interest.children %}
+              {%with interest=ch template_name="interests/interest_template.html" %}
+                   {% include template_name %}
+              {%endwith%}
+         {%endfor%}
+         </ul>
+    {%endif%}
 </li>

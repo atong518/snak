@@ -8,7 +8,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^messages/', include("postman.urls")),
+    # url(r'^messages/', include("postman.urls")),
 
     # chat urls - TODO: move these to a chat urls.py file if this gets too cluttered
     url(r'^chat/$', chatviews.chat, name='chat'),

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from snakd.apps.user.models import ProspieUser, CollegeUser
-from snakd.apps.user.forms import ProspieSignupForm, CollegeSignupForm
+from snakd.apps.user.forms import ProspieSignupForm, CollegeSignupForm, GenericSignupForm
 from django.shortcuts import render_to_response, redirect
 from django.http import HttpResponse
 from django.template import RequestContext, loader
@@ -102,3 +102,48 @@ def confirm_email(request, activation_code, email):
         user.save()
     
     return redirect("/chat/")
+
+def edit(request):
+    import pdb; pdb.set_trace()
+    if request.method == "POST":
+        pass
+        # form = GenericSignupForm()
+    elif request.method == "GET":
+        pass
+    else:
+        import pdb; pdb.set_trace()
+
+    return render(request, 'user/settings.html', {})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,69 @@
+{% extends "user/base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+
+<div class="row">
+  <div class="col-md-4"></div>
+
+  <form class="form-horizontal col-md-4" 
+          data-toggle="validator" 
+          role="form"  
+          name="LoginForm" 
+          action="/login/" 
+          method="post">
+    
+    {% csrf_token %}
+    
+    <input type="text" name="firstname" 
+           id="firstname" value="{{firstname}}" 
+           placeholder="First Name" 
+           class="form-control form-group col-sm-12" 
+           required>
+
+    <input type="text" name="lastname" 
+           id="lastname" value="{{lastname}}" 
+           placeholder="Last Name" 
+           class="form-control form-group col-sm-12" 
+           required>
+
+    <input type="text" name="homecountry" 
+           id="homecountry" value="{{homecountry}}" 
+           placeholder="Country" 
+           class="form-control form-group col-sm-12" 
+           required>
+
+    <input type="text" name="homestate" 
+           id="homestate" value="{{homestate}}" 
+           placeholder="State" 
+           class="form-control form-group col-sm-12" 
+           required>
+
+    <input type="text" name="email" 
+           id="email" value="{{email}}" 
+           placeholder="Email" 
+           class="form-control form-group col-sm-12" 
+           required>
+
+    <input type="password" name="password" 
+           id="password" placeholder="Password" 
+           class="form-control form-group col-sm-12" 
+           required>
+
+    <div class="form-group col-sm-12" 
+         style="margin-bottom: 5px; text-align: center;">
+    	<button type="submit" class="btn btn-success">Submit</button>
+    </div>
+      <!--a class="" href="{% url 'splash' %}" >Back</a-->
+  </form>
+
+  <div class="col-md-4"></div>
+</div>
+
+<!-- <form action="" method="post">
+    <label for="your_name">Your name: </label>
+    <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+    <input type="submit" value="OK">
+</form> -->
+
+{% endblock %}

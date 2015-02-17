@@ -2,8 +2,10 @@
 
 {% block content %}
 {% load staticfiles %}
+{% load customtags %}
 
 <!-- TODO: (maybe?) CLEAN THIS UP WITH CSS INSTEAD OF BUFFER ROWS -->
+
 
 <div class="row">
 	<div class="col-sm-4"></div>
@@ -40,30 +42,82 @@
 	</div>
 	<div class="col-sm-1"></div>
 
-	<div class="col-sm-4">
-		<div class="panel panel-default">
-  			<div class="panel-body">
-				<p> greek life frats coeds sororities other social life </p>
-			</div>
-		</div>
+	<ul class="col-sm-4 panel panel-default panel-body">
+		{% for interest in i_list.children %} 
+		    {%include "interests/interest_template.html" %}
+		{% endfor %}
+	</ul>
+	
+	<div class="col-sm-2 panel panel-default">
+		<ul class="panel-body" id="interest-name-list"></ul>
 	</div>
-	<div class="col-sm-2">
-		<div class="panel panel-default">
-  			<div class="panel-body">
-				<p> chosen interests </p>
-			</div>
-		</div>
-	</div>
+
 	<div class="col-sm-2"></div>
 
 </div>
-			
-<ul class="row">
-	{% for athlete in athlete_list %}
-	    <li>{{ athlete.name }}</li>
-	{% endfor %}
-</ul>
 
+
+
+<script> 
+	var interestlist = []
+
+	UpdateInterestList = function() {
+		$('#interest-name-list').empty()
+		$.each(interestlist, function(i, val) {
+			$('#interest-name-list').append($('<li/>').text(val.name))
+		});
+	}
+
+	AddToInterestList = function(interest) {
+		interest["priority"] = 1
+		interestlist = interestlist.concat(interest)
+		UpdateInterestList()
+	}
+
+	var sort_by = function(field, reverse, wrapperfunc){
+		// wrapperfunc 
+		var key = wrapperfunc ? 
+		   function(x) {return wrapperfunc(x[field])} : 
+		   function(x) {return x[field]};
+
+		reverse = [-1, 1][+!!reverse];
+
+		return function (a, b) {
+		   return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
+		}
+	}
+
+	user_interests = {{user_interests|safe}}
+
+	user_interests.forEach(function(interest) {
+		AddToInterestList(interest)		
+	})
+
+	$(".selectbtn").click(function(element) {
+		// TODO: Can't tell if its already in the array if we add priority to 
+		// the objects upon adding - Use underscore? Multiple lists?
+		// Just getting rid of priorities for now...
+
+		jsn = JSON.parse(element.toElement.firstElementChild.textContent)
+		ids = $.map(interestlist, function(val, index) {return val.id})
+		if ((x = $.inArray(jsn.id, ids)) != -1) {
+			interestlist[x]["priority"] += 1
+			if (interestlist[x]["priority"] == 3) {
+				interestlist.splice(x, 1)
+			} else {
+				interestlist.sort(sort_by('priority', false))
+			}
+		} else {
+			jsn["priority"] = 1
+			interestlist.push(jsn)
+		}
+
+		UpdateInterestList()
+	})
+
+
+
+</script>
 
 
 

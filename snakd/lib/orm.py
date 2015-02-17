@@ -15,8 +15,13 @@ def GetInterestTree():
 			return {}
 		l = {}
 		children = node.ChildList()
+		l["name"] = node.name
+		l["tooltip"] = node.tooltip
+		l["weight"] = node.weight
+		l["id"] = node.id
+		l["children"] = []
 		for child in children:
-			l[child] = GetSubtree(child)
+			l["children"].append(GetSubtree(child))
 		return l
 
 	root = GetInterestRoot()

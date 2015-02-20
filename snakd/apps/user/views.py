@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from snakd.apps.user.models import ProspieUser, CollegeUser, GenericUser
 from snakd.apps.user.forms import ProspieSignupForm, CollegeSignupForm, GenericSignupForm
 from django.shortcuts import render_to_response, redirect
@@ -131,7 +131,7 @@ def edit(request):
 
         return render(request, 'user/settings.html', dic)
     except:
-        return render(request, 'user/splash.html')
+        return HttpResponseRedirect('/')
 
 
 
@@ -145,12 +145,11 @@ def match(request):
         else:
             opplist = CollegeUser.objects.all()
         matrix = getMatrix()
-        import pdb; pdb.set_trace()
         best = bestmatch(matrix, user, opplist)
         user.matches.add(best)
-        return redirect("/chat/")
+        return HttpResponseRedirect('/chat/')
     except:
-        return render(request, 'user/splash.html')
+        return HttpResponseRedirect('/')
 
 
 

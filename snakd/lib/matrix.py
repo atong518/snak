@@ -7,7 +7,7 @@ from snakd.apps.interest.models import Interest
 from orm import GetInterestRoot
 from orm import GetInterestTree
 
-class Matrix:
+class Matrix(object):
     def __init__(self, root):
         self.root = root
         self.order_list = self.interestList(self.root) 

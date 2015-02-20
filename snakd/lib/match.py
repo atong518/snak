@@ -17,7 +17,7 @@ def match(matrix, user1, user2):
         for int2 in ints2:
 
         	# watch out for dividing by 0
-            score += 100 / ((matrix.getValFromInts(int1, int2) + 3) * int1.freq)
+            score += 100 / ((matrix.getValFromInts(int1, int2) + 3) * int1.getFrequency())
 
     return score / len(ints1)
 

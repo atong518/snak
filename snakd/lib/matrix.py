@@ -2,7 +2,7 @@ import sys, os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'snakd.settings'
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
-from snakd.apps.interest.models import Interest
+from snakd.apps.interest.models import Interest, InterestMatrix
 
 from orm import GetInterestRoot
 from orm import GetInterestTree
@@ -60,6 +60,14 @@ class Matrix(object):
         return d
 
 def bfs(graph, matrix, start_node):
+    def concat(list1, list2):
+        lst = []
+        for item in list1 if list1 else []:
+            lst.append(item)
+        for item in list2 if list2 else []:
+            lst.append(item)
+        return lst
+
     # queue represented by a list
     queue = [start_node]
     visited = []
@@ -75,7 +83,7 @@ def bfs(graph, matrix, start_node):
 
         matrix.setValFromInts(start_node, node, depth)
 
-        adjList = [node.ChildList(), node.getParent()]
+        adjList = concat(node.ChildList(), node.getParent())
         for adj in adjList:
             if adj not in visited:
                 queue.append(adj)
@@ -87,12 +95,13 @@ def bfs(graph, matrix, start_node):
     return matrix
 
 def buildMatrix():
-    m = Matrix(orm.GetInterestRoot())
-    tree = orm.GetInterestTree()
+    m = Matrix(GetInterestRoot())
+    tree = GetInterestTree()
 
     for interest in m.getOrderList():
         m = bfs(tree, m, interest)
-            
-    return m
 
+    i = InterestMatrix(matrix = m)
+    i.save()
+    
 

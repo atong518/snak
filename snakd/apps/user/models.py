@@ -101,7 +101,7 @@ class GenericUser(AbstractBaseUser):
         self.interests.add(interest_reference)
 
     def getInterestList(self):
-        return self.interest.all()
+        return self.interests.all()
 
     def editableFields(self):
         return {

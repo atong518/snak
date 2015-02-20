@@ -15,7 +15,8 @@ college = {
 	"homestate": "California",
 	"activation_code": "000",
 	"is_active": True,
-	"bio": "Once upon a time, I didn't do homework and I hung out instead."
+	"bio": "Once upon a time, I didn't do homework and I hung out instead.",
+	"max_match_frequency": 0
 }
 
 prospie = {

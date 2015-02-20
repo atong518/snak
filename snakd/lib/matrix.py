@@ -104,4 +104,12 @@ def buildMatrix():
     i = InterestMatrix(matrix = m)
     i.save()
     
+def getMatrix():
+    matlist = InterestMatrix.objects.all()
+    if len(matlist) > 1:
+        print("WARNING! Multiple matricies!")
+    elif len(matlist) == 0:
+        buildMatrix()
+    return InterestMatrix.objects.all()[0].matrix
+
 

@@ -10,7 +10,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.contrib.auth import update_session_auth_hash
-
+from snakd.lib.match import bestmatch
+from snakd.lib.matrix import getMatrix
 # Create your views here.
 def splash(request):
     return render(request, 'user/splash.html', {})
@@ -110,32 +111,46 @@ def confirm_email(request, activation_code, email):
     return redirect("/chat/")
 
 def edit(request):
-    uid = request.session.get("_auth_user_id")
-    if uid:
+    try:
+        uid = request.session.get("_auth_user_id")
         user = GenericUser.objects.get(id=uid)
-        if user:
-            user = _specify_class(user)
-            if request.method == "POST":
-                params = request.POST.dict()
-                if user.check_password(params.pop('password')):
-                    user.updateUser(**params)
-                    update_session_auth_hash(request, user)
-                    dic = user.editableFields()
-                else:
-                    # TODO?: What should happen here?
-                    dic = user.editableFields()
-            elif request.method == "GET":
+        user = _specify_class(user)
+        if request.method == "POST":
+            params = request.POST.dict()
+            if user.check_password(params.pop('password')):
+                user.updateUser(**params)
+                update_session_auth_hash(request, user)
                 dic = user.editableFields()
-            else:  # TODO: Will need a delete method here
-                import pdb; pdb.set_trace()
+            else:
+                # TODO?: What should happen here?
+                dic = user.editableFields()
+        elif request.method == "GET":
+            dic = user.editableFields()
+        else:  # TODO: Will need a delete method here
+            import pdb; pdb.set_trace()
 
-            return render(request, 'user/settings.html', dic)
-    return render(request, 'user/splash.html')
+        return render(request, 'user/settings.html', dic)
+    except:
+        return render(request, 'user/splash.html')
 
 
 
-
-
+def match(request):
+    try:
+        uid = request.session.get("_auth_user_id")
+        user = GenericUser.objects.get(id=uid)
+        user = _specify_class(user)
+        if isinstance(user, CollegeUser):
+            opplist = ProspieUser.objects.all()
+        else:
+            opplist = CollegeUser.objects.all()
+        matrix = getMatrix()
+        import pdb; pdb.set_trace()
+        best = bestmatch(matrix, user, opplist)
+        user.matches.add(best)
+        return redirect("/chat/")
+    except:
+        return render(request, 'user/splash.html')
 
 
 

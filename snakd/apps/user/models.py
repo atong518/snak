@@ -87,7 +87,7 @@ class GenericUser(AbstractBaseUser):
     activation_code = models.CharField(max_length=250)
     is_active = models.NullBooleanField(default=False)
 
-    interests = models.ManyToManyField(Interest, null=True)
+    interests = models.ManyToManyField(Interest, null=True, related_name='user_set')
 
     objects = GenericUserManager()
     
@@ -137,6 +137,7 @@ class CollegeUser(GenericUser):
     max_match_frequency = models.IntegerField(max_length=200, null=False)
 
     objects = CollegeUserManager()
+    matches = models.ManyToManyField("ProspieUser", related_name="matches", null=True)
 
     def editableFields(self):
         dic = super(CollegeUser, self).editableFields()

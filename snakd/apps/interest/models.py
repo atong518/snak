@@ -20,7 +20,7 @@ class Interest(models.Model):
 	# https://docs.djangoproject.com/en/1.7/topics/db/examples/many_to_many/
 	# http://stackoverflow.com/questions/13341173/django-get-objects-from-a-many-to-many-field
 	def getFrequency(self):
-		return len(self.genericuser_set.all())
+		return len(self.user_set.all())
 
 class SerializedDataField(models.TextField):
     """Because Django for some reason feels its needed to repeatedly call

@@ -4,35 +4,6 @@
 {% block extrastyle %}
   <link rel="stylesheet" type="text/css" href="{% static 'messages/css/chat.css' %}" />
 {% endblock %}
-
-
-{% block extra_js %}
-<script>
-// these functions live here rather than in the js file because 
-// they deal with django variables, which I don't know how to pass
-// to the separate js file :( -ds
-
-function getLoggedInUserEmail() {
-  return "{{ user.email }}";
-}
-
-// CHANGE THIS TO BE FIRSTNAME/LASTNAME EVENTUALLY
-function getMatchedUserEmails() {
-  var emails = [];
-  {% for user in matched_users %}
-    emails.push( "{{user.email}}" );
-  {% endfor %}
-
-  return emails;
-}
-</script>
-<script type="text/javascript" src="{% static 'messages/js/chat.js' %}"></script>
-<script type="text/javascript" src="{% static 'messages/js/typeahead.jquery.js' %}"></script>
-
-<script>
-</script>
-{% endblock %}
-
 {% block content %}
 <div class="row" style="height:100%; padding: 10px;" id="chat-room">
   <!--left navbar-->

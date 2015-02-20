@@ -97,7 +97,7 @@ $(document).ready(function(){
     var message = $('#message-input-box').val();
     var prev_messages = $('#message-content').html();
 
-    $("#addPersonToThread").modal('hide');
+    $("#addPersonToThread").modal('show');
 
     return false;
   });  

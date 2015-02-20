@@ -14,4 +14,6 @@ urlpatterns = patterns('',
     url(r'^chat/$', chatviews.chat, name='chat'),
     url(r'^chat/send_chat_message/$', chatviews.send_chat_message, name="send_chat_message"),
     url(r'^chat/check_for_new_messages/$', chatviews.check_for_new_messages, name="check_for_new_messages"),
+    url(r'^chat/add_user_to_thread/$', chatviews.add_user_to_thread, name="add_user_to_thread"),
+    url(r'^chat/leave_thread/$', chatviews.leave_thread, name="leave_thread"),
 )

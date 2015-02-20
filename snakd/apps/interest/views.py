@@ -26,3 +26,20 @@ def show(request):
 	# import pdb; pdb.set_trace()
 	responsedict["user_interests"] = json.dumps([])
 	return render(request, 'interests/show.html', responsedict)
+
+
+def update(request):
+	import pdb; pdb.set_trace()
+	responsedict = {}
+	responsedict["i_list"] = GetInterestTree()
+	# Test user interest until we have actual population data
+	# responsedict["user_interests"] = json.dumps([{
+	# 	"name": 5,
+	# 	"id": 44,
+	# 	"tooltip": "testing 1 2 3",
+	# 	"weight": 1,
+	# }])
+	# import pdb; pdb.set_trace()
+	responsedict["user_interests"] = json.dumps([])
+	return render(request, 'interests/show.html', responsedict)
+

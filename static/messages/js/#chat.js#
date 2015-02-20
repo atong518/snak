@@ -97,7 +97,7 @@ $(document).ready(function(){
     var message = $('#message-input-box').val();
     var prev_messages = $('#message-content').html();
 
-    $("#addPersonToThread").modal('hide');
+    $("#addPersonToThread").modal('show');
 
     return false;
   });  
@@ -299,7 +299,7 @@ function _sentMessageToDjango(json, selectedThreadId) {
 
 function _addedToThread(addedUserName) {
     // close addPersonToThread modal
-    $('#addPersonToThread').modal('hide');
+    //$('#addPersonToThread').modal('hide');
     
     // update thread to reflect new member yeehaw!
     prev = $("#list-of-members").html();

@@ -20,10 +20,15 @@ def chat(request):
     # get all messages associated with first thread
     first_thread = inbox.first() #GET RID OF THIS ITS STUPID
     messages = Message.objects.filter(thread=first_thread)
+
+    # get all users matched with the logged-in user
+    matched_users = GenericUser.objects.all() #CHANGE THIS ONCE WE HAVE A WAY TO GET MATCHED USERS
+
     return render(request,
                   'messages/chat.html',
                   {'inbox_threads' : inbox,
-                   'messages' : messages})
+                   'messages' : messages,
+                   'matched_users' : matched_users})
 
 def check_for_new_messages(request):
 #    import pdb; pdb.set_trace()
@@ -68,3 +73,40 @@ def send_chat_message(request):
         return HttpResponse(
             json.dumps({"ignore": "this isn't happening"}),
             content_type="application/json")
+
+def add_user_to_thread(request):
+#    import pdb; pdb.set_trace();
+    if request.method == 'POST' and len(request.POST.get('user_email')) > 0:
+        user_email = request.POST.get('user_email')
+        thread_id = request.POST.get('thread_id')
+        response_data = {}
+        thread = get_object_or_404(Thread, pk=thread_id)
+        user = get_object_or_404(GenericUser, email=user_email)
+        thread.members.add(user)
+        thread.save()
+
+        response_data["result"] = "user added successfully!"
+        response_data["new_user_name"] = user.firstname + " " + user.lastname
+
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json")
+
+    else:
+        return HttpResponse(
+            json.dumps({"ignore": "this isn't happening"}),
+            content_type="application/json")
+
+def leave_thread(request):
+    if request.method == 'POST':
+        user_email = request.POST.get('user_email')
+        thread_id = request.POST.get('thread_id')
+        user = get_object_or_404(GenericUser, email=user_email)
+        thread = get_object_or_404(Thread, pk=thread_id)
+        thread.members.remove(user)
+        thread.save()
+
+    return HttpResponse(
+        json.dumps({"ignore": "this isn't happening"}),
+        content_type="application/json")
+        

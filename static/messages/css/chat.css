@@ -1,3 +1,7 @@
+body {
+  overflow: hidden;
+}
+
 #inbox {
   height: 75%;
   position: relative;
@@ -31,13 +35,10 @@
   bottom: 0;
 }
 
-#message-content {
-
-}
-
 .box {
   height: 75%;
   background-color: white;     
+  padding-top: 5px;
 }
 
 .inbox-message {
@@ -47,4 +48,23 @@
 .active-link {
   background-color: #337ab7;
   color: white;
+}
+
+#scrollable-dropdown-menu .tt-dropdown-menu {
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid grey;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  width: 100%;
+  background-color: white;	
+  padding: 5px;
+}
+
+#thread-title-bar {
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgb(227, 227, 227);
 }

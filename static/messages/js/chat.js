@@ -299,7 +299,7 @@ function _sentMessageToDjango(json, selectedThreadId) {
 
 function _addedToThread(addedUserName) {
     // close addPersonToThread modal
-    //$('#addPersonToThread').modal('hide');
+    $('#addPersonToThread').modal('hide');
     
     // update thread to reflect new member yeehaw!
     prev = $("#list-of-members").html();

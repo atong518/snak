@@ -36,7 +36,7 @@ function getMatchedUserEmails() {
 {% block content %}
 <div class="row" style="height:100%; padding: 10px;" id="chat-room">
   <!--left navbar-->
-  <div class="col-md-2 well" id="inbox">    
+  <div class="col-md-2 col-md-offset-2 well" id="inbox">    
     <!--chat menu dropdown-->
     <div class="btn-group btn-group-justified" id="btn-chat-menu">
       <div class="btn-group" id="btn-chat-menu">
@@ -44,7 +44,7 @@ function getMatchedUserEmails() {
 	  Menu <span class="caret"></span>
 	</button>
 	<ul class="dropdown-menu" role="menu">
-	  <li><a href="#">Settings</a></li>
+	  <li><a href="{% url 'settings' %}">Settings</a></li>
 	  <li><a href="#">Advanced Match</a></li>
 	  <li><a href="#">Adjust Interests</a></li>
 	  <li><a href="#">Submit Feedback</a></li>
@@ -67,7 +67,7 @@ function getMatchedUserEmails() {
 
   </div>
   <!--current message-->
-  <div class="col-md-10 well box">
+  <div class="col-md-6 well box">
     <div class="row" id="thread-title-bar">
       <!--Title of message-->
       <div class="col-md-10">

@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from snakd.apps.user.models import ProspieUser, CollegeUser, GenericUser
-from snakd.apps.user.forms import ProspieSignupForm, CollegeSignupForm, GenericSignupForm
+from snakd.apps.user.forms import ProspieSignupForm, CollegeSignupForm, CollegeSettingsForm, ProspieSettingsForm
 from django.shortcuts import render_to_response, redirect
 from django.http import HttpResponse
 from django.template import RequestContext, loader
@@ -111,11 +111,17 @@ def confirm_email(request, activation_code, email):
     return redirect("/chat/")
 
 def edit(request):
+    import pdb; pdb.set_trace()
     try:
         uid = request.session.get("_auth_user_id")
         user = GenericUser.objects.get(id=uid)
         user = _specify_class(user)
         if request.method == "POST":
+            if isinstance(user, CollegeUser):
+                form = CollegeSettingsForm(request.POST)
+            else:
+                form = ProspieSettingsForm(request.POST)
+            form.update_user(user)
             params = request.POST.dict()
             if user.check_password(params.pop('password')):
                 user.updateUser(**params)
@@ -125,11 +131,15 @@ def edit(request):
                 # TODO?: What should happen here?
                 dic = user.editableFields()
         elif request.method == "GET":
-            dic = user.editableFields()
+            if isinstance(user, CollegeUser):
+                form = CollegeSettingsForm()
+            else:
+                form = ProspieSettingsForm()
         else:  # TODO: Will need a delete method here
             import pdb; pdb.set_trace()
 
-        return render(request, 'user/settings.html', dic)
+        # return render(request, 'user/settings.html', dic)
+        return render(request, 'user/settings.html', {'settingsform': form})
     except:
         return HttpResponseRedirect('/')
 

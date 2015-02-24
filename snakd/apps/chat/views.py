@@ -1,5 +1,5 @@
 import json
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.template import RequestContext
 from django.http import HttpResponse
 from snakd.apps.user.models import GenericUser, ProspieUser, CollegeUser

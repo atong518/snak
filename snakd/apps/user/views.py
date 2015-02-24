@@ -14,6 +14,9 @@ from snakd.lib.match import bestmatch
 from snakd.lib.matrix import getMatrix
 # Create your views here.
 def splash(request):
+    if request.user.is_authenticated():
+        return redirect("snakd.apps.chat.views.chat")
+
     return render(request, 'user/splash.html', {})
 
 def _specify_class(user):

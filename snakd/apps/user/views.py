@@ -15,7 +15,7 @@ from snakd.lib.matrix import getMatrix
 # Create your views here.
 def splash(request):
     if request.user.is_authenticated():
-        return redirect("snakd.apps.chat.views.chat")
+        return redirect("/chat/")
 
     return render(request, 'user/splash.html', {})
 

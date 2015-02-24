@@ -82,6 +82,7 @@ def main(request):
 
 def login(request):
     email = password = ''
+    has_error = "none"
     if request.POST:
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -90,10 +91,13 @@ def login(request):
         if user is not None:
             auth_login(request, user)
             return redirect("/chat/")
+        else:
+            has_error = "block"
 
     return render(request,
                   'user/login.html',
-                  {'email': email})
+                  {'email': email,
+                   'has_error': has_error})
 
 def confirm_email(request, activation_code, email):
     try:

@@ -26,6 +26,11 @@
            class="form-control form-group col-sm-12" 
            required>
 
+    <div class="form-group col-sm-12" id="login-error" style="display: {{ has_error }}; text-align: center; color: red">
+      <h3>WHAT ARE YOU????</h3>
+      <h5>...that email/password combo doesn't exist in our systems.  Try again or <a href="{% url 'sign_up' %}">sign up</a>, stop tryna hack us you will FAIL.</h5>
+    </div>
+
     <div class="form-group col-sm-12" 
          style="margin-bottom: 5px; text-align: center;">
       <button type="submit" class="btn btn-primary">Login</button>

@@ -40,8 +40,8 @@ Then surround all code with
 
 {% if user.is_authenticated %}
 <div class="row" style="padding-right: 20px; margin: 0;">
-  <h6 class="pull-right">Welcome, {{ user.firstname }}</h6>
-  <a href="{% url 'logout' %}">Logout</a>
+  <a class="col-md-offset-2 col-md-1" href="{% url 'logout' %}">Logout</a>
+  <h6 class="col-md-offset-6 col-md-1" id="user-welcome">Welcome, {{ user.firstname }}</h6>
 </div>
 {% endif %}
 

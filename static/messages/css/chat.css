@@ -44,6 +44,7 @@ body {
 
 .inbox-message {
   background-color: white;
+  font-size: 10px;  
 }
 
 .active-link {

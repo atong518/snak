@@ -4,60 +4,59 @@
 {% load staticfiles %}
 {% load customtags %}
 
+{% block extra_js %}
+<script>
+$('#interest-categories').affix({
+  offset: {
+    top: 100,
+    bottom: function () {
+      return (this.bottom = $('.footer').outerHeight(true))
+    }
+  }
+})
+</script>
+{% endblock %}
+
 <div class="row">
-	<div class="col-sm-4"></div>
-	<div class="col-sm-6">
-		<div class="input-group">
-			<input type="text" class="form-control" placeholder="Search">
-			<span class "input-group-btn">
-				<button class="btn btn-success" type="button">Add</button>
-			</span>
-		</div>
-	</div>
-	<div class="col-sm-2"></div>
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <div class="input-group" style="width: 100%; margin-bottom: 5%;">
+      <input type="text" class="form-control" placeholder="Search">
+    </div>
+  </div>
 </div>
 
-<div class="buffer-row"></div>
-
 <div class="row">
-	<div class="col-sm-2"></div>
-	<div class="col-sm-1">
-		<div class="btn-group-vertical" data-toggle="buttons">
-			<label class="btn btn-success active">
-    			<input type="radio" autocomplete="off" id="academics" checked> Academics
-  			</label>
-  			<label class="btn btn-success">
-    			<input type="radio" autocomplete="off" id="exracurriculars"> Extracurriculars
-  			</label>
-  			<label class="btn btn-success">
-    			<input type="radio" autocomplete="off" id="athleics"> Athletics
-  			</label>
-  			<label class="btn btn-success">
-    			<input type="radio" autocomplete="off" id="social"> Social Life
-  			</label>
-  		</div>
-	</div>
-	<div class="col-sm-1"></div>
-
-	<div class="col-sm-4">
-		<ul class="panel panel-default panel-body">
-			{% for interest in i_list.children %} 
-			    {%include "interests/interest_template.html" %}
-			{% endfor %}
-		</ul>
-
-		<form id="sendinterests" method="POST">
-			{% csrf_token %}
-			<button class="btn btn-success" type="submit">Submit</button>
-		</form>
-	</div>
-	
-	<div class="col-sm-2 panel panel-default">
-		<ul class="panel-body" id="interest-name-list"></ul>
-	</div>
-
-	<div class="col-sm-2"></div>
-
+  <div class="col-sm-2"></div>
+  <div class="col-sm-2" align="right">
+    <div id="interest-categories">
+      <ul class="nav">
+	<li>Academics</li>
+	<li>Extracurrix</li>
+	<li>Other</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="col-sm-4">
+    <ul class="panel panel-default panel-body">
+      {% for interest in i_list.children %} 
+      {%include "interests/interest_template.html" %}
+      {% endfor %}
+    </ul>
+    
+    <form id="sendinterests" method="POST">
+      {% csrf_token %}
+      <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+  </div>
+  
+  <div class="col-sm-2 panel panel-default">
+    <ul class="panel-body" id="interest-name-list"></ul>
+  </div>
+  
+  <div class="col-sm-2"></div>
+  
 </div>
 
 

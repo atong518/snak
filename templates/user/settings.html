@@ -2,11 +2,13 @@
 
 {% block content %}
 {% load staticfiles %}
-
+<!-- 
 <div class="row">
   <div class="col-md-4"></div>
+  <div class="col-md-4"></div>
+   -->
 
-  <form class="form-horizontal col-md-4" 
+<!--   <form class="form-horizontal col-md-4" 
           data-toggle="validator" 
           role="form"  
           name="SettingsForm" 
@@ -53,10 +55,26 @@
          style="margin-bottom: 5px; text-align: center;">
     	<button type="submit" class="btn btn-success">Submit</button>
     </div>
+  </form> -->
+
+
+  <form class="form-horizontal" data-toggle="validator" role="form" id="settings_form" method="post" action=".">
+    {% csrf_token %}
+    {% for field in settings_form %}
+    <div class="form-group">
+  <div class="col-sm-12">
+  {{ field }}
+  <div class="help-block with-errors"></div>
+  </div>
+    </div>
+    {% endfor %}
+    <div class = "signup-submit-holder">
+      <input type="submit" class="btn btn-primary" value="Submit" name="college_signup">
+    </div>
   </form>
 
-  <div class="col-md-4"></div>
-</div>
+<!--   <div class="col-md-4"></div>
+</div> -->
 
 
 {% endblock %}

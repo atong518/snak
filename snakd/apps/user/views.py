@@ -90,6 +90,8 @@ def login(request):
         if user is not None:
             auth_login(request, user)
             return redirect("/chat/")
+        else:
+            return redirect('/splash/')
 
     return render(request,
                   'user/login.html',
@@ -114,7 +116,7 @@ def confirm_email(request, activation_code, email):
     return redirect("/chat/")
 
 def edit(request):
-    import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
     try:
         uid = request.session.get("_auth_user_id")
         user = GenericUser.objects.get(id=uid)
@@ -134,15 +136,16 @@ def edit(request):
                 # TODO?: What should happen here?
                 dic = user.editableFields()
         elif request.method == "GET":
+            import pdb; pdb.set_trace()
             if isinstance(user, CollegeUser):
-                form = CollegeSettingsForm()
+                form = CollegeSettingsForm(**user.editableFields())
             else:
-                form = ProspieSettingsForm()
+                form = ProspieSettingsForm(**user.editableFields())
         else:  # TODO: Will need a delete method here
             import pdb; pdb.set_trace()
 
         # return render(request, 'user/settings.html', dic)
-        return render(request, 'user/settings.html', {'settingsform': form})
+        return render(request, 'user/settings.html', {'settings_form': form})
     except:
         return HttpResponseRedirect('/')
 

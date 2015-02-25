@@ -12,13 +12,18 @@ def chat(request):
     if not request.user.is_authenticated():
         return redirect(login)
 
-    # get all threads the user is involved in
     user_pk = request.user.pk
+
+    # get all threads the user is involved in
     inbox = Thread.objects.filter(members__id=user_pk)
     
+    # get all users matched with the logged-in user
+    matched_users = GenericUser.objects.all() #CHANGE THIS ONCE WE HAVE A WAY TO GET MATCHED USERS
+
     return render(request,
                   'messages/chat.html',
-                  {'inbox_threads' : inbox})
+                  {'inbox_threads' : inbox,
+                   'matched_users' : matched_users})
 
 def check_for_new_messages(request):
 #    import pdb; pdb.set_trace()

@@ -63,8 +63,8 @@ $(document).ready(function(){
    // hit submit button on 'enter' keypress
   $('#message-input-box').keypress(function (e) {
     if (e.which == 13) {
-      $('#btn-send-message').click();
-      $('#message-input-box').val("");
+      $('#btn-send-message').submit();
+      return false;
     }
   });
 
@@ -105,7 +105,9 @@ $(document).ready(function(){
   // long polling to query for new messages in current thread
   longPollForThread(firstThreadId);
 
-
+  // turn on auto-resizing text box for outgoing messages
+  //  init_textarea();
+  init();
 
   // autocomplete for adding more ppl to threads
   var substringMatcher = function(strs) {
@@ -163,10 +165,10 @@ function _poll(threadId) {
 
 			messages_html += '<div class="row" style="margin-top: 10px">';
 			if (sender_email == getLoggedInUserEmail()) 
-			    messages_html += '<div class="btn btn-primary disabled pull-right">';
+			    messages_html += '<p class="chat-message sent pull-right">';
 			else
-			    messages_html += '<div class="btn btn-default disabled">';			    
-			messages_html += text + '</div></div>';
+			    messages_html += '<p class="chat-message received">';			    
+			messages_html += text + '</p></div>';
 		    });
 
 		$("#thread-" + threadId).html(messages_html);
@@ -186,7 +188,7 @@ function longPollForThread(threadId) {
     if (typeof SET_INTERVAL != 'undefined')
 	clearInterval(SET_INTERVAL);
 
-    SET_INTERVAL = setInterval(_poll, 5000, threadId);
+    SET_INTERVAL = setInterval(_poll, 500, threadId);
 }
 
 function scrollDown() {
@@ -240,6 +242,9 @@ function sendMessage() {
     // get text of message to be sent
     var message_text = $("#message-input-box").val();
     
+    // clear text of input
+    $("#message-input-box").val('');
+
     $.ajax({
 	    url : "send_chat_message/", // the endpoint
 		type : "POST", // http method
@@ -267,7 +272,6 @@ function _sentMessageToDjango(json, selectedThreadId) {
     // restart longpoll
     longPollForThread(selectedThreadId);
 
-    $('#message-input-box').val(''); // remove the value from the input
     $('#message-content').html();
     console.log(json); // log the returned json to the console
     console.log("huzzah"); // another sanity check
@@ -332,4 +336,37 @@ function addToThread() {
 		console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
 	    }
 	});
+}
+
+// functions for autoresizing textbox for outgoing messages
+if (window.attachEvent) {
+    observe = function (element, event, handler) {
+        element.attachEvent('on'+event, handler);
+    };
+}
+else {
+    observe = function (element, event, handler) {
+        element.addEventListener(event, handler, false);
+    };
+}
+function init () {
+    var text = document.getElementById('message-input-box');
+
+    function resize () {
+        text.style.height = 'auto';
+        text.style.height = text.scrollHeight+'px';
+    }
+    /* 0-timeout to get the already changed text */
+    function delayedResize () {
+        window.setTimeout(resize, 0);
+    }
+    observe(text, 'change',  resize);
+    observe(text, 'cut',     delayedResize);
+    observe(text, 'paste',   delayedResize);
+    observe(text, 'drop',    delayedResize);
+    observe(text, 'keydown', delayedResize);
+
+    text.focus();
+    text.select();
+    resize();
 }

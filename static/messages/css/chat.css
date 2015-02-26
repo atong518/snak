@@ -21,16 +21,19 @@ body {
 }
 
 #message-box {
-  height: 90%;
+  height: 85%;
   position: relative;
-  padding: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin: 0;
   background-color: white;
   overflow-y: scroll;
 }
 
 #send-message-row {
   width: 100%;
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
   position: absolute;
   bottom: 0;
 }
@@ -38,8 +41,7 @@ body {
 .box {
   height: 75%;
   background-color: white;     
-  padding-top: 5px;
-
+  padding: 0px;
 }
 
 .inbox-message {
@@ -65,9 +67,47 @@ body {
 }
 
 #thread-title-bar {
-  padding-right: 5px;
+  padding-right: 15px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(227, 227, 227);
+  margin: 0;
+}
+
+p.chat-message {
+  padding-left: 15px;
+  padding-right: 15px;
   padding-top: 5px;
   padding-bottom: 5px;
-  border-bottom: 1px solid rgb(227, 227, 227);
-  margin-right: -5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  max-width: 40%;
+  opacity: 0.6499999761581421;
+  word-wrap: break-word;
+}
+
+p.chat-message.sent {
+  border: 1px solid rgb(46, 109, 164);
+  background-color: rgb(51, 122, 183);
+  color: white;
+}
+
+p.chat-message.received {
+  border: 1px solid rgb(204, 204, 204);
+  background-color: white;
+  color: black;
+}
+
+textarea {
+    border: 0 none white;
+    overflow: hidden;
+    padding: 0;
+    outline: none;
+    background-color: #D0D0D0;
+    resize: none;
+    max-height: 100px;
+    overflow-y: scroll;
 }

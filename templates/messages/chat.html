@@ -80,7 +80,7 @@ function getMatchedUserEmails() {
   <div class="col-md-6 well box">
     <div class="row" id="thread-title-bar">
       <!--Title of message-->
-      <div class="col-md-10">
+      <div class="col-md-10" style="padding-left: 0px;">
 	{% for thread in inbox_threads %}
 	<div class="thread" id="members-in-thread-{{ thread.pk }}">
 	  {% if thread.members.all.count == 1 %}
@@ -128,9 +128,9 @@ function getMatchedUserEmails() {
           {% for message in thread.message_set.all %}
 	  <div class="row" style="margin-top: 10px">
             {% if message.sender == user %}
-	    <div class="btn btn-primary disabled pull-right">{{ message }}</div>
+	    <p class="chat-message sent pull-right">{{ message }}</p>
             {% else %}
-            <div class="btn btn-default disabled">{{ message }}</div>
+            <p class="chat-message received pull-left">{{ message }}</p>
             {% endif %}
 	  </div>
 	  {% endfor %}
@@ -142,9 +142,10 @@ function getMatchedUserEmails() {
     <form id="send-message-form" method="POST">
       {% csrf_token %}
       <div class="input-group" id="send-message-row">
-	<input class="form-control" type="text" id="message-input-box">
+	<textarea class="form-control custom-control" id="message-input-box" rows="1" style="height: 1em;"></textarea>
+	<!--input class="form-control" type="text" id="message-input-box"-->
 	<span class="input-group-btn">
-	  <input type="submit" id="btn-send-message" class="btn btn-success" value="Send"/>
+	  <input type="submit" id="btn-send-message" value="Send" class="btn btn-success"/>
 	</span>
       </div>
     </form>

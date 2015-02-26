@@ -60,24 +60,13 @@ $.ajaxSetup({
 var SET_INTERVAL;
 
 $(document).ready(function(){
-  
-  // disable scroll on this page
-	//  $('#chat-room').on({
-	  //     'mousewheel': function(e) {
-	 //       if (e.target.id == 'el') return;
-       //       e.preventDefault();
-       //       e.stopPropagation();
-       //     }
-     // });
-
-  // hit submit button on 'enter' keypress
+   // hit submit button on 'enter' keypress
   $('#message-input-box').keypress(function (e) {
     if (e.which == 13) {
       $('#btn-send-message').click();
       $('#message-input-box').val("");
     }
   });
-
 
   // start all threads as hidden
   $('.thread').each(function() {
@@ -90,7 +79,7 @@ $(document).ready(function(){
   // open first thread
   populateThread(firstThreadId);
 
-  // send message
+  // send message button functionality
   $("#send-message-form").on('submit', function(event) {
     event.preventDefault(); // prevent page refresh
     sendMessage();
@@ -137,13 +126,13 @@ $(document).ready(function(){
 		      // JavaScript object, refer to typeahead docs for more info
 		      matches.push({ value: str });
 		  }
-    });
+	      });
 	  
-    cb(matches);
+	  cb(matches);
       };
   };
   
-  var states = getMatchedUserEmails();
+  var emails = getMatchedUserEmails();
   
   $('#add-person-to-thread-input').typeahead({
 	  hint: true,
@@ -151,9 +140,9 @@ $(document).ready(function(){
 	      minLength: 1
 	      },
       {
-	  name: 'states',
+	  name: 'emailes',
 	      displayKey: 'value',
-	      source: substringMatcher(states)
+	      source: substringMatcher(emails)
 	      });
   
 
@@ -275,20 +264,9 @@ function sendMessage() {
 }
 
 function _sentMessageToDjango(json, selectedThreadId) {
-    var prev_messages = $('#thread-' + selectedThreadId).html();
-    var append = '<div class="row" style="margin-top: 10px;">';
-    
-    var userEmail = getLoggedInUserEmail();
-    if (json.sender == userEmail) {
-	append += '<div class="btn btn-primary pull-right disabled">';
-    }
-    else {
-	append += '<div class="btn btn-default disabled">';
-    }
-    append += json.text + '</div></div>';
-    console.log("append:" + append);
-    $('#thread-' + selectedThreadId).html(prev_messages + append);
-    
+    // restart longpoll
+    longPollForThread(selectedThreadId);
+
     $('#message-input-box').val(''); // remove the value from the input
     $('#message-content').html();
     console.log(json); // log the returned json to the console

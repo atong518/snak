@@ -111,3 +111,7 @@ textarea {
     max-height: 100px;
     overflow-y: scroll;
 }
+
+#btn-send-message {
+  max-height: 100px;
+}

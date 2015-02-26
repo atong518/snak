@@ -351,10 +351,12 @@ else {
 }
 function init () {
     var text = document.getElementById('message-input-box');
+    var send_button = document.getElementById('btn-send-message');
 
     function resize () {
         text.style.height = 'auto';
         text.style.height = text.scrollHeight+'px';
+	send_button.style.height = text.style.height;
     }
     /* 0-timeout to get the already changed text */
     function delayedResize () {

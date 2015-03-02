@@ -1,11 +1,55 @@
 {% extends "user/base.html" %}
-
 {% block content %}
+{% load staticfiles %}
+
+<script type="text/javascript">
+var radios = document.getElementsByTagName("input");
+
+function getCheckedValues(){
+    //muste be stored in an array
+    var values = [];
+    for(var x = 0; x < radios.length; x++){
+        if(radios[x].type == "radio" && radios[x].checked){
+           values.push(radios[x].value);
+        }
+    }
+    console.log(values)
+    return values;
+}
+</script>
+
+<script type="text/javascript">
+</script>
+
+
+<div class="row buffer-row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <hr class="snak-divider">
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4" style="padding:0;">
+    <h3 align="center">I am a...</h3>
+    <div class="btn-group btn-group-justified" data-toggle="buttons">
+      <label class="btn btn-success active col-sm-6">
+	<input onchange="javascript:getCheckedValues();" type="radio" name="student-type" id="prospie" autocomplete="off" value="prospie" checked> Prospie (HS)
+      </label>
+      <label class="btn btn-success col-sm-6">
+	<input onchange="javascript:getCheckedValues();" type="radio" name="student-type" id="college_student" autocomplete="off" value="college"> College Student 
+      </label>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
 <div class="row">
   <div class="col-md-2"></div>
   <div class="col-md-8">
     <h1 id="slogan">Connecting Prospies with Dartmouth Students</h1>
-    <hr class="snak-divider">
   </div>
   <div class="col-md-2"></div>
 </div>

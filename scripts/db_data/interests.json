@@ -1,5 +1,4 @@
-[
-	{
+[{
 		"name": "academics",
 		"tooltip": "hard",
 		"weight": 1,
@@ -11,13 +10,13 @@
 				"children": [
 					{
 						"name": "studio art",
-						"tooltip": "drawing naked people",
+						"tooltip": "drawing naked",
 						"weight": 1,
 						"children": []
 					},
 					{
 						"name": "art history",
-						"tooltip": "history of drawing naked people",
+						"tooltip": "history of",
 						"weight": 1,
 						"children": []
 					}
@@ -26,18 +25,18 @@
 			},
 			{
 				"name": "science",
-				"tooltip": "numbers live here",
+				"tooltip": "numbers live",
 				"weight": 1,
 				"children": [
 					{
 						"name": "biology",
-						"tooltip": "gooey insides and sex",
+						"tooltip": "gooey insides",
 						"weight": 1,
 						"children": []
 					},
 					{
 						"name": "chemistry",
-						"tooltip": "really tiny stuff",
+						"tooltip": "really tiny ",
 						"weight": 1,
 						"children": []
 					}
@@ -47,7 +46,7 @@
 	},
 	{
 		"name": "social",
-		"tooltip": "the pursuit of a sidedness",
+		"tooltip": "the pursuit ",
 		"weight": 1,
 		"children": [
 			{
@@ -63,7 +62,7 @@
 					},
 					{
 						"name": "sororities",
-						"tooltip": "no hazing, still fun",
+						"tooltip": "no hazing, still",
 						"weight": 1,
 						"children": []
 					},

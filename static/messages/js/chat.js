@@ -173,7 +173,6 @@ function _poll(threadId) {
 
 		$("#thread-" + threadId).html(messages_html);
 		console.log("checked...");
-		scrollDown();
 	    },
 
 		error : function(xhr, errmsg, err) {
@@ -189,6 +188,7 @@ function longPollForThread(threadId) {
 	clearInterval(SET_INTERVAL);
 
     SET_INTERVAL = setInterval(_poll, 500, threadId);
+    scrollDown();
 }
 
 function scrollDown() {

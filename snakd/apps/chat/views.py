@@ -5,29 +5,24 @@ from django.http import HttpResponse
 from snakd.apps.user.models import GenericUser, ProspieUser, CollegeUser
 from snakd.apps.chat.models import Thread, Message
 
-from snakd.apps.user.views import main
+from snakd.apps.user.views import login
 
 def chat(request):
     # get logged in user id
     if not request.user.is_authenticated():
-        return redirect(main)
+        return redirect(login)
 
     user_pk = request.user.pk
 
     # get all threads the user is involved in
     inbox = Thread.objects.filter(members__id=user_pk)
     
-    # get all messages associated with first thread
-    first_thread = inbox.first() #GET RID OF THIS ITS STUPID
-    messages = Message.objects.filter(thread=first_thread)
-
     # get all users matched with the logged-in user
     matched_users = GenericUser.objects.all() #CHANGE THIS ONCE WE HAVE A WAY TO GET MATCHED USERS
 
     return render(request,
                   'messages/chat.html',
                   {'inbox_threads' : inbox,
-                   'messages' : messages,
                    'matched_users' : matched_users})
 
 def check_for_new_messages(request):

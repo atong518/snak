@@ -57,7 +57,17 @@ function getMatchedUserEmails() {
     {% for thread in inbox_threads %}
       <li role="presentation"><a class="inbox-message" href="#" 
 				 onclick="populateThread({{ thread.pk }})" 
-				 id="thread-link-{{ thread.pk }}">{{ thread }}</a></li>
+				 id="thread-link-{{ thread.pk }}">
+	  {% if thread.members.count == 1 %}myself {% endif %}
+	  {% for member in thread.members.all %}
+	  {% ifnotequal member user %}
+	  {{ member.firstname }} {{ member.lastname }}
+	  {% if not forloop.last %} 
+	  , 
+	  {% endif%}
+	  {% endifnotequal %}
+	  {% endfor %}
+      </a></li>
     {% endfor %}
     </ul>
 
@@ -73,15 +83,28 @@ function getMatchedUserEmails() {
       <div class="col-md-10">
 	{% for thread in inbox_threads %}
 	<div class="thread" id="members-in-thread-{{ thread.pk }}">
-	  <h4>{{ thread.subject }}</h4>
-	  <h5 id="list-of-members"><b>Members: </b>
+	  {% if thread.members.all.count == 1 %}
+	  <h3 id="solo-chat">looks like it's only you in this chat, 
+	    <a data-toggle="modal" data-target="#addPersonToThread">add a friend?</a></h3>
+	  <h5 id="list-of-members-{{ thread.pk }}"></h5>
+	  {% endif %}
+	  {% if thread.members.all.count == 2 %}
+	  <h3 id="list-of-members-{{ thread.pk }}">
+	    {{ thread.members.last.firstname }} {{ thread.members.last.lastname }}
+	  </h3>
+	  {% endif %}
+	  {% if thread.members.all.count > 2 %}
+	  <h5 id="list-of-members-{{ thread.pk }}"><b>Members: </b>
 	    {% for member in thread.members.all %}
-	    {{ member.firstname }} {{ member.lastname }}
-	    {% if not forloop.last %}
-	    , 
-	    {% endif %}
+	      {% ifnotequal member user %}
+  	        {{ member.firstname }} {{ member.lastname }}
+  	        {% if not forloop.last %}
+	          , 
+	        {% endif %}
+	      {% endifnotequal %}
 	    {% endfor %}
 	  </h5>
+	  {% endif %}
 	</div>
 	{% endfor %}
       </div>

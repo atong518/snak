@@ -2,79 +2,29 @@
 
 {% block content %}
 {% load staticfiles %}
-<!-- 
-<div class="row">
-  <div class="col-md-4"></div>
-  <div class="col-md-4"></div>
-   -->
 
-<!--   <form class="form-horizontal col-md-4" 
-          data-toggle="validator" 
-          role="form"  
-          name="SettingsForm" 
-          action="/settings/" 
-          method="post">
-    
-    {% csrf_token %}
-    
-    <input type="text" name="firstname" 
-           id="firstname" value="{{firstname}}" 
-           placeholder="First Name" 
-           class="form-control form-group col-sm-12" 
-           required>
-
-    <input type="text" name="lastname" 
-           id="lastname" value="{{lastname}}" 
-           placeholder="Last Name" 
-           class="form-control form-group col-sm-12">
-
-    <input type="text" name="homecountry" 
-           id="homecountry" value="{{homecountry}}" 
-           placeholder="Country" 
-           class="form-control form-group col-sm-12" 
-           required>
-
-    <input type="text" name="homestate" 
-           id="homestate" value="{{homestate}}" 
-           placeholder="State" 
-           class="form-control form-group col-sm-12" 
-           required>
-
-    <input type="text" name="email" 
-           id="email" value="{{email}}" 
-           placeholder="Email" 
-           class="form-control form-group col-sm-12" 
-           required>
-
-    <input type="password" name="password" 
-           id="password" placeholder="Password" 
-           class="form-control form-group col-sm-12" 
-           required>
-
-    <div class="form-group col-sm-12" 
-         style="margin-bottom: 5px; text-align: center;">
-    	<button type="submit" class="btn btn-success">Submit</button>
-    </div>
-  </form> -->
-
+<script type="text/javascript" src="{% static 'user/js/country_states.js' %}"></script>
+<script type="text/javascript">
+  window.onload = function() {
+    initCountry('', 'countrySelect', 'stateSelect'); 
+  }
+</script>
 
   <form class="form-horizontal" data-toggle="validator" role="form" id="settings_form" method="post" action=".">
     {% csrf_token %}
     {% for field in settings_form %}
-    <div class="form-group">
-  <div class="col-sm-12">
-  {{ field }}
-  <div class="help-block with-errors"></div>
-  </div>
-    </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          {{ field }}
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
     {% endfor %}
     <div class = "signup-submit-holder">
       <input type="submit" class="btn btn-primary" value="Submit" name="college_signup">
     </div>
   </form>
 
-<!--   <div class="col-md-4"></div>
-</div> -->
 
 
 {% endblock %}

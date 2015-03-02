@@ -82,6 +82,7 @@ def main(request):
 
 def login(request):
     email = password = ''
+    has_error = "none"
     if request.POST:
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -91,11 +92,12 @@ def login(request):
             auth_login(request, user)
             return redirect("/chat/")
         else:
-            return redirect('/splash/')
+            return redirect('/')
 
     return render(request,
                   'user/login.html',
-                  {'email': email})
+                  {'email': email,
+                   'has_error': has_error})
 
 def confirm_email(request, activation_code, email):
     try:
@@ -123,31 +125,28 @@ def edit(request):
         user = _specify_class(user)
         if request.method == "POST":
             if isinstance(user, CollegeUser):
-                form = CollegeSettingsForm(request.POST)
+                form = CollegeSettingsForm(request.POST, instance=user)
             else:
-                form = ProspieSettingsForm(request.POST)
-            form.update_user(user)
-            params = request.POST.dict()
-            if user.check_password(params.pop('password')):
-                user.updateUser(**params)
+                form = ProspieSettingsForm(request.POST, instance=user)
+            # Update fields if password is correct
+            if user.check_password(request.POST['password']):
+                import pdb; pdb.set_trace()
+                form.update_user()
+                # Update session
                 update_session_auth_hash(request, user)
-                dic = user.editableFields()
             else:
                 # TODO?: What should happen here?
-                dic = user.editableFields()
+                pass
         elif request.method == "GET":
-            import pdb; pdb.set_trace()
             if isinstance(user, CollegeUser):
-                form = CollegeSettingsForm(**user.editableFields())
+                form = CollegeSettingsForm(instance=user)
             else:
-                form = ProspieSettingsForm(**user.editableFields())
+                form = ProspieSettingsForm(instance=user)
         else:  # TODO: Will need a delete method here
             import pdb; pdb.set_trace()
-
-        # return render(request, 'user/settings.html', dic)
         return render(request, 'user/settings.html', {'settings_form': form})
     except:
-        return HttpResponseRedirect('/')
+        return redirect('/')
 
 
 

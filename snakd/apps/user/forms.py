@@ -186,19 +186,20 @@ class GenericSettingsForm(UserChangeForm):
 
     def __init__(self, *args, **kwargs):
         super(GenericSettingsForm, self).__init__()
+        self.instance = kwargs.get("instance", None)
         self.fields['email'].widget = EmailInput(attrs={
             'class': 'form-control',
             'initial': kwargs.get('email', "Email"),
             'data-valid-error': "Yikes, that email address is invalid",
             'required': 'true'})
         self.fields['homecountry'].widget = Select(attrs={
-            'id': 'countrySelect2',
+            'id': 'countrySelect',
             'name': 'country',
-            'onchange': "populateState(\'stateSelect2\', \'countrySelect2\')",
+            'onchange': "populateState(\'stateSelect\', \'countrySelect\')",
             'class': 'form-control',
             'required': 'true'})
         self.fields['homestate'].widget = Select(attrs={
-            'id': 'stateSelect2',
+            'id': 'stateSelect',
             'name': 'state',
             'class': 'form-control'})
         self.fields['password'].widget = PasswordInput(attrs={
@@ -207,6 +208,8 @@ class GenericSettingsForm(UserChangeForm):
             'placeholder': 'Password',
             'required': 'true'})
         self.fields.pop('username')
+        if self.instance:
+            self.initial = self.instance.editableFields()
 
 class CollegeSettingsForm(GenericSettingsForm):
     class Meta():
@@ -216,28 +219,22 @@ class CollegeSettingsForm(GenericSettingsForm):
           'max_match_frequency'
          ]
 
-    def update_user(self, user=None):
-        import pdb; pdb.set_trace()
+    def update_user(self):
         # TODO: Save here
-        if not user:
-            user = CollegeUser.objects.get(email=self.fields['email'])
-
+        import pdb; pdb.set_trace()
+        self.instance.updateUser()
         return user
 
     def __init__(self, *args, **kwargs):
-        import pdb; pdb.set_trace()
         super(CollegeSettingsForm, self).__init__(*args, **kwargs)
         self.fields['max_match_frequency'].widget = Select(attrs={
             'class': 'form-control',
             'required': 'true',
             'initial': MAX_MATCH_FREQS[5]})
         self.fields['max_match_frequency'].widget.choices = MAX_MATCH_FREQS
-
         self.fields['bio'].widget = Textarea(attrs={
             'class': 'form-control',
             'placeholder': 'Tell us about yourself!'})
-        if kwargs.get('bio'):
-            self.fields['bio'].widget.initial = kwargs.get('bio')
 
 class ProspieSettingsForm(GenericSettingsForm):
     class Meta():
@@ -246,7 +243,7 @@ class ProspieSettingsForm(GenericSettingsForm):
         ]
 
 
-    def update_user(self, user=None):
+    def update_user(self):
         import pdb; pdb.set_trace()
         if not user:
             user = ProspieUser.objects.get(email=self.fields['email'])
@@ -255,7 +252,6 @@ class ProspieSettingsForm(GenericSettingsForm):
 
 
     def __init__(self, *args, **kwargs):
-        import pdb;pdb.set_trace()
         super(ProspieSettingsForm, self).__init__(*args, **kwargs)
 
 

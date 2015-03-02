@@ -302,9 +302,23 @@ function _addedToThread(addedUserName) {
     $('#addPersonToThread').modal('hide');
     
     // update thread to reflect new member yeehaw!
-    prev = $("#list-of-members").html();
+    //prev = $("#list-of-members").html();
+    //    append = ", " + addedUserName;
+    //    $("#list-of-members").html(prev+append);
+    var selectedThreadId = $(".active-link").attr("id").split("-")[2];
+    var old = $("#list-of-members-" + selectedThreadId).html();
+    var append = " " + addedUserName;
+    $("#list-of-members-"+selectedThreadId).html(old+append);
+    populateThread(selectedThreadId);
+
+    // add to button
+    old = $("#thread-link-" + selectedThreadId).html();
     append = ", " + addedUserName;
-    $("#list-of-members").html(prev+append);
+    $("#thread-link-" + selectedThreadId).html(old+append);
+
+    // clear out solo chat message
+    $("#solo-chat").html("");
+    
 }
 
 function addToThread() {

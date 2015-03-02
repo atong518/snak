@@ -51,7 +51,6 @@ body {
 
 #footer { position: fixed; bottom: 0; right: 0; height: 40 }
 
-#user-welcome {
+.align-right {
   text-align: right;
-  padding-right: 0px;
 }

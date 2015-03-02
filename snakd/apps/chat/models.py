@@ -8,7 +8,7 @@ class Thread(models.Model):
     subject = models.CharField(max_length=200)
     started_at = models.DateTimeField("started at" , null=True, blank=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.subject
 
 class Message(models.Model):
@@ -20,7 +20,7 @@ class Message(models.Model):
     sender = models.ForeignKey(GenericUser, related_name='sent_messages', verbose_name="Sender")
     sent_at = models.DateTimeField("sent at", null=True, blank=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.text
 
     class Meta:

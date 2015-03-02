@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from snakd.apps.user.models import ProspieUser, CollegeUser, GenericUser
-from snakd.apps.user.forms import ProspieSignupForm, CollegeSignupForm, GenericSignupForm
+from snakd.apps.user.forms import ProspieSignupForm, CollegeSignupForm, CollegeSettingsForm, ProspieSettingsForm
 from django.shortcuts import render_to_response, redirect
 from django.http import HttpResponse
 from django.template import RequestContext, loader
@@ -92,12 +92,27 @@ def login(request):
             auth_login(request, user)
             return redirect("/chat/")
         else:
-            has_error = "block"
+            return redirect('/')
 
     return render(request,
                   'user/login.html',
                   {'email': email,
                    'has_error': has_error})
+
+def change_password(request):
+    error = ""
+    if request.POST:
+        password = request.POST.get('old-password')
+        user = authenticate(email=request.user.email, password=password)
+        if user is not None:
+            user.set_password(request.POST.get('new-password-1'))
+            user.save()
+            return redirect("/login/")
+        else:
+            error = "FALSE.  That is not your current password."
+    return render(request,
+                  'user/change_password.html',
+                  {'error': error})
 
 def confirm_email(request, activation_code, email):
     try:
@@ -118,27 +133,35 @@ def confirm_email(request, activation_code, email):
     return redirect("/chat/")
 
 def edit(request):
+    # import pdb; pdb.set_trace()
     try:
         uid = request.session.get("_auth_user_id")
         user = GenericUser.objects.get(id=uid)
         user = _specify_class(user)
         if request.method == "POST":
-            params = request.POST.dict()
-            if user.check_password(params.pop('password')):
-                user.updateUser(**params)
+            if isinstance(user, CollegeUser):
+                form = CollegeSettingsForm(request.POST, instance=user)
+            else:
+                form = ProspieSettingsForm(request.POST, instance=user)
+            # Update fields if password is correct
+            if user.check_password(request.POST['password']):
+                import pdb; pdb.set_trace()
+                form.update_user()
+                # Update session
                 update_session_auth_hash(request, user)
-                dic = user.editableFields()
             else:
                 # TODO?: What should happen here?
-                dic = user.editableFields()
+                pass
         elif request.method == "GET":
-            dic = user.editableFields()
+            if isinstance(user, CollegeUser):
+                form = CollegeSettingsForm(instance=user)
+            else:
+                form = ProspieSettingsForm(instance=user)
         else:  # TODO: Will need a delete method here
             import pdb; pdb.set_trace()
-
-        return render(request, 'user/settings.html', dic)
+        return render(request, 'user/settings.html', {'settings_form': form})
     except:
-        return HttpResponseRedirect('/')
+        return redirect('/')
 
 
 

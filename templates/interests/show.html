@@ -168,12 +168,12 @@ $('#interest-categories').affix({
 	});
 
 	$("#sendinterests").on('submit', function(event) {
-		debugger
-		var interests = $.map(interestlist, function(val, index) {return val.id val.priority})
+		// TODO: Return id and priority only in the interest of speed?
+		// var interests = $.map(interestlist, function(val, index) {return val.id val.priority})
 	    $.ajax({
 		    url : "/interest/update/", 
 			type : "POST", 
-			data : { interests : interests }, 
+			data : { interestlist : interestlist }, 
 			
 		    success : function(json) {
 

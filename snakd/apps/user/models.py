@@ -49,6 +49,7 @@ class CollegeUserManager(GenericUserManager):
         user = self.model(
                 email=email,
                 firstname=firstname,
+                lastname=lastname,
                 homecountry=homecountry,
                 homestate=homestate,
                 bio=bio,
@@ -69,6 +70,7 @@ class ProspieUserManager(GenericUserManager):
         user = self.model(
                 email=email,
                 firstname=firstname,
+                lastname=lastname,
                 homecountry=homecountry,
                 homestate=homestate)
         user.set_password(password)

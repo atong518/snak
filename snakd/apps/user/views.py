@@ -99,6 +99,21 @@ def login(request):
                   {'email': email,
                    'has_error': has_error})
 
+def change_password(request):
+    error = ""
+    if request.POST:
+        password = request.POST.get('old-password')
+        user = authenticate(email=request.user.email, password=password)
+        if user is not None:
+            user.set_password(request.POST.get('new-password-1'))
+            user.save()
+            return redirect("/login/")
+        else:
+            error = "FALSE.  That is not your current password."
+    return render(request,
+                  'user/change_password.html',
+                  {'error': error})
+
 def confirm_email(request, activation_code, email):
     try:
         user = ProspieUser.objects.get(email=email)

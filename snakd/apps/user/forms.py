@@ -167,3 +167,4 @@ class ProspieSignupForm(GenericSignupForm):
             'required': 'true',
             'data-match': '#prospie_password1',
             'data-error': 'Whoops, these passwords don\'t match'})
+

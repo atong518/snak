@@ -1,7 +1,7 @@
 from django.utils.crypto import get_random_string
 from django.forms import ModelForm, EmailInput, TextInput, PasswordInput, Textarea, Select
 from snakd.apps.user.models import GenericUser, CollegeUser, ProspieUser
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 
 UNLIMITED = 0
@@ -167,3 +167,96 @@ class ProspieSignupForm(GenericSignupForm):
             'required': 'true',
             'data-match': '#prospie_password1',
             'data-error': 'Whoops, these passwords don\'t match'})
+
+
+class GenericSettingsForm(UserChangeForm):
+    class Meta():
+        model = GenericUser
+        fields = ['email', 
+          'password',
+          'homecountry',
+          'homestate',
+         ]
+
+    def update_user(self):
+        import pdb; pdb.set_trace()
+        user = GenericUser.objects.get(email=self.fields['email'])
+        return user
+
+
+    def __init__(self, *args, **kwargs):
+        super(GenericSettingsForm, self).__init__()
+        self.instance = kwargs.get("instance", None)
+        self.fields['email'].widget = EmailInput(attrs={
+            'class': 'form-control',
+            'initial': kwargs.get('email', "Email"),
+            'data-valid-error': "Yikes, that email address is invalid",
+            'required': 'true'})
+        self.fields['homecountry'].widget = Select(attrs={
+            'id': 'countrySelect',
+            'name': 'country',
+            'onchange': "populateState(\'stateSelect\', \'countrySelect\')",
+            'class': 'form-control',
+            'required': 'true'})
+        self.fields['homestate'].widget = Select(attrs={
+            'id': 'stateSelect',
+            'name': 'state',
+            'class': 'form-control'})
+        self.fields['password'].widget = PasswordInput(attrs={
+            'id': 'password',
+            'class': 'form-control',
+            'placeholder': 'Password',
+            'required': 'true'})
+        self.fields.pop('username')
+        if self.instance:
+            self.initial = self.instance.editableFields()
+
+class CollegeSettingsForm(GenericSettingsForm):
+    class Meta():
+        model = CollegeUser
+        fields = GenericSettingsForm.Meta.fields + [
+          'bio',
+          'max_match_frequency'
+         ]
+
+    def update_user(self):
+        # TODO: Save here
+        import pdb; pdb.set_trace()
+        self.instance.updateUser()
+        return user
+
+    def __init__(self, *args, **kwargs):
+        super(CollegeSettingsForm, self).__init__(*args, **kwargs)
+        self.fields['max_match_frequency'].widget = Select(attrs={
+            'class': 'form-control',
+            'required': 'true',
+            'initial': MAX_MATCH_FREQS[5]})
+        self.fields['max_match_frequency'].widget.choices = MAX_MATCH_FREQS
+        self.fields['bio'].widget = Textarea(attrs={
+            'class': 'form-control',
+            'placeholder': 'Tell us about yourself!'})
+
+class ProspieSettingsForm(GenericSettingsForm):
+    class Meta():
+        model = ProspieUser
+        fields = GenericSettingsForm.Meta.fields + [
+        ]
+
+
+    def update_user(self):
+        import pdb; pdb.set_trace()
+        if not user:
+            user = ProspieUser.objects.get(email=self.fields['email'])
+
+        return user
+
+
+    def __init__(self, *args, **kwargs):
+        super(ProspieSettingsForm, self).__init__(*args, **kwargs)
+
+
+
+
+
+
+

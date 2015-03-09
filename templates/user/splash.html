@@ -2,77 +2,82 @@
 {% block content %}
 {% load staticfiles %}
 
-<script type="text/javascript">
-var radios = document.getElementsByTagName("input");
+<link rel="stylesheet" type="text/css" href="../../static/user/css/splash.css">
+<link rel="stylesheet" type="text/css" href="../../static/user/css/onepage-scroll.css">
 
-function getCheckedValues(){
-    //muste be stored in an array
-    var values = [];
-    for(var x = 0; x < radios.length; x++){
-        if(radios[x].type == "radio" && radios[x].checked){
-           values.push(radios[x].value);
-        }
-    }
-    console.log(values)
-    return values;
+<script src="../../static/user/js/onepagescroll.js"></script>
+<script src="../../static/user/js/onepagescroll.min.js"></script>
+
+<script type="text/javascript">
+// logic to hide/show fields for Dartmouth Student vs. 'Prospie' signup
+window.onload = function() {
+  document.getElementById('prospie_info').style.display = 'TEST';
+  document.getElementById('college_info').style.display = 'none';
+}
+
+function toggleDisplayInfo() {
+  console.log("as;dl");
+  if (document.getElementById('p').checked) {
+    document.getElementById('prospie_info').style.display = '';
+    document.getElementById('college_info').style.display = 'none';
+  }
+  if (document.getElementById('c').checked) {
+    document.getElementById('prospie_info').style.display = 'none';
+    document.getElementById('college_info').style.display = '';
+  }
 }
 </script>
 
-<script type="text/javascript">
-</script>
+<div class="main">
 
-
-<div class="row buffer-row">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-    <hr class="snak-divider">
-  </div>
-  <div class="col-md-2"></div>
-</div>
-
-<div class="row">
-  <div class="col-md-4"></div>
-  <div class="col-md-4" style="padding:0;">
-    <h3 align="center">I am a...</h3>
-    <div class="btn-group btn-group-justified" data-toggle="buttons">
-      <label class="btn btn-success active col-sm-6">
-	<input onchange="javascript:getCheckedValues();" type="radio" name="student-type" id="prospie" autocomplete="off" value="prospie" checked> Prospie (HS)
-      </label>
-      <label class="btn btn-success col-sm-6">
-	<input onchange="javascript:getCheckedValues();" type="radio" name="student-type" id="college_student" autocomplete="off" value="college"> College Student 
-      </label>
+  <div class="row buffer-row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <hr class="snak-divider">
     </div>
+    <div class="col-md-2"></div>
   </div>
-  <div class="col-md-4"></div>
+  
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <h3 align="center">I am a...</h3>
+      <form class="form-horizontal">
+	<div class="form-group">
+	  <div class="btn-group btn-group-justified" data-toggle="buttons">
+	    <label class="btn btn-success active col-sm-6" id="btn-signup" style="white-space: normal;">
+	      <input onchange="javascript:toggleDisplayInfo();" type="radio" name="student-type" id="p" autocomplete="off" value="p" checked>Prospective Dartmouth Student
+	    </label>
+	    <label class="btn btn-success col-sm-6" id="btn-signup" style="white-space: normal;">
+	      <input onchange="javascript:toggleDisplayInfo();" type="radio" name="student-type" id="c" autocomplete="off" value="c">Current Dartmouth Student
+	    </label>
+	  </div>
+	</div>
+      </form>
+      <form id="prospie_info" method="post" action=".">
+	<h2 align="center"><i>Get personalized answers and mentorship from Dartmouth students</i></h2>
+      </form>
+      <form id="college_info" method="post" action=".">
+	<h2 align="center"><i>Share your Dartmouth experience with interested prospies</i></h2>
+      </form>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <a href="{% url 'sign_up' %}"> <div id="btn-signup" class="btn btn-primary btn-large">Sign Up Now</div></a>
+      <br>
+      <div class="centered">Been there, done that? <a href="{% url 'login' %}">Login</a></div>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  
+  <div class="row buffer-row"></div>
+  
 </div>
 
-<div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-    <h1 id="slogan">Connecting Prospies with Dartmouth Students</h1>
-  </div>
-  <div class="col-md-2"></div>
-</div>
 
-<div class="row buffer-row"></div>
 
-<div class="row">
-  <div class="col-md-4"></div>
-  <div class="col-md-4">
-    <a href="{% url 'sign_up' %}"> <div id="btn-signup" class="btn btn-success btn-large">Sign Up Now</div></a>
-    <br>
-    <div class="centered">Been there, done that? <a href="{% url 'login' %}">Login</a></div>
-  </div>
-  <div class="col-md-4"></div>
-</div>
-
-<div class="row buffer-row"></div>
-
-<div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-    <hr class="snak-divider">
-  </div>
-  <div class="col-md-2"></div>
-</div>
 {% endblock %}

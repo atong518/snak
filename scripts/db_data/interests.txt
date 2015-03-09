@@ -1,0 +1,158 @@
+Academics
+	Arts
+		General Art
+		Studio Art
+		Art History
+		Digital Arts
+		Music
+		Theater
+		Film/Media
+	Humanities
+		General Humanities
+		Languages
+		Culture Studies
+		Literature
+		Classics
+		History
+		Religion
+		Women/Gender
+		LGBT
+		Philosophy
+	Social Sciences
+		General Social Science
+		Anthropology
+		International Relations
+		Economics/Finance
+		Education
+		Government
+		Geography
+		Ethics
+		Psychology
+		Linguistics
+		Public Policy
+		Sociology
+		Journalism
+		Law
+		Global Health
+	Sciences
+		General Science
+		Agriculture
+		Biology
+		Chemistry
+		Computer Science
+		Earth
+		Environmental
+		Mathematics
+		Neuroscience
+		Physics
+		Pre-Health
+	Engineering
+		General Engineering
+		Biomedical
+		Biotechnical
+		Chemical
+		Computer
+		Electrical
+		Environmental
+		Material Science
+		Mechanical
+		Management
+Extracurricular
+	Competition Based
+		Quiz bowl
+		Debate
+		Mock Trial
+	Performance Group
+		Dance
+		Comedy
+		Theater
+		Band
+		Orchestra
+		A cappella
+		Choir
+	Culture Based Organization
+		Religious Groups
+		Culture-Specific Groups
+	Issue Awareness
+		Political Organizations
+		International Issues Programs
+		Environmental or Animal-Based Group
+		Mental Health Awareness
+		Sexual Assault Awareness
+	Recreational
+		Outdoors-Related
+		Intramural Sports
+	Greek Life
+		Fraternities
+		Coeds
+		Sororities
+	Residential Based
+		Undergraduate Societies
+		Living Learning Communities
+		Affinity Housing
+	Academic Based
+		Tech
+	Publications
+		Academic Journals
+		Media
+	Student Employment
+		Work Study
+		Campus Jobs
+	Misc
+		Service/Philanthropy
+		Military (ROTC)
+		Student Government
+		Emergency Medical Services
+		Ski Patrol
+	Environmental or Animal-Based Group
+	Mentoring Groups
+Athletics
+	Varsity
+		Baseball (m)
+		Basketball
+		Crew (f)
+		Cross Country
+		Equestrian 
+		Field Hockey (f)
+		Football (m)
+		Golf
+		Heavyweight Crew (m)
+		Ice Hockey
+		Lacrosse
+		Lightweight Crew (m)
+		Sailing 
+		Skiing (Alpine)
+		Skiing (Nordic)
+		Soccer
+		Softball (f) 
+		Squash
+		Swimming/Diving
+		Tennis
+		Track and Field
+		Volleyball (f)
+	Club
+		Badminton
+		Baseball
+		Basketball
+		Boxing
+		Cheer
+		Cricket
+		Cycling
+		Dressage
+		Endurance Racing
+		Fencing
+		Field Hockey
+		Figure Skating
+		Ice Hockey
+		Lacrosse
+		Rugby
+		Soccer
+		Squash
+		Swimming
+		Table Tennis
+		Tae Kwon Do
+		Tennis
+		Triathlon
+		Ultimate Frisbee
+		Volleyball
+		Water Polo

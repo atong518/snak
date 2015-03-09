@@ -14,13 +14,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='interest',
             name='name',
-            field=models.CharField(default=b'Test', max_length=20),
+            field=models.CharField(default=b'Test', max_length=50),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='interest',
             name='tooltip',
-            field=models.CharField(max_length=20, null=True),
+            field=models.CharField(max_length=50, null=True),
             preserve_default=True,
         ),
         migrations.AddField(

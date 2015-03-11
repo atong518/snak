@@ -42,9 +42,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap3',
     'snakd',
-#    'snakd.apps.user',
-#    'snakd.apps.interest',
-#    'snakd.apps.chat',
+    'snakd.apps.user',
+    'snakd.apps.interest',
+    'snakd.apps.chat',
     'scripts',
     'scripts.db_data'
 )
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'snakd.urls'
 
 WSGI_APPLICATION = 'snakd.wsgi.application'
 
-# AUTHENTICATION_BACKENDS = ('snakd.apps.user.backends.EmailAuthBackend',)
+ AUTHENTICATION_BACKENDS = ('snakd.apps.user.backends.EmailAuthBackend',)
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases

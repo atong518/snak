@@ -5,43 +5,58 @@
 {% load customtags %}
 
 {% block extra_js %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'interests/css/show.css' %}" />
+
 <script>
-$('#interest-categories').affix({
-  offset: {
-    top: 100,
-    bottom: function () {
-      return (this.bottom = $('.footer').outerHeight(true))
-    }
-  }
-})
+	$(window).stellar({
+	  // Set scrolling to be in either one or both directions
+	  horizontalScrolling: false,
+	  verticalScrolling: true,
+
+	  // Set the global alignment offsets
+	  horizontalOffset: 0,
+	  verticalOffset: 0,
+
+	  // Refreshes parallax content on window load and resize
+	  responsive: false,
+
+	  // Select which property is used to calculate scroll.
+	  // Choose 'scroll', 'position', 'margin' or 'transform',
+	  // or write your own 'scrollProperty' plugin.
+	  scrollProperty: 'scroll',
+
+	  // Select which property is used to position elements.
+	  // Choose between 'position' or 'transform',
+	  // or write your own 'positionProperty' plugin.
+	  positionProperty: 'position',
+
+	  // Enable or disable the two types of parallax
+	  parallaxBackgrounds: true,
+	  parallaxElements: true,
+
+	  // Hide parallax elements that move outside the viewport
+	  hideDistantElements: true,
+
+	  // Customise how elements are shown and hidden
+	  hideElement: function($elem) { $elem.hide(); },
+	  showElement: function($elem) { $elem.show(); }
+	});
 </script>
-{% endblock %}
+
+<!-- {% endblock %} -->
 
 <div class="row">
-  <div class="col-sm-4"></div>
-  <div class="col-sm-4">
-    <div class="input-group" style="width: 100%; margin-bottom: 5%;">
-      <input type="text" class="form-control" placeholder="Search">
+  <div class="col-sm-offset-1 col-sm-6">
+    <div class="topbar"  data-stellar-ratio=".1">
+	    <div class="input-group" style="width: 100%; margin-bottom: 5%;">
+	      <input type="text" class="form-control" placeholder="Search">
+	    </div>
     </div>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-sm-2"></div>
-  <div class="col-sm-2" align="right">
-    <div id="interest-categories">
-      <ul class="nav">
-	<li>Academics</li>
-	<li>Extracurrix</li>
-	<li>Other</li>
-      </ul>
-    </div>
-  </div>
-  
-  <div class="col-sm-4">
     <ul class="panel panel-default panel-body">
       {% for interest in i_list.children %} 
-      {%include "interests/interest_template.html" %}
+      	{%include "interests/interest_template.html" %}
       {% endfor %}
     </ul>
     
@@ -51,11 +66,9 @@ $('#interest-categories').affix({
     </form>
   </div>
   
-  <div class="col-sm-2 panel panel-default">
+  <div class="col-sm-4 panel panel-default rightbar">
     <ul class="panel-body" id="interest-name-list"></ul>
   </div>
-  
-  <div class="col-sm-2"></div>
   
 </div>
 

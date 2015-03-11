@@ -1,0 +1,18 @@
+.topbar {
+  position: fixed;
+/*  top: 15px;
+  left: 50%;*/
+  width: 200px;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+/*  margin: auto;
+  display: inline;
+  float: none;*/
+}
+
+.rightbar {
+  position: fixed;
+  left: 60%;
+  top: 15px;
+}

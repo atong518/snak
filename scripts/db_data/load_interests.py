@@ -21,10 +21,16 @@ for name in ["Academics", "Athletics", "Social Life", "Extracurriculars"]:
 	dic["name"] = name
 	dic["parent"] = i
 	x, created = Interest.objects.get_or_create(**dic)
-	for j in range(0, 4):
+	for j in range(0, 3):
 		dic["name"] = count.__str__()
 		dic["parent"] = x
 		y, created = Interest.objects.get_or_create(**dic)
 		count += 1
+		# for k in range(0, 2):
+		# 	dic["name"] = count.__str__()
+		# 	dic["parent"] = y
+		# 	z, created = Interest.objects.get_or_create(**dic)
+		# 	count += 1
 
 buildMatrix()
+import pdb; pdb.set_trace()

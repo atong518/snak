@@ -4,61 +4,30 @@
 {% load staticfiles %}
 {% load customtags %}
 
-{% block extra_js %}
+
 
 <link rel="stylesheet" type="text/css" href="{% static 'interests/css/show.css' %}" />
-
-<script>
-	$(window).stellar({
-	  // Set scrolling to be in either one or both directions
-	  horizontalScrolling: false,
-	  verticalScrolling: true,
-
-	  // Set the global alignment offsets
-	  horizontalOffset: 0,
-	  verticalOffset: 0,
-
-	  // Refreshes parallax content on window load and resize
-	  responsive: false,
-
-	  // Select which property is used to calculate scroll.
-	  // Choose 'scroll', 'position', 'margin' or 'transform',
-	  // or write your own 'scrollProperty' plugin.
-	  scrollProperty: 'scroll',
-
-	  // Select which property is used to position elements.
-	  // Choose between 'position' or 'transform',
-	  // or write your own 'positionProperty' plugin.
-	  positionProperty: 'position',
-
-	  // Enable or disable the two types of parallax
-	  parallaxBackgrounds: true,
-	  parallaxElements: true,
-
-	  // Hide parallax elements that move outside the viewport
-	  hideDistantElements: true,
-
-	  // Customise how elements are shown and hidden
-	  hideElement: function($elem) { $elem.hide(); },
-	  showElement: function($elem) { $elem.show(); }
-	});
-</script>
-
-<!-- {% endblock %} -->
+	<script type="text/javascript" src="{% static 'interests/js/jquery.waypoints.min.js' %}"></script>
 
 <div class="row">
-  <div class="col-sm-offset-1 col-sm-6">
-    <div class="topbar"  data-stellar-ratio=".1">
-	    <div class="input-group" style="width: 100%; margin-bottom: 5%;">
-	      <input type="text" class="form-control" placeholder="Search">
-	    </div>
-    </div>
+  <div class="lefthalf col-sm-6 col-sm-offset-1">
+    <h1 class="topbar"></h1>
+
+    <ul class="midbar">
+	    {% for interest in i_list.children %} 
+				<button class="round-button jumper {{interest.id}}_btn" href="#{{interest.id}}_jump" title="{{interest.name}}"></button><br><br>
+	    	<!-- <a class="jumper" href="#{{interest.id}}_jump">{{interest.name}}</a> <br> -->
+	    {% endfor %}
+    </ul>
 
     <ul class="panel panel-default panel-body">
       {% for interest in i_list.children %} 
+		    <div id="{{interest.id}}_jump" name="{{interest.name}}" style="hidden: true"></div>
       	{%include "interests/interest_template.html" %}
       {% endfor %}
     </ul>
+
+    <div class="bottombar"></div>
     
     <form id="sendinterests" method="POST">
       {% csrf_token %}
@@ -66,8 +35,13 @@
     </form>
   </div>
   
-  <div class="col-sm-4 panel panel-default rightbar">
+  <div class="rightbar col-sm-4">
+    <div class="input-group searchbar" style="width: 100%; margin-bottom: 5%;">
+      <input type="text" class="form-control" placeholder="Search">
+    </div>
     <ul class="panel-body" id="interest-name-list"></ul>
+  	<button class="btn btn-success navbutton previousbutton" type="button" disabled>Previous</button>
+  	<button class="btn btn-success navbutton nextbutton" type="button" href="#{{i_list.children.0.id}}_jump">Next</button>
   </div>
   
 </div>
@@ -127,6 +101,79 @@
 		UpdateInterestList()
 	})
 
+
+  // Section management functions
+  updateTitle = function(newtitle) {
+  	$(".topbar").text(newtitle)
+  }
+
+  updateNext = function(nextid) {
+  	$(".nextbutton").attr('href', '#' + nextid).removeAttr('disabled');
+  }
+
+  updatePrevious = function(nextid) {
+  	$(".previousbutton").attr('href', '#' + nextid).removeAttr('disabled');
+  }
+
+  mainCategories = {{i_list.children|dumpsjs|safe}}
+  titles = []
+  mainCategories.forEach(function(interest) {
+  	$('#' + interest.id + '_jump').waypoint({
+		  handler: function(direction) {
+		  	if (direction=="down") {
+		  		nxt = this.next()
+		  		prv = this
+		  		titles.push(this.element)
+		  	} else {
+		  		nxt = this
+		  		prv = this.previous()
+		  		titles.pop()
+		  	}
+
+	  		if(nxt) {
+	  			updateNext(nxt.element.id)
+	  		} else {
+	  			$(".nextbutton").attr('disabled','disabled')
+	  		}
+
+	  		if(prv) {
+	  			updatePrevious(prv.element.id)
+	  			debugger
+	  			$("#" + prv.element.id.replace("jump", "btn"))
+	  		} else {
+	  			$(".previousbutton").attr('disabled','disabled')
+	  		}
+
+			  if (titles.length > 0) { 
+			  	newtitle = titles[titles.length - 1].getAttribute("name")
+			  } else { newtitle = "" }
+			  
+			  updateTitle(newtitle)
+
+		  }
+		})
+	})
+
+	// Jumper functions
+	jumpFunction = function(e, element) {
+		e.preventDefault();
+    $("body, html").animate({ 
+      scrollTop: $( $(element).attr('href') ).offset().top 
+    }, 600);
+	}
+
+  $(".jumper").on("click", function( e ) {
+  	jumpFunction(e, this);
+  });
+
+  $(".nextbutton").on("click", function( e ) {
+  	jumpFunction(e, this);
+  });
+
+  $(".previousbutton").on("click", function( e ) {
+  	jumpFunction(e, this);
+  });
+
 	// TODO: Shamelessly copied and pasted from Diana's chat.js file...
 	// Should probably put it in its own common js file
 
@@ -156,6 +203,7 @@
 	    // these HTTP methods do not require CSRF protection
 	    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 	}
+
 	function sameOrigin(url) {
 	    // test that a given url is a same-origin URL
 	    // url could be relative or scheme relative or absolute
@@ -198,8 +246,6 @@
 		});
 
 	})
-
-
 
 </script>
 

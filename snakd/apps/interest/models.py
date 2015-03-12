@@ -3,8 +3,8 @@ import cPickle as pickle
 import base64
 
 class Interest(models.Model):
-	name    = models.CharField(max_length = 20, blank = False, default="Test")
-	tooltip = models.CharField(max_length = 20, null = True)
+	name    = models.CharField(max_length = 50, blank = False, default="Test")
+	tooltip = models.CharField(max_length = 50, null = True)
 	weight  = models.IntegerField(default = 0)
 	parent  = models.ForeignKey('self', null=True, related_name='children')
 	hidden  = models.BooleanField(default=False)

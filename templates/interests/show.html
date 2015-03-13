@@ -230,19 +230,17 @@
 	$("#sendinterests").on('submit', function(event) {
 		// TODO: Return id and priority only in the interest of speed?
 		// var interests = $.map(interestlist, function(val, index) {return val.id val.priority})
-	    $.ajax({
-		    url : "/interest/update/", 
-			type : "POST", 
-			data : { interestlist : interestlist }, 
-			
-		    success : function(json) {
+		interests = interestlist.map(function(interest) {
+			return interest.id}
+		)
 
-		    },
-			
-		    error : function(xhr,errmsg,err) {
-
-		    }
-		});
+	    deferred = $.post("/interest/update/", {list: interests});
+		deferred.success(function (response) {
+			debugger
+	    });
+	    deferred.error(function (response) {
+	      debugger
+	    });
 
 	})
 

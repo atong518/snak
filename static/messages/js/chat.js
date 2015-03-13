@@ -78,9 +78,13 @@ $(document).ready(function(){
     deferred = $.get("/match/", {})
 
     deferred.success(function (response) {
-      $("#modal-intro").text(response.intro)
-      $("#new-thread-form").attr('otherid', response.newmatch.id)    
-      $('#newMatchModal').modal('show');
+      if(response.intro){
+        $("#modal-intro").text(response.intro)
+        $("#new-thread-form").attr('otherid', response.newmatch.id)    
+        $('#newMatchModal').modal('show');
+      } else {
+        $('#noNewMatchModal').modal('show');
+      }
     });
 
     deferred.error(function (response) {
@@ -98,7 +102,7 @@ $(document).ready(function(){
     deferred = $.post("new_thread/", requestdict)
 
     deferred.success(function (response) {
-
+      location.reload();
     });
 
     deferred.error(function (response) {

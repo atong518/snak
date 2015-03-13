@@ -29,7 +29,6 @@ def show(request):
 
 
 def update(request):
-	import pdb; pdb.set_trace()
 	responsedict = {}
 	responsedict["i_list"] = GetInterestTree()
 	# Test user interest until we have actual population data

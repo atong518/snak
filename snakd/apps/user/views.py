@@ -165,43 +165,44 @@ def edit(request):
     except:
         return redirect('/')
 
-
-
 def match(request):
     try:
         uid = request.session.get("_auth_user_id")
         user = GenericUser.objects.get(id=uid)
         user = _specify_class(user)
         # import pdb; pdb.set_trace()
-        if isinstance(user, CollegeUser):
-            opplist = ProspieUser.objects.filter().exclude(
-                matches__id__contains=user.id)
-            c_user = user
-        else:
-            # TEMPORARY!
-            user.matches.remove(CollegeUser.objects.all()[0])
-
-            opplist = CollegeUser.objects.filter(
-                next_match__lte=datetime.now()).exclude(
-                matches__id__contains=user.id)
-            c_user = False
-        matrix = getMatrix()
-        best = bestmatch(matrix, user, opplist)
-        user.matches.add(best)
-        if not c_user:
-            c_user = best
-        c_user.next_match = (
-            datetime.now() + 
-            timedelta(days=c_user.max_match_frequency)
-        )
-        user.save()
-        c_user.save()
-        newmatch = best.matchInfo() if best else {}
-        # TODO: Gross hack caused by async request:
-        # Django can't template the modal since we determine
-        # the match at a different time. This will work but
-        # it's definitely not ideal...
-        intro = best.introText() if best else ""
+        try:
+            if isinstance(user, CollegeUser):
+                opplist = ProspieUser.objects.filter().exclude(
+                    matches__id__contains=user.id)
+                c_user = user
+            else:
+                # TEMPORARY!
+                # user.matches.remove(CollegeUser.objects.all()[0])
+                opplist = CollegeUser.objects.filter(
+                    next_match__lte=datetime.now()).exclude(
+                    matches__id__contains=user.id)
+                c_user = False
+            matrix = getMatrix()
+            best = bestmatch(matrix, user, opplist)
+            user.matches.add(best)
+            if not c_user:
+                c_user = best
+            c_user.next_match = (
+                datetime.now() + 
+                timedelta(days=c_user.max_match_frequency)
+            )
+            user.save()
+            c_user.save()
+            # TODO: Gross hack caused by async request:
+            # Django can't template the modal since we determine
+            # the match at a different time. This will work but
+            # it's definitely not ideal...
+            newmatch = best.matchInfo()
+            intro = best.introText()
+        except:
+            newmatch = {}
+            intro = ""
         return HttpResponse(
             json.dumps({"newmatch": newmatch,
                         "intro": intro}), 

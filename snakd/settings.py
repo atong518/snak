@@ -46,7 +46,8 @@ INSTALLED_APPS = (
     'snakd.apps.interest',
     'snakd.apps.chat',
     'scripts',
-    'scripts.db_data'
+    'scripts.db_data',
+    'memoize'
 )
 
 MIDDLEWARE_CLASSES = (

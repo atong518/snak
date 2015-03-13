@@ -108,7 +108,6 @@ def leave_thread(request):
         
 def new_thread(request):
     # TODO: Where do we get the subject?
-    import pdb; pdb.set_trace()
     try:
         uid = request.session.get("_auth_user_id")
         user1 = GenericUser.objects.get(id=uid)        
@@ -120,7 +119,7 @@ def new_thread(request):
         newthread.members.add(user2)
         m = Message(thread=newthread, text=dic['message'], sender=user1)
         m.save()
-        return redirect('/chat/')
+        return redirect('chat/')
     except:
         pass
 

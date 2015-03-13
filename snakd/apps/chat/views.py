@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.http import HttpResponse
 from snakd.apps.user.models import GenericUser, ProspieUser, CollegeUser
 from snakd.apps.chat.models import Thread, Message
+from snakd.apps.user.models import GenericUser
 
 from snakd.apps.user.views import login
 
@@ -105,3 +106,23 @@ def leave_thread(request):
         json.dumps({"ignore": "this isn't happening"}),
         content_type="application/json")
         
+def new_thread(request):
+    # TODO: Where do we get the subject?
+    import pdb; pdb.set_trace()
+    try:
+        uid = request.session.get("_auth_user_id")
+        user1 = GenericUser.objects.get(id=uid)        
+        dic = request.POST.dict()
+        user2 = GenericUser.objects.get(id=dic['otherid'])
+        newthread = Thread()
+        newthread.save()
+        newthread.members.add(user1)
+        newthread.members.add(user2)
+        m = Message(thread=newthread, text=dic['message'], sender=user1)
+        m.save()
+        return redirect('/chat/')
+    except:
+        pass
+
+
+

@@ -29,7 +29,9 @@ class Migration(migrations.Migration):
             name='Thread',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('member', models.ManyToManyField(to=settings.AUTH_USER_MODEL)),
+                ('subject', models.CharField(max_length=200)),
+                ('started_at', models.DateTimeField(null=True, verbose_name=b'started at', blank=True)),
+                ('members', models.ManyToManyField(to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },

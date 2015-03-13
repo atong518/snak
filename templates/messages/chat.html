@@ -71,8 +71,8 @@ function getMatchedUserEmails() {
     {% endfor %}
     </ul>
 
-    <form action="/match/" method="GET">
-      <button type="submit" class="btn btn-danger btn-large" id="btn-match-me">Match Me!</button>
+    <form id="match-me" method="GET">
+      <button type="submit" class="btn btn-danger btn-large btn-match-me" id="btn-match-me">Match Me!</button>
     </form>
 
   </div>
@@ -173,4 +173,27 @@ function getMatchedUserEmails() {
     </div>
   </div>
 </div>
+
+<!-- New Match Modal -->
+<div class="modal fade" id="newMatchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">New Match!</h4>
+      </div>
+      <div class="modal-body">
+        <div id="modal-intro"></div><br>
+        <form id="new-thread-form" method="POST">
+				  <textarea form="new-thread-form" name="textarea" rows="10" cols="50" placeholder="Start the conversation!" required></textarea><br><br>
+				  {% csrf_token %}
+			    <button type="submit" class="btn btn-primary new-match-accept" id="new-match-accept">Do ittttt</button>
+				</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TODO: No match modal -->
+
 {% endblock %}

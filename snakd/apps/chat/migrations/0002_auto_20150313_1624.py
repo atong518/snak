@@ -11,10 +11,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
+        migrations.AlterField(
             model_name='thread',
-            name='started_at',
-            field=models.DateTimeField(null=True, verbose_name=b'started at', blank=True),
+            name='subject',
+            field=models.CharField(default=b'', max_length=200, blank=True),
             preserve_default=True,
         ),
     ]

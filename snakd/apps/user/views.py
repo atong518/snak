@@ -147,20 +147,16 @@ def edit(request):
                 form = ProspieSettingsForm(request.POST, instance=user)
             # Update fields if password is correct
             if user.check_password(request.POST['password']):
-                import pdb; pdb.set_trace()
-                form.update_user()
+                user = form.update_user(request.POST)
                 # Update session
                 update_session_auth_hash(request, user)
             else:
                 # TODO?: What should happen here?
                 pass
-        elif request.method == "GET":
-            if isinstance(user, CollegeUser):
-                form = CollegeSettingsForm(instance=user)
-            else:
-                form = ProspieSettingsForm(instance=user)
-        else:  # TODO: Will need a delete method here
-            import pdb; pdb.set_trace()
+        if isinstance(user, CollegeUser):
+            form = CollegeSettingsForm(instance=user)
+        else:
+            form = ProspieSettingsForm(instance=user)
         return render(request, 'user/settings.html', {'settings_form': form})
     except:
         return redirect('/')
@@ -170,15 +166,12 @@ def match(request):
         uid = request.session.get("_auth_user_id")
         user = GenericUser.objects.get(id=uid)
         user = _specify_class(user)
-        # import pdb; pdb.set_trace()
         try:
             if isinstance(user, CollegeUser):
                 opplist = ProspieUser.objects.filter().exclude(
                     matches__id__contains=user.id)
                 c_user = user
             else:
-                # TEMPORARY!
-                # user.matches.remove(CollegeUser.objects.all()[0])
                 opplist = CollegeUser.objects.filter(
                     next_match__lte=datetime.now()).exclude(
                     matches__id__contains=user.id)
@@ -207,7 +200,6 @@ def match(request):
             json.dumps({"newmatch": newmatch,
                         "intro": intro}), 
             content_type='application/json')
-        # TODO: What if there's no matches?
     except:
         return HttpResponseRedirect('/')
 

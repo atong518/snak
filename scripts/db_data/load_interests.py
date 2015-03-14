@@ -23,16 +23,16 @@ for name in ["Academics", "Athletics", "Extracurriculars"]:
 	dic["name"] = name
 	dic["parent"] = i
 	x, created = Interest.objects.get_or_create(**dic)
-	for j in range(0, 3):
+	for j in range(0, 4):
 		dic["name"] = count.__str__()
 		dic["parent"] = x
 		y, created = Interest.objects.get_or_create(**dic)
 		count += 1
-		# for k in range(0, 2):
-		# 	dic["name"] = count.__str__()
-		# 	dic["parent"] = y
-		# 	z, created = Interest.objects.get_or_create(**dic)
-		# 	count += 1
+		for k in range(0, 3):
+			dic["name"] = count.__str__()
+			dic["parent"] = y
+			z, created = Interest.objects.get_or_create(**dic)
+			count += 1
 
 
 def build_subtree(parent, **kwargs):
@@ -50,4 +50,3 @@ def build_subtree(parent, **kwargs):
 
 
 buildMatrix()
-import pdb; pdb.set_trace()

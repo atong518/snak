@@ -1,42 +1,296 @@
 [{
-		"name": "academics",
-		"tooltip": "hard",
+		"name": "Academics",
+		"tooltip": "apparently not rigorous enough",
 		"weight": 1,
 		"children": [
 			{
-				"name": "arts",
+				"name": "Arts",
 				"tooltip": "drawing 'n shit",
 				"weight": 1,
 				"children": [
 					{
-						"name": "studio art",
-						"tooltip": "drawing naked",
+						"name": "General Art",
+						"tooltip": "Unspecified Art stuff",
 						"weight": 1,
 						"children": []
 					},
 					{
-						"name": "art history",
-						"tooltip": "history of",
+						"name": "Art History",
+						"tooltip": "history of drawing naked people",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Digital Arts",
+						"tooltip": "drawing naked people with computers",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Music",
+						"tooltip": "dum dum dum da da doom",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Theater",
+						"tooltip": "3.9 average GPA",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Film/Media",
+						"tooltip": "sweet FSPs",
 						"weight": 1,
 						"children": []
 					}
-
 				]
 			},
 			{
-				"name": "science",
-				"tooltip": "numbers live",
+				"name": "Humanities",
+				"tooltip": "not really art but kind of",
 				"weight": 1,
 				"children": [
 					{
-						"name": "biology",
-						"tooltip": "gooey insides",
+						"name": "General Humanities",
+						"tooltip": "no one is gonna pick this",
 						"weight": 1,
 						"children": []
 					},
 					{
-						"name": "chemistry",
-						"tooltip": "really tiny ",
+						"name": "Languages",
+						"tooltip": "s'il vous plait adios DEUTSCHLAND UBER",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Culture Studies",
+						"tooltip": "this is super vague",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Literature",
+						"tooltip": "pretending to do all your readings",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Classics",
+						"tooltip": "diana and maybe one other person at dartmouth",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "History",
+						"tooltip": "the past, but doesn't include dinosaurs :(",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Religion",
+						"tooltip": "beware of clickers",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Women/Gender Studies",
+						"tooltip": "there should be a men studies too",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "LGBT",
+						"tooltip": "where even is the triangle house",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Philosophy",
+						"tooltip": "why is this table",
+						"weight": 1,
+						"children": []
+					}
+				]
+			},
+			{
+				"name": "Social Sciences",
+				"tooltip": "pre med dropouts",
+				"weight": 1,
+				"children": [
+					{
+						"name": "General Social Science",
+						"tooltip": "I still need a soc distrib",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Anthropology",
+						"tooltip": "is this where they look at fossils?",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "International Relations",
+						"tooltip": "go to georgetown or something",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Economics/Finance",
+						"tooltip": "lots of money, lots of boring",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Education",
+						"tooltip": "14 week terms. turn back now",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Government",
+						"tooltip": "biggest complainers about work",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Geography",
+						"tooltip": "how is a whole major about maps?",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Ethics",
+						"tooltip": "is this table moral?",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Psychology",
+						"tooltip": "get T points or get a C",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Linguistics",
+						"tooltip": "phonemes or something idk",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Public Policy",
+						"tooltip": "say pubpol 5 times fast",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Sociology",
+						"tooltip": "lol",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Journalism",
+						"tooltip": "the D... haha jk",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Law",
+						"tooltip": "MCAT workload > LSAT so stop complaining",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Global Health",
+						"tooltip": "no one sees you being a good person",
+						"weight": 1,
+						"children": []
+					}
+				]
+			},
+			{
+				"name": "Sciences",
+				"tooltip": "drawing 'n shit",
+				"weight": 1,
+				"children": [
+					{
+						"name": "General Science",
+						"tooltip": "Unspecified Art stuff",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Art History",
+						"tooltip": "history of drawing naked people",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Digital Arts",
+						"tooltip": "drawing naked people with computers",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Music",
+						"tooltip": "dum dum dum da da doom",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Theater",
+						"tooltip": "3.9 average GPA",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Film/Media",
+						"tooltip": "sweet FSPs",
+						"weight": 1,
+						"children": []
+					}
+				]
+			},
+			{
+				"name": "Engineering",
+				"tooltip": "drawing 'n shit",
+				"weight": 1,
+				"children": [
+					{
+						"name": "General Art",
+						"tooltip": "Unspecified Art stuff",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Art History",
+						"tooltip": "history of drawing naked people",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Digital Arts",
+						"tooltip": "drawing naked people with computers",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Music",
+						"tooltip": "dum dum dum da da doom",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Theater",
+						"tooltip": "3.9 average GPA",
+						"weight": 1,
+						"children": []
+					},
+					{
+						"name": "Film/Media",
+						"tooltip": "sweet FSPs",
 						"weight": 1,
 						"children": []
 					}
@@ -62,7 +316,7 @@
 					},
 					{
 						"name": "sororities",
-						"tooltip": "no hazing, still",
+						"tooltip": "no hazing, still fun",
 						"weight": 1,
 						"children": []
 					},

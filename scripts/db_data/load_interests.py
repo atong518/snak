@@ -28,6 +28,11 @@ for name in ["Academics", "Athletics", "Extracurriculars"]:
 		dic["parent"] = x
 		y, created = Interest.objects.get_or_create(**dic)
 		count += 1
+		for k in range(0, 3):
+			dic["name"] = count.__str__()
+			dic["parent"] = y
+			z, created = Interest.objects.get_or_create(**dic)
+			count += 1
 
 
 def build_subtree(parent, **kwargs):

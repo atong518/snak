@@ -73,8 +73,49 @@ $(document).ready(function(){
     $(this).hide();
   });
 
+  $("#match-me").submit(function(event) {
+    event.preventDefault();
+    deferred = $.get("/match/", {})
+
+    deferred.success(function (response) {
+      if(response.intro){
+        $("#modal-intro").text(response.intro)
+        $("#new-thread-form").attr('otherid', response.newmatch.id)    
+        $('#newMatchModal').modal('show');
+      } else {
+        $('#noNewMatchModal').modal('show');
+      }
+    });
+
+    deferred.error(function (response) {
+        debugger
+    });
+
+  });
+
+  $("#new-thread-form").submit(function(event) {
+    event.preventDefault();
+    requestdict = {
+      message: event.target.elements[0].value,
+      otherid: event.target.getAttribute("otherid")
+    }
+    deferred = $.post("new_thread/", requestdict)
+
+    deferred.success(function (response) {
+      location.reload();
+    });
+
+    deferred.error(function (response) {
+      debugger
+    });
+
+  });
+
   // get id of first thread
-  var firstThreadId = $('.thread-messages').first().attr("id").split("-")[1];
+  // TODO: Throws error if there are no messages
+  if ($('.thread-messages').first().length != 0){
+    var firstThreadId = $('.thread-messages').first().attr("id").split("-")[1];
+  }
 
   // open first thread
   populateThread(firstThreadId);
@@ -187,7 +228,7 @@ function longPollForThread(threadId) {
     if (typeof SET_INTERVAL != 'undefined')
 	clearInterval(SET_INTERVAL);
 
-    SET_INTERVAL = setInterval(_poll, 500, threadId);
+    // SET_INTERVAL = setInterval(_poll, 500, threadId);
     scrollDown();
 }
 
@@ -372,3 +413,14 @@ function init () {
     text.select();
     resize();
 }
+
+
+
+
+
+
+
+
+
+
+

@@ -14,13 +14,13 @@
     {% csrf_token %}
     {% for field in settings_form %}
       <div class="form-group">
-        <div class="col-sm-12">
+        <div class="col-sm-4 col-sm-offset-4">
           {{ field }}
           <div class="help-block with-errors"></div>
         </div>
       </div>
     {% endfor %}
-    <div class = "signup-submit-holder">
+    <div class = "signup-submit-holder col-sm-4 col-sm-offset-4">
       <input type="submit" class="btn btn-primary" value="Submit" name="college_signup">
     </div>
   </form>

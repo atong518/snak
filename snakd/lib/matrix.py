@@ -59,6 +59,38 @@ class Matrix(object):
 
         return d
 
+
+# def floydwarshall(graph):
+
+#     # Initialize dist and pred:
+#     # copy graph into dist, but add infinite where there is
+#     # no edge, and 0 in the diagonal
+#     import pdb; pdb.set_trace()
+#     dist = {}
+#     pred = {}
+#     for u1 in graph:
+#         dist[u1] = {}
+#         pred[u1] = {}
+#         for v in graph:
+#             dist[u1][v] = 1000
+#             pred[u1][v] = -1
+#             dist[u1][u1] = 0
+#         for neighbor in graph[u1]:
+#             dist[u1][neighbor] = graph[u1][neighbor]
+#             pred[u1][neighbor] = u1
+
+#     for t in graph:
+#         # given dist u to v, check if path u - t - v is shorter
+#         for u in graph:
+#             for v in graph:
+#                 newdist = dist[u][t] + dist[t][v]
+#                 if newdist < dist[u][v]:
+#                     dist[u][v] = newdist
+#                     pred[u][v] = pred[t][v] # route new path through t
+
+#     return dist, pred
+
+
 def bfs(graph, matrix, start_node):
     def concat(list1, list2):
         lst = []
@@ -98,6 +130,7 @@ def buildMatrix():
     tree = GetInterestTree()
     for interest in m.getOrderList():
         m = bfs(tree, m, interest)
+    # m = floydwarshall(tree)
     i = InterestMatrix(matrix = m)
     i.save()
     

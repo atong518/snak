@@ -6,8 +6,6 @@ urlpatterns = patterns('',
     url(r'^', include('snakd.apps.user.urls')),
     url(r'^interest/', include('snakd.apps.interest.urls')),
 
-    url(r'^admin/', include(admin.site.urls)),
-
     url(r'chat/', include('snakd.apps.chat.urls')),
 
     # url(r'^messages/', include("postman.urls")),

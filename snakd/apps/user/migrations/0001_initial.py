@@ -27,6 +27,7 @@ class Migration(migrations.Migration):
                 ('homestate', models.CharField(max_length=200, null=True, blank=True)),
                 ('activation_code', models.CharField(max_length=250)),
                 ('is_active', models.NullBooleanField(default=False)),
+                ('gender', models.CharField(default=b'gender is a construct', max_length=50)),
             ],
             options={
                 'abstract': False,
@@ -38,7 +39,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('genericuser_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
                 ('bio', models.CharField(max_length=500)),
-                ('next_match', models.DateTimeField(default=datetime.datetime(2015, 3, 13, 0, 57, 11, 195812))),
+                ('max_match_frequency', models.IntegerField(default=0)),
+                ('next_match', models.DateTimeField(default=datetime.datetime(2015, 3, 30, 20, 50, 39, 191857))),
             ],
             options={
                 'abstract': False,

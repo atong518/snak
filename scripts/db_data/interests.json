@@ -663,7 +663,6 @@
 					{
 						"name": "Baseball",
 						"tooltip": "",
-						"gender": "male",
 						"weight": 1,
 						"children": []
 					},
@@ -671,147 +670,126 @@
 						"name": "Basketball",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "null",
 						"children": []
 					},
 					{
 						"name": "Crew",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "female",
 						"children": []
 					},
 					{
 						"name": "Crew (Heavyweight)",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "male",
 						"children": []
 					},
 					{
 						"name": "Crew (Lightweight)",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "male",
 						"children": []
 					},
 					{
 						"name": "Cross Country",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "null",
 						"children": []
 					},
 					{
 						"name": "Equestrian",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "null",
 						"children": []
 					},
 					{
 						"name": "Field Hockey",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "female",
 						"children": []
 					},
 					{
 						"name": "Football",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "male",
 						"children": []
 					},
 					{
 						"name": "Golf",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "null",
 						"children": []
 					},
 					{
 						"name": "Ice Hockey",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "",
 						"children": []
 					},
 					{
 						"name": "Lacrosse",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "null",
 						"children": []
 					},
 					{
 						"name": "Sailing",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "null",
 						"children": []
 					},
 					{
 						"name": "Skiing (Alpine)",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "null",
 						"children": []
 					},
 					{
 						"name": "Skiing (Nordic)",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "null",
 						"children": []
 					},
 					{
 						"name": "Soccer",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "null",
 						"children": []
 					},
 					{
 						"name": "Softball",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "female",
 						"children": []
 					},
 					{
 						"name": "Squash",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "null",
 						"children": []
 					},
 					{
 						"name": "Swimming/Diving",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "null",
 						"children": []
 					},
 					{
 						"name": "Tennis",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "null",
 						"children": []
 					},
 					{
 						"name": "Track and Field",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "null",
 						"children": []
 					},
 					{
 						"name": "Volleyball",
 						"tooltip": "",
 						"weight": 1,
-						"gender": "female",
 						"children": []
 					}
 

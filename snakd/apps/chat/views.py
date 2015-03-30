@@ -148,12 +148,14 @@ def report_person(request):
         subject = "REPORT RECEIVED"
         message = "Reported by: " + request.user.firstname + " " + request.user.lastname
         message += " (email: " + request.user.email + ")\n"
-        message += "Reported on: " + request.POST.get("reported_name")
-        message = "Issue: " + issue
+        message += "Reported on: " + request.POST.get("reported-name")
+        message += "\nIssue: " + issue
         from_email = settings.EMAIL_HOST_USER
 
-        msg = EmailMultiAlternatives(subject, message, from_email, from_email)
-        msg.attach_alternative(message, "text/html")
+        html_message = message
+
+        msg = EmailMultiAlternatives(subject, message, from_email, {from_email})
+        msg.attach_alternative(html_message, "text/html")
         msg.send()
 
     return redirect(chat)

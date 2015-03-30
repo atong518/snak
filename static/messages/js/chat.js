@@ -368,13 +368,15 @@ function getDropdownMembersOfThread() {
     var members = $("#thread-link-" + selectedThreadId).html().split(",");
     members.pop(); // get rid of blank entry at the end
 
+    var result;
     if (members.length == 1) { 
-	$("#members-to-report").html(members[0].trim());
+        result = '<input type="hidden"  name="reported-name" value="' + members[0].trim() + '">';
+	$("#members-to-report").html(result + members[0].trim());
 	return;
     }
-    var result = '<select class="form-control">';
+    result = '<select class="form-control" name="reported-name">';
     for (var index=0; index < members.length; index++) {
-	result += "<option>" + members[index].trim() + "</option>";
+	result += '<option value="' + members[index].trim() + '">' + members[index].trim() + "</option>";
     }
     result += "</select>";
 

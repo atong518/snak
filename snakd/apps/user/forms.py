@@ -19,6 +19,12 @@ MAX_MATCH_FREQS = [
         (TWOWEEKS, '1 every 2 weeks'),
     ]
 
+GENDER_CHOICES = [
+    ("gender is a construct", "Prefer not to disclose"),
+    ("male", "Male"),
+    ("female", "Female"),
+]
+
 class GenericSignupForm(UserCreationForm):
     class Meta:
         model = GenericUser
@@ -29,6 +35,7 @@ class GenericSignupForm(UserCreationForm):
                   'lastname', 
                   'homecountry',
                   'homestate',
+                  'gender',
                  ]
             
 
@@ -37,6 +44,7 @@ class GenericSignupForm(UserCreationForm):
                                                firstname=data['firstname'],
                                                lastname=data['lastname'],
                                                homecountry=data['homecountry'],
+                                               gender=data['gender'],
                                                homestate=data['homestate'],
                                                password=data['password1'])
         return user
@@ -84,6 +92,7 @@ class CollegeSignupForm(GenericSignupForm):
                                                lastname=data['lastname'],
                                                homecountry=data['homecountry'],
                                                homestate=data['homestate'],
+                                               gender=data['gender'],
                                                password=data['password1'],
                                                bio=data['bio'],
                                                max_match_frequency=data['max_match_frequency'])
@@ -116,6 +125,11 @@ class CollegeSignupForm(GenericSignupForm):
             'required': 'true',
             'placeholder': 'How often can we match you?'})
         self.fields['max_match_frequency'].widget.choices = MAX_MATCH_FREQS
+        self.fields['gender'].widget = Select(attrs={
+            'class': 'form-control',
+            'required': 'true',
+            'placeholder': 'Gender'})
+        self.fields['gender'].widget.choices = GENDER_CHOICES
         self.fields['password1'].widget = PasswordInput(attrs={
             'class': 'form-control',
             'placeholder': 'Password',
@@ -139,6 +153,7 @@ class ProspieSignupForm(GenericSignupForm):
                                                lastname=data['lastname'],
                                                homecountry=data['homecountry'],
                                                homestate=data['homestate'],
+                                               gender=data['gender'],
                                                password=data['password1'])
         user.save()
         return user
@@ -146,6 +161,11 @@ class ProspieSignupForm(GenericSignupForm):
     def __init__(self, *args, **kwargs):
         super(ProspieSignupForm, self).__init__(*args, **kwargs)
 
+        self.fields['gender'].widget = Select(attrs={
+            'class': 'form-control',
+            'required': 'true',
+            'placeholder': 'Gender'})
+        self.fields['gender'].widget.choices = GENDER_CHOICES
         self.fields['homecountry'].widget = Select(attrs={
             'id': 'countrySelect2',
             'name': 'country',

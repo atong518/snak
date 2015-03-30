@@ -8,7 +8,7 @@ from datetime import datetime
 
 # Create your models here.
 class GenericUserManager(BaseUserManager):
-    def create_user(self, email, firstname, lastname, homecountry, homestate=None, password=None):
+    def create_user(self, email, firstname, lastname, homecountry, homestate, gender, password=None):
         """
         Creates and saves a GenericUser with the given fields
         """
@@ -21,12 +21,13 @@ class GenericUserManager(BaseUserManager):
             'lastname': lastname,
             'homecountry': homecountry,
             'homestate': homestate,
+            'gender': gender,
             'password': password,
             'is_active': False
             }
         return data
 
-    def create_superuser(self, email, firstname, lastname, homecountry, homestate, password):
+    def create_superuser(self, email, firstname, lastname, homecountry, homestate, gender, password):
         """
         Needed for Django functionality
         """
@@ -35,6 +36,7 @@ class GenericUserManager(BaseUserManager):
                                 lastname=lastname,
                                 homecountry=homecountry,
                                 homestate=homestate,
+                                gender=gender,
                                 password=password,  
                                 )
         user.is_admin = True
@@ -43,19 +45,21 @@ class GenericUserManager(BaseUserManager):
 
 
 class CollegeUserManager(GenericUserManager):
-    def create_user(self, email, firstname, lastname, homecountry, homestate, bio, max_match_frequency, password=None):
+    def create_user(self, email, firstname, lastname, homecountry, homestate, gender, bio, max_match_frequency, password=None):
         """
         Creates and saves a CollegeUser by creating a GenericUser and adding appropriate fields
         """
+        import pdb; pdb.set_trace()
         user = self.model(
                 email=email,
                 firstname=firstname,
                 lastname=lastname,
                 homecountry=homecountry,
                 homestate=homestate,
+                gender=gender,
                 bio=bio,
                 max_match_frequency=max_match_frequency,
-                next_match=datetime.date.today())
+                next_match=datetime.today())
         user.set_password(password)
         user.is_active = False
         user.activation_code = get_random_string(250)
@@ -64,7 +68,7 @@ class CollegeUserManager(GenericUserManager):
 
 
 class ProspieUserManager(GenericUserManager):
-    def create_user(self, email, firstname, lastname, homecountry, homestate, password=None):
+    def create_user(self, email, firstname, lastname, homecountry, homestate, gender, password=None):
         """
         Creates and saves a CollegeUser by creating a GenericUser and adding appropriate fields
         """
@@ -75,7 +79,7 @@ class ProspieUserManager(GenericUserManager):
                 lastname=lastname,
                 homecountry=homecountry,
                 homestate=homestate,
-                next_match=datetime.now())
+                gender=gender)
         user.set_password(password)
         user.is_active = False
         user.activation_code = get_random_string(250)
@@ -92,6 +96,7 @@ class GenericUser(AbstractBaseUser):
     activation_code = models.CharField(max_length=250)
     is_active = models.NullBooleanField(default=False)
     interests = models.ManyToManyField(Interest, null=True, related_name='user_set')
+    gender = models.CharField(max_length=50, null=False, default="gender is a construct")
 
     objects = GenericUserManager()
     

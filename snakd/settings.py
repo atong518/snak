@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap3',
     'snakd',
+    'snakd.apps',
     'snakd.apps.user',
     'snakd.apps.interest',
     'snakd.apps.chat',

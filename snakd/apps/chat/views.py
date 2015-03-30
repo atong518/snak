@@ -27,7 +27,6 @@ def chat(request):
                    'matched_users' : matched_users})
 
 def check_for_new_messages(request):
-#    import pdb; pdb.set_trace()
     if request.method == 'POST' and len(request.POST.get('thread_id')) > 0:
         thread_id = request.POST.get('thread_id')
         response_data = []
@@ -47,7 +46,6 @@ def check_for_new_messages(request):
             content_type = "application/json")
 
 def send_chat_message(request):
-#    import pdb; pdb.set_trace();
     if request.method == 'POST' and len(request.POST.get('message_text')) > 0:
         text = request.POST.get('message_text')
         thread_id = request.POST.get('thread_id')
@@ -71,7 +69,6 @@ def send_chat_message(request):
             content_type="application/json")
 
 def add_user_to_thread(request):
-#    import pdb; pdb.set_trace();
     if request.method == 'POST' and len(request.POST.get('user_email')) > 0:
         user_email = request.POST.get('user_email')
         thread_id = request.POST.get('thread_id')
@@ -119,7 +116,9 @@ def new_thread(request):
         newthread.members.add(user2)
         m = Message(thread=newthread, text=dic['message'], sender=user1)
         m.save()
-        return redirect('chat/')
+        return HttpResponse(
+            json.dumps({"ignore": "this isn't happening"}),
+            content_type="application/json")
     except:
         pass
 

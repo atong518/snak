@@ -201,7 +201,7 @@ def match(request):
             user.save()
             c_user.save()
             # TODO: Gross hack caused by async request:
-            # Django can't template the modal since we determine
+            # Django can't template the model since we determine
             # the match at a different time. This will work but
             # it's definitely not ideal...
             newmatch = best.matchInfo()

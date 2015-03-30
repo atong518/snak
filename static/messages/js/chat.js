@@ -88,10 +88,17 @@ $(document).ready(function(){
     });
 
     deferred.error(function (response) {
-        debugger
     });
 
   });
+
+  $("#new-match-accept").submit(function(event) {
+    deferred.success(function (response) {
+      // $('#newMatchModal').modal('hide');
+    });
+
+    deferred.error(function (response) {});
+  })
 
   $("#new-thread-form").submit(function(event) {
     event.preventDefault();
@@ -99,6 +106,7 @@ $(document).ready(function(){
       message: event.target.elements[0].value,
       otherid: event.target.getAttribute("otherid")
     }
+
     deferred = $.post("new_thread/", requestdict)
 
     deferred.success(function (response) {
@@ -106,7 +114,6 @@ $(document).ready(function(){
     });
 
     deferred.error(function (response) {
-      debugger
     });
 
   });

@@ -188,7 +188,6 @@ class ProspieSignupForm(GenericSignupForm):
             'data-match': '#prospie_password1',
             'data-error': 'Whoops, these passwords don\'t match'})
 
-
 class GenericSettingsForm(UserChangeForm):
     class Meta():
         model = GenericUser
@@ -263,10 +262,4 @@ class ProspieSettingsForm(GenericSettingsForm):
 
     def __init__(self, *args, **kwargs):
         super(ProspieSettingsForm, self).__init__(*args, **kwargs)
-
-
-
-
-
-
 

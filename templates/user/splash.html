@@ -1,34 +1,139 @@
 {% extends "user/base.html" %}
+{% block content %}{% load staticfiles %}
 
-{% block content %}
-<div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-    <h1 id="slogan">Connecting Prospies with Dartmouth Students</h1>
-    <hr class="snak-divider">
+
+<head>
+  <script src="../../static/js/jquery.js"></script>
+  <script src="../../static/user/js/onepagescroll.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="../../static/user/css/splash.css">
+  <!--<link rel="stylesheet" type="text/css" href="../../static/user/css/onepage-scroll.css">-->
+
+  <script type="text/javascript">
+    // logic to hide/show fields for Dartmouth Student vs. 'Prospie' signup
+    window.onload = function() {
+    document.getElementById('prospie_info').style.display = 'TEST';
+    document.getElementById('college_info').style.display = 'none';
+    document.getElementById('prospie_how').style.display = 'TEST';
+    document.getElementById('college_how').style.display = 'none';
+    }
+
+    //(".main").onepage_scroll({sectionContainer: "section", easing: "ease", animationTime: 1000, pagination: true, updateURL: false, beforeMove: function(index) {}, afterMove: function(index) {}, loop: false, keyboard: true, responsiveFallback: false, direction: "vertical"});
+
+    function toggleDisplayInfo() {
+    if (document.getElementById('p').checked) {
+    document.getElementById('prospie_info').style.display = '';
+    document.getElementById('college_info').style.display = 'none';
+    document.getElementById('prospie_how').style.display = '';
+    document.getElementById('college_how').style.display = 'none';
+    }
+    if (document.getElementById('c').checked) {
+    document.getElementById('prospie_info').style.display = 'none';
+    document.getElementById('college_info').style.display = '';
+    document.getElementById('prospie_how').style.display = 'none';
+    document.getElementById('college_how').style.display = '';
+    }
+    }
+  </script>
+</head>
+
+<body>
+  <div class="main">
+    <section>
+      <div class="row buffer-row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+	  <hr class="snak-divider">
+	</div>
+	<div class="col-md-2"></div>
+      </div>
+      
+      <div class="row">
+	<div class="col-md-3"></div>
+	<div class="col-md-6">
+	  <h3 align="center">I am a...</h3>
+	  <form class="form-horizontal">
+	    <div class="form-group">
+	      <div class="btn-group btn-group-justified" data-toggle="buttons">
+		<label class="btn btn-success active col-sm-6" id="btn-signup" style="white-space: normal;">
+		  <input onchange="javascript:toggleDisplayInfo();" type="radio" name="student-type" id="p" autocomplete="off" value="p" checked>Prospective Dartmouth Student
+		</label>
+		<label class="btn btn-success col-sm-6" id="btn-signup" style="white-space: normal;">
+		  <input onchange="javascript:toggleDisplayInfo();" type="radio" name="student-type" id="c" autocomplete="off" value="c">Current Dartmouth Student
+		</label>
+	      </div>
+	    </div>
+	  </form>
+	  <form id="prospie_info" method="post" action=".">
+	    <h2 align="center"><i>Get personalized answers and mentorship from Dartmouth students</i></h2>
+	  </form>
+	  <form id="college_info" method="post" action=".">
+	    <h2 align="center"><i>Share your Dartmouth experience with interested prospies</i></h2>
+	  </form>
+	</div>
+	<div class="col-md-3"></div>
+      </div>
+      
+      <div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+	  <a href="{% url 'sign_up' %}"> <div id="btn-signup" class="btn btn-primary btn-large">Sign Up Now</div></a>
+	  <br>
+	  <div class="centered">Been there, done that? <a href="{% url 'login' %}">Login</a></div>
+	</div>
+	<div class="col-md-4"></div>
+      </div>
+      <div class="row buffer-row"></div>
+      <div class="row buffer-row"></div>
+      <div class="row buffer-row"></div>
+      <div class="row buffer-row"></div>
+    </section>
+
+    <section>
+      <div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+	  <h1 id="logo">Sagely.io</h1>
+	</div>
+	<div class="col-md-2"></div>
+      </div>
+      <div class="row buffer-row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <hr class="snak-divider">
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+
+      <div class="row">
+	<div class="col-md-3"></div>
+	<div class="col-md-6">
+	  <h1 align="center"><b>How it Works</b></h1>
+	  <form id="prospie_how" method="post" action=".">
+	    <img src="../../static/user/jpg/one.jpg" alt="Question" class="img-circle" width="120" height="120" align="left">
+	    <h1 align="justify">1. Tell us about yourself and what you are interested in</h1>
+	    <img src="../../static/user/jpg/two.jpg" alt="Arrow" class="img-circle" width="120" height="120" align="right">
+	    <h1 align="justify">2. Get matched with Dartmouth students with similar interests</h1>
+	    <img src="../../static/user/jpg/three.jpg" alt="Chat" class="img-circle" width="120" height="120" align="left">
+            <h1 align="justify">3. Find out what it is like to go to Dartmouth!</h1>
+          </form>
+	  <form id="college_how" method="post" action=".">
+	    <img src="../../static/user/jpg/one.jpg" alt="Question" class="img-circle" width="100" height="100" align="left">
+	    <h1 align="justify">1. Tell us about yourself and what you do on campus</h1>
+	    <img src="../../static/user/jpg/two.jpg" alt="Arrow" class="img-circle" width="100" height="100" align="right">
+            <h1 align="justify">2. Get matched with prospies with similar interests</h1>
+	    <img src="../../static/user/jpg/three.jpg" alt="Chat" class="img-circle" width="100" height="100" align="left">
+            <h1 align="justify">3. Help prospies discover what it is like to go to Dartmouth!</h1>
+	  </form>
+	</div>
+	<div class="col-md-3"></div>
+      </div>
+      <div class="row buffer-row"></div>
+      <div class="row buffer-row"></div>
+      <div class="row buffer-row"></div>
+      <div class="row buffer-row"></div>
+    </section>
   </div>
-  <div class="col-md-2"></div>
-</div>
-
-<div class="row buffer-row"></div>
-
-<div class="row">
-  <div class="col-md-4"></div>
-  <div class="col-md-4">
-    <a href="{% url 'sign_up' %}"> <div id="btn-signup" class="btn btn-success btn-large">Sign Up Now</div></a>
-    <br>
-    <div class="centered">Been there, done that? <a href="{% url 'login' %}">Login</a></div>
-  </div>
-  <div class="col-md-4"></div>
-</div>
-
-<div class="row buffer-row"></div>
-
-<div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-    <hr class="snak-divider">
-  </div>
-  <div class="col-md-2"></div>
-</div>
+</body>
 {% endblock %}
+

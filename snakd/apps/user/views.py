@@ -95,7 +95,7 @@ def login(request):
             auth_login(request, user)
             return redirect("/chat/")
         else:
-            return redirect('/')
+            has_error = "block"
 
     return render(request,
                   'user/login.html',
@@ -161,6 +161,18 @@ def edit(request):
     except:
         return redirect('/')
 
+def _send_match_notification(email):
+    # Email shenanigans
+    subject = "SnakDartmouth Match!"
+    message = "You've got a match on SnakD!\n"
+    from_email = settings.EMAIL_HOST_USER
+
+    url = "http://0.0.0.0:5000/chat/"
+    txt_message = message + "Click here to respond: " + url
+    msg = EmailMultiAlternatives(subject, txt_message, from_email, {email})
+    msg.attach_alternative(message, "text/html")
+    msg.send()
+
 def match(request):
     try:
         uid = request.session.get("_auth_user_id")
@@ -179,6 +191,7 @@ def match(request):
             matrix = getMatrix()
             best = bestmatch(matrix, user, opplist)
             user.matches.add(best)
+            _send_match_notification(best.email)
             if not c_user:
                 c_user = best
             c_user.next_match = (

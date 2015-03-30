@@ -43,6 +43,5 @@ def update(request):
 		user.interests.add(intr[0])
 	intlist = makeInterestList(user.interests.all())
 	responsedict["user_interests"] = json.dumps(intlist)
-	import pdb; pdb.set_trace()
 	return render(request, 'interests/show.html', responsedict)
 

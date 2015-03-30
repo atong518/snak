@@ -128,15 +128,28 @@ def refer_friend(request):
     # Send referral email
     if request.method == "POST":
         email = request.POST.get("refer-email")
-        subject = "Someone must love you a lot..."
-        message = "Because they want to introduce you to the glorious world of Sagely!"
+        subject = "Want to know what it's like to go to Dartmouth College?"
+
+        message = "Hi " + request.POST.get("refer-name") + "!\n"
+        message += "Are you interested in going to Dartmouth College?  Do you want to find out what it's like to be a student here?\n"
+        message += 'At Sagely, we help prospective Dartmouth students like you get an "inside look" into what it\'s like to go to Dartmouth. We help you get personalized answers to your questions by connecting you directly with real Dartmouth students.\n'
+        message += request.user.firstname + " " + request.user.lastname + " thought thought you might be interested in using Sagely and told us to get in touch with you! We Dartmouth students would love nothing more than to share our experiences, so give us a shot and check us out "
+        message += "at www.sagely.io!\n"
+        message += "Cheers!\nThe Sagely Team"
+
+        html_message = "<h3>Hi " + request.POST.get("refer-name") + "!</h3>"
+        html_message += "<p>Are you interested in going to Dartmouth College?  Do you want to find out what it's like to be a student here?</p>"
+        html_message += '<p>At Sagely, we help prospective Dartmouth students like you get an "inside look" into what it\'s like to go to Dartmouth. We help you get personalized answers to your questions by connecting you directly with real Dartmouth students.</p>'
+        html_message += '<p>request.user.firstname + " " + request.user.lastname + " thought thought you might be interested in using Sagely and told us to get in touch with you! We Dartmouth students would love nothing more than to share our experiences, so give us a shot and check us out '
+        html_message += '<a href="www.sagely.io">here</a>!'
+        html_message += "<p>Cheers!</p><p><b>The Sagely Team</b></p>"
+
         from_email = settings.EMAIL_HOST_USER
         
         # TODO: add in the correct sagely.io url once it is working
-        html_message = message # this can use html formatting
 
         msg = EmailMultiAlternatives(subject, message, from_email, {email})
-        msg.attach_alternative(message, "text/html")
+        msg.attach_alternative(html_message, "text/html")
         msg.send()
 
     return redirect(chat)

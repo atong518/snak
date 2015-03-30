@@ -225,6 +225,7 @@ function getMatchedUserEmails() {
 	  3. To be a dope human and spread the Sagely luv <3</p>
 	<form id="refer-a-friend-form" method="POST" action="/chat/refer_friend/">
 	  {% csrf_token %}
+	  <input class="form-control" type="text" name="refer-name" id="refer-a-friend-name" placeholder="Friend's Name" /><br>
 	  <input class="form-control" type="text" name="refer-email" id="refer-a-friend-email" placeholder="Friend's email" /><br>
 	  <button type="submit" value="Send" class="btn btn-primary">REFERRRRRRR</button>
 	</form>

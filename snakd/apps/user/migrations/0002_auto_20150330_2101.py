@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='collegeuser',
             name='next_match',
-            field=models.DateTimeField(default=datetime.datetime(2015, 3, 13, 0, 57, 23, 548419)),
+            field=models.DateTimeField(default=datetime.datetime(2015, 3, 30, 21, 1, 41, 922895)),
             preserve_default=True,
         ),
     ]

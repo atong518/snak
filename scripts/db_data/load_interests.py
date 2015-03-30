@@ -2,6 +2,7 @@ import sys, os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'snakd.settings'
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 from snakd.apps.interest.models import Interest
+from snakd.apps.interest.models import SportsInterest
 from snakd.lib.matrix import buildMatrix
 import json
 
@@ -38,14 +39,19 @@ for name in ["Academics", "Athletics", "Extracurriculars"]:
 def build_subtree(parent, **kwargs):
 	children = kwargs.pop("children")
 	kwargs["parent"] = parent
-	i = Interest.objects.get_or_create(**kwargs)
+
+	if kwargs.has_key("gender"):
+		i = SportsInterest.objects.get_or_create(**kwargs)
+	else:
+		i = Interest.objects.get_or_create(**kwargs)
+		
 	for child in children:
 		build_subtree(i, **child)
 
 
-# with open("interests.json") as jsonfile:
-# 	for child in json.load(jsonfile):
-# 		build_subtree(root, **child)
+with open("interests.json") as jsonfile:
+	for child in json.load(jsonfile):
+		build_subtree(root, **child)
 
 
 

@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import datetime
 import django.utils.timezone
 from django.conf import settings
 
@@ -9,6 +10,7 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('interest', '0001_initial'),
     ]
 
     operations = [
@@ -36,6 +38,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('genericuser_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
                 ('bio', models.CharField(max_length=500)),
+                ('next_match', models.DateTimeField(default=datetime.datetime(2015, 3, 13, 0, 57, 11, 195812))),
             ],
             options={
                 'abstract': False,
@@ -51,5 +54,17 @@ class Migration(migrations.Migration):
                 'abstract': False,
             },
             bases=('user.genericuser',),
+        ),
+        migrations.AddField(
+            model_name='collegeuser',
+            name='matches',
+            field=models.ManyToManyField(related_name='matches', null=True, to='user.ProspieUser'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='genericuser',
+            name='interests',
+            field=models.ManyToManyField(related_name='user_set', null=True, to='interest.Interest'),
+            preserve_default=True,
         ),
     ]

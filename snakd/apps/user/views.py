@@ -12,6 +12,9 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 from django.contrib.auth import update_session_auth_hash
 from snakd.lib.match import bestmatch
 from snakd.lib.matrix import getMatrix
+from datetime import datetime, timedelta
+import json
+
 # Create your views here.
 def splash(request):
     if request.user.is_authenticated():
@@ -133,7 +136,6 @@ def confirm_email(request, activation_code, email):
     return redirect("/chat/")
 
 def edit(request):
-    # import pdb; pdb.set_trace()
     try:
         uid = request.session.get("_auth_user_id")
         user = GenericUser.objects.get(id=uid)
@@ -145,39 +147,59 @@ def edit(request):
                 form = ProspieSettingsForm(request.POST, instance=user)
             # Update fields if password is correct
             if user.check_password(request.POST['password']):
-                import pdb; pdb.set_trace()
-                form.update_user()
+                user = form.update_user(request.POST)
                 # Update session
                 update_session_auth_hash(request, user)
             else:
                 # TODO?: What should happen here?
                 pass
-        elif request.method == "GET":
-            if isinstance(user, CollegeUser):
-                form = CollegeSettingsForm(instance=user)
-            else:
-                form = ProspieSettingsForm(instance=user)
-        else:  # TODO: Will need a delete method here
-            import pdb; pdb.set_trace()
+        if isinstance(user, CollegeUser):
+            form = CollegeSettingsForm(instance=user)
+        else:
+            form = ProspieSettingsForm(instance=user)
         return render(request, 'user/settings.html', {'settings_form': form})
     except:
         return redirect('/')
-
-
 
 def match(request):
     try:
         uid = request.session.get("_auth_user_id")
         user = GenericUser.objects.get(id=uid)
         user = _specify_class(user)
-        if isinstance(user, CollegeUser):
-            opplist = ProspieUser.objects.all()
-        else:
-            opplist = CollegeUser.objects.all()
-        matrix = getMatrix()
-        best = bestmatch(matrix, user, opplist)
-        user.matches.add(best)
-        return HttpResponseRedirect('/chat/')
+        try:
+            if isinstance(user, CollegeUser):
+                opplist = ProspieUser.objects.filter().exclude(
+                    matches__id__contains=user.id)
+                c_user = user
+            else:
+                opplist = CollegeUser.objects.filter(
+                    next_match__lte=datetime.now()).exclude(
+                    matches__id__contains=user.id)
+                c_user = False
+            matrix = getMatrix()
+            best = bestmatch(matrix, user, opplist)
+            user.matches.add(best)
+            if not c_user:
+                c_user = best
+            c_user.next_match = (
+                datetime.now() + 
+                timedelta(days=c_user.max_match_frequency)
+            )
+            user.save()
+            c_user.save()
+            # TODO: Gross hack caused by async request:
+            # Django can't template the modal since we determine
+            # the match at a different time. This will work but
+            # it's definitely not ideal...
+            newmatch = best.matchInfo()
+            intro = best.introText()
+        except:
+            newmatch = {}
+            intro = ""
+        return HttpResponse(
+            json.dumps({"newmatch": newmatch,
+                        "intro": intro}), 
+            content_type='application/json')
     except:
         return HttpResponseRedirect('/')
 

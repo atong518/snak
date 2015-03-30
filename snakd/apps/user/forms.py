@@ -5,10 +5,10 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 
 UNLIMITED = 0
-ONEDAY = 864000
-THREEDAYS = 2592000
-ONEWEEK = 6048000
-TWOWEEKS = 12096000
+ONEDAY = 1
+THREEDAYS = 3
+ONEWEEK = 7
+TWOWEEKS = 14
 
 MAX_MATCH_FREQS = [
         (THREEDAYS, 'How often can we match you? - Default=1 every 3 days'),
@@ -174,13 +174,12 @@ class GenericSettingsForm(UserChangeForm):
         model = GenericUser
         fields = ['email', 
           'password',
-          'homecountry',
-          'homestate',
+          'id'
          ]
 
     def update_user(self):
-        import pdb; pdb.set_trace()
-        user = GenericUser.objects.get(email=self.fields['email'])
+        user = self.instance
+        user.email = self.email
         return user
 
 
@@ -192,16 +191,6 @@ class GenericSettingsForm(UserChangeForm):
             'initial': kwargs.get('email', "Email"),
             'data-valid-error': "Yikes, that email address is invalid",
             'required': 'true'})
-        self.fields['homecountry'].widget = Select(attrs={
-            'id': 'countrySelect',
-            'name': 'country',
-            'onchange': "populateState(\'stateSelect\', \'countrySelect\')",
-            'class': 'form-control',
-            'required': 'true'})
-        self.fields['homestate'].widget = Select(attrs={
-            'id': 'stateSelect',
-            'name': 'state',
-            'class': 'form-control'})
         self.fields['password'].widget = PasswordInput(attrs={
             'id': 'password',
             'class': 'form-control',
@@ -219,10 +208,12 @@ class CollegeSettingsForm(GenericSettingsForm):
           'max_match_frequency'
          ]
 
-    def update_user(self):
-        # TODO: Save here
-        import pdb; pdb.set_trace()
-        self.instance.updateUser()
+    def update_user(self, data):
+        user = self.instance
+        user.email = data['email']
+        user.bio = data['bio']
+        user.max_match_frequency = data['max_match_frequency']
+        user.save()
         return user
 
     def __init__(self, *args, **kwargs):
@@ -243,11 +234,10 @@ class ProspieSettingsForm(GenericSettingsForm):
         ]
 
 
-    def update_user(self):
-        import pdb; pdb.set_trace()
-        if not user:
-            user = ProspieUser.objects.get(email=self.fields['email'])
-
+    def update_user(self, data):
+        user = self.instance
+        user.email = data['email']
+        user.save()
         return user
 
 

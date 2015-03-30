@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import datetime
 
 
 class Migration(migrations.Migration):
@@ -11,10 +12,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
+        migrations.AlterField(
             model_name='collegeuser',
-            name='max_match_frequency',
-            field=models.IntegerField(default=2592000, max_length=200, choices=[(0, b'Unlimited'), (864000, b'1 per day'), (2592000, b'1 every 3 days'), (6048000, b'1 per week'), (12096000, b'1 every 2 weeks')]),
+            name='next_match',
+            field=models.DateTimeField(default=datetime.datetime(2015, 3, 13, 0, 57, 23, 548419)),
             preserve_default=True,
         ),
     ]

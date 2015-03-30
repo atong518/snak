@@ -12,34 +12,37 @@ from snakd.apps.interest.models import Interest
 from snakd.lib.orm import *
 import json
 
+def getUser(request):
+	uid = request.session.get("_auth_user_id")
+	user = GenericUser.objects.get(id=uid)
+	return user
+
+def makeInterestList(queryset):
+	intlist = []
+	for interest in queryset:
+		intlist.append(interest.__str__())
+	return intlist
 
 def show(request):
 	responsedict = {}
 	responsedict["i_list"] = GetInterestTree()
-	# Test user interest until we have actual population data
-	# responsedict["user_interests"] = json.dumps([{
-	# 	"name": 5,
-	# 	"id": 44,
-	# 	"tooltip": "testing 1 2 3",
-	# 	"weight": 1,
-	# }])
-	# import pdb; pdb.set_trace()
-	responsedict["user_interests"] = json.dumps([])
+	user = getUser(request)
+	intlist = makeInterestList(user.interests.all())
+	responsedict["user_interests"] = json.dumps(intlist)
 	return render(request, 'interests/show.html', responsedict)
 
 
 def update(request):
-	import pdb; pdb.set_trace()
 	responsedict = {}
 	responsedict["i_list"] = GetInterestTree()
-	# Test user interest until we have actual population data
-	# responsedict["user_interests"] = json.dumps([{
-	# 	"name": 5,
-	# 	"id": 44,
-	# 	"tooltip": "testing 1 2 3",
-	# 	"weight": 1,
-	# }])
-	# import pdb; pdb.set_trace()
-	responsedict["user_interests"] = json.dumps([])
+	interests = request.POST.getlist('list[]')
+	user = getUser(request)
+	user.interests.clear()
+	for interest in interests:
+		intr = Interest.objects.filter(id=interest)
+		user.interests.add(intr[0])
+	intlist = makeInterestList(user.interests.all())
+	responsedict["user_interests"] = json.dumps(intlist)
+	import pdb; pdb.set_trace()
 	return render(request, 'interests/show.html', responsedict)
 

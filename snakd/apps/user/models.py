@@ -4,6 +4,7 @@ from snakd.apps.interest.models import Interest
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
+from datetime import datetime
 
 # Create your models here.
 class GenericUserManager(BaseUserManager):
@@ -53,7 +54,8 @@ class CollegeUserManager(GenericUserManager):
                 homecountry=homecountry,
                 homestate=homestate,
                 bio=bio,
-                max_match_frequency=max_match_frequency)
+                max_match_frequency=max_match_frequency,
+                next_match=datetime.date.today())
         user.set_password(password)
         user.is_active = False
         user.activation_code = get_random_string(250)
@@ -72,7 +74,8 @@ class ProspieUserManager(GenericUserManager):
                 firstname=firstname,
                 lastname=lastname,
                 homecountry=homecountry,
-                homestate=homestate)
+                homestate=homestate,
+                next_match=datetime.now())
         user.set_password(password)
         user.is_active = False
         user.activation_code = get_random_string(250)
@@ -88,7 +91,6 @@ class GenericUser(AbstractBaseUser):
     homestate = models.CharField(max_length=200, null=True, blank=True)
     activation_code = models.CharField(max_length=250)
     is_active = models.NullBooleanField(default=False)
-
     interests = models.ManyToManyField(Interest, null=True, related_name='user_set')
 
     objects = GenericUserManager()
@@ -105,6 +107,16 @@ class GenericUser(AbstractBaseUser):
     def getInterestList(self):
         return self.interests.all()
 
+    def getInterestString(self):
+        interestlist = self.getInterestList()
+        lst = ""
+        if interestlist:
+            lst += interestlist[0]
+            for interest in interestlist[1:len(interestlist)-1]:
+                lst += ", " + interest
+            lst += " and " + interestlist[len(interestlist)-1] + "\n"
+        return lst
+
     def editableFields(self):
         return {
             "email": self.email,
@@ -119,13 +131,31 @@ class GenericUser(AbstractBaseUser):
             setattr(self, k, v)
         self.save()
 
+    def matchInfo(self):
+        interests = []
+        for interest in self.getInterestList():
+            interests.append(interest.name)
+        return {
+            "firstname": self.firstname,
+            "lastname": self.lastname,
+            "homecountry": self.homecountry,
+            "homestate": self.homestate,
+            "interests": list(interests),
+            "id": self.id
+        }
+
+    def introText(self):
+        intro = "Say hello to " + self.firstname + " " + self.lastname + "!\n"
+        intro += self.getInterestString()
+        return intro
+
 class CollegeUser(GenericUser):
     # Match frequencies in seconds (for countdown)
     UNLIMITED = 0
-    ONEDAY = 864000
-    THREEDAYS = 2592000
-    ONEWEEK = 6048000
-    TWOWEEKS = 12096000
+    ONEDAY = 1
+    THREEDAYS = 3
+    ONEWEEK = 7
+    TWOWEEKS = 14
 
     MAX_MATCH_FREQS = (
         (UNLIMITED, 'UNLIMITED'),
@@ -136,7 +166,8 @@ class CollegeUser(GenericUser):
     )
 
     bio = models.CharField(max_length=500)
-    max_match_frequency = models.IntegerField(max_length=200, null=False)
+    max_match_frequency = models.IntegerField(null=False, default=0)
+    next_match = models.DateTimeField(null=False, default=datetime.now())
 
     objects = CollegeUserManager()
     matches = models.ManyToManyField("ProspieUser", related_name="matches", null=True)
@@ -146,6 +177,17 @@ class CollegeUser(GenericUser):
         dic["bio"] = self.bio
         dic["max_match_frequency"] = self.max_match_frequency
         return dic
+
+    def matchInfo(self):
+        dic = super(CollegeUser, self).matchInfo()
+        dic["bio"] = self.bio
+        return dic
+
+    def introText(self):
+        intro = super(CollegeUser, self).introText()
+        if self.bio:
+            intro += self.bio + "\n"
+        return intro
 
 class ProspieUser(GenericUser):
     objects = ProspieUserManager()

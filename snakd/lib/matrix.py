@@ -75,7 +75,6 @@ def bfs(graph, matrix, start_node):
     depth = 0
     # counts down nodes to when depth increases
     timetodepth = len(queue)
-
     while len(queue) > 0:
         node = queue.pop(0) 
         visited.append(node)
@@ -97,10 +96,8 @@ def bfs(graph, matrix, start_node):
 def buildMatrix():
     m = Matrix(GetInterestRoot())
     tree = GetInterestTree()
-
     for interest in m.getOrderList():
         m = bfs(tree, m, interest)
-
     i = InterestMatrix(matrix = m)
     i.save()
     

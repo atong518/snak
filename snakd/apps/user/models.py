@@ -49,7 +49,6 @@ class CollegeUserManager(GenericUserManager):
         """
         Creates and saves a CollegeUser by creating a GenericUser and adding appropriate fields
         """
-        import pdb; pdb.set_trace()
         user = self.model(
                 email=email,
                 firstname=firstname,

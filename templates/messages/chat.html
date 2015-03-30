@@ -44,11 +44,12 @@ function getMatchedUserEmails() {
 	  Menu <span class="caret"></span>
 	</button>
 	<ul class="dropdown-menu" role="menu">
-	  <li><a href="{% url 'settings' %}">Settings</a></li>
-	  <li><a href="#">Advanced Match</a></li>
+	  <li><a href="{% url 'settings' %}">Change Settings</a></li>
+    <li><a href="{% url 'change_password' %}">Change Password</a></li>
 	  <li><a href="/interest/show/">Adjust Interests</a></li>
 	  <li><a href="#">Submit Feedback</a></li>
 	  <li><a href="#">Refer a Friend</a></li>
+    <li><a href="{% url 'logout' %}">Logout</a></li>
 	</ul>
       </div>
     </div>      

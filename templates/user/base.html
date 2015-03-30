@@ -40,21 +40,9 @@ Then surround all code with
 
 {% if user.is_authenticated %}
 <div class="row">
-
-  <div class="col-md-offset-8 col-md-2">
-    <div class="dropdown" align="right" >
-      <h6 class="dropdown-toggle" type="button" id="user-welcome" data-toggle="dropdown" aria-expanded="true">
+  <div class="col-md-offset-8 col-md-2" align="right">
 	Welcome, {{ user.firstname }}
-	<span class="caret"></span>
-      </h6>
-      <ul class="dropdown-menu" role="menu" aria-labelledby="user-welcome" align="right">
-	<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'logout' %}">Logout</a></li>
-	<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'settings' %}">Change Settings</a></li>
-	<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'change_password' %}">Change Password</a></li>
-      </ul>
-    </div>
   </div>
-
 </div>
 {% endif %}
 
@@ -65,9 +53,11 @@ Then surround all code with
   <div class="col-md-12">
     <ul class="nav nav-pills" id="footer">
       <li><a href="{% url 'chat' %}">Home</a></li>
-      <li><a href="{% url 'settings' %}">Settings</a></li>
       <li><a href="{% url 'howto' %}">How It Works</a></li>
       <li><a href="{% url 'aboutus' %}">About Us</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">Logout</a></li>      
+      {% endif %}
     </ul>
   </div>
 </div>

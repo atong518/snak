@@ -191,7 +191,6 @@ def match(request):
             matrix = getMatrix()
             best = bestmatch(matrix, user, opplist)
             user.matches.add(best)
-            import pdb; pdb.set_trace()
             _send_match_notification(best.email)
             if not c_user:
                 c_user = best

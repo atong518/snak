@@ -80,6 +80,7 @@ class ProspieUserManager(GenericUserManager):
                 homecountry=homecountry,
                 homestate=homestate,
                 gender=gender)
+                homestate=homestate)
         user.set_password(password)
         user.is_active = False
         user.activation_code = get_random_string(250)

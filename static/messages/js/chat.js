@@ -147,6 +147,11 @@ $(document).ready(function(){
 	  return false;
       });
 
+  // report person members population
+  $("#reportAPersonModal").on('shown.bs.modal', function() {
+	  getDropdownMembersOfThread();
+      });
+
   // scroll down!
   scrollDown();
 
@@ -349,6 +354,31 @@ function _addedToThread(addedUserName) {
     // clear out solo chat message
     $("#solo-chat").html("");
     
+}
+
+function getDropdownMembersOfThread() {
+    var selectedThreadId = $(".active-link").attr("id");
+    if (typeof selectedThreadId == "undefiend") {
+	alert("Please select a thread to report someone from!");
+    }
+    else {
+	selectedThreadId =selectedThreadId.split("-")[2];
+    }
+    
+    var members = $("#thread-link-" + selectedThreadId).html().split(",");
+    members.pop(); // get rid of blank entry at the end
+
+    if (members.length == 1) { 
+	$("#members-to-report").html(members[0].trim());
+	return;
+    }
+    var result = '<select class="form-control">';
+    for (var index=0; index < members.length; index++) {
+	result += "<option>" + members[index].trim() + "</option>";
+    }
+    result += "</select>";
+
+    $("#members-to-report").html(result);
 }
 
 function addToThread() {

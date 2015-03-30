@@ -9,4 +9,6 @@ urlpatterns = patterns('',
     url(r'^add_user_to_thread/$', chatviews.add_user_to_thread, name="add_user_to_thread"),
     url(r'^leave_thread/$', chatviews.leave_thread, name="leave_thread"),
     url(r'^new_thread/$', chatviews.new_thread, name="new_thread"),
+    url(r'^refer_friend/$', chatviews.refer_friend, name="refer_friend"),
+    url(r'^report_person/$', chatviews.report_person, name="report_person"),
 )

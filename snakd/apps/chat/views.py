@@ -2,6 +2,8 @@ import json
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import RequestContext
 from django.http import HttpResponse
+from django.conf import settings
+from django.core.mail import send_mail, EmailMultiAlternatives
 from snakd.apps.user.models import GenericUser, ProspieUser, CollegeUser
 from snakd.apps.chat.models import Thread, Message
 from snakd.apps.user.models import GenericUser
@@ -122,5 +124,36 @@ def new_thread(request):
     except:
         pass
 
+def refer_friend(request):
+    # Send referral email
+    if request.method == "POST":
+        email = request.POST.get("refer-email")
+        subject = "Someone must love you a lot..."
+        message = "Because they want to introduce you to the glorious world of Sagely!"
+        from_email = settings.EMAIL_HOST_USER
+        
+        # TODO: add in the correct sagely.io url once it is working
+        html_message = message # this can use html formatting
 
+        msg = EmailMultiAlternatives(subject, message, from_email, {email})
+        msg.attach_alternative(message, "text/html")
+        msg.send()
 
+    return redirect(chat)
+
+def report_person(request):
+    # Send report on person
+    if request.method == "POST":
+        issue = request.POST.get("report-issue-text")
+        subject = "REPORT RECEIVED"
+        message = "Reported by: " + request.user.firstname + " " + request.user.lastname
+        message += " (email: " + request.user.email + ")\n"
+        message += "Reported on: " + request.POST.get("reported_name")
+        message = "Issue: " + issue
+        from_email = settings.EMAIL_HOST_USER
+
+        msg = EmailMultiAlternatives(subject, message, from_email, from_email)
+        msg.attach_alternative(message, "text/html")
+        msg.send()
+
+    return redirect(chat)

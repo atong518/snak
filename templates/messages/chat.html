@@ -48,7 +48,7 @@ function getMatchedUserEmails() {
 	  <li><a href="#">Advanced Match</a></li>
 	  <li><a href="/interest/show/">Adjust Interests</a></li>
 	  <li><a href="#">Submit Feedback</a></li>
-	  <li><a href="#">Refer a Friend</a></li>
+	  <li><a data-toggle="modal" data-target="#referAFriendModal">Refer a Friend</a></li>
 	</ul>
       </div>
     </div>      
@@ -114,7 +114,7 @@ function getMatchedUserEmails() {
 	  <button class="btn btn-success dropdown-toggle pull-right" type="button" id="plusmenu" data-toggle="dropdown" aria-expanded="false">+</button>
 	  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="plusmenu">
 	    <li><a data-toggle="modal" data-target="#addPersonToThread">Add a Person</a></li>
-	    <li><a href="#">Report Conversation</a></li>
+	    <li><a data-toggle="modal" data-target="#reportAPersonModal">Report Conversation</a></li>
 	    <li><a href="#">Nudge Person</a></li>
 	  </ul>
 	</div>
@@ -125,7 +125,7 @@ function getMatchedUserEmails() {
       <div id="message-content">
 	{% for thread in inbox_threads %}
  	<div id="thread-{{ thread.pk }}" class="thread thread-messages">
-          {% for message in thread.message_set.all %}
+          {% for message in thread.message_set.all reversed %}
 	  <div class="row" style="margin-top: 10px">
             {% if message.sender == user %}
 	    <p class="chat-message sent pull-right">{{ message }}</p>
@@ -209,5 +209,48 @@ function getMatchedUserEmails() {
   </div>
 </div>
 
+<!-- Refer a friend modal -->
+<div class="modal fade" id="referAFriendModal" tabindex="-1" role="dialog" aria-labelledby="myReferAFriendModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<h4 class="modal-title" id="myModalLabel">Refer a Friend!</h4>
+      </div>
+      <div class="modal-body">
+	<p><b>re&middot; fer</b>: <i>verb</i> <br>
+	  1. To direct the attention or thoughts of <br>
+	  2. To mention or allude to <br>
+	  3. To be a dope human and spread the Sagely luv <3</p>
+	<form id="refer-a-friend-form" method="POST" action="/chat/refer_friend/">
+	  {% csrf_token %}
+	  <input class="form-control" type="text" name="refer-email" id="refer-a-friend-email" placeholder="Friend's email" /><br>
+	  <button type="submit" value="Send" class="btn btn-primary">REFERRRRRRR</button>
+	</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Report a person modal -->
+<div class="modal fade" id="reportAPersonModal" tabindex="-1" role="dialog" aria-labelledby="reportAPersonModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<h4 class="modal-title" id="myModalLabel">Report a Person</h4>
+      </div>
+      <div class="modal-body">
+	<form id="report-a-person-form" method="POST" action="/chat/report_person/">
+	  {% csrf_token %}
+	  <p>Did someone cause a kerfuffle?  What would you like to say about the following hooligan: <div id="members-to-report"></div></p>
+	  <br>
+	  <textarea rows="4" class="form-control" type="text" name="report-issue-text" id="report-issue-text" placeholder="Tell us what happened :(" ></textarea><br>
+	  <button type="submit" value="Send" class="btn btn-primary">LET US AT 'EM</button>
+	</form>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

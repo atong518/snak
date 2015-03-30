@@ -95,7 +95,7 @@ def login(request):
             auth_login(request, user)
             return redirect("/chat/")
         else:
-            return redirect('/')
+            has_error = "block"
 
     return render(request,
                   'user/login.html',

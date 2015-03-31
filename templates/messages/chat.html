@@ -59,14 +59,17 @@ function getMatchedUserEmails() {
       <li role="presentation"><a class="inbox-message" href="#" 
 				 onclick="populateThread({{ thread.pk }})" 
 				 id="thread-link-{{ thread.pk }}">
+	  <!-- empty conversation -->
 	  {% if thread.members.count == 1 %}myself {% endif %}
+
+	  <!-- print each member's name -->
 	  {% for member in thread.members.all %}
-	  {% ifnotequal member user %}
-	  {{ member.firstname }} {{ member.lastname }}
-	  {% if not forloop.last %} 
-	  , 
-	  {% endif%}
-	  {% endifnotequal %}
+	    {% ifnotequal member user %} <!-- don't print your own name though! -->
+    	      {% if not forloop.first%} <!-- print a comma before each each name except the last one -->
+	        , 
+	      {% endif%}
+	      {{ member.firstname }} {{ member.lastname }}
+	    {% endifnotequal %}
 	  {% endfor %}
       </a></li>
     {% endfor %}
@@ -91,17 +94,21 @@ function getMatchedUserEmails() {
 	  {% endif %}
 	  {% if thread.members.all.count == 2 %}
 	  <h3 id="list-of-members-{{ thread.pk }}">
-	    {{ thread.members.last.firstname }} {{ thread.members.last.lastname }}
+	    {% for member in thread.members.all %}
+	      {% ifnotequal member user %}
+	        {{ member.firstname }} {{ member.lastname }}
+	      {% endifnotequal %}
+	    {% endfor %}
 	  </h3>
 	  {% endif %}
 	  {% if thread.members.all.count > 2 %}
 	  <h5 id="list-of-members-{{ thread.pk }}"><b>Members: </b>
 	    {% for member in thread.members.all %}
 	      {% ifnotequal member user %}
-  	        {{ member.firstname }} {{ member.lastname }}
-  	        {% if not forloop.last %}
+  	        {% if not forloop.first %}
 	          , 
 	        {% endif %}
+  	        {{ member.firstname }} {{ member.lastname }}
 	      {% endifnotequal %}
 	    {% endfor %}
 	  </h5>

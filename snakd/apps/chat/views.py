@@ -126,21 +126,23 @@ def new_thread(request):
 
 def refer_friend(request):
     # Send referral email
-    if request.method == "POST":
+    if request.method == "POST" and request.user.is_authenticated():
         email = request.POST.get("refer-email")
         subject = "Want to know what it's like to go to Dartmouth College?"
+
+        referer_name = request.user.firstname + " " + request.user.lastname
 
         message = "Hi " + request.POST.get("refer-name") + "!\n"
         message += "Are you interested in going to Dartmouth College?  Do you want to find out what it's like to be a student here?\n"
         message += 'At Sagely, we help prospective Dartmouth students like you get an "inside look" into what it\'s like to go to Dartmouth. We help you get personalized answers to your questions by connecting you directly with real Dartmouth students.\n'
-        message += request.user.firstname + " " + request.user.lastname + " thought thought you might be interested in using Sagely and told us to get in touch with you! We Dartmouth students would love nothing more than to share our experiences, so give us a shot and check us out "
+        message += referer_name + " thought thought you might be interested in using Sagely and told us to get in touch with you! We Dartmouth students would love nothing more than to share our experiences, so give us a shot and check us out "
         message += "at www.sagely.io!\n"
         message += "Cheers!\nThe Sagely Team"
 
         html_message = "<h3>Hi " + request.POST.get("refer-name") + "!</h3>"
         html_message += "<p>Are you interested in going to Dartmouth College?  Do you want to find out what it's like to be a student here?</p>"
         html_message += '<p>At Sagely, we help prospective Dartmouth students like you get an "inside look" into what it\'s like to go to Dartmouth. We help you get personalized answers to your questions by connecting you directly with real Dartmouth students.</p>'
-        html_message += '<p>request.user.firstname + " " + request.user.lastname + " thought thought you might be interested in using Sagely and told us to get in touch with you! We Dartmouth students would love nothing more than to share our experiences, so give us a shot and check us out '
+        html_message += "<p>" + referer_name + " thought you might be interested in using Sagely and told us to get in touch with you! We Dartmouth students would love nothing more than to share our experiences, so give us a shot and check us out "
         html_message += '<a href="www.sagely.io">here</a>!'
         html_message += "<p>Cheers!</p><p><b>The Sagely Team</b></p>"
 

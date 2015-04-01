@@ -58,6 +58,10 @@ Then surround all code with
       {% if user.is_authenticated %}
         <li><a href="{% url 'logout' %}">Logout</a></li>      
       {% endif %}
+      {% if user.is_authenticated %}
+      {% else %}
+	<li><a href="{% url 'contactus' %}">Contact Us</a></li>
+      {% endif %}
     </ul>
   </div>
 </div>

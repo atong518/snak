@@ -15,6 +15,17 @@ from snakd.lib.matrix import getMatrix
 from datetime import datetime, timedelta
 import json
 
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response
+from snakd.apps.user.models import ContactForm
+from django.template import RequestContext, Context
+#from django import newforms as forms
+from django import forms
+from django.forms.widgets import *
+from django.core.mail import send_mail, BadHeaderError
+
+
 # Create your views here.
 def splash(request):
     if request.user.is_authenticated():
@@ -79,6 +90,9 @@ def howto(request):
 
 def aboutus(request):
     return render(request, 'user/aboutus.html', {})
+
+def contactus(request):
+    return render(request, 'user/contactus.html', {})
 
 def main(request):
     return render(request, "user/main.html", {})
@@ -231,26 +245,24 @@ def match(request):
 
 
 
+def contactview(request):
+    subject = "Sagely.io Comment"
+    message = request.POST.get('message', '')
+    from_email = settings.EMAIL_HOST_USER
 
+#    if subject and message and from_email:
+     #   try:
+    send_mail(subject, message, from_email, ['katherine.c.lachance.15@dartmouth.edu'])
+    print TEST
+#except BadHeaderError:
+        #    return HttpResponse('Invalid header found.')
+        #return HttpResponseRedirect('/contact/thankyou/')
+#        return HttpResponseRedirect('/')
+       # else:
+       #     return render_to_response('contactus.html', {'form': ContactForm()})
+    
+   #     return render_to_response('contactus.html', {'form': ContactForm()},
+    #                          RequestContext(request))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#def thankyou(request):
+#    return render_to_response('thankyou.html')

@@ -78,6 +78,7 @@ US:AP:Military Pacific|\
 // The order displayed here is the order it appears on the drop down.
 //
 var country = '\
+US:United States|\
 AF:Afghanistan|\
 AL:Albania|\
 DZ:Algeria|\
@@ -313,7 +314,6 @@ UA:Ukraine|\
 AE:United Arab Emirates|\
 UK:United Kingdom|\
 GB:Great Britain|\
-US:United States|\
 UM:United States Minor Outlying Isl|\
 UY:Uruguay|\
 UZ:Uzbekistan|\

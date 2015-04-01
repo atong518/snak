@@ -5,6 +5,10 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
 from datetime import datetime
+#from django import newforms as forms
+from django import forms
+from django.forms.widgets import *
+from django.core.mail import send_mail, BadHeaderError
 
 # Create your models here.
 class GenericUserManager(BaseUserManager):
@@ -197,3 +201,7 @@ class CollegeUser(GenericUser):
 class ProspieUser(GenericUser):
     objects = ProspieUserManager()
 
+
+class ContactForm(forms.Form):
+    topic = forms.CharField()
+    message = forms.CharField(widget=Textarea())

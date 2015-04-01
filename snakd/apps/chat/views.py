@@ -176,3 +176,24 @@ def report_person(request):
         msg.send()
 
     return redirect(chat)
+
+def submit_feedback(request):
+    # Submit feedback
+    if request.method == "POST":
+        issue = request.POST.get("send-feedback-text")
+        subject = "FEEDBACK RECEIVED"
+        message = "Submitted by: " + request.user.firstname + " " + request.user.lastname
+        message += " (email: " + request.user.email + ")\n"
+        message += "\nIssue: " + issue
+        from_email = settings.EMAIL_HOST_USER
+
+        html_message = "<h3>REPORT RECEIVED</h3>"
+        html_message += "<p><b>Submitted by</b>: " + request.user.firstname + " " + request.user.lastname + " (" + request.user.email + ")</p>"
+        html_message += "<p><b>Issue</b>: " + issue
+
+        # TODO: Should we send a copy of the email to the person who reported it as well?
+        msg = EmailMultiAlternatives(subject, message, from_email, {from_email})
+        msg.attach_alternative(html_message, "text/html")
+        msg.send()
+
+    return redirect(chat)

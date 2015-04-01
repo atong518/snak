@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'^new_thread/$', chatviews.new_thread, name="new_thread"),
     url(r'^refer_friend/$', chatviews.refer_friend, name="refer_friend"),
     url(r'^report_person/$', chatviews.report_person, name="report_person"),
+    url(r'^submit_feedback/$', chatviews.submit_feedback, name="submit_feedback"),
 )

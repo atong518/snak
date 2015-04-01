@@ -55,10 +55,10 @@
 	  <form class="form-horizontal">
 	    <div class="form-group">
 	      <div class="btn-group btn-group-justified" data-toggle="buttons">
-		<label class="btn btn-success active col-sm-6" id="btn-signup" style="white-space: normal;">
+		<label class="btn btn-success-splash active col-sm-6" id="btn-signup" style="white-space: normal;">
 		  <input onchange="javascript:toggleDisplayInfo();" type="radio" name="student-type" id="p" autocomplete="off" value="p" checked>Prospective Dartmouth Student
 		</label>
-		<label class="btn btn-success col-sm-6" id="btn-signup" style="white-space: normal;">
+		<label class="btn btn-success-splash col-sm-6" id="btn-signup" style="white-space: normal;">
 		  <input onchange="javascript:toggleDisplayInfo();" type="radio" name="student-type" id="c" autocomplete="off" value="c">Current Dartmouth Student
 		</label>
 	      </div>
@@ -77,14 +77,12 @@
       <div class="row">
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
-	  <a href="{% url 'sign_up' %}"> <div id="btn-signup" class="btn btn-primary btn-large">Sign Up Now</div></a>
+	  <a href="{% url 'sign_up' %}"> <div id="btn-signup" class="btn btn-primary-splash btn-large">Sign Up Now</div></a>
 	  <br>
-	  <div class="centered">Been there, done that? <a href="{% url 'login' %}">Login</a></div>
+	  <h4 class="centered">Been there, done that? <a href="{% url 'login' %}">Login</a></h4>
 	</div>
 	<div class="col-md-4"></div>
       </div>
-      <div class="row buffer-row"></div>
-      <div class="row buffer-row"></div>
       <div class="row buffer-row"></div>
       <div class="row buffer-row"></div>
     </section>
@@ -128,6 +126,7 @@
 	</div>
 	<div class="col-md-3"></div>
       </div>
+      <div class="row buffer-row"></div>
       <div class="row buffer-row"></div>
       <div class="row buffer-row"></div>
       <div class="row buffer-row"></div>

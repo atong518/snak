@@ -5,7 +5,7 @@ import base64
 class Interest(models.Model):
 	name    = models.CharField(max_length = 500, blank = False, default="Test")
 	tooltip = models.CharField(max_length = 500, null = True)
-	weight  = models.IntegerField(default = 0)
+	weight  = models.IntegerField(default = 1)
 	parent  = models.ForeignKey('self', null=True, related_name='children')
 	hidden  = models.BooleanField(default=False)
 	# genders = models.CharField(max_length = 50, null=False, default="gender is a construct")

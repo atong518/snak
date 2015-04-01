@@ -1,7 +1,7 @@
 body {
   background-image: url("../jpg/DHall.jpg");
   background-repeat: repeat-y;
-  background-size: 100% 95%;	
+  background-size: 100% 100%;	
 /*  background: #A6B09D; */
   color: #5F704D; 
   height: 100%;
@@ -61,51 +61,51 @@ img {
   text-align: center;
 }
 
-.btn-success {
+.btn-success-splash {
  background-color: transparent;
  border-color: #DCDCC6;
  border: 2px solid;
 }
 
-.btn-success:hover,
-.btn-success:focus,
-.btn-success:active,
-.btn-success.active {
+.btn-success-splash:hover,
+.btn-success-splash:focus,
+.btn-success-splash:active,
+.btn-success-splash.active {
   color: #DCDCC6;
   background-color: #DCDCC6;
   border-color: #5F704D;
 }
 
-.btn-success:hover,
-.btn-success:focus,
-.btn-success:active,
-.btn-success.hover {
+.btn-success-splash:hover,
+.btn-success-splash:focus,
+.btn-success-splash:active,
+.btn-success-splash.hover {
   color: #DCDCC6;
   background-color: #DCDCC6;;
   border-color: #5F704D;
 }
 
 
-.btn-primary {
+.btn-primary-splash {
   color: #52230C;
   background-color: transparent;
   border-color: #5F704D;
   border: 2px solid;
 }
 
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active {
+.btn-primary-splash:hover,
+.btn-primary-splash:focus,
+.btn-primary-splash:active,
+.btn-primary-splash.active {
   color: #52230C;
   background-color: #52230C;
   border-color: #5F704D;
 }
 
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.hover {
+.btn-primary-splash:hover,
+.btn-primary-splash:focus,
+.btn-primary-splash:active,
+.btn-primary-splash.hover {
   color: #52230C;
   background-color: #52230C;
   border-color: #5F704D;

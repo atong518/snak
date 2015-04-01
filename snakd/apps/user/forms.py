@@ -20,7 +20,7 @@ MAX_MATCH_FREQS = [
     ]
 
 GENDER_CHOICES = [
-    ("gender is a construct", "Prefer not to disclose"),
+    ("gender is a construct", "Gender - prefer not to disclose"),
     ("male", "Male"),
     ("female", "Female"),
 ]
@@ -263,3 +263,7 @@ class ProspieSettingsForm(GenericSettingsForm):
     def __init__(self, *args, **kwargs):
         super(ProspieSettingsForm, self).__init__(*args, **kwargs)
 
+class ContactUsForm(forms.Form):
+    name = forms.CharField()
+    url = forms.URLField()
+    comment = forms.CharField(widget=forms.Textarea)

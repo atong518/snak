@@ -1,0 +1,65 @@
+{% extends "user/base.html" %}
+{% block content %}
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="../../static/user/css/contactus.css">
+<!--
+<script type="text/javascript">
+// logic to hide/show fields for Dartmouth Student vs. 'Prospie' signup
+window.onload = function() {
+  document.getElementById('contactus_form').style.display = '';
+}
+</script>
+
+<form class="form-horizontal" data-toggle="validator" role="form" id="contactus_form" method="post" action=".">
+  {% csrf_token %}
+  {% for field in contactus_form %}
+  <div class="form-group">
+    <div class="col-sm-12">
+      {{ field }}
+      <div class="help-block with-errors"></div>
+    </div>
+  </div>
+  {% endfor %}
+  <div class = "signup-submit-holder">
+    <input type="submit" class="btn btn-primary" value="Submit" name="contact_us">
+  </div>
+</form>
+-->
+<div class="row buffer-row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <hr class="snak-divider">
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <div id="contact_wrap">
+      <div id="contact" class="clearfix">
+	<div id="c_form">
+	  <br /><br />
+	  {% csrf_token %}
+	  <form name="theform" action="." method="post" id="theform">
+            <div id="message">
+              <textarea name="message" rows="12" cols="85"></textarea>
+            </div><!-- end message -->
+	    <div class="row buffer-row"></div>
+	    <div class="contact-submit-holder">
+              <input type="submit" class="btn btn-primary center-block" value="Submit" name="contact_us">
+	    </div>
+	</div>
+            <input class="hidden" type="hidden" name="topic" value="Home : Contact Form Submission" id="subject" />
+	  </form>
+	  
+	</div><!-- end c_form -->
+      </div><!-- end contact -->
+      
+    </div><!-- end contact_wrap -->
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
+{% endblock %}

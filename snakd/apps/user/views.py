@@ -164,7 +164,6 @@ def edit(request):
 # TODO: LINK TO THE CHAT PAGE
 def _send_match_notification(user, match):
     try:
-        import pdb; pdb.set_trace()
         if isinstance(user, CollegeUser):
             subject = "Meet your Sage(ly)!"
         else:

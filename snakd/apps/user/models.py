@@ -154,7 +154,7 @@ class GenericUser(AbstractBaseUser):
         }
 
     def introText(self):
-        intro = "Say hello to " + self.firstname + " " + self.lastname + "!\n"
+        intro = "Say hello to " + self.firstname + " " + self.lastname + "!<br>"
         intro += self.getInterestString()
         return intro
 
@@ -195,7 +195,7 @@ class CollegeUser(GenericUser):
     def introText(self):
         intro = super(CollegeUser, self).introText()
         if self.bio:
-            intro += self.bio + "\n"
+            intro += "<br>" + self.bio + "<br>"
         return intro
 
 class ProspieUser(GenericUser):

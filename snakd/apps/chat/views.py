@@ -148,8 +148,6 @@ def refer_friend(request):
 
         from_email = settings.EMAIL_HOST_USER
         
-        # TODO: add in the correct sagely.io url once it is working
-
         msg = EmailMultiAlternatives(subject, message, from_email, {email})
         msg.attach_alternative(html_message, "text/html")
         msg.send()
@@ -167,8 +165,12 @@ def report_person(request):
         message += "\nIssue: " + issue
         from_email = settings.EMAIL_HOST_USER
 
-        html_message = message
+        html_message = "<h3>REPORT RECEIVED</h3>"
+        html_message += "<p><b>Reported by</b>: " + request.user.firstname + " " + request.user.lastname + " (" + request.user.email + ")</p>"
+        html_message += "<p><b>Reported on</b>: " + request.POST.get("reported-name") + "</p>"
+        html_message += "<p><b>Issue</b>: " + issue
 
+        # TODO: Should we send a copy of the email to the person who reported it as well?
         msg = EmailMultiAlternatives(subject, message, from_email, {from_email})
         msg.attach_alternative(html_message, "text/html")
         msg.send()

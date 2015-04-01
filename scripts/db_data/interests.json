@@ -226,7 +226,6 @@
 					},
 					{
 						"name": "A cappella",
-						"tooltip": "",
 					},
 					{
 						"name": "Choir",
@@ -247,7 +246,6 @@
 					},
 					{
 						"name": "Islam",
-						"tooltip": "",
 					},
 					{
 						"name": "Hinduism",
@@ -255,7 +253,6 @@
 					},
 					{
 						"name": "Other Religious Groups",
-						"tooltip": "",
 					},
 					{
 						"name": "Asian Culture",
@@ -288,7 +285,6 @@
 				"children": [
 					{
 						"name": "Political Organizations",
-						"tooltip": "",
 					},
 					{
 						"name": "International Issues Programs",
@@ -342,15 +338,12 @@
 				"children": [
 					{
 						"name": "Fraternties",
-						"tooltip": "",
 					},
 					{
 						"name": "Sororities",
-						"tooltip": "",
 					},
 					{
 						"name": "Co-eds",
-						"tooltip": "",
 					}
 				]
 			},
@@ -394,7 +387,6 @@
 			},
 			{
 				"name": "Student Employment",
-				"tooltip": "",
 				"children": [
 					{
 						"name": "Work Study",
@@ -409,7 +401,6 @@
 				"children": [
 					{
 						"name": "Intramural Sports",
-						"tooltip": "",
 					},
 					{
 						"name": "Outdoors-Related",
@@ -434,7 +425,6 @@
 					},
 					{
 						"name": "Student Government",
-						"tooltip": "",
 					},
 					{
 						"name": "Emergency Medical Services",
@@ -496,7 +486,7 @@
 					},
 					{
 						"name": "Ice Hockey",
-						"gender": "",
+						"gender": "male",
 					},
 					{
 						"name": "Lacrosse",

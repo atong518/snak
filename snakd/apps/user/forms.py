@@ -20,7 +20,7 @@ MAX_MATCH_FREQS = [
     ]
 
 GENDER_CHOICES = [
-    ("gender is a construct", "Prefer not to disclose"),
+    ("gender is a construct", "Gender - prefer not to disclose"),
     ("male", "Male"),
     ("female", "Female"),
 ]

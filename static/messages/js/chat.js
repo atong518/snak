@@ -79,7 +79,7 @@ $(document).ready(function(){
 
     deferred.success(function (response) {
       if(response.intro){
-        $("#modal-intro").text(response.intro)
+        $("#modal-intro")[0].innerHTML = response.intro
         $("#new-thread-form").attr('otherid', response.newmatch.id)    
         $('#newMatchModal').modal('show');
       } else {

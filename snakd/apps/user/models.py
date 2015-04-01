@@ -191,7 +191,7 @@ class CollegeUser(GenericUser):
     def introText(self):
         intro = super(CollegeUser, self).introText()
         if self.bio:
-            intro += "<br>" + self.bio + "<br>"
+            intro += "<br>Here's a short bio about " + self.firstname + ": " + self.bio + "<br>"
         return intro
 
 class ProspieUser(GenericUser):

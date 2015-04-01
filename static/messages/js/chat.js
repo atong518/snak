@@ -366,7 +366,6 @@ function getDropdownMembersOfThread() {
     }
     
     var members = $("#thread-link-" + selectedThreadId).html().split(",");
-    members.pop(); // get rid of blank entry at the end
 
     var result;
     if (members.length == 1) { 

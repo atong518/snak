@@ -59,13 +59,11 @@ function getMatchedUserEmails() {
       <li role="presentation"><a class="inbox-message" href="#" 
 				 onclick="populateThread({{ thread.pk }})" 
 				 id="thread-link-{{ thread.pk }}">
-	  <!-- empty conversation -->
 	  {% if thread.members.count == 1 %}myself {% endif %}
 
-	  <!-- print each member's name -->
 	  {% for member in thread.members.all %}
-	    {% ifnotequal member user %} <!-- don't print your own name though! -->
-    	      {% if not forloop.first%} <!-- print a comma before each each name except the last one -->
+	    {% ifnotequal member user %}
+    	      {% if not forloop.first%}
 	        , 
 	      {% endif%}
 	      {{ member.firstname }} {{ member.lastname }}

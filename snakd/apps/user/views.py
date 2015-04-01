@@ -31,7 +31,7 @@ def _specify_class(user):
 
 def _send_mail(email, activation_code):
     # Email shenanigans
-    subject = "SnakDartmouth Email Verification"
+    subject = "Sagely Email Verification"
     message = "Welcome to SnakDartmouth, we very much appreciate your signing up!\n"
     from_email = settings.EMAIL_HOST_USER
 
@@ -161,17 +161,30 @@ def edit(request):
     except:
         return redirect('/')
 
-def _send_match_notification(email):
-    # Email shenanigans
-    subject = "SnakDartmouth Match!"
-    message = "You've got a match on SnakD!\n"
-    from_email = settings.EMAIL_HOST_USER
+# TODO: LINK TO THE CHAT PAGE
+def _send_match_notification(user, match):
+    try:
+        import pdb; pdb.set_trace()
+        if isinstance(user, CollegeUser):
+            subject = "Meet your Sage(ly)!"
+        else:
+            subject = "Ready to give Sagely advice?"
+        message = "Hi " + match.firstname + ",<br><br>"
+        message += "Great news, you got matched with " + user.firstname + "!<br><br>"
+        if match.interests.all():
+            message += "They're interested in the following:<br>"
+            for interest in match.interests.all():
+                message += "   - " + interest.name + "<br>"
+            message += "<br>"
+        message += "Head here to respond, sagely.io, " + user.firstname + " is waiting.<br><br>"
+        message += "The Sagely Team"
+        from_email = settings.EMAIL_HOST_USER
+        msg = EmailMultiAlternatives(subject, message, from_email, {match.email})
+        msg.attach_alternative(message, "text/html")
+        msg.send()
+    except:
+        pass
 
-    url = "http://0.0.0.0:5000/chat/"
-    txt_message = message + "Click here to respond: " + url
-    msg = EmailMultiAlternatives(subject, txt_message, from_email, {email})
-    msg.attach_alternative(message, "text/html")
-    msg.send()
 
 def match(request):
     try:
@@ -191,7 +204,7 @@ def match(request):
             matrix = getMatrix()
             best = bestmatch(matrix, user, opplist)
             user.matches.add(best)
-            _send_match_notification(best.email)
+            _send_match_notification(user, best)
             if not c_user:
                 c_user = best
             c_user.next_match = (

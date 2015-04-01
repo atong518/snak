@@ -10,12 +10,12 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_APP_ROOT = os.path.abspath(BASE_DIR)
 PROJECT_ROOT = os.path.abspath(os.path.dirname(PROJECT_APP_ROOT))
 PUBLIC_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, 'public'))
 
-# STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = 'staticfiles'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -104,6 +104,7 @@ import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.config(default='postgres://nznobbvumguuzd:6m8WRiKTl_Ze3d9mOPhaSuZ6Vy@ec2-50-16-190-77.compute-1.amazonaws.com:5432/dabedq5i48j024')
+    # 'default': dj_database_url.config()
 }
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
@@ -114,8 +115,10 @@ ALLOWED_HOSTS = ['*']
 
 
 # Static files (CSS, JavaScript, Images)
-STATICFILES_DIRS = [os.path.join(PROJECT_APP_ROOT, 'static')]
-
+# STATICFILES_DIRS = [os.path.join(PROJECT_APP_ROOT, 'static')]
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 # template asset configuration
 TEMPLATE_DIRS = [os.path.join(PROJECT_APP_ROOT, 'templates')]
 

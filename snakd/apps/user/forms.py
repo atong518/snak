@@ -263,3 +263,7 @@ class ProspieSettingsForm(GenericSettingsForm):
     def __init__(self, *args, **kwargs):
         super(ProspieSettingsForm, self).__init__(*args, **kwargs)
 
+class ContactUsForm(forms.Form):
+    name = forms.CharField()
+    url = forms.URLField()
+    comment = forms.CharField(widget=forms.Textarea)

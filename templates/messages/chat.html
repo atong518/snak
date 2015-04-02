@@ -34,6 +34,17 @@ function getMatchedUserEmails() {
 {% endblock %}
 
 {% block content %}
+<div class="row col-md-offset-2 col-md-8" id="chatroom-messages-row">
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-success alert-dismissible fade in" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+    <strong>Nudge alert!</strong> {{ message }}
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
+
 <div class="row" style="height:100%; padding: 10px;" id="chat-room">
   <!--left navbar-->
   <div class="col-md-2 col-md-offset-2 well" id="inbox">    
@@ -121,7 +132,7 @@ function getMatchedUserEmails() {
 	  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="plusmenu">
 	    <li><a data-toggle="modal" data-target="#addPersonToThread">Add a Person</a></li>
 	    <li><a data-toggle="modal" data-target="#reportAPersonModal">Report Conversation</a></li>
-	    <li><a href="#">Nudge Person</a></li>
+	    <li><a data-toggle="modal" data-target="#nudgeAPersonModal">Nudge Person</a></li>
 	  </ul>
 	</div>
     </div>
@@ -171,8 +182,9 @@ function getMatchedUserEmails() {
         <form id="add-person-to-thread-form" method="POST">
 	  {% csrf_token %}
 	  <div id="scrollable-dropdown-menu">
-	    <input class="form-control" type="text" id="add-person-to-thread-input" placeholder="Search by email..." autocomplete="off"/>
+	    <input class="form-control" type="text" id="add-person-to-thread-input" placeholder="Search by name..." autocomplete="off"/>
 	  </div>
+    <br>
     <button type="submit" value="Send" class="btn btn-primary">Do ittttt</button>
 	</form>
       </div>
@@ -230,7 +242,7 @@ function getMatchedUserEmails() {
 	  3. To be a dope human and spread the Sagely luv <3</p>
 	<form id="refer-a-friend-form" method="POST" action="/chat/refer_friend/">
 	  {% csrf_token %}
-	  <input class="form-control" type="text" name="refer-name" id="refer-a-friend-name" placeholder="Friend's Name" /><br>
+	  <input class="form-control" id="refer_text1" type="text" name="refer-name" id="refer-a-friend-name" placeholder="Friend's Name"/>
 	  <input class="form-control" type="text" name="refer-email" id="refer-a-friend-email" placeholder="Friend's email" /><br>
 	  <button type="submit" value="Send" class="btn btn-primary">REFERRRRRRR</button>
 	</form>
@@ -260,21 +272,42 @@ function getMatchedUserEmails() {
   </div>
 </div>
 
+<!-- Submit Feedback modal -->
 <div class="modal fade" id="sendFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="sendFeedbackModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <h4 class="modal-title" id="myModalLabel">Submit Feedback</h4>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<h4 class="modal-title" id="myModalLabel">Submit Feedback</h4>
       </div>
       <div class="modal-body">
-  <form id="report-a-person-form" method="POST" action="/chat/submit_feedback/">
-    {% csrf_token %}
-    <p>Tell us what's on your mind!</p>
-    <br>
-    <textarea rows="4" class="form-control" type="text" name="send-feedback-text" id="send-feedback-text" placeholder="We will totally read this" ></textarea><br>
-    <button type="submit" value="Send" class="btn btn-primary">Submit</button>
-  </form>
+	<form id="report-a-person-form" method="POST" action="/chat/submit_feedback/">
+	  {% csrf_token %}
+	  <p>Tell us what's on your mind!</p>
+	  <br>
+	  <textarea rows="4" class="form-control" type="text" name="send-feedback-text" id="send-feedback-text" placeholder="Thank you!" ></textarea><br>
+	  <button type="submit" value="Send" class="btn btn-primary">Submit</button>
+	</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Nudge a person modal -->
+<div class="modal fade" id="nudgeAPersonModal" tabindex="-1" role="dialog" aria-labelledby="nudgeAPersonModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<h4 class="modal-title" id="myModalLabel">Nudge a Person</h4>
+      </div>
+      <div class="modal-body">
+	<form id="nudge-a-person-form" method="POST" action=".">
+	  {% csrf_token %}
+	  <p>Someone a little slow on the response?  Would you like us to give the following a little nudge for you? <div id="members-to-nudge"></div></p>
+	  <br>
+	  <button type="submit" value="Send" class="btn btn-primary" id="nudge-a-person-button">Wink wink, nudge nudge :)</button>
+	</form>
       </div>
     </div>
   </div>

@@ -147,6 +147,16 @@ $(document).ready(function(){
 	  return false;
       });
 
+  // report person members population
+  $("#reportAPersonModal").on('shown.bs.modal', function() {
+	  getDropdownMembersOfThread("#members-to-report");
+      });
+
+  // nudge person members population
+  $("#nudgeAPersonModal").on('shown.bs.modal', function() {
+	  getDropdownMembersOfThread("#members-to-nudge");
+      });
+
   // scroll down!
   scrollDown();
 
@@ -190,7 +200,7 @@ $(document).ready(function(){
 	      minLength: 1
 	      },
       {
-	  name: 'emailes',
+	  name: 'emails',
 	      displayKey: 'value',
 	      source: substringMatcher(emails)
 	      });
@@ -235,7 +245,7 @@ function longPollForThread(threadId) {
     if (typeof SET_INTERVAL != 'undefined')
 	clearInterval(SET_INTERVAL);
 
-    SET_INTERVAL = setInterval(_poll, 500, threadId);
+    // SET_INTERVAL = setInterval(_poll, 500, threadId);
     scrollDown();
 }
 
@@ -349,6 +359,33 @@ function _addedToThread(addedUserName) {
     // clear out solo chat message
     $("#solo-chat").html("");
     
+}
+
+function getDropdownMembersOfThread(divName) {
+    var selectedThreadId = $(".active-link").attr("id");
+    if (typeof selectedThreadId == "undefiend") {
+	alert("Please select a thread to report someone from!");
+    }
+    else {
+	selectedThreadId =selectedThreadId.split("-")[2];
+    }
+    
+    var members = $("#thread-link-" + selectedThreadId).html().split(",");
+
+    var result;
+    if (members.length == 1) { 
+        result = '<input type="hidden"  name="reported-name" value="' + members[0].trim() + '">';
+	$(divName).html(result + members[0].trim());
+	return;
+    }
+    result = '<select class="form-control" name="reported-name">';
+    for (var index=0; index < members.length; index++) {
+	result += '<option value="' + members[index].trim() + '">' + members[index].trim() + "</option>";
+    }
+    result += "</select>";
+    result += '<input type="hidden"  name="selected-thread-id" value="' + selectedThreadId + '">'
+
+    $(divName).html(result);
 }
 
 function addToThread() {

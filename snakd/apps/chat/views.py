@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.http import HttpResponse
 from django.conf import settings
 from django.core.mail import send_mail, EmailMultiAlternatives
+from django.contrib import messages
 from snakd.apps.user.models import GenericUser, ProspieUser, CollegeUser
 from snakd.apps.chat.models import Thread, Message
 from snakd.apps.user.models import GenericUser
@@ -22,6 +23,23 @@ def chat(request):
     
     # get all users matched with the logged-in user
     matched_users = GenericUser.objects.all() #CHANGE THIS ONCE WE HAVE A WAY TO GET MATCHED USERS
+
+
+    # Nudge person logic
+    if request.method == "POST" and request.POST.get("reported-name") and request.POST.get("selected-thread-id"):
+        # get user email
+        threadId = request.POST.get("selected-thread-id")
+        thread = Thread.objects.get(pk=threadId)
+        firstname = request.POST.get("reported-name").split(" ")[0]
+        lastname = request.POST.get("reported-name").split(" ")[1]
+        nudgedUser = thread.members.filter(firstname=firstname, lastname=lastname).first()
+
+        # if last message sent by nudgedUser in this thread (or if they haven't sent a message
+        # in this thread) is > 5 days ago, and nudgedUser last_nudged is > 5 days ago, send 
+        # email to nudgedUser.email
+
+        message_text = request.POST.get("reported-name") + " email=" + nudgedUser.email + " has been nudged!"
+        messages.add_message(request, messages.INFO, message_text)
 
     return render(request,
                   'messages/chat.html',

@@ -18,7 +18,7 @@ import json
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
-from snakd.apps.user.models import ContactForm
+from snakd.apps.user.forms import ContactUsForm
 from django.template import RequestContext, Context
 #from django import newforms as forms
 from django import forms
@@ -92,7 +92,22 @@ def aboutus(request):
     return render(request, 'user/aboutus.html', {})
 
 def contactus(request):
-    return render(request, 'user/contactus.html', {})
+    if request.method == "POST":
+        contactform = ContactUsForm(request.POST)
+        if  request.POST.get("contactus_button") is not None and contactform.is_valid():
+            # Email shenanigans                                                                                                   
+            subject = "Sagely.io Contact Us Comment"
+            message = contactform.cleaned_data['contact_comments']
+            email = settings.EMAIL_HOST_USER
+            msg = EmailMultiAlternatives(subject, message, email, {email})
+            msg.send()
+            return redirect("/thankyou/")
+    else: 
+        contactform = ContactUsForm()
+    return render(request, 'user/contactus.html', {'contactus_form': contactform})
+
+def thankyou(request):
+    return render(request, 'user/thankyou.html', {})
 
 def main(request):
     return render(request, "user/main.html", {})
@@ -242,27 +257,3 @@ def match(request):
     except:
         return HttpResponseRedirect('/')
 
-
-
-
-def contactview(request):
-    subject = "Sagely.io Comment"
-    message = request.POST.get('message', '')
-    from_email = settings.EMAIL_HOST_USER
-
-#    if subject and message and from_email:
-     #   try:
-    send_mail(subject, message, from_email, ['katherine.c.lachance.15@dartmouth.edu'])
-    print TEST
-#except BadHeaderError:
-        #    return HttpResponse('Invalid header found.')
-        #return HttpResponseRedirect('/contact/thankyou/')
-#        return HttpResponseRedirect('/')
-       # else:
-       #     return render_to_response('contactus.html', {'form': ContactForm()})
-    
-   #     return render_to_response('contactus.html', {'form': ContactForm()},
-    #                          RequestContext(request))
-
-#def thankyou(request):
-#    return render_to_response('thankyou.html')

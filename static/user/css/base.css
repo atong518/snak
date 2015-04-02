@@ -49,7 +49,7 @@ img {
 }
 
 .snak-divider {
-  border-top-color: rgb(82, 35, 12);
+  border-top-color: rgb(110, 47, 16);
   border-top-width: 3px;
 }
 
@@ -81,13 +81,13 @@ img {
 .btn-success-splash:active,
 .btn-success-splash.hover {
   color: #DCDCC6;
-  background-color: #DCDCC6;;
+  background-color: #DCDCC6;
   border-color: #5F704D;
 }
 
 
 .btn-primary-splash {
-  color: #52230C;
+  color: #6E2F10;
   background-color: transparent;
   border-color: #5F704D;
   border: 2px solid;
@@ -97,8 +97,8 @@ img {
 .btn-primary-splash:focus,
 .btn-primary-splash:active,
 .btn-primary-splash.active {
-  color: #52230C;
-  background-color: #52230C;
+  color: #6E2F10;
+  background-color: #6E2F10;
   border-color: #5F704D;
 }
 

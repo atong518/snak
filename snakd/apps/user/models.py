@@ -101,6 +101,7 @@ class GenericUser(AbstractBaseUser):
     is_active = models.NullBooleanField(default=False)
     interests = models.ManyToManyField(Interest, null=True, related_name='user_set')
     gender = models.CharField(max_length=50, null=False, default="gender is a construct")
+    contact_comments = models.CharField(max_length=1000)
 
     objects = GenericUserManager()
     
@@ -120,10 +121,15 @@ class GenericUser(AbstractBaseUser):
         interestlist = self.getInterestList()
         lst = ""
         if interestlist:
-            lst += interestlist[0]
+            lst += "<br>"
+            if self.gender == "female":
+                lst += "Her"
+            else:
+                lst += "His"
+            lst += " interests include: " + interestlist[0].name
             for interest in interestlist[1:len(interestlist)-1]:
-                lst += ", " + interest
-            lst += " and " + interestlist[len(interestlist)-1] + "\n"
+                lst += ", " + interest.name
+            lst += " and " + interestlist[len(interestlist)-1].name + "<br>"
         return lst
 
     def editableFields(self):
@@ -202,6 +208,3 @@ class ProspieUser(GenericUser):
     objects = ProspieUserManager()
 
 
-class ContactForm(forms.Form):
-    topic = forms.CharField()
-    message = forms.CharField(widget=Textarea())

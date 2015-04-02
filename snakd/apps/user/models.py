@@ -120,10 +120,15 @@ class GenericUser(AbstractBaseUser):
         interestlist = self.getInterestList()
         lst = ""
         if interestlist:
-            lst += interestlist[0]
+            lst += "<br>"
+            if self.gender == "female":
+                lst += "Her"
+            else:
+                lst += "His"
+            lst += " interests include: " + interestlist[0].name
             for interest in interestlist[1:len(interestlist)-1]:
-                lst += ", " + interest
-            lst += " and " + interestlist[len(interestlist)-1] + "\n"
+                lst += ", " + interest.name
+            lst += " and " + interestlist[len(interestlist)-1].name + "<br>"
         return lst
 
     def editableFields(self):

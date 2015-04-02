@@ -112,6 +112,14 @@ textarea {
     overflow-y: scroll;
 }
 
+#refer_text1 {
+  margin-bottom: 10px;
+}
+
+#add-person-to-thread-input {
+  width: 300px;
+}
+
 #btn-send-message {
   max-height: 100px;
 }

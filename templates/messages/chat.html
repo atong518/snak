@@ -182,8 +182,9 @@ function getMatchedUserEmails() {
         <form id="add-person-to-thread-form" method="POST">
 	  {% csrf_token %}
 	  <div id="scrollable-dropdown-menu">
-	    <input class="form-control" type="text" id="add-person-to-thread-input" placeholder="Search by email..." autocomplete="off"/>
+	    <input class="form-control" type="text" id="add-person-to-thread-input" placeholder="Search by name..." autocomplete="off"/>
 	  </div>
+    <br>
     <button type="submit" value="Send" class="btn btn-primary">Do ittttt</button>
 	</form>
       </div>
@@ -241,7 +242,7 @@ function getMatchedUserEmails() {
 	  3. To be a dope human and spread the Sagely luv <3</p>
 	<form id="refer-a-friend-form" method="POST" action="/chat/refer_friend/">
 	  {% csrf_token %}
-	  <input class="form-control" type="text" name="refer-name" id="refer-a-friend-name" placeholder="Friend's Name" /><br>
+	  <input class="form-control" id="refer_text1" type="text" name="refer-name" id="refer-a-friend-name" placeholder="Friend's Name"/>
 	  <input class="form-control" type="text" name="refer-email" id="refer-a-friend-email" placeholder="Friend's email" /><br>
 	  <button type="submit" value="Send" class="btn btn-primary">REFERRRRRRR</button>
 	</form>
@@ -271,7 +272,7 @@ function getMatchedUserEmails() {
   </div>
 </div>
 
-
+<!-- Submit Feedback modal -->
 <div class="modal fade" id="sendFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="sendFeedbackModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -284,7 +285,7 @@ function getMatchedUserEmails() {
 	  {% csrf_token %}
 	  <p>Tell us what's on your mind!</p>
 	  <br>
-	  <textarea rows="4" class="form-control" type="text" name="send-feedback-text" id="send-feedback-text" placeholder="We will totally read this" ></textarea><br>
+	  <textarea rows="4" class="form-control" type="text" name="send-feedback-text" id="send-feedback-text" placeholder="Thank you!" ></textarea><br>
 	  <button type="submit" value="Send" class="btn btn-primary">Submit</button>
 	</form>
       </div>

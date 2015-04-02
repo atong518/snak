@@ -202,7 +202,7 @@ def submit_feedback(request):
         subject = "FEEDBACK RECEIVED"
         message = "Submitted by: " + request.user.firstname + " " + request.user.lastname
         message += " (email: " + request.user.email + ")\n"
-        message += "\nIssue: " + issue
+        message += "\nFeedback: " + issue
         from_email = settings.EMAIL_HOST_USER
 
         html_message = "<h3>REPORT RECEIVED</h3>"

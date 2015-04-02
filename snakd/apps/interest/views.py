@@ -33,15 +33,14 @@ def show(request):
 
 
 def update(request):
-	responsedict = {}
-	responsedict["i_list"] = GetInterestTree()
-	interests = request.POST.getlist('list[]')
+	import pdb; pdb.set_trace();
+	interests = request.POST.get("interest_list");
 	user = getUser(request)
 	user.interests.clear()
 	for interest in interests:
 		intr = Interest.objects.filter(id=interest)
 		user.interests.add(intr[0])
-	intlist = makeInterestList(user.interests.all())
-	responsedict["user_interests"] = json.dumps(intlist)
-	return render(request, 'interests/show.html', responsedict)
+
+	user.save()
+	return redirect(show)
 

@@ -18,7 +18,7 @@ import json
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
-from snakd.apps.user.forms import ContactUsForm
+#from snakd.apps.user.forms import ContactUsForm
 from django.template import RequestContext, Context
 #from django import newforms as forms
 from django import forms
@@ -91,20 +91,20 @@ def howto(request):
 def aboutus(request):
     return render(request, 'user/aboutus.html', {})
 
-def contactus(request):
-    if request.method == "POST":
-        contactform = ContactUsForm(request.POST)
-        if  request.POST.get("contactus_button") is not None and contactform.is_valid():
-            # Email shenanigans                                                                                                   
-            subject = "Sagely.io Contact Us Comment"
-            message = contactform.cleaned_data['contact_comments']
-            email = settings.EMAIL_HOST_USER
-            msg = EmailMultiAlternatives(subject, message, email, {email})
-            msg.send()
-            return redirect("/thankyou/")
-    else: 
-        contactform = ContactUsForm()
-    return render(request, 'user/contactus.html', {'contactus_form': contactform})
+#def contactus(request):
+#    if request.method == "POST":
+#        contactform = ContactUsForm(request.POST)
+#        if  request.POST.get("contactus_button") is not None and contactform.is_valid():
+#            # Email shenanigans                                                                                                   
+#            subject = "Sagely.io Contact Us Comment"
+#            message = contactform.cleaned_data['contact_comments']
+#            email = settings.EMAIL_HOST_USER
+#            msg = EmailMultiAlternatives(subject, message, email, {email})
+#            msg.send()
+#            return redirect("/thankyou/")
+#    else: 
+#        contactform = ContactUsForm()
+#    return render(request, 'user/contactus.html', {'contactus_form': contactform})
 
 def thankyou(request):
     return render(request, 'user/thankyou.html', {})

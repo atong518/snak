@@ -44,12 +44,6 @@ function getMainCategories() {
     </ul>
 
     <div class="bottombar"></div>
-    
-    <form id="sendinterests" method="POST" action="/interest/update/">
-      {% csrf_token %}
-      <input type="hidden" name="interest_list" id="to_send_interest_list">
-      <button class="btn btn-success" type="submit">Submit</button>
-    </form>
   </div>
   
   <div class="rightbar col-sm-4">
@@ -59,6 +53,12 @@ function getMainCategories() {
     <ul class="panel-body" id="interest-name-list"></ul>
   	<button class="btn btn-success navbutton previousbutton" type="button" disabled>Previous</button>
   	<button class="btn btn-success navbutton nextbutton" type="button" href="#{{i_list.children.0.id}}_jump">Next</button>
+	<form id="sendinterests" method="POST" action="/interest/update/">
+	  {% csrf_token %}
+	  <input type="hidden" name="interest_list" id="to_send_interest_list" value="empty">
+	  <button class="btn btn-success" type="submit">Submit</button>
+	</form>
+	
   </div>
   
 </div>

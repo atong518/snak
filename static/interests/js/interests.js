@@ -1,7 +1,11 @@
 var interestlist = [];
 
 function getInterestList() {
-    return interestlist;
+    var str_ids = "";
+    interestlist.forEach(function(interest) {
+	    str_ids += interest.id + ", ";
+	});
+    return str_ids.substr(0, str_ids.length-2);;
 }
     
 UpdateInterestList = function() {
@@ -192,7 +196,7 @@ $("#sendinterests").click(function(event) {
 	deferred.error(function (response) {
 		debugger
 		});*/
-	$("#to_send_interest_list").value(getInterestList());
+	$("#to_send_interest_list").val(getInterestList());
 	
     });
     

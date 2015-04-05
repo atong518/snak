@@ -18,7 +18,10 @@ class Interest(models.Model):
 			return []
 		return [self.parent]
 
- 	def __str__(self):
+	def __str__(self):
+		return self.name
+
+ 	def get_kwargs(self):
  		return {
  			"name": self.name,
  			"tooltip": self.tooltip,

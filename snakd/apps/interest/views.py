@@ -20,7 +20,7 @@ def getUser(request):
 def makeInterestList(queryset):
 	intlist = []
 	for interest in queryset:
-		intlist.append(interest.__str__())
+		intlist.append(interest.get_kwargs())
 	return intlist
 
 def show(request):
@@ -33,8 +33,7 @@ def show(request):
 
 
 def update(request):
-	import pdb; pdb.set_trace();
-	interests = request.POST.get("interest_list");
+	interests = request.POST.get("interest_list").split(",");
 	user = getUser(request)
 	user.interests.clear()
 	for interest in interests:

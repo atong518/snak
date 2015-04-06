@@ -25,23 +25,24 @@ function getMainCategories() {
 {% load customtags %}
 <link rel="stylesheet" type="text/css" href="{% static 'interests/css/show.css' %}" />
 
-<div class="row">
-  <div class="lefthalf col-sm-6 col-sm-offset-1">
-    <h1 class="topbar"></h1>
-
-    <ul class="midbar">
-	    {% for interest in i_list.children %} 
-				<button class="round-button jumper {{interest.id}}_btn" href="#{{interest.id}}_jump" title="{{interest.name}}"></button><br><br>
-	    	<!-- <a class="jumper" href="#{{interest.id}}_jump">{{interest.name}}</a> <br> -->
-	    {% endfor %}
-    </ul>
-
-    <ul class="panel panel-default panel-body">
+<div class="row" style="padding: 3%;">
+  <div class="col-sm-6 lefthalf">
+    <ul class="well interests-well">
       {% for interest in i_list.children %} 
 		    <div id="{{interest.id}}_jump" name="{{interest.name}}" style="hidden: true"></div>
       	{%include "interests/interest_template.html" %}
       {% endfor %}
     </ul>
+    <ul class="midbar">
+  	<a class="chevron previousbutton"><span class="glyphicon glyphicon-chevron-up"></span></a><br>
+  	<a class="chevron nextbutton" ><span class="glyphicon glyphicon-chevron-down"></span></a>
+
+<!--	  href="#{{i_list.children.0.id}}_jump"  { % for interest in i_list.children %} 
+				<button class="round-button jumper {{interest.id}}_btn" href="#{{interest.id}}_jump" title="{{interest.name}}"></button><br><br>
+	    	<!-- <a class="jumper" href="#{{interest.id}}_jump">{{interest.name}}</a> <br>
+	    { % endfor %}-->
+    </ul>
+
 
     <div class="bottombar"></div>
   </div>
@@ -51,14 +52,12 @@ function getMainCategories() {
       <input type="text" class="form-control" placeholder="Search">
     </div>
     <ul class="panel-body" id="interest-name-list"></ul>
-  	<button class="btn btn-success navbutton previousbutton" type="button" disabled>Previous</button>
-  	<button class="btn btn-success navbutton nextbutton" type="button" href="#{{i_list.children.0.id}}_jump">Next</button>
 	<form id="sendinterests" method="POST" action="/interest/update/">
 	  {% csrf_token %}
 	  <input type="hidden" name="interest_list" id="to_send_interest_list" value="empty">
 	  <button class="btn btn-success" type="submit">Submit</button>
 	</form>
-	
+	<button class="btn btn-primary" type="button"><a href="{% url 'chat' %}">Go to chat!</a></button>
   </div>
   
 </div>

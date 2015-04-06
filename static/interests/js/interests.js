@@ -40,23 +40,91 @@ user_interests.forEach(function(interest) {
 	AddToInterestList(interest)		
 	    });
 
-$(".selectbtn").click(function(element) {
-	jsn = JSON.parse(element.toElement.firstElementChild.textContent)
-	    ids = $.map(interestlist, function(val, index) {return val.id})
-	    if ((x = $.inArray(jsn.id, ids)) != -1) {
-		interestlist[x]["priority"] += 1
-		if (interestlist[x]["priority"] == 3) {
-		    interestlist.splice(x, 1)
-		} else {
-		    interestlist.sort(sort_by('priority', false))
-		}
-	    } else {
-		jsn["priority"] = 1
-		    interestlist.push(jsn)
-		    }
+
+// TODO: THIS FUNCTION EXISTS IN TWO FILES, WE SHOULD PROBS REFACTOR
+// autocomplete for adding more ppl to threads
+var substringMatcher = function(strs_arr) {
+    return function findMatches(q, cb) {
+	var matches, substrRegex;
 	
-	UpdateInterestList()
+	// an array that will be populated with substring matches
+	matches = [];
+	
+	// regex used to determine if a string contains the substring `q`
+	substrRegex = new RegExp(q, 'i');
+	
+	// iterate through the pool of strings and for any string that
+	// contains the substring `q`, add it to the `matches` array
+	$.each(strs_arr, function(i, str) {
+		if (substrRegex.test(str.name)) {
+		    // the typeahead jQuery plugin expects suggestions to a
+		    // JavaScript object, refer to typeahead docs for more info
+		    matches.push({ name: str.name, id: str.id });
+		}
 	    });
+	
+	cb(matches);
+    };
+};
+
+var interests = getIList();
+var interest_names = getIStrings();
+
+$('#interests-searchbar').typeahead(
+				    {
+					hint: true,
+					    highlight: true,
+					    minLength: 1
+					    },
+				    {
+					name: 'interests',
+					    displayKey: 'name',
+					    source: substringMatcher(interests),
+					    templates: {
+					    suggestion: function(data){
+						return '<a class="sel-interest" value="' + data.id + '"> ' + data.name + '</a>';
+					    }
+					    },				 
+					    }).on('typeahead:selected', function(event, element) {
+						    interestSelectedFromSearch(element);
+						});
+
+
+function interestSelectedFromSearch(element) {
+    id = element.id;
+    ids = $.map(interestlist, function(val, index) {return val.id});
+    if ((x = $.inArray(id, ids)) != -1) {
+	interestlist[x]["priority"] += 1;
+	if (interestlist[x]["priority"] == 3) {
+	    interestlist.splice(x, 1);
+	} else {
+	    interestlist.sort(sort_by('priority', false));
+	}
+    } else {
+	jsn = {id: id, name: element.name, priority: 1};
+	interestlist.push(jsn);
+    }
+    
+    UpdateInterestList();
+}
+
+$(".selectbtn").click(function(element) {
+	jsn = JSON.parse(element.toElement.firstElementChild.textContent);
+	ids = $.map(interestlist, function(val, index) {return val.id});
+	if ((x = $.inArray(jsn.id, ids)) != -1) {
+	    interestlist[x]["priority"] += 1;
+	    if (interestlist[x]["priority"] == 3) {
+		interestlist.splice(x, 1);
+	    } else {
+		interestlist.sort(sort_by('priority', false));
+	    }
+	} else {
+	    jsn["priority"] = 1;
+	    interestlist.push(jsn);
+	}
+	
+	UpdateInterestList();
+    });
     
     
 // Section management functions

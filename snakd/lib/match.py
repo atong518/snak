@@ -16,20 +16,12 @@ def match(matrix, user1, user2):
     for int1 in ints1:
         for int2 in ints2:
 
-        	# watch out for dividing by 0
-            try:
-                score += 100 / ((matrix.getValFromInts(int1, int2) + 3) * int1.getFrequency())
-            except:
-                pass
+            dist = matrix.getValFromInts(int1, int2)
+            score += 100 / math.pow(2, dist) #* int1.getFrequency())
+            # right now, direct match is 4x more points than a sibling match
 
     return score / max(len(ints1), 1)
 
-'''
-		### TO DO ###
-- matrix needs to be built and potentially stored in the database, need to structure
-	it so it can be easily stored and queried
-- take priorities into account when user-interest relation model is rebuilt
-'''
 
 def heapsort(iterable):
     h = []

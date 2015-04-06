@@ -53,14 +53,14 @@ Then surround all code with
 <div class="row">
   <div class="col-md-12" id="footer">
     <ul class="nav nav-pills pull-right">
-      <li><a href="{% url 'chat' %}">Home</a></li>
+      <li><a href="{% url 'splash' %}">Home</a></li>
       <li><a href="{% url 'aboutus' %}">About Us</a></li>
       {% if user.is_authenticated %}
         <li><a href="{% url 'logout' %}">Logout</a></li>      
       {% endif %}
       {% if user.is_authenticated %}
       {% else %}
-	<li><a href="{% url 'contactus' %}">Contact Us</a></li>
+<!--	<li><a href="{ % url 'contactus' %}">Contact Us</a></li -->
       {% endif %}
     </ul>
   </div>

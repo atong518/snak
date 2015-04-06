@@ -18,6 +18,18 @@ class Interest(models.Model):
 			return []
 		return [self.parent]
 
+	def __str__(self):
+		return self.name
+
+ 	def get_kwargs(self):
+ 		return {
+ 			"name": self.name,
+ 			"tooltip": self.tooltip,
+ 			"weight": self.weight,
+ 			"hidden": self.hidden,
+ 			"id": self.id
+ 		}
+
 	# https://docs.djangoproject.com/en/1.7/topics/db/examples/many_to_many/
 	# http://stackoverflow.com/questions/13341173/django-get-objects-from-a-many-to-many-field
 	# def getFrequency(self):
@@ -27,14 +39,6 @@ class Interest(models.Model):
 # class SportsInterest(Interest):
 # 	gender = models.CharField(max_length = 20)
 
-# 	def __str__(self):
-# 		return {
-# 			"name": self.name,
-# 			"tooltip": self.tooltip,
-# 			"weight": self.weight,
-# 			"hidden": self.hidden,
-# 			"id": self.id
-# 		}
 
 class SerializedDataField(models.TextField):
     """Because Django for some reason feels its needed to repeatedly call

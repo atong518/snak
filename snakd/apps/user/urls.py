@@ -19,7 +19,10 @@ urlpatterns = patterns('',
     url(r'^aboutus/$', views.aboutus, name='aboutus'),
 
     # contact us page
-    url(r'^contactus/$', views.contactus, name='contactus'),
+#    url(r'^contactus/$', views.contactus, name='contactus'),
+
+    # thank you page
+    url(r'^thankyou/$', views.thankyou, name='thankyou'),
 
     # login page
     url(r'^login/$', views.login, name='login'),

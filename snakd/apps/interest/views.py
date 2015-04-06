@@ -20,7 +20,7 @@ def getUser(request):
 def makeInterestList(queryset):
 	intlist = []
 	for interest in queryset:
-		intlist.append(interest.__str__())
+		intlist.append(interest.get_kwargs())
 	return intlist
 
 def show(request):
@@ -33,15 +33,13 @@ def show(request):
 
 
 def update(request):
-	responsedict = {}
-	responsedict["i_list"] = GetInterestTree()
-	interests = request.POST.getlist('list[]')
+	interests = request.POST.get("interest_list").split(",");
 	user = getUser(request)
 	user.interests.clear()
 	for interest in interests:
 		intr = Interest.objects.filter(id=interest)
 		user.interests.add(intr[0])
-	intlist = makeInterestList(user.interests.all())
-	responsedict["user_interests"] = json.dumps(intlist)
-	return render(request, 'interests/show.html', responsedict)
+
+	user.save()
+	return redirect(show)
 

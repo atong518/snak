@@ -1,13 +1,29 @@
 {% extends "user/base.html" %}
-
-{% block content %}
+{% load static %}
 {% load staticfiles %}
 {% load customtags %}
 
+{% block extra_js %}
+<script>
+// These functions live here rather than in the js file because 
+// they deal with django variables, which I don't know how to pass
+// to the separate js file :( -ds
+function getCurrentUserInterests() {
+  return {{ user_interests|safe }};
+}
+
+function getMainCategories() {
+  return {{i_list.children|dumpsjs|safe}};
+}
+</script>
+
+<script type="text/javascript" src="{% static 'interests/js/jquery.waypoints.min.js' %}"></script>
+{% endblock %}
 
 
+{% block content %}
+{% load customtags %}
 <link rel="stylesheet" type="text/css" href="{% static 'interests/css/show.css' %}" />
-	<script type="text/javascript" src="{% static 'interests/js/jquery.waypoints.min.js' %}"></script>
 
 <div class="row">
   <div class="lefthalf col-sm-6 col-sm-offset-1">
@@ -28,11 +44,6 @@
     </ul>
 
     <div class="bottombar"></div>
-    
-    <form id="sendinterests" method="POST">
-      {% csrf_token %}
-      <button class="btn btn-success" type="submit">Submit</button>
-    </form>
   </div>
   
   <div class="rightbar col-sm-4">
@@ -42,211 +53,15 @@
     <ul class="panel-body" id="interest-name-list"></ul>
   	<button class="btn btn-success navbutton previousbutton" type="button" disabled>Previous</button>
   	<button class="btn btn-success navbutton nextbutton" type="button" href="#{{i_list.children.0.id}}_jump">Next</button>
+	<form id="sendinterests" method="POST" action="/interest/update/">
+	  {% csrf_token %}
+	  <input type="hidden" name="interest_list" id="to_send_interest_list" value="empty">
+	  <button class="btn btn-success" type="submit">Submit</button>
+	</form>
+	
   </div>
   
 </div>
 
-
-
-<script> 
-	var interestlist = []
-
-	UpdateInterestList = function() {
-		$('#interest-name-list').empty()
-		$.each(interestlist, function(i, val) {
-			$('#interest-name-list').append($('<li/>').text(val.name))
-		});
-	}
-
-	AddToInterestList = function(interest) {
-		interest["priority"] = 1
-		interestlist = interestlist.concat(interest)
-		UpdateInterestList()
-	}
-
-	var sort_by = function(field, reverse, wrapperfunc){
-		// wrapperfunc 
-		var key = wrapperfunc ? 
-		   function(x) {return wrapperfunc(x[field])} : 
-		   function(x) {return x[field]};
-
-		reverse = [-1, 1][+!!reverse];
-
-		return function (a, b) {
-		   return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
-		}
-	}
-
-	user_interests = {{user_interests|safe}}
-
-	user_interests.forEach(function(interest) {
-		AddToInterestList(interest)		
-	})
-
-	$(".selectbtn").click(function(element) {
-		jsn = JSON.parse(element.toElement.firstElementChild.textContent)
-		ids = $.map(interestlist, function(val, index) {return val.id})
-		if ((x = $.inArray(jsn.id, ids)) != -1) {
-			interestlist[x]["priority"] += 1
-			if (interestlist[x]["priority"] == 3) {
-				interestlist.splice(x, 1)
-			} else {
-				interestlist.sort(sort_by('priority', false))
-			}
-		} else {
-			jsn["priority"] = 1
-			interestlist.push(jsn)
-		}
-
-		UpdateInterestList()
-	})
-
-
-  // Section management functions
-  updateTitle = function(newtitle) {
-  	$(".topbar").text(newtitle)
-  }
-
-  updateNext = function(nextid) {
-  	$(".nextbutton").attr('href', '#' + nextid).removeAttr('disabled');
-  }
-
-  updatePrevious = function(nextid) {
-  	$(".previousbutton").attr('href', '#' + nextid).removeAttr('disabled');
-  }
-
-  mainCategories = {{i_list.children|dumpsjs|safe}}
-  titles = []
-  mainCategories.forEach(function(interest) {
-  	$('#' + interest.id + '_jump').waypoint({
-		  handler: function(direction) {
-		  	if (direction=="down") {
-		  		nxt = this.next()
-		  		prv = this
-		  		titles.push(this.element)
-		  	} else {
-		  		nxt = this
-		  		prv = this.previous()
-		  		titles.pop()
-		  	}
-
-	  		if(nxt) {
-	  			updateNext(nxt.element.id)
-	  		} else {
-	  			$(".nextbutton").attr('disabled','disabled')
-	  		}
-
-	  		if(prv) {
-	  			updatePrevious(prv.element.id)
-	  			$("#" + prv.element.id.replace("jump", "btn"))
-	  		} else {
-	  			$(".previousbutton").attr('disabled','disabled')
-	  		}
-
-			  if (titles.length > 0) { 
-			  	newtitle = titles[titles.length - 1].getAttribute("name")
-			  } else { newtitle = "" }
-			  
-			  updateTitle(newtitle)
-
-		  }
-		})
-	})
-
-	// Jumper functions
-	jumpFunction = function(e, element) {
-		e.preventDefault();
-    $("body, html").animate({ 
-      scrollTop: $( $(element).attr('href') ).offset().top 
-    }, 600);
-	}
-
-  $(".jumper").on("click", function( e ) {
-  	jumpFunction(e, this);
-  });
-
-  $(".nextbutton").on("click", function( e ) {
-  	jumpFunction(e, this);
-  });
-
-  $(".previousbutton").on("click", function( e ) {
-  	jumpFunction(e, this);
-  });
-
-	// TODO: Shamelessly copied and pasted from Diana's chat.js file...
-	// Should probably put it in its own common js file
-
-	// This function gets cookie with a given name
-	function getCookie(name) {
-	    var cookieValue = null;
-	    if (document.cookie && document.cookie != '') {
-	        var cookies = document.cookie.split(';');
-	        for (var i = 0; i < cookies.length; i++) {
-	            var cookie = jQuery.trim(cookies[i]);
-	            // Does this cookie string begin with the name we want?
-	            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-	                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-	                break;
-	            }
-	        }
-	    }
-	    return cookieValue;
-	}
-	var csrftoken = getCookie('csrftoken');
-
-	/*
-	The functions below will create a header with csrftoken
-	*/
-
-	function csrfSafeMethod(method) {
-	    // these HTTP methods do not require CSRF protection
-	    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-	}
-
-	function sameOrigin(url) {
-	    // test that a given url is a same-origin URL
-	    // url could be relative or scheme relative or absolute
-	    var host = document.location.host; // host + port
-	    var protocol = document.location.protocol;
-	    var sr_origin = '//' + host;
-	    var origin = protocol + sr_origin;
-	    // Allow absolute or scheme relative URLs to same origin
-	    return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-	        (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
-	        // or any other URL that isn't scheme relative or absolute i.e relative.
-	        !(/^(\/\/|http:|https:).*/.test(url));
-	}
-
-	$.ajaxSetup({
-		beforeSend: function(xhr, settings) {
-			if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-			// Send the token to same-origin, relative URLs only.
-			// Send the token only if the method warrants CSRF protection
-			// Using the CSRFToken value acquired earlier
-				xhr.setRequestHeader("X-CSRFToken", csrftoken);
-		}}
-	});
-
-	$("#sendinterests").on('submit', function(event) {
-		// TODO: Return id and priority only in the interest of speed?
-		// var interests = $.map(interestlist, function(val, index) {return val.id val.priority})
-		interests = interestlist.map(function(interest) {
-			return interest.id}
-		)
-
-	    deferred = $.post("/interest/update/", {list: interests});
-		deferred.success(function (response) {
-			debugger
-	    });
-	    deferred.error(function (response) {
-	      debugger
-	    });
-
-	})
-
-</script>
-
-
-
-
+<script type ="text/javascript" src="{% static 'interests/js/interests.js' %}"></script>
 {% endblock %}

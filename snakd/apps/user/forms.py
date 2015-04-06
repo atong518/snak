@@ -263,14 +263,14 @@ class ProspieSettingsForm(GenericSettingsForm):
     def __init__(self, *args, **kwargs):
         super(ProspieSettingsForm, self).__init__(*args, **kwargs)
 
-#class ContactUsForm(ModelForm):
-#    class Meta():
-#        model = GenericUser
-#        fields = ['contact_comments']
-#    def __init__(self, *args, **kwargs):
-#        super(ModelForm, self).__init__(*args, **kwargs)
-#        self.fields['contact_comments'].widget = Textarea(attrs={
-#            'class': 'form-control',
-#            'placeholder': 'Let us know what is on your mind!',
-#            'required': 'true',
-#            'name': 'message'})
+class ContactUsForm(ModelForm):
+    class Meta():
+        model = GenericUser
+        fields = ['contact_comments']
+    def __init__(self, *args, **kwargs):
+        super(ModelForm, self).__init__(*args, **kwargs)
+        self.fields['contact_comments'].widget = Textarea(attrs={
+            'class': 'form-control',
+            'placeholder': 'Let us know what is on your mind!',
+            'required': 'true',
+            'name': 'message'})

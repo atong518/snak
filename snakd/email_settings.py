@@ -3,5 +3,5 @@
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'sagelyio@gmail.com'
-EMAIL_HOST_PASSWORD = 'HackedOnEaster2015'
+EMAIL_HOST_PASSWORD = 'stop hacking us you weirdos'
 EMAIL_PORT = 587

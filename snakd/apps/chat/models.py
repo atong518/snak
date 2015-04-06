@@ -4,10 +4,9 @@ from django.utils import timezone
 from snakd.apps.user.models import GenericUser
 from datetime import datetime
 
-# TODOOOOOO
 class ThreadManager(models.Manager):
     def in_a_number_order(self, *args, **kwargs):
-        qs = self.get_query_set().filter(*args, **kwargs)
+        qs = self.get_queryset().filter(*args, **kwargs)
         try:
             new = sorted(qs, key=lambda n: (n.message_set.first().sent_at, n.message_set.first().sent_at), reverse=True)
             return new

@@ -13,13 +13,34 @@
   <form class="form-horizontal" data-toggle="validator" role="form" id="settings_form" method="post" action=".">
     {% csrf_token %}
     {% for field in settings_form %}
-      <div class="form-group">
-        <div class="col-sm-4 col-sm-offset-4">
-          {{ field }}
-          <div class="help-block with-errors"></div>
+      {% if field.name != "password" %}
+        <div class="form-group">
+          <div class="col-sm-4 col-sm-offset-4">
+            {{ field }}
+            <div class="help-block with-errors"></div>
+          </div>
         </div>
-      </div>
+      {% endif %}
     {% endfor %}
+    <div class="password"> 
+        <div class="col-sm-4 col-sm-offset-4">
+          Please enter your password to make settings changes:
+        <div class="help-block with-errors"></div>
+      </div>
+      {% for field in settings_form %}
+        {% if field.name == "password" %}
+          <div class="form-group">
+            <div class="col-sm-4 col-sm-offset-4">
+              {{ field }}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+      <div class="col-sm-4 col-sm-offset-4">
+        Or change your password
+        <a href="{% url 'change_password' %}">here.</a>
+      </div><br><br>
+    </div>
     <div class = "signup-submit-holder col-sm-4 col-sm-offset-4">
       <input type="submit" class="btn btn-primary" value="Submit" name="college_signup">
     </div>

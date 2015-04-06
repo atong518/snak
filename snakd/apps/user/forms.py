@@ -193,6 +193,8 @@ class GenericSettingsForm(UserChangeForm):
         model = GenericUser
         fields = ['email', 
           'password',
+          'firstname',
+          'lastname',
           'id'
          ]
 
@@ -209,6 +211,14 @@ class GenericSettingsForm(UserChangeForm):
             'class': 'form-control',
             'initial': kwargs.get('email', "Email"),
             'data-valid-error': "Yikes, that email address is invalid",
+            'required': 'true'})
+        self.fields['firstname'].widget = TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'First Name',
+            'required': 'true'})
+        self.fields['lastname'].widget = TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Last Name',
             'required': 'true'})
         self.fields['password'].widget = PasswordInput(attrs={
             'id': 'password',
@@ -232,6 +242,8 @@ class CollegeSettingsForm(GenericSettingsForm):
         user.email = data['email']
         user.bio = data['bio']
         user.max_match_frequency = data['max_match_frequency']
+        user.firstname = data['firstname']
+        user.lastname = data['lastname']
         user.save()
         return user
 
@@ -256,6 +268,10 @@ class ProspieSettingsForm(GenericSettingsForm):
     def update_user(self, data):
         user = self.instance
         user.email = data['email']
+        user.firstname = data['firstname']
+        user.lastname = data['lastname']
+        user.firstname = data['firstname']
+        user.lastname = data['lastname']
         user.save()
         return user
 

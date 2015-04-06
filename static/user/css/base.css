@@ -1,10 +1,5 @@
-
-
 body {
-  background-image: url("../jpg/DHall.jpg");
-  background-repeat: repeat-y;
-  background-size: 100% 100%;	
-/*  background: #A6B09D; */
+  background: #A6B09D; 
   color: #5F704D; 
   height: 100%;
   font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif; 
@@ -27,9 +22,6 @@ a:active {
   color: #52230C;
 }
 
-img {
-  background-color: #A6B09D;
-}
 
 .header-row {
   height: 5%;
@@ -39,16 +31,6 @@ img {
   height: 3%;
 }
 
-#logo {
-  text-align: center;
-  font-size: 75px;
-}
-
-#slogan {
-  text-align: center;
-  font-size: 28px;
-  font-style: italic;
-}
 
 .snak-divider {
   border-top-color: rgb(110, 47, 16);
@@ -63,78 +45,99 @@ img {
   text-align: center;
 }
 
-.btn-success-splash {
- background-color: transparent;
- border-color: #DCDCC6;
- border: 2px solid;
-}
-
-.btn-success-splash:hover,
-.btn-success-splash:focus,
-.btn-success-splash:active,
-.btn-success-splash.active {
-  color: #DCDCC6;
-  background-color: #DCDCC6;
-  border-color: #5F704D;
-}
-
-.btn-success-splash:hover,
-.btn-success-splash:focus,
-.btn-success-splash:active,
-.btn-success-splash.hover {
-  color: #DCDCC6;
-  background-color: #DCDCC6;
-  border-color: #5F704D;
-}
-
-
-.btn-primary-splash {
-  color: #6E2F10;
-  background-color: transparent;
-  border-color: #5F704D;
-  border: 2px solid;
-}
-
-.btn-primary-splash:hover,
-.btn-primary-splash:focus,
-.btn-primary-splash:active,
-.btn-primary-splash.active {
-  color: #6E2F10;
-  background-color: #6E2F10;
-  border-color: #5F704D;
-}
-
-.btn-primary-splash:hover,
-.btn-primary-splash:focus,
-.btn-primary-splash:active,
-.btn-primary-splash.hover {
-  color: #52230C;
-  background-color: #52230C;
-  border-color: #5F704D;
-}
-
 img{
  max-width:100% !important;
  height: auto;
  display: block;
 }
 
-#btn-signup {
-  width: 95%;
-  margin-left: 2.5%;
-  padding: 32px 28px;
-  font-size: 28px;
-  color: #5F704D;
-  line-height: normal;
-  -webkit-border-radius: 8px;
-     -moz-border-radius: 8px;
-     	  border-radius: 8px;
-}
-
 #top-footer { position: fixed; bottom: 40; width: 75%; }
 
 #footer { position: fixed; bottom: 0; right: 0; height: 40; background-color:#fff; }
 
+#logo {
+  text-align: center;
+  font-size: 75px;
+}
+
+#slogan {
+  text-align: center;
+  font-size: 28px;
+  font-style: italic;
+}
+
 .align-right {
   text-align: right;
 }
+
+/*
+
+.btn-success {
+ color: #5F704D;
+ background-color: transparent;
+ border-color: #5F704D;
+ border: 2px solid;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active {
+  color: #5F704D;
+  background-color: #DCDCC6;
+  border-color: #5F704D;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.hover {
+  color: #5F704D;
+  background-color: #DCDCC6;
+  border-color: #5F704D;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.focus {
+  color: #5F704D;
+  background-color: #DCDCC6;
+  border-color: #5F704D;
+}
+
+
+ul.dropdown-menu {
+    background-color: #DCDCC6;
+}
+
+ul.dropdown {
+ background-color: #DCDCC6;
+}
+
+.btn-primary {
+  color: #5F704D; 
+  background-color: transparent;
+  border-color: #5F704D;
+  border: 2px solid;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+  color: #5F704D;
+  background-color: #6E2F10;
+  border-color: #5F704D;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.hover {
+  color: #5F704D;
+  background-color: #6E2F10;
+  border-color: #5F704D;
+}
+
+*/

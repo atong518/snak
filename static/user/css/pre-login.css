@@ -1,0 +1,71 @@
+.info-holder{
+        text-align: center
+}
+
+body {
+  background-image: url("../jpg/DHall.jpg");
+  background-repeat: repeat-y;
+  background-size: 100% 100%;
+}
+
+.btn-success {
+ background-color: transparent;
+ border-color: #DCDCC6;
+ border: 2px solid;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active {
+  color: #DCDCC6;
+  background-color: #DCDCC6;
+  border-color: #5F704D;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.hover {
+  color: #DCDCC6;
+  background-color: #DCDCC6;
+  border-color: #5F704D;
+}
+
+
+.btn-primary {
+  color: #6E2F10;
+  background-color: transparent;
+  border-color: #5F704D;
+  border: 2px solid;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+  color: #6E2F10;
+  background-color: #6E2F10;
+  border-color: #5F704D;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.hover {
+  color: #52230C;
+  background-color: #52230C;
+  border-color: #5F704D;
+}
+
+#btn-signup {
+  width: 95%;
+  margin-left: 2.5%;
+  padding: 32px 28px;
+  font-size: 28px;
+  color: #5F704D;
+  line-height: normal;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+}

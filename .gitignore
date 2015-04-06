@@ -4,4 +4,3 @@ staticfiles
 .idea/workspace.xml
 *~
 tmp/
-snakd/email_settings.py

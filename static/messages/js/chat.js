@@ -178,12 +178,12 @@ $(document).ready(function(){
   // report person members population
   $("#reportAPersonModal").on('shown.bs.modal', function() {
 	  getDropdownMembersOfThread("#members-to-report");
-      });
+  });
 
   // nudge person members population
   $("#nudgeAPersonModal").on('shown.bs.modal', function() {
 	  getDropdownMembersOfThread("#members-to-nudge");
-      });
+  });
 
   // scroll down!
   scrollDown();
@@ -487,7 +487,33 @@ function init () {
 }
 
 
+/**
+ * This tiny script just helps us demonstrate
+ * what the various example callbacks are doing
+ * from: http://bootboxjs.com/
+ */
+var Example = (function() {
+    "use strict";
 
+    var elem,
+        hideHandler,
+        that = {};
+
+    that.init = function(options) {
+        elem = $(options.selector);
+    };
+
+    that.show = function(text) {
+        clearTimeout(hideHandler);
+
+        elem.find("span").html(text);
+        elem.delay(200).fadeIn().delay(4000).fadeOut();
+    };
+
+    return that;
+}());
+
+// Example.show("something plz happen");
 
 
 

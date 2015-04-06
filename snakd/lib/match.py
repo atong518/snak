@@ -17,8 +17,8 @@ def match(matrix, user1, user2):
         for int2 in ints2:
 
             dist = matrix.getValFromInts(int1, int2)
-            score += 100 / math.pow(2, dist) #* int1.getFrequency())
-            # right now, direct match is 4x more points than a sibling match
+            score += 100 / math.pow(3, dist) #* int1.getFrequency())
+            # right now, direct match is 9x more points than a sibling match
 
     return score / max(len(ints1), 1)
 

@@ -10,7 +10,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.contrib.auth import update_session_auth_hash
-from snakd.lib.match import bestmatch
+from snakd.lib.match import bestmatches
 from snakd.lib.matrix import getMatrix
 from datetime import datetime, timedelta
 import json
@@ -175,30 +175,6 @@ def edit(request):
     except:
         return redirect('/')
 
-# TODO: LINK TO THE CHAT PAGE
-def _send_match_notification(user, match):
-    try:
-        if isinstance(user, CollegeUser):
-            subject = "Meet your Sage(ly)!"
-        else:
-            subject = "Ready to give Sagely advice?"
-        message = "Hi " + match.firstname + ",<br><br>"
-        message += "Great news, you got matched with " + user.firstname + "!<br><br>"
-        if match.interests.all():
-            message += "They're interested in the following:<br>"
-            for interest in match.interests.all():
-                message += "   - " + interest.name + "<br>"
-            message += "<br>"
-        message += "Head here to respond, sagely.io, " + user.firstname + " is waiting.<br><br>"
-        message += "The Sagely Team"
-        from_email = settings.EMAIL_HOST_USER
-        msg = EmailMultiAlternatives(subject, message, from_email, {match.email})
-        msg.attach_alternative(message, "text/html")
-        msg.send()
-    except:
-        pass
-
-
 def match(request):
     try:
         uid = request.session.get("_auth_user_id")
@@ -215,29 +191,28 @@ def match(request):
                     matches__id__contains=user.id)
                 c_user = False
             matrix = getMatrix()
-            best = bestmatch(matrix, user, opplist)
-            user.matches.add(best)
-            _send_match_notification(user, best)
-            if not c_user:
-                c_user = best
-            c_user.next_match = (
-                datetime.now() + 
-                timedelta(days=c_user.max_match_frequency)
-            )
-            user.save()
-            c_user.save()
+            possibleusers = bestmatches(matrix, user, opplist)
+            # user.matches.add(best)
+            # _send_match_notification(user, best)
+            # if not c_user:
+            #     c_user = best
+            # c_user.next_match = (
+            #     datetime.now() + 
+            #     timedelta(days=c_user.max_match_frequency)
+            # )
+            # user.save()
+            # c_user.save()
             # TODO: Gross hack caused by async request:
             # Django can't template the model since we determine
             # the match at a different time. This will work but
             # it's definitely not ideal...
-            newmatch = best.matchInfo()
-            intro = best.introText()
+            possibles = []
+            for usr in possibleusers:
+                possibles.append(usr.matchInfo())
         except:
-            newmatch = {}
-            intro = ""
+            possibles = []
         return HttpResponse(
-            json.dumps({"newmatch": newmatch,
-                        "intro": intro}), 
+            json.dumps({"possibles": possibles}), 
             content_type='application/json')
     except:
         return HttpResponseRedirect('/')

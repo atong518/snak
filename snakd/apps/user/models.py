@@ -155,7 +155,8 @@ class GenericUser(AbstractBaseUser):
             "homecountry": self.homecountry,
             "homestate": self.homestate,
             "interests": list(interests),
-            "id": self.id
+            "id": self.id,
+            "intro": self.introText()
         }
 
     def introText(self):

@@ -192,20 +192,30 @@ function getMatchedUserEmails() {
 </div>
 
 <!-- New Match Modal -->
-<div class="modal fade" id="newMatchModal" tabindex="-1" role="dialog" aria-labelledby="myMatchModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">New Match!</h4>
-      </div>
-      <div class="modal-body">
-        <div id="modal-intro"></div><br>
-        <form id="new-thread-form" method="POST">
-				  <textarea form="new-thread-form" name="textarea" rows="10" cols="50" placeholder="Start the conversation!" required></textarea><br><br>
-				  {% csrf_token %}
-			    <button type="submit" class="btn btn-primary new-match-accept" id="new-match-accept">Do ittttt</button>
-				</form>
+<div id="newMatchModals">
+  <div class="modal fade" id="newMatchModal" tabindex="-1" role="dialog" aria-labelledby="myMatchModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Possible New Match!</h4>
+        </div>
+        <div style="text-align:center" class="row">
+          <button type="button" class="btn btn-default btn-lg" id="leftMatch" style="float: left top: 50%">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> 
+          </button>
+          <div class="modal-body" style="display: inline-block">
+            <div id="modal-intro"></div><br>
+            <form id="new-thread-form" method="POST">
+    				  <textarea form="new-thread-form" name="textarea" rows="10" cols="50" placeholder="Start the conversation!" required></textarea><br><br>
+    				  {% csrf_token %}
+    			    <button type="submit" class="btn btn-primary new-match-accept" id="new-match-accept">Match me!</button>
+    				</form>
+          </div>
+          <button type="button" class="btn btn-default btn-lg" id="rightMatch" style="float: right top: 50%">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> 
+          </button>
+        </div>
       </div>
     </div>
   </div>

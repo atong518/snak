@@ -156,11 +156,9 @@ def _specify_class(user):
 
 def new_thread(request):
     # TODO: Where do we get the subject?
-    import pdb; pdb.set_trace()
     try:
         uid = request.session.get("_auth_user_id")
         user1 = GenericUser.objects.get(id=uid)  
-        import pdb; pdb.set_trace()
         dic = request.POST.dict()
         user2 = GenericUser.objects.get(id=dic['otherid'])
         user1 = _specify_class(user1)      

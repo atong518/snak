@@ -4,13 +4,25 @@ from django.utils import timezone
 from snakd.apps.user.models import GenericUser
 from datetime import datetime
 
+# TODOOOOOO
+class ThreadManager(models.Manager):
+    def in_a_number_order(self, *args, **kwargs):
+        qs = self.get_query_set().filter(*args, **kwargs)
+        new = sorted(qs, key=lambda n: (n.message_set.first().sent_at, n.message_set.first().sent_at))
+        new.reverse()
+        return new
+
 class Thread(models.Model):
     members = models.ManyToManyField(GenericUser)
     subject = models.CharField(max_length=200, blank=True, default="")
     started_at = models.DateTimeField("started at" , null=True, blank=True, default=datetime.now())
+    objects = ThreadManager()
 
     def __unicode__(self):
         return self.subject
+
+    def mostRecentMessage(self):
+        return self.message_set.last().sent_at
 
 class Message(models.Model):
     """

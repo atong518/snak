@@ -65,7 +65,7 @@ function getMatchedUserEmails() {
       </div>
     </div>      
     <!--inbox-->
-    <ul class="nav nav-pills nav-stacked">
+    <ul class="nav nav-pills nav-stacked" style="overflow-y: scroll">
     {% for thread in inbox_threads %}
       <li role="presentation"><a class="inbox-message" href="#" 
 				 onclick="populateThread({{ thread.pk }})" 

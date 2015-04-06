@@ -8,6 +8,7 @@ from django.contrib import messages
 from snakd.apps.user.models import GenericUser, ProspieUser, CollegeUser
 from snakd.apps.chat.models import Thread, Message
 from snakd.apps.user.models import GenericUser
+from datetime import datetime, timedelta
 
 from snakd.apps.user.views import login
 
@@ -122,14 +123,59 @@ def leave_thread(request):
     return HttpResponse(
         json.dumps({"ignore": "this isn't happening"}),
         content_type="application/json")
-        
+
+# TODO: LINK TO THE CHAT PAGE
+def _send_match_notification(user, match):
+    try:
+        if isinstance(user, CollegeUser):
+            subject = "Meet your Sage(ly)!"
+        else:
+            subject = "Ready to give Sagely advice?"
+        message = "Hi " + match.firstname + ",<br><br>"
+        message += "Great news, you got matched with " + user.firstname + "!<br><br>"
+        if match.interests.all():
+            message += "They're interested in the following:<br>"
+            for interest in match.interests.all():
+                message += "   - " + interest.name + "<br>"
+            message += "<br>"
+        message += "Head here to respond, sagely.io, " + user.firstname + " is waiting.<br><br>"
+        message += "The Sagely Team"
+        from_email = settings.EMAIL_HOST_USER
+        msg = EmailMultiAlternatives(subject, message, from_email, {match.email})
+        msg.attach_alternative(message, "text/html")
+        msg.send()
+    except:
+        pass
+
+def _specify_class(user):
+    try:
+        user = user.collegeuser
+    except:
+        user = user.prospieuser
+    return user
+
 def new_thread(request):
     # TODO: Where do we get the subject?
+    import pdb; pdb.set_trace()
     try:
         uid = request.session.get("_auth_user_id")
-        user1 = GenericUser.objects.get(id=uid)        
+        user1 = GenericUser.objects.get(id=uid)  
+        import pdb; pdb.set_trace()
         dic = request.POST.dict()
         user2 = GenericUser.objects.get(id=dic['otherid'])
+        user1 = _specify_class(user1)      
+        user2 = _specify_class(user2)      
+        if isinstance(user1, CollegeUser):
+            c_user = user1
+        else:
+            c_user = user2
+        user1.matches.add(user2)
+        _send_match_notification(user1, user2)
+        c_user.next_match = (
+            datetime.now() + 
+            timedelta(days=c_user.max_match_frequency)
+        )
+
         newthread = Thread()
         newthread.save()
         newthread.members.add(user1)

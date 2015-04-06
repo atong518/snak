@@ -73,26 +73,54 @@ $(document).ready(function(){
     $(this).hide();
   });
 
+  function updateModal(data) {
+      if(data){
+        $("#modal-intro")[0].innerHTML = data.intro
+        $("#new-thread-form").attr('otherid', data.id)    
+        $('#newMatchModal').modal('show');
+      } else {
+        $('#noNewMatchModal').modal('show');
+      }
+  }
+
   $("#match-me").submit(function(event) {
     event.preventDefault();
     deferred = $.get("/match/", {})
 
     deferred.success(function (response) {
-      if(response.intro){
-        $("#modal-intro")[0].innerHTML = response.intro
-        $("#new-thread-form").attr('otherid', response.newmatch.id)    
-        $('#newMatchModal').modal('show');
-      } else {
-        $('#noNewMatchModal').modal('show');
-      }
+      possibles = response.possibles
+      current_index = 0
+      updateModal(possibles[current_index])
+      $("#leftMatch")[0].setAttribute("disabled", true)
     });
 
-    deferred.error(function (response) {
-    });
+    deferred.error(function (response) {});
 
   });
 
+  $("#leftMatch").click(function(event) {
+    if(current_index == possibles.length-1) {
+      $("#rightMatch")[0].removeAttribute("disabled")
+    } else if(current_index == 1) {
+      $("#leftMatch")[0].setAttribute("disabled", true)
+    }
+    current_index -= 1
+    updateModal(possibles[current_index])
+  });
+
+  $("#rightMatch").click(function(event) {
+    if(current_index == 0) {
+      $("#leftMatch")[0].removeAttribute("disabled")
+    } else if (current_index == possibles.length-2) {
+      $("#rightMatch")[0].setAttribute("disabled", true)
+    }
+    current_index += 1
+    updateModal(possibles[current_index])
+  });
+
+
   $("#new-match-accept").submit(function(event) {
+    debugger
     deferred.success(function (response) {
       // $('#newMatchModal').modal('hide');
     });

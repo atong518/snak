@@ -29,11 +29,18 @@ def heapsort(iterable):
         heappush(h, value)
     return [heappop(h) for i in range(len(h))]
 
-def bestmatch(matrix, user, opplist):
+def bestmatches(matrix, user, opplist):
     options = []
     for opp in opplist:
         score = match(matrix, user, opp)
         options.append((-1*score, opp))
     heapsort(options)
     # TODO: How are we keeping last match?
-    return options[0][1]
+    length = min(len(options), 5)
+    matches = []
+    for i in range(0, length):
+        matches.append(options[i][1])
+    return matches
+
+
+

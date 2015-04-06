@@ -40,7 +40,7 @@ def chat(request):
     matched_users = GenericUser.objects.all() #CHANGE THIS ONCE WE HAVE A WAY TO GET MATCHED USERS
 
     nudged = False
-    message = ""
+    message = "hi"
     # Nudge person logic
     if request.method == "POST" and request.POST.get("reported-name") and request.POST.get("selected-thread-id"):
         # get user email

@@ -37,12 +37,10 @@ function getMatchedUserEmails() {
 {% block content %}
 <div class="row col-md-offset-2 col-md-8" id="chatroom-messages-row">
   {% if messages %}
-  {% for message in messages %}
-  <div class="alert alert-success alert-dismissible fade in" role="alert">
+  <div class="alert alert-success alert-dismissible fade in" role="alert" id="alert-message">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-    <strong>Nudge alert!</strong> {{ message }}
+    <strong>Nudge alert!</strong> {{ messages }}
   </div>
-  {% endfor %}
   {% endif %}
 </div>
 
@@ -131,6 +129,15 @@ function getMatchedUserEmails() {
 	</div>
     </div>
     </div>
+
+  <!--
+  {% if messages %}
+  <div class="panel panel-default" id="confirmation-panel">
+    <div class="panel-body">{{ message }}</div>
+  </div>
+  {% endif %}
+  -->
+
     <div id="message-box" class="row" style="margin-bottom: 5px;">
       <!--previously sent/received messages-->
       <div id="message-content">
@@ -310,7 +317,7 @@ function getMatchedUserEmails() {
 	  {% csrf_token %}
 	  <p>Someone a little slow on the response?  Would you like us to give the following a little nudge for you? <div id="members-to-nudge"></div></p>
 	  <br>
-	  <button type="submit" value="Send" class="btn btn-primary" id="nudge-a-person-button" onclick="confirmation()">Wink wink, nudge nudge :)</button>
+	  <button type="submit" value="Send" class="btn btn-primary" id="nudge-a-person-button">Wink wink, nudge nudge :)</button>
 	</form>
       </div>
     </div>

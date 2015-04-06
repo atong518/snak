@@ -39,7 +39,8 @@ def chat(request):
     # get all users matched with the logged-in user
     matched_users = GenericUser.objects.all() #CHANGE THIS ONCE WE HAVE A WAY TO GET MATCHED USERS
 
-
+    nudged = False
+    message = ""
     # Nudge person logic
     if request.method == "POST" and request.POST.get("reported-name") and request.POST.get("selected-thread-id"):
         # get user email
@@ -48,10 +49,12 @@ def chat(request):
         firstname = request.POST.get("reported-name").split(" ")[0]
         lastname = request.POST.get("reported-name").split(" ")[1]
         nudgedUser = thread.members.filter(firstname=firstname, lastname=lastname).first()
-
         # if last message sent by nudgedUser in this thread (or if they haven't sent a message
         # in this thread) is > 5 days ago, and nudgedUser last_nudged is > 5 days ago, send 
         # email to nudgedUser.email
+
+        nudged = True
+        message = firstname + " " + lastname + " was nudged. You're not pushy at all.."
 
         message_text = request.POST.get("reported-name") + " email=" + nudgedUser.email + " has been nudged!"
         messages.add_message(request, messages.INFO, message_text)
@@ -59,7 +62,8 @@ def chat(request):
     return render(request,
                   'messages/chat.html',
                   {'inbox_threads' : inbox,
-                   'matched_users' : matched_users})
+                   'matched_users' : matched_users,
+                   'messages' : message})
 
 def check_for_new_messages(request):
     if request.method == 'POST' and len(request.POST.get('thread_id')) > 0:

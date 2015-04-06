@@ -117,6 +117,14 @@ textarea {
   border-radius: 4px;
 }
 
+/*
+#confirmation-panel {
+  width: 200px;
+  display: none;
+  background-color: yellow;
+}
+*/
+
 #refer_text1 {
   margin-bottom: 10px;
 }

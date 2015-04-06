@@ -66,7 +66,12 @@ $(document).ready(function(){
       $('#btn-send-message').submit();
       return false;
     }
+
   });
+
+  window.onload = function() {
+    $("#alert-message").delay(3000).fadeOut();
+  }
 
   // start all threads as hidden
   $('.thread').each(function() {
@@ -175,15 +180,15 @@ $(document).ready(function(){
 	  addToThread();
 
 	  return false;
-      });
+  });
 
   // report person members population
-  $("#reportAPersonModal").on('shown.bs.modal', function() {
+  $("#reportAPersonModal").on('show.bs.modal', function() {
 	  getDropdownMembersOfThread("#members-to-report");
   });
 
   // nudge person members population
-  $("#nudgeAPersonModal").on('shown.bs.modal', function() {
+  $("#nudgeAPersonModal").on('show.bs.modal', function() {
 	  getDropdownMembersOfThread("#members-to-nudge");
   });
 

@@ -12,6 +12,18 @@ from datetime import datetime, timedelta
 
 from snakd.apps.user.views import login
 
+def sortInbox(inbox):
+    for thread in range(len(inbox)-1,0,-1):
+        for i in range(thread):
+            import pdb; pdb.set_trace()
+            if inbox[i].mostRecentMessage() >inbox[i+1].mostRecentMessage():
+                temp = inbox[i]
+                inbox[i] = inbox[i+1]
+                inbox[i+1] = temp
+    import pdb; pdb.set_trace()
+    return inbox
+
+
 def chat(request):
     # get logged in user id
     if not request.user.is_authenticated():
@@ -20,8 +32,10 @@ def chat(request):
     user_pk = request.user.pk
 
     # get all threads the user is involved in
-    inbox = Thread.objects.filter(members__id=user_pk)
-    
+    # inbox = Thread.objects.filter(members__id=user_pk, order_by=)
+    # inbox = Thread.objects.filter(members__id=user_pk)
+    # inbox = sortInbox(inbox)
+    inbox = Thread.objects.in_a_number_order(members__id=user_pk)
     # get all users matched with the logged-in user
     matched_users = GenericUser.objects.all() #CHANGE THIS ONCE WE HAVE A WAY TO GET MATCHED USERS
 
@@ -124,7 +138,7 @@ def leave_thread(request):
         json.dumps({"ignore": "this isn't happening"}),
         content_type="application/json")
 
-# TODO: LINK TO THE CHAT PAGE
+
 def _send_match_notification(user, match):
     try:
         if isinstance(user, CollegeUser):
@@ -181,7 +195,7 @@ def new_thread(request):
         m = Message(thread=newthread, text=dic['message'], sender=user1)
         m.save()
         return HttpResponse(
-            json.dumps({"ignore": "this isn't happening"}),
+            json.dumps({"threadid": newthread.id}),
             content_type="application/json")
     except:
         pass

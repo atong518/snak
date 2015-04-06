@@ -92,6 +92,9 @@ $(document).ready(function(){
       current_index = 0
       updateModal(possibles[current_index])
       $("#leftMatch")[0].setAttribute("disabled", true)
+      if (current_index >= possibles.length-1) {
+        $("#rightMatch")[0].setAttribute("disabled", true)
+      }
     });
 
     deferred.error(function (response) {});
@@ -111,7 +114,7 @@ $(document).ready(function(){
   $("#rightMatch").click(function(event) {
     if(current_index == 0) {
       $("#leftMatch")[0].removeAttribute("disabled")
-    } else if (current_index == possibles.length-2) {
+    } else if (current_index >= possibles.length-2) {
       $("#rightMatch")[0].setAttribute("disabled", true)
     }
     current_index += 1
@@ -120,7 +123,6 @@ $(document).ready(function(){
 
 
   $("#new-match-accept").submit(function(event) {
-    debugger
     deferred.success(function (response) {
       // $('#newMatchModal').modal('hide');
     });
@@ -313,6 +315,7 @@ function populateThread(threadId) {
     // begin long polling for the newly selected thread
     longPollForThread(threadId);
 }
+
 function sendMessage() {
     // get id of the thread that is activated
     var selectedThreadId = $(".active-link").attr("id");

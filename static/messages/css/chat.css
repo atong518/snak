@@ -50,7 +50,8 @@ body {
 }
 
 .active-link {
-  background-color: #337ab7;
+  background-color: #7dafda;
+  border: 1px solid #5596cf;
   color: white;
 }
 
@@ -85,7 +86,7 @@ p.chat-message {
   border-radius: 5px;
   font-size: 12px;
   max-width: 40%;
-  opacity: 0.6499999761581421;
+  opacity: 0.65;
   word-wrap: break-word;
 }
 
@@ -110,6 +111,10 @@ textarea {
     resize: none;
     max-height: 100px;
     overflow-y: scroll;
+}
+
+#chatmenu {
+  border-radius: 4px;
 }
 
 #refer_text1 {

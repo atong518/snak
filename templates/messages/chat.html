@@ -15,8 +15,8 @@
 function getLoggedInUserEmail() {
   return "{{ user.email }}";
 }
-
-// CHANGE THIS TO BE FIRSTNAME/LASTNAME EVENTUALLY
+ 
+// TODO CHANGE THIS TO BE FIRSTNAME/LASTNAME EVENTUALLY
 function getMatchedUserEmails() {
   var emails = [];
   {% for user in matched_users %}
@@ -25,12 +25,11 @@ function getMatchedUserEmails() {
 
   return emails;
 }
+
 </script>
 <script type="text/javascript" src="{% static 'messages/js/chat.js' %}"></script>
 <script type="text/javascript" src="{% static 'messages/js/typeahead.jquery.js' %}"></script>
 
-<script>
-</script>
 {% endblock %}
 
 {% block content %}
@@ -58,14 +57,14 @@ function getMatchedUserEmails() {
 	  <li><a href="{% url 'settings' %}">Change Settings</a></li>
     <li><a href="{% url 'change_password' %}">Change Password</a></li>
 	  <li><a href="/interest/show/">Adjust Interests</a></li>
-	  <li><a data-toggle="modal" data-target="#sendFeedbackModal">Submit Feedback</a></li>
-	  <li><a data-toggle="modal" data-target="#referAFriendModal">Refer a Friend</a></li>
+	  <li><a data-toggle="modal" href="#sendFeedbackModal">Submit Feedback</a></li>
+	  <li><a data-toggle="modal" href="#referAFriendModal">Refer a Prospie</a></li>
     <li><a href="{% url 'logout' %}">Logout</a></li>
 	</ul>
       </div>
     </div>      
     <!--inbox-->
-    <ul class="nav nav-pills nav-stacked">
+    <ul class="nav nav-pills nav-stacked" style="overflow-y: scroll">
     {% for thread in inbox_threads %}
       <li role="presentation"><a class="inbox-message" href="#" 
 				 onclick="populateThread({{ thread.pk }})" 
@@ -97,18 +96,18 @@ function getMatchedUserEmails() {
 	{% for thread in inbox_threads %}
 	<div class="thread" id="members-in-thread-{{ thread.pk }}">
 	  {% if thread.members.all.count == 1 %}
-	  <h3 id="solo-chat">looks like it's only you in this chat, 
-	    <a data-toggle="modal" data-target="#addPersonToThread">add a friend?</a></h3>
+	  <h5 id="solo-chat">looks like it's only you in this chat, 
+	    <a data-toggle="modal" href="#addPersonToThread">add a friend?</a></h5>
 	  <h5 id="list-of-members-{{ thread.pk }}"></h5>
 	  {% endif %}
 	  {% if thread.members.all.count == 2 %}
-	  <h3 id="list-of-members-{{ thread.pk }}">
+	  <h5 id="list-of-members-{{ thread.pk }}">
 	    {% for member in thread.members.all %}
 	      {% ifnotequal member user %}
 	        {{ member.firstname }} {{ member.lastname }}
 	      {% endifnotequal %}
 	    {% endfor %}
-	  </h3>
+	  </h5>
 	  {% endif %}
 	  {% if thread.members.all.count > 2 %}
 	  <h5 id="list-of-members-{{ thread.pk }}"><b>Members: </b>
@@ -130,9 +129,9 @@ function getMatchedUserEmails() {
 	<div class="dropdown">
 	  <button class="btn btn-success dropdown-toggle pull-right" type="button" id="plusmenu" data-toggle="dropdown" aria-expanded="false">+</button>
 	  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="plusmenu">
-	    <li><a data-toggle="modal" data-target="#addPersonToThread">Add a Person</a></li>
-	    <li><a data-toggle="modal" data-target="#reportAPersonModal">Report Conversation</a></li>
-	    <li><a data-toggle="modal" data-target="#nudgeAPersonModal">Nudge Person</a></li>
+	    <li><a data-toggle="modal" href="#addPersonToThread">Add a Person</a></li>
+	    <li><a data-toggle="modal" href="#reportAPersonModal">Report Conversation</a></li>
+	    <li><a data-toggle="modal" href="#nudgeAPersonModal">Nudge Person</a></li>
 	  </ul>
 	</div>
     </div>
@@ -243,7 +242,7 @@ function getMatchedUserEmails() {
     <div class="modal-content">
       <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	<h4 class="modal-title" id="myModalLabel">Refer a Friend!</h4>
+	<h4 class="modal-title" id="myModalLabel">Refer a Prospective Dartmouth Student!</h4>
       </div>
       <div class="modal-body">
 	<p><b>re&middot; fer</b>: <i>verb</i> <br>
@@ -316,7 +315,7 @@ function getMatchedUserEmails() {
 	  {% csrf_token %}
 	  <p>Someone a little slow on the response?  Would you like us to give the following a little nudge for you? <div id="members-to-nudge"></div></p>
 	  <br>
-	  <button type="submit" value="Send" class="btn btn-primary" id="nudge-a-person-button">Wink wink, nudge nudge :)</button>
+	  <button type="submit" value="Send" class="btn btn-primary" id="nudge-a-person-button" onclick="confirmation()">Wink wink, nudge nudge :)</button>
 	</form>
       </div>
     </div>

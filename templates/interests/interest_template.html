@@ -1,17 +1,17 @@
 {% load customtags %}
 
 <li> 
-	<button type="button" class="btn btn-success selectbtn">
-		{{interest.name}}
-		<div style="display: none;">{{interest|dumpsjs}}</div>
-	</button>
-    {%if interest.children %}
-        <ul>
-         {%for ch in interest.children %}
-              {%with interest=ch template_name="interests/interest_template.html" %}
-                   {% include template_name %}
+  <a class="selectbtn">
+    {{interest.name}}
+    <div style="display: none;">{{interest|dumpsjs}}</div>
+  </a>
+  {%if interest.children %}
+  <ul>
+    {%for ch in interest.children %}
+    {%with interest=ch template_name="interests/interest_template.html" %}
+    {% include template_name %}
               {%endwith%}
-         {%endfor%}
-         </ul>
-    {%endif%}
+    {%endfor%}
+  </ul>
+  {%endif%}
 </li>

@@ -67,14 +67,14 @@ def sign_up(request):
             # log in the new user and redirect to chat page
             user = authenticate(email=new_student.email, password=prospieform.cleaned_data["password1"])
             auth_login(request, user)
-            return redirect("/chat/")
+            return redirect("/interest/show/")
 
         if request.POST.get("college_signup") is not None and collegeform.is_valid():
             new_student = collegeform.save_user(collegeform.cleaned_data)
             _send_mail(new_student.email, new_student.activation_code)
             user = authenticate(email=new_student.email, password=collegeform.cleaned_data["password1"])
             auth_login(request, user)
-            return redirect("/chat/")
+            return redirect("/interest/show/")
 
     else:
         prospieform = ProspieSignupForm()

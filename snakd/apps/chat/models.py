@@ -8,9 +8,11 @@ from datetime import datetime
 class ThreadManager(models.Manager):
     def in_a_number_order(self, *args, **kwargs):
         qs = self.get_query_set().filter(*args, **kwargs)
-        new = sorted(qs, key=lambda n: (n.message_set.first().sent_at, n.message_set.first().sent_at))
-        new.reverse()
-        return new
+        try:
+            new = sorted(qs, key=lambda n: (n.message_set.first().sent_at, n.message_set.first().sent_at), reverse=True)
+            return new
+        except:
+            return qs
 
 class Thread(models.Model):
     members = models.ManyToManyField(GenericUser)

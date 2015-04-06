@@ -175,7 +175,6 @@ def edit(request):
             else:
                 form = ProspieSettingsForm(request.POST, instance=user)
             # Update fields if password is correct
-            import pdb; pdb.set_trace()
             if user.check_password(request.POST['password']):
                 user = form.update_user(request.POST)
                 # Update session

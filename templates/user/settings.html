@@ -3,13 +3,6 @@
 {% block content %}
 {% load staticfiles %}
 
-<script type="text/javascript" src="{% static 'user/js/country_states.js' %}"></script>
-<script type="text/javascript">
-  window.onload = function() {
-    initCountry('', 'countrySelect', 'stateSelect'); 
-  }
-</script>
-
   <form class="form-horizontal" data-toggle="validator" role="form" id="settings_form" method="post" action=".">
     {% csrf_token %}
     {% for field in settings_form %}
@@ -46,6 +39,9 @@
     </div>
   </form>
 
+<script type="text/javascript">
+$("#password")[0].setAttribute("minlength", 6)
+</script>
 
 
 {% endblock %}

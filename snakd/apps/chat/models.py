@@ -25,6 +25,10 @@ class Thread(models.Model):
     def mostRecentMessage(self):
         return self.message_set.last().sent_at
 
+    def userList(self):
+        import pdb; pdb.set_trace()
+
+
 class Message(models.Model):
     """
     A private message from user to user

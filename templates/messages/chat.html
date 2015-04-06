@@ -30,6 +30,8 @@ function getMatchedUserEmails() {
 <script type="text/javascript" src="{% static 'messages/js/chat.js' %}"></script>
 <script type="text/javascript" src="{% static 'messages/js/typeahead.jquery.js' %}"></script>
 
+{% load chattags %}
+
 {% endblock %}
 
 {% block content %}
@@ -71,14 +73,7 @@ function getMatchedUserEmails() {
 				 id="thread-link-{{ thread.pk }}">
 	  {% if thread.members.count == 1 %}myself {% endif %}
 
-	  {% for member in thread.members.all %}
-	    {% ifnotequal member user %}
-    	      {% if not forloop.first%}
-	        , 
-	      {% endif%}
-	      {{ member.firstname }} {{ member.lastname }}
-	    {% endifnotequal %}
-	  {% endfor %}
+    {{ thread | userlist:user | joinby:", " }}
       </a></li>
     {% endfor %}
     </ul>

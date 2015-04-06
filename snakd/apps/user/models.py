@@ -109,7 +109,7 @@ class GenericUser(AbstractBaseUser):
     REQUIRED_FIELDS = ['firstname', 'lastname']
 
     def get_fullname(self):
-        return self.firstname + "" + self.lastname
+        return self.firstname + " " + self.lastname
 
     def set_interest(self, interest_reference):
         self.interests.add(interest_reference)

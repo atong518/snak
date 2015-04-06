@@ -1,0 +1,78 @@
+
+<script src="https://code.jquery.com/jquery.js"></script>
+{% load bootstrap3 %}
+{% load static %}
+{% load staticfiles %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<!--
+This is the basic template for all pages on the snakd site
+Coontains scripts/stylesheets, a navbar, footer, and block tags for content to be added 
+in between.  To use, simply add
+    { \% extends "user/base.html" \% } (without \ and spaces between % and {})
+to the top of any template file.  *NOTE* this must be the FIRST line in the template!
+Then surround all code with
+    { \% block content \% }
+    { \% endblock \%} 
+         (again without '\' and spaces between '%' and '{}')
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'user/css/base.css' %}" />
+  <script type="text/javascript" src="{% static 'user/js/validator.js' %}"></script>
+
+{% block extrastyle %}{% endblock %}
+{% block extra_js %}{% endblock %}
+
+</head>
+<!--
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <h1 id="logo">Sagely.io</h1>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+-->
+{% if user.is_authenticated %}
+{% if not user.is_active %}
+<div class="alert alert-danger alert-dismissible fade in" role="alert">
+  <h4 id="non-active-user-error">Oh snap! You still need to confirm your email account!</h4>
+  <p>You should have received an email from sagelyio@gmail.com with information 
+    to confirm your account.  If you still haven't received this, click 
+    <a href="#">here</a> to resend the email :)<p>
+  <p>
+</div>
+{% endif %}
+<div class="row">
+  <div class="col-md-offset-8 col-md-2" align="right">
+	Welcome, {{ user.firstname }}
+  </div>
+</div>
+{% endif %}
+
+{% block content %}{% endblock %}
+
+
+<div class="row">
+  <div class="col-md-12" id="footer">
+    <ul class="nav nav-pills pull-right">
+      <li><a href="{% url 'splash' %}">Home</a></li>
+      <li><a href="{% url 'aboutus' %}">About Us</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">Logout</a></li>      
+      {% endif %}
+      {% if user.is_authenticated %}
+      {% else %}
+        <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+
+</html>

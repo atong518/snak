@@ -69,7 +69,7 @@ Then surround all code with
       {% endif %}
       {% if user.is_authenticated %}
       {% else %}
-<!--	<li><a href="{ % url 'contactus' %}">Contact Us</a></li -->
+        <li><a href="{% url 'contactus' %}">Contact Us</a></li>
       {% endif %}
     </ul>
   </div>

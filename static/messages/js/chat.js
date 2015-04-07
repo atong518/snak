@@ -211,7 +211,7 @@ $(document).ready(function(){
 	  // iterate through the pool of strings and for any string that
 	  // contains the substring `q`, add it to the `matches` array
 	  $.each(strs, function(i, str) {
-		  if (substrRegex.test(str)) {
+		  if (substrRegex.test(str.name)) {
 		      // the typeahead jQuery plugin expects suggestions to a
 		      // JavaScript object, refer to typeahead docs for more info
 		      matches.push({ value: str });
@@ -223,18 +223,43 @@ $(document).ready(function(){
   };
   
   var emails = getMatchedUserEmails();
+  var names = getMatchedUserNames();
   
   $('#add-person-to-thread-input').typeahead({
 	  hint: true,
 	      highlight: true,
 	      minLength: 1
 	      },
-      {
-	  name: 'emails',
-	      displayKey: 'value',
-	      source: substringMatcher(emails)
-	      });
-  
+    { name: 'emails',
+      displayKey: 'value',
+      source: substringMatcher(emails)
+  });
+
+  $('#switch-to-chat-input').typeahead({
+    hint: true,
+        highlight: true,
+        minLength: 1
+        },
+    { name: 'names',
+      displayKey: 'value',
+      source: substringMatcher(names),
+      templates: {
+        suggestion: function(data){
+          debugger
+          return '<div class="new-chat" value="' + data.value.id + '"> ' + data.value.name + '</div>';
+      }},         
+      }).on('typeahead:selected', function(event, element) {
+        populateThread(element.value.id)
+    });
+
+  // $("#switch-to-chat").submit(function(event) {
+  //   var name = $('#switch-to-chat-input').val()
+  //   names.forEach(function(possible) {
+  //     if(possible[0]==name) {
+  //       populateThread(possible[1])
+  //       }
+  //   });
+  // });
 
 });
 
@@ -275,7 +300,7 @@ function longPollForThread(threadId) {
     if (typeof SET_INTERVAL != 'undefined')
 	clearInterval(SET_INTERVAL);
 
-    // SET_INTERVAL = setInterval(_poll, 500, threadId);
+    // SET_INTERVAL = setInterval(_poll, 5000, threadId);
     scrollDown();
 }
 

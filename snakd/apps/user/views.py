@@ -199,24 +199,12 @@ def match(request):
             if isinstance(user, CollegeUser):
                 opplist = ProspieUser.objects.filter().exclude(
                     matches__id__contains=user.id)
-                c_user = user
             else:
                 opplist = CollegeUser.objects.filter(
                     next_match__lte=datetime.now()).exclude(
                     matches__id__contains=user.id)
-                c_user = False
             matrix = getMatrix()
             possibleusers = bestmatches(matrix, user, opplist)
-            # user.matches.add(best)
-            # _send_match_notification(user, best)
-            # if not c_user:
-            #     c_user = best
-            # c_user.next_match = (
-            #     datetime.now() + 
-            #     timedelta(days=c_user.max_match_frequency)
-            # )
-            # user.save()
-            # c_user.save()
             # TODO: Gross hack caused by async request:
             # Django can't template the model since we determine
             # the match at a different time. This will work but

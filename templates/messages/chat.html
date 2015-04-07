@@ -1,6 +1,9 @@
 {% extends "user/base.html" %}
 {% load static %}
 
+{% load chattags %}
+{% load customtags %}
+
 {% block extrastyle %}
   <link rel="stylesheet" type="text/css" href="{% static 'messages/css/chat.css' %}" />
 {% endblock %}
@@ -26,11 +29,20 @@ function getMatchedUserEmails() {
   return emails;
 }
 
+function getMatchedUserNames() {
+  names = []
+  {% for user in matched_users %}
+    names.push({"name": "{{ user.get_fullname }}", 
+                "id": {{ user.id }} });
+  {% endfor %}
+  
+  return names;
+}
+
 </script>
 <script type="text/javascript" src="{% static 'messages/js/chat.js' %}"></script>
 <script type="text/javascript" src="{% static 'messages/js/typeahead.jquery.js' %}"></script>
 
-{% load chattags %}
 
 {% endblock %}
 
@@ -52,20 +64,22 @@ function getMatchedUserEmails() {
     <!--chat menu dropdown-->
     <div class="btn-group btn-group-justified" id="btn-chat-menu">
       <div class="btn-group" id="btn-chat-menu">
-	<button type="button" class="btn btn-success btn-large dropdown-toggle" id="chatmenu" data-toggle="dropdown" aria-expanded="false">
-	  Menu <span class="caret"></span>
-	</button>
-	<ul class="dropdown-menu" role="menu">
-	  <li><a href="{% url 'settings' %}">Change Settings</a></li>
-    <li><a href="{% url 'change_password' %}">Change Password</a></li>
-	  <li><a href="/interest/show/">Adjust Interests</a></li>
-	  <li><a data-toggle="modal" href="#sendFeedbackModal">Submit Feedback</a></li>
-	  <li><a data-toggle="modal" href="#referAFriendModal">Refer a Prospie</a></li>
-    <li><a href="{% url 'logout' %}">Logout</a></li>
-	</ul>
+      	<button type="button" class="btn btn-success btn-large dropdown-toggle" id="chatmenu" data-toggle="dropdown" aria-expanded="false">
+      	  Menu <span class="caret"></span>
+      	</button>
+      	<ul class="dropdown-menu" role="menu">
+      	  <li><a href="{% url 'settings' %}">Change Settings</a></li>
+          <li><a href="{% url 'change_password' %}">Change Password</a></li>
+      	  <li><a href="/interest/show/">Adjust Interests</a></li>
+      	  <li><a data-toggle="modal" href="#sendFeedbackModal">Submit Feedback</a></li>
+      	  <li><a data-toggle="modal" href="#referAFriendModal">Refer a Prospie</a></li>
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+      	</ul>
       </div>
-    </div>      
-    <!--inbox-->
+    </div>
+    <div id="scrollable-dropdown-menu ">
+      <input class="form-control" type="text" id="switch-to-chat-input" placeholder="Search by name..." autocomplete="off"/>
+    </div>
     <ul class="nav nav-pills nav-stacked" style="overflow-y: scroll">
     {% for thread in inbox_threads %}
       <li role="presentation"><a class="inbox-message" href="#" 
@@ -81,7 +95,6 @@ function getMatchedUserEmails() {
     <form id="match-me" method="GET">
       <button type="submit" class="btn btn-danger btn-large btn-match-me" id="btn-match-me">Match Me!</button>
     </form>
-
   </div>
   <!--current message-->
   <div class="col-md-6 well box">
@@ -90,32 +103,7 @@ function getMatchedUserEmails() {
       <div class="col-md-10" style="padding-left: 0px;">
 	{% for thread in inbox_threads %}
 	<div class="thread" id="members-in-thread-{{ thread.pk }}">
-	  {% if thread.members.all.count == 1 %}
-	  <h5 id="solo-chat">looks like it's only you in this chat, 
-	    <a data-toggle="modal" href="#addPersonToThread">add a friend?</a></h5>
-	  <h5 id="list-of-members-{{ thread.pk }}"></h5>
-	  {% endif %}
-	  {% if thread.members.all.count == 2 %}
-	  <h5 id="list-of-members-{{ thread.pk }}">
-	    {% for member in thread.members.all %}
-	      {% ifnotequal member user %}
-	        {{ member.firstname }} {{ member.lastname }}
-	      {% endifnotequal %}
-	    {% endfor %}
-	  </h5>
-	  {% endif %}
-	  {% if thread.members.all.count > 2 %}
-	  <h5 id="list-of-members-{{ thread.pk }}"><b>Members: </b>
-	    {% for member in thread.members.all %}
-	      {% ifnotequal member user %}
-  	        {% if not forloop.first %}
-	          , 
-	        {% endif %}
-  	        {{ member.firstname }} {{ member.lastname }}
-	      {% endifnotequal %}
-	    {% endfor %}
-	  </h5>
-	  {% endif %}
+    <h5>{{ thread | userlist:user | joinby:", " }}</h5>
 	</div>
 	{% endfor %}
       </div>
@@ -124,7 +112,8 @@ function getMatchedUserEmails() {
 	<div class="dropdown">
 	  <button class="btn btn-success dropdown-toggle pull-right" type="button" id="plusmenu" data-toggle="dropdown" aria-expanded="false">+</button>
 	  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="plusmenu">
-	    <li><a data-toggle="modal" href="#addPersonToThread">Add a Person</a></li>
+<!-- TODO: Multiperson chats! -->
+<!-- 	    <li><a data-toggle="modal" href="#addPersonToThread">Add a Person</a></li> -->
 	    <li><a data-toggle="modal" href="#reportAPersonModal">Report Conversation</a></li>
 	    <li><a data-toggle="modal" href="#nudgeAPersonModal">Nudge Person</a></li>
 	  </ul>
@@ -163,7 +152,6 @@ function getMatchedUserEmails() {
   </div>
 </div>
 
-
 <!-- Add Person to Thread Modal -->
 <div class="modal fade" id="addPersonToThread" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -174,13 +162,13 @@ function getMatchedUserEmails() {
       </div>
       <div class="modal-body">
         <form id="add-person-to-thread-form" method="POST">
-	  {% csrf_token %}
-	  <div id="scrollable-dropdown-menu">
-	    <input class="form-control" type="text" id="add-person-to-thread-input" placeholder="Search by name..." autocomplete="off"/>
-	  </div>
-    <br>
-    <button type="submit" value="Send" class="btn btn-primary">Do ittttt</button>
-	</form>
+      	  {% csrf_token %}
+      	  <div id="scrollable-dropdown-menu">
+      	    <input class="form-control" type="text" id="add-person-to-thread-input" placeholder="Search by name..." autocomplete="off"/>
+      	  </div>
+          <br>
+          <button type="submit" value="Send" class="btn btn-primary">Do ittttt</button>
+      	</form>
       </div>
     </div>
   </div>

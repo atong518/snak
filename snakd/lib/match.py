@@ -9,7 +9,6 @@ from heapq import heappush, heappop
 
 def match(matrix, user1, user2):
     score = 0.0
-
     ints1 = user1.getInterestList()
     ints2 = user2.getInterestList()
 

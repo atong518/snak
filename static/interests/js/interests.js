@@ -82,6 +82,8 @@ $('#interests-searchbar').typeahead(
 					    source: substringMatcher(interests),
 					    templates: {
 					    suggestion: function(data){
+						$("#interest-id-searchbox").val(data.id);
+						$("#interest-name-searchbox").val(data.name);
 						return '<a class="sel-interest" value="' + data.id + '"> ' + data.name + '</a>';
 					    }
 					    },				 
@@ -106,6 +108,15 @@ function interestSelectedFromSearch(element) {
     }
     
     UpdateInterestList();
+}
+
+function interestEnteredFromSearch(event) {
+    if (event.keyCode == 13) {
+	var name = $("#interest-searchbar").val();
+	var id = $("#interest-id-searchbox").val();
+	interestSelectedFromSearch({name: name, id: id});
+    }
+
 }
 
 $(".selectbtn").click(function(element) {

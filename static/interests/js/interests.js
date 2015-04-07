@@ -11,7 +11,9 @@ function getInterestList() {
 UpdateInterestList = function() {
     $('#interest-name-list').empty()
     $.each(interestlist, function(i, val) {
-	    $('#interest-name-list').append($('<li/>').text(val.name))
+	    var listItem = '<div id="interest-list-' + val.id + '"><a class="glyphicon glyphicon-remove" aria-hidden="true" onclick="return removeInterest(event);"></a>  ';
+	    listItem += val.name + '</div>';
+	    $('#interest-name-list').append(listItem);
 	});
 };
     
@@ -72,7 +74,7 @@ var interest_names = getIStrings();
 
 $('#interests-searchbar').typeahead(
 				    {
-					hint: true,
+					hint: false,
 					    highlight: true,
 					    minLength: 1
 					    },
@@ -96,12 +98,7 @@ function interestSelectedFromSearch(element) {
     id = element.id;
     ids = $.map(interestlist, function(val, index) {return val.id});
     if ((x = $.inArray(id, ids)) != -1) {
-	interestlist[x]["priority"] += 1;
-	if (interestlist[x]["priority"] == 3) {
-	    interestlist.splice(x, 1);
-	} else {
-	    interestlist.sort(sort_by('priority', false));
-	}
+	interestlist.splice(x, 1);
     } else {
 	jsn = {id: id, name: element.name, priority: 1};
 	interestlist.push(jsn);
@@ -110,9 +107,19 @@ function interestSelectedFromSearch(element) {
     UpdateInterestList();
 }
 
+function removeInterest(element) {
+	id = parseInt(element.currentTarget.parentElement.id.split("-")[2]);
+	ids = $.map(interestlist, function(val, index) {return val.id});
+	if ((x = $.inArray(id, ids)) != -1) {
+	    interestlist.splice(x, 1);
+	}
+
+	UpdateInterestList();
+}
+
 function interestEnteredFromSearch(event) {
     if (event.keyCode == 13) {
-	var name = $("#interest-searchbar").val();
+	var name = $("#interests-searchbar").val();
 	var id = $("#interest-id-searchbox").val();
 	interestSelectedFromSearch({name: name, id: id});
     }
@@ -123,12 +130,7 @@ $(".selectbtn").click(function(element) {
 	jsn = JSON.parse(element.toElement.firstElementChild.textContent);
 	ids = $.map(interestlist, function(val, index) {return val.id});
 	if ((x = $.inArray(jsn.id, ids)) != -1) {
-	    interestlist[x]["priority"] += 1;
-	    if (interestlist[x]["priority"] == 3) {
-		interestlist.splice(x, 1);
-	    } else {
-		interestlist.sort(sort_by('priority', false));
-	    }
+	    interestlist.splice(x, 1);
 	} else {
 	    jsn["priority"] = 1;
 	    interestlist.push(jsn);

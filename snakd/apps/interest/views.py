@@ -49,7 +49,6 @@ def show(request):
 
 
 def update(request):
-	import pdb; pdb.set_trace();
 	interest_string = request.POST.get("interest_list")
 	user = getUser(request)
 	user.interests.clear()

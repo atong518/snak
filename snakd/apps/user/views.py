@@ -206,6 +206,7 @@ def match(request):
                     next_match__lte=datetime.now()).exclude(
                     matches__id__contains=user.id)
             matrix = getMatrix()
+            import pdb; pdb.set_trace()
             possibleusers = bestmatches(matrix, user, opplist)
             # TODO: Gross hack caused by async request:
             # Django can't template the model since we determine

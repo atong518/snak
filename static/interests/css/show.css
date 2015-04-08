@@ -1,6 +1,6 @@
-.lefthalf {	  
-	width: 60%;
-	margin-right: 3%;
+.interests-row {
+  padding-left: 7%;
+  padding-top: 1%;
 }
 
 .round-button {
@@ -12,8 +12,7 @@
 
 .midbar {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  right: 2%;
 }
 
 .chevron {
@@ -25,17 +24,22 @@
 }
 
 .rightbar {
-	/*background-color: black;*/
-	position: fixed;
-	right: 0%;
+  position: fixed;
+  right: 7%;
+  opacity: .9;
+  width: 30%;
+  height: 32.5%;
+  padding-top: 0;
+  min-height: 32.5%;
+  overflow-y: scroll;
 }
 
 .interests-well {
-  padding: 5%;
+  padding: 0;
   opacity: .8;
   height: 65%;
+  width: 100%;
   font-color: black;
-  overflow-y: scroll;
 }
 
 .selectbtn {
@@ -43,3 +47,68 @@
   color: rgb(86, 61, 124);
   font-weight: 500;
 }
+
+.search-box {
+  margin: 3%;
+  position: absolute;
+  width: 100%;
+}
+
+.list-of-interests {
+  margin-left: 3%;
+  margin-top: -2%;
+  overflow-y: scroll;
+  height: 85%;
+}
+
+#scrollable-dropdown-menu .tt-dropdown-menu {
+  width: 100%;
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid grey;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  width: 100%;
+  background-color: white;	
+  padding: 5px;
+}
+
+.twitter-typeahead {
+  width: 95%;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+ul li {
+  font-size: 28px;
+  text-align: center;
+}
+ul ul li {
+  border: none;
+  text-align: left;
+  font-size: 22px;
+}
+ul ul ul li {
+  font-size: 14px;
+  padding-left: 20px;
+}
+
+# Styling the interest list items
+#ul {
+#   list-style-type:none;
+#}
+### top level
+#ul li {
+#  font-size: 16px;
+#}
+## second level
+#ul ul li {
+#  font-size: 14px;
+#}
+## leaf level
+#ul ul ul li {
+#  font-size: 12px;
+#}

@@ -20,6 +20,12 @@ body {
   bottom: 0;
 }
 
+#alert-message {
+  position: absolute;
+  width: 96.5%;
+  z-index: 1;
+}
+
 #message-box {
   height: 85%;
   position: relative;

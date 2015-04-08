@@ -52,8 +52,8 @@ function toggleStudentType() {
 	</div>
       </div>
       {% endfor %}
-      <div class = "signup-submit-holder">
-        <input type="submit" class="btn btn-primary" value="Submit" name="prospie_signup">
+      <div class="signup-submit-holder">
+        <input class="btn btn-primary" type="submit" value="Submit" name="prospie_signup">
       </div>
     </form>
     <form class="form-horizontal" data-toggle="validator" role="form" id="college_form" method="post" action=".">
@@ -79,8 +79,13 @@ function toggleStudentType() {
 <div class="row buffer-row"></div>
 
 <script type="text/javascript">
-$("#prospie_password1")[0].setAttribute("minlength", 6)
-$("#id_password1")[0].setAttribute("minlength", 6)
+  $("#prospie_password1")[0].setAttribute("minlength", 6)
+  $("#id_password1")[0].setAttribute("minlength", 6)
+  $( window ).load(function() {
+    if ("{{ student_type }}" == "dartmouth") {
+      $("#college_student")[0].click()
+    };
+  });
 </script>
 
 {% endblock %}

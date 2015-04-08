@@ -59,7 +59,7 @@ def sign_up(request):
     if request.method == "POST":
         prospieform = ProspieSignupForm(request.POST)
         collegeform = CollegeSignupForm(request.POST)
-
+        studenttype = request.POST.get("type", "prospie")
 
         if  request.POST.get("prospie_signup") is not None and prospieform.is_valid():
             new_student = prospieform.save_user(prospieform.cleaned_data)
@@ -79,11 +79,13 @@ def sign_up(request):
     else:
         prospieform = ProspieSignupForm()
         collegeform = CollegeSignupForm()
+        studenttype = "prospie"
 
     return render(request, 
                   'user/sign_up.html', 
                   {'prospie_form': prospieform, 
-                   'college_form': collegeform})
+                   'college_form': collegeform,
+                   'student_type': studenttype})
 
 def howto(request):
     return render(request, 'user/howto.html', {})

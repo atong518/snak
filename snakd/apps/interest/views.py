@@ -23,9 +23,25 @@ def makeInterestList(queryset):
 		intlist.append(interest.get_kwargs())
 	return intlist
 
+def getInterestNames():
+	dict_of_names = []
+	for interest in Interest.objects.all():
+		if interest.name != "HEAD":
+			dict_of_names.append({"name": interest.name, "id": interest.id})
+	return dict_of_names
+
+def getInterestStrings():		
+	list_of_names = ""
+	for interest in Interest.objects.all():
+		if interest.name != "HEAD":
+			list_of_names += interest.name + ", "
+	return list_of_names[:-2]
+
 def show(request):
 	responsedict = {}
 	responsedict["i_list"] = GetInterestTree()
+	responsedict["all_interests"] = getInterestNames()
+	responsedict["all_interests_string"] = getInterestStrings()
 	user = getUser(request)
 	intlist = makeInterestList(user.interests.all())
 	responsedict["user_interests"] = json.dumps(intlist)
@@ -33,13 +49,15 @@ def show(request):
 
 
 def update(request):
-	interests = request.POST.get("interest_list").split(",");
+	interest_string = request.POST.get("interest_list")
 	user = getUser(request)
 	user.interests.clear()
-	for interest in interests:
-		intr = Interest.objects.filter(id=interest)
-		user.interests.add(intr[0])
+	if len(interest_string) > 0:
+		interests = interest_string.split(",");
+		for interest in interests:
+			intr = Interest.objects.filter(id=interest)
+			user.interests.add(intr[0])
 
-	user.save()
-	return redirect(show)
+		user.save()
+	return redirect('/chat/')
 

@@ -8,7 +8,7 @@ class Interest(models.Model):
 	weight  = models.IntegerField(default = 1)
 	parent  = models.ForeignKey('self', null=True, related_name='children')
 	hidden  = models.BooleanField(default=False)
-	# genders = models.CharField(max_length = 50, null=False, default="gender is a construct")
+	gender = models.CharField(max_length = 50, null=False, default="gender is a construct")
 
 	def ChildList(self):
 		return self.children.all()

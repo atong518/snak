@@ -1,3 +1,4 @@
+
 <script src="https://code.jquery.com/jquery.js"></script>
 {% load bootstrap3 %}
 {% load static %}
@@ -29,7 +30,7 @@ Then surround all code with
 {% block extra_js %}{% endblock %}
 
 </head>
-
+<!--
 <div class="row">
   <div class="col-md-2"></div>
   <div class="col-md-8">
@@ -37,7 +38,7 @@ Then surround all code with
   </div>
   <div class="col-md-2"></div>
 </div>
-
+-->
 {% if user.is_authenticated %}
 {% if not user.is_active %}
 <div class="alert alert-danger alert-dismissible fade in" role="alert">

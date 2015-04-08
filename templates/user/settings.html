@@ -1,5 +1,6 @@
 {% extends "user/base.html" %}
 
+
 {% block content %}
 {% load staticfiles %}
 
@@ -34,8 +35,9 @@
         <a href="{% url 'change_password' %}">here.</a>
       </div><br><br>
     </div>
-    <div class = "signup-submit-holder col-sm-4 col-sm-offset-4">
-      <input type="submit" class="btn btn-primary" value="Submit" name="college_signup">
+    <div class = "signup-submit-holder col-sm-offset-4 col-sm-4">
+        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Cancel</button>
+        <input type="submit" id="submitS" class="btn btn-primary" value="Submit" name="college_signup">
     </div>
   </form>
 

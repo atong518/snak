@@ -66,7 +66,12 @@ $(document).ready(function(){
       $('#btn-send-message').submit();
       return false;
     }
+
   });
+
+  window.onload = function() {
+    $("#alert-message").delay(3000).fadeOut();
+  }
 
   // start all threads as hidden
   $('.thread').each(function() {
@@ -175,7 +180,7 @@ $(document).ready(function(){
 	  addToThread();
 
 	  return false;
-      });
+  });
 
   // report person members population
   $("#reportAPersonModal").on('shown.bs.modal', function() {

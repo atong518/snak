@@ -1,5 +1,9 @@
 var interestlist = [];
 
+$(document).ready(function() {
+	UpdateInterestList();
+    });
+
 function getInterestList() {
     var str_ids = "";
     interestlist.forEach(function(interest) {
@@ -10,9 +14,26 @@ function getInterestList() {
     
 UpdateInterestList = function() {
     $('#interest-name-list').empty()
-    $.each(interestlist, function(i, val) {
-	    $('#interest-name-list').append($('<li/>').text(val.name))
-	});
+    if (interestlist.length > 0) {
+	$("#interest-name-list").append("<h4>Your interests:</h4");
+	$.each(interestlist, function(i, val) {
+		var listItem = '<div id="interest-list-' + val.id + '"><a class="glyphicon glyphicon-remove" aria-hidden="true" onclick="return removeInterest(event);"></a>  ';
+		listItem += val.name + '</div>';
+		$('#interest-name-list').append(listItem);
+	    });
+	if (interestlist.length < 3) {
+	    $("#submit-interests-btn").button('loading');
+	}
+	else {
+	    $("#submit-interests-btn").button('reset');
+	}
+    }
+    else {
+	$("#interest-name-list").append("<h4>You need to select some interests friend!</h4>");
+	$("#interest-name-list").append("<p>To add interests, either search for them using the searchbar");
+	$("#interest-name-list").append(" or click to select them from the list</p>");
+	$("#submit-interests-btn").button('loading');
+    }
 };
     
 AddToInterestList = function(interest) {
@@ -40,23 +61,104 @@ user_interests.forEach(function(interest) {
 	AddToInterestList(interest)		
 	    });
 
-$(".selectbtn").click(function(element) {
-	jsn = JSON.parse(element.toElement.firstElementChild.textContent)
-	    ids = $.map(interestlist, function(val, index) {return val.id})
-	    if ((x = $.inArray(jsn.id, ids)) != -1) {
-		interestlist[x]["priority"] += 1
-		if (interestlist[x]["priority"] == 3) {
-		    interestlist.splice(x, 1)
-		} else {
-		    interestlist.sort(sort_by('priority', false))
-		}
-	    } else {
-		jsn["priority"] = 1
-		    interestlist.push(jsn)
-		    }
+
+// TODO: THIS FUNCTION EXISTS IN TWO FILES, WE SHOULD PROBS REFACTOR
+// autocomplete for adding more ppl to threads
+var substringMatcher = function(strs_arr) {
+    return function findMatches(q, cb) {
+	var matches, substrRegex;
 	
-	UpdateInterestList()
+	// an array that will be populated with substring matches
+	matches = [];
+	
+	// regex used to determine if a string contains the substring `q`
+	substrRegex = new RegExp(q, 'i');
+	
+	// iterate through the pool of strings and for any string that
+	// contains the substring `q`, add it to the `matches` array
+	$.each(strs_arr, function(i, str) {
+		if (substrRegex.test(str.name)) {
+		    // the typeahead jQuery plugin expects suggestions to a
+		    // JavaScript object, refer to typeahead docs for more info
+		    matches.push({ name: str.name, id: str.id });
+		}
 	    });
+	
+	cb(matches);
+    };
+};
+
+var interests = getIList();
+var interest_names = getIStrings();
+
+$('#interests-searchbar').typeahead(
+				    {
+					hint: false,
+					    highlight: true,
+					    minLength: 1
+					    },
+				    {
+					name: 'interests',
+					    displayKey: 'name',
+					    source: substringMatcher(interests),
+					    templates: {
+					    suggestion: function(data){
+						$("#interest-id-searchbox").val(data.id);
+						$("#interest-name-searchbox").val(data.name);
+						return '<a class="sel-interest" value="' + data.id + '"> ' + data.name + '</a>';
+					    }
+					    },				 
+					    }).on('typeahead:selected', function(event, element) {
+						    interestSelectedFromSearch(element);
+						});
+
+
+function interestSelectedFromSearch(element) {
+    id = element.id;
+    ids = $.map(interestlist, function(val, index) {return val.id});
+    if ((x = $.inArray(id, ids)) != -1) {
+	interestlist.splice(x, 1);
+    } else {
+	jsn = {id: id, name: element.name, priority: 1};
+	interestlist.push(jsn);
+    }
+    
+    UpdateInterestList();
+}
+
+function removeInterest(element) {
+	id = parseInt(element.currentTarget.parentElement.id.split("-")[2]);
+	ids = $.map(interestlist, function(val, index) {return val.id});
+	if ((x = $.inArray(id, ids)) != -1) {
+	    interestlist.splice(x, 1);
+	}
+
+	UpdateInterestList();
+}
+
+function interestEnteredFromSearch(event) {    
+    if (event.keyCode == 13) {
+	names = getIStrings();
+	var name = $("#interests-searchbar").val();
+	var id = $("#interest-id-searchbox").val();
+	if ((x = $.inArray(name, names)) != -1) 
+	    interestSelectedFromSearch({name: name, id: id});
+    }
+
+}
+
+$(".selectbtn").click(function(element) {
+	jsn = JSON.parse(element.toElement.firstElementChild.textContent);
+	ids = $.map(interestlist, function(val, index) {return val.id});
+	if ((x = $.inArray(jsn.id, ids)) != -1) {
+	    interestlist.splice(x, 1);
+	} else {
+	    jsn["priority"] = 1;
+	    interestlist.push(jsn);
+	}
+	
+	UpdateInterestList();
+    });
     
     
 // Section management functions

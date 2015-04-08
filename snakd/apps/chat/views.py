@@ -8,7 +8,7 @@ from django.contrib import messages
 from snakd.apps.user.models import GenericUser, ProspieUser, CollegeUser
 from snakd.apps.chat.models import Thread, Message
 from snakd.apps.user.models import GenericUser
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 from snakd.apps.user.views import login
 
@@ -37,7 +37,7 @@ def chat(request):
     # inbox = sortInbox(inbox)
     inbox = Thread.objects.in_a_number_order(members__id=user_pk)
     # get all users matched with the logged-in user
-    matched_users = GenericUser.objects.all() #CHANGE THIS ONCE WE HAVE A WAY TO GET MATCHED USERS
+    matched_users = GenericUser.objects.all() # TODO CHANGE THIS ONCE WE HAVE A WAY TO GET MATCHED USERS
 
     # message_text = "debug"
     # messages.add_message(request, messages.INFO, message_text, fail_silently=True)
@@ -55,6 +55,39 @@ def chat(request):
         # email to nudgedUser.email
 
         message_text = "Thanks for letting us know! We've nudged " + firstname + " for you!"
+
+        # look at snakd/apps/chat/models.py
+        # use thread to get number of members, disable if >2
+        # get last message time from thread.mostRecentMessage and compare sent_at with datetime.now()
+
+        # NO MORE GROUP CHATS
+        # need a thread model function to return last sent message,
+        # compare message to sender, only send nudge if they're the same
+        # fix thread user list?
+
+        # if last message is fewer than 5 days old, display wait message and don't send email
+        if thread.mostRecentMessage() > (date.today() - timedelta(days=5)):
+            message_text = "Let's give " + firstname + " a little more time to answer!"
+        else:
+            issue = request.POST.get("report-issue-text")
+            subject = "REPORT RECEIVED"
+            message = "Reported by: " + request.user.firstname + " " + request.user.lastname
+            message += " (email: " + request.user.email + ")\n"
+            message += "Reported on: " + request.POST.get("reported-name")
+            message += "\nIssue: " + issue
+            from_email = settings.EMAIL_HOST_USER
+
+            html_message = "<h3>REPORT RECEIVED</h3>"
+            html_message += "<p><b>Reported by</b>: " + request.user.firstname + " " + request.user.lastname + " (" + request.user.email + ")</p>"
+            html_message += "<p><b>Reported on</b>: " + request.POST.get("reported-name") + "</p>"
+            html_message += "<p><b>Issue</b>: " + issue
+
+            # TODO: Should we send a copy of the email to the person who reported it as well?
+            msg = EmailMultiAlternatives(subject, message, from_email, {from_email})
+            msg.attach_alternative(html_message, "text/html")
+            msg.send()
+
+        
         messages.add_message(request, messages.INFO, message_text, fail_silently=True)
 
     return render(request, 'messages/chat.html',
@@ -70,7 +103,6 @@ def check_for_new_messages(request):
         messages = thread.message_set.all()
         for message in messages:
             response_data.append([message.text, message.sender.email])
-
 
         return HttpResponse(
             json.dumps(response_data),
@@ -152,7 +184,7 @@ def _send_match_notification(user, match):
             for interest in match.interests.all():
                 message += "   - " + interest.name + "<br>"
             message += "<br>"
-        message += "Head here to respond, sagely.io, " + user.firstname + " is waiting.<br><br>"
+        message += "Head here to respond, sagely.io, " + user.firstname + " is waiting ;)<br><br>"
         message += "The Sagely Team"
         from_email = settings.EMAIL_HOST_USER
         msg = EmailMultiAlternatives(subject, message, from_email, {match.email})
@@ -272,7 +304,6 @@ def submit_feedback(request):
         html_message += "<p><b>Submitted by</b>: " + request.user.firstname + " " + request.user.lastname + " (" + request.user.email + ")</p>"
         html_message += "<p><b>Issue</b>: " + issue
 
-        # TODO: Should we send a copy of the email to the person who reported it as well?
         msg = EmailMultiAlternatives(subject, message, from_email, {from_email})
         msg.attach_alternative(html_message, "text/html")
         msg.send()

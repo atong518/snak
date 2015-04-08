@@ -1,5 +1,9 @@
 var interestlist = [];
 
+$(document).ready(function() {
+	UpdateInterestList();
+    });
+
 function getInterestList() {
     var str_ids = "";
     interestlist.forEach(function(interest) {
@@ -10,11 +14,26 @@ function getInterestList() {
     
 UpdateInterestList = function() {
     $('#interest-name-list').empty()
-    $.each(interestlist, function(i, val) {
-	    var listItem = '<div id="interest-list-' + val.id + '"><a class="glyphicon glyphicon-remove" aria-hidden="true" onclick="return removeInterest(event);"></a>  ';
-	    listItem += val.name + '</div>';
-	    $('#interest-name-list').append(listItem);
-	});
+    if (interestlist.length > 0) {
+	$("#interest-name-list").append("<h4>Your interests:</h4");
+	$.each(interestlist, function(i, val) {
+		var listItem = '<div id="interest-list-' + val.id + '"><a class="glyphicon glyphicon-remove" aria-hidden="true" onclick="return removeInterest(event);"></a>  ';
+		listItem += val.name + '</div>';
+		$('#interest-name-list').append(listItem);
+	    });
+	if (interestlist.length < 3) {
+	    $("#submit-interests-btn").button('loading');
+	}
+	else {
+	    $("#submit-interests-btn").button('reset');
+	}
+    }
+    else {
+	$("#interest-name-list").append("<h4>You need to select some interests friend!</h4>");
+	$("#interest-name-list").append("<p>To add interests, either search for them using the searchbar");
+	$("#interest-name-list").append(" or click to select them from the list</p>");
+	$("#submit-interests-btn").button('loading');
+    }
 };
     
 AddToInterestList = function(interest) {
@@ -117,11 +136,13 @@ function removeInterest(element) {
 	UpdateInterestList();
 }
 
-function interestEnteredFromSearch(event) {
+function interestEnteredFromSearch(event) {    
     if (event.keyCode == 13) {
+	names = getIStrings();
 	var name = $("#interests-searchbar").val();
 	var id = $("#interest-id-searchbox").val();
-	interestSelectedFromSearch({name: name, id: id});
+	if ((x = $.inArray(name, names)) != -1) 
+	    interestSelectedFromSearch({name: name, id: id});
     }
 
 }

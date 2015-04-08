@@ -59,5 +59,5 @@ def update(request):
 			user.interests.add(intr[0])
 
 		user.save()
-	return redirect(show)
+	return redirect('/chat/')
 

@@ -33,8 +33,8 @@ function getIStrings() {
 {% load customtags %}
 <link rel="stylesheet" type="text/css" href="{% static 'interests/css/show.css' %}" />
 
-<div class="row" style="padding: 3%;">
-  <div class="col-sm-8 lefthalf">
+<div class="row interests-row">
+  <div class="col-sm-7 lefthalf">
     <div class="well interests-well">
       <div id="scrollable-dropdown-menu">
 	<input type="text" placeholder="Search for interests" class="form-control search-box" id="interests-searchbar" onkeypress="return interestEnteredFromSearch(event);">
@@ -42,10 +42,12 @@ function getIStrings() {
 	<input type="hidden" id="interest-name-searchbox" value="none">
       </div>
       <div class="list-of-interests">
-      {% for interest in i_list.children %} 
-        <div id="{{interest.id}}_jump" name="{{interest.name}}" style="hidden: true"></div>
-	{%include "interests/interest_template.html" %}
-      {% endfor %}
+	<ul>
+	  {% for interest in i_list.children %} 
+          <div id="{{interest.id}}_jump" name="{{interest.name}}" style="hidden: true"></div>
+	  {%include "interests/interest_template.html" %}
+	  {% endfor %}
+	</ul>
       </div>
     </div>
     <div class="midbar">
@@ -62,14 +64,13 @@ function getIStrings() {
     <div class="bottombar"></div>
   </div>
   
-  <div class="rightbar col-sm-4">
+  <div class="col-sm-4 well rightbar">
     <ul class="panel-body" id="interest-name-list"></ul>
     <form id="sendinterests" method="POST" action="/interest/update/">
       {% csrf_token %}
       <input type="hidden" name="interest_list" id="to_send_interest_list" value="empty">
-      <button class="btn btn-success" type="submit">Submit</button>
+      <button class="btn btn-primary" type="submit" id="submit-interests-btn" data-loading-text="Add more interests to continue (need 3+)!">Save and continue</button>
     </form>
-    <button class="btn btn-primary" type="button"><a href="{% url 'chat' %}">Go to chat!</a></button>
   </div>
   
 </div>

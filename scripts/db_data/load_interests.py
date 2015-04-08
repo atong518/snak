@@ -39,14 +39,14 @@ root_node, created = Interest.objects.get_or_create(hidden=True, **dic)
 
 
 def build_subtree(parent, **kwargs):
-	children = kwargs.pop("children")
+	children = kwargs.pop("children", [])
 	kwargs["parent"] = parent
 
 	# if kwargs.has_key("gender"):
 	# 	i = SportsInterest.objects.get_or_create(**kwargs)
 	# else:
 	new_node, created = Interest.objects.get_or_create(**kwargs)
-		
+
 	for child in children:
 		build_subtree(new_node, **child)
 

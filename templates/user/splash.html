@@ -87,7 +87,7 @@
       <div class="row">      
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
-	  <a href="{% url 'sign_up' %}"> <div id="btn-signup" class="btn btn-primary btn-large">Sign Up Now</div></a>
+	  <a> <div id="btn-signup" class="btn btn-primary btn-large btn-signup-submit">Sign Up Now</div></a>
 	  <br>
 	  <h4 class="centered">Been there, done that? <a href="{% url 'login' %}">Login</a></h4>
 	</div>
@@ -146,5 +146,16 @@
     </div>
   </div>
 </body>
+
+  <script type="text/javascript">
+    $(".btn-signup-submit").click(function(event) {
+      respdict = {}
+      if(document.getElementById('p').checked) 
+        respdict["form"] = "prospie";
+      else
+        respdict["form"] = "student";
+      $.post("{% url 'sign_up' %}", respdict)
+    })
+  </script>
 {% endblock %}
 

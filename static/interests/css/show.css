@@ -24,14 +24,16 @@
 }
 
 .rightbar {
-  position: fixed;
+  min-height: 150px;
+  max-height: 65%;
+  height: auto !important;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -40px;
   right: 7%;
   opacity: .9;
   width: 30%;
-  height: 32.5%;
   padding-top: 0;
-  min-height: 32.5%;
-  overflow-y: scroll;
+  overflow: scroll;
 }
 
 .interests-well {
@@ -48,6 +50,11 @@
   font-weight: 500;
 }
 
+.up-arrow {
+  margin-right: 3%;
+  font-size: 30px;
+  margin-bottom: 0;
+}
 .search-box {
   margin: 3%;
   position: absolute;
@@ -56,8 +63,8 @@
 
 .list-of-interests {
   margin-left: 3%;
-  margin-top: -2%;
-  overflow-y: scroll;
+  margin-top: -3%;
+  overflow: scroll;
   height: 85%;
 }
 
@@ -96,19 +103,7 @@ ul ul ul li {
   padding-left: 20px;
 }
 
-# Styling the interest list items
-#ul {
-#   list-style-type:none;
-#}
-### top level
-#ul li {
-#  font-size: 16px;
-#}
-## second level
-#ul ul li {
-#  font-size: 14px;
-#}
-## leaf level
-#ul ul ul li {
-#  font-size: 12px;
-#}
+#submit-interests-btn {
+  width: 90%;
+  height: 40px;
+}

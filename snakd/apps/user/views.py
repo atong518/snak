@@ -96,8 +96,9 @@ def contactus(request):
         contactform = ContactUsForm(request.POST)
         if  request.POST.get("contactus_button") is not None and contactform.is_valid():
             # Email shenanigans                                                                                                   
-            subject = "Sagely.io Contact Us Comment"
+            subject = "Sagely.io Contact Us Comment from " + contactform.cleaned_data['user_email']
             message = contactform.cleaned_data['contact_comments']
+#            txt_message = message + contactform.cleaned_data['user_email']
             email = settings.EMAIL_HOST_USER
             msg = EmailMultiAlternatives(subject, message, email, {email})
             msg.send()

@@ -35,6 +35,13 @@ function getMatchedUserEmails() {
 {% endblock %}
 
 {% block content %}
+<div class="row buffer-row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <hr class="snak-divider">
+  </div>
+  <div class="col-md-2"></div>
+</div>
 <div class="row col-md-offset-2 col-md-8" id="chatroom-messages-row">
   {% if messages %}
   {% for message in messages %}
@@ -46,7 +53,7 @@ function getMatchedUserEmails() {
   {% endif %}
 </div>
 
-<div class="row" style="height:100%; padding: 10px;" id="chat-room">
+<div class="row" style="height:90%; padding: 10px;" id="chat-room">
   <!--left navbar-->
   <div class="col-md-2 col-md-offset-2 well" id="inbox">    
     <!--chat menu dropdown-->
@@ -57,7 +64,7 @@ function getMatchedUserEmails() {
 	</button>
 	<ul class="dropdown-menu" role="menu">
 	  <li><a href="{% url 'settings' %}">Change Settings</a></li>
-    <li><a href="{% url 'change_password' %}">Change Password</a></li>
+	  <li><a href="{% url 'change_password' %}">Change Password</a></li>
 	  <li><a href="/interest/show/">Adjust Interests</a></li>
 	  <li><a data-toggle="modal" href="#sendFeedbackModal">Submit Feedback</a></li>
 	  <li><a data-toggle="modal" href="#referAFriendModal">Refer a Prospie</a></li>
@@ -123,7 +130,7 @@ function getMatchedUserEmails() {
 	<!--plus menu-->
 	<div class="dropdown">
 	  <button class="btn btn-success dropdown-toggle pull-right" type="button" id="plusmenu" data-toggle="dropdown" aria-expanded="false">+</button>
-	  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="plusmenu">
+	  <ul class="dropdown-menu" style="right: 35; left: auto;" role="menu" aria-labelledby="plusmenu">
 	    <li><a data-toggle="modal" href="#addPersonToThread">Add a Person</a></li>
 	    <li><a data-toggle="modal" href="#reportAPersonModal">Report Conversation</a></li>
 	    <li><a data-toggle="modal" href="#nudgeAPersonModal">Nudge Person</a></li>

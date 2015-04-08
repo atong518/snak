@@ -11,8 +11,7 @@ ONEWEEK = 7
 TWOWEEKS = 14
 
 MAX_MATCH_FREQS = [
-        (THREEDAYS, 'How often can we match you? - Default=1 every 3 days'),
-        (UNLIMITED, 'Unlimited'),
+        (UNLIMITED, 'How often can we match you? - Unlimited'),
         (ONEDAY, '1 per day'),
         (THREEDAYS, '1 every 3 days'),
         (ONEWEEK, '1 per week'),
@@ -282,11 +281,17 @@ class ProspieSettingsForm(GenericSettingsForm):
 class ContactUsForm(ModelForm):
     class Meta():
         model = GenericUser
-        fields = ['contact_comments']
+        fields = ['user_email','contact_comments']
     def __init__(self, *args, **kwargs):
         super(ModelForm, self).__init__(*args, **kwargs)
+        self.fields['user_email'].widget = TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Email',
+            'required': 'true',
+            'name': 'user_email'})
         self.fields['contact_comments'].widget = Textarea(attrs={
             'class': 'form-control',
+            'style':'resize:none;',
             'placeholder': 'Let us know what is on your mind!',
             'required': 'true',
             'name': 'message'})

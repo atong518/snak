@@ -59,7 +59,7 @@ def sign_up(request):
     if request.method == "POST":
         prospieform = ProspieSignupForm(request.POST)
         collegeform = CollegeSignupForm(request.POST)
-
+        studenttype = request.POST.get("type", "prospie")
 
         if  request.POST.get("prospie_signup") is not None and prospieform.is_valid():
             new_student = prospieform.save_user(prospieform.cleaned_data)
@@ -79,11 +79,13 @@ def sign_up(request):
     else:
         prospieform = ProspieSignupForm()
         collegeform = CollegeSignupForm()
+        studenttype = "prospie"
 
     return render(request, 
                   'user/sign_up.html', 
                   {'prospie_form': prospieform, 
-                   'college_form': collegeform})
+                   'college_form': collegeform,
+                   'student_type': studenttype})
 
 def howto(request):
     return render(request, 'user/howto.html', {})
@@ -96,8 +98,9 @@ def contactus(request):
         contactform = ContactUsForm(request.POST)
         if  request.POST.get("contactus_button") is not None and contactform.is_valid():
             # Email shenanigans                                                                                                   
-            subject = "Sagely.io Contact Us Comment"
+            subject = "Sagely.io Contact Us Comment from " + contactform.cleaned_data['user_email']
             message = contactform.cleaned_data['contact_comments']
+#            txt_message = message + contactform.cleaned_data['user_email']
             email = settings.EMAIL_HOST_USER
             msg = EmailMultiAlternatives(subject, message, email, {email})
             msg.send()

@@ -74,6 +74,15 @@ img{
   text-align: right;
 }
 
+#submitS {
+  float: right;
+}
+
+#submitCP {
+  float: right;
+  margin-right: 30px;
+}
+
 /*
 
 .btn-success {

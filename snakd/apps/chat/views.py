@@ -39,8 +39,9 @@ def chat(request):
     # get all users matched with the logged-in user
     matched_users = GenericUser.objects.all() #CHANGE THIS ONCE WE HAVE A WAY TO GET MATCHED USERS
 
-    nudged = False
-    message = "hi"
+    # message_text = "debug"
+    # messages.add_message(request, messages.INFO, message_text, fail_silently=True)
+    
     # Nudge person logic
     if request.method == "POST" and request.POST.get("reported-name") and request.POST.get("selected-thread-id"):
         # get user email
@@ -53,17 +54,12 @@ def chat(request):
         # in this thread) is > 5 days ago, and nudgedUser last_nudged is > 5 days ago, send 
         # email to nudgedUser.email
 
-        nudged = True
-        message = firstname + " " + lastname + " was nudged. You're not pushy at all.."
+        message_text = "Thanks for letting us know! We've nudged " + firstname + " for you!"
+        messages.add_message(request, messages.INFO, message_text, fail_silently=True)
 
-        message_text = request.POST.get("reported-name") + " email=" + nudgedUser.email + " has been nudged!"
-        messages.add_message(request, messages.INFO, message_text)
-
-    return render(request,
-                  'messages/chat.html',
+    return render(request, 'messages/chat.html',
                   {'inbox_threads' : inbox,
-                   'matched_users' : matched_users,
-                   'messages' : message})
+                   'matched_users' : matched_users})
 
 def check_for_new_messages(request):
     if request.method == 'POST' and len(request.POST.get('thread_id')) > 0:
@@ -212,25 +208,27 @@ def refer_friend(request):
 
         referer_name = request.user.firstname + " " + request.user.lastname
 
-        message = "Hi " + request.POST.get("refer-name") + "!\n"
-        message += "Are you interested in going to Dartmouth College?  Do you want to find out what it's like to be a student here?\n"
-        message += 'At Sagely, we help prospective Dartmouth students like you get an "inside look" into what it\'s like to go to Dartmouth. We help you get personalized answers to your questions by connecting you directly with real Dartmouth students.\n'
-        message += referer_name + " thought thought you might be interested in using Sagely and told us to get in touch with you! We Dartmouth students would love nothing more than to share our experiences, so give us a shot and check us out "
-        message += "at www.sagely.io!\n"
-        message += "Cheers!\nThe Sagely Team"
+        message = "Hi " + request.POST.get("refer-name") + '''!
+                   Are you interested in going to Dartmouth College?  Do you want to find out what it's like to be a student here?
+                   At Sagely, we help prospective Dartmouth students like you get an "inside look" into what it's like to go to Dartmouth. We help you get personalized answers to your questions by connecting you directly with real Dartmouth students.
+             ''' + referer_name + ''' thought thought you might be interested in using Sagely and told us to get in touch with you! We Dartmouth students would love nothing more than to share our experiences, so give us a shot and check us out at www.sagely.io!
+                   Cheers!
+                   The Sagely Team'''
 
-        html_message = "<h3>Hi " + request.POST.get("refer-name") + "!</h3>"
-        html_message += "<p>Are you interested in going to Dartmouth College?  Do you want to find out what it's like to be a student here?</p>"
-        html_message += '<p>At Sagely, we help prospective Dartmouth students like you get an "inside look" into what it\'s like to go to Dartmouth. We help you get personalized answers to your questions by connecting you directly with real Dartmouth students.</p>'
-        html_message += "<p>" + referer_name + " thought you might be interested in using Sagely and told us to get in touch with you! We Dartmouth students would love nothing more than to share our experiences, so give us a shot and check us out "
-        html_message += '<a href="www.sagely.io">here</a>!'
-        html_message += "<p>Cheers!</p><p><b>The Sagely Team</b></p>"
+        html_message =  "<h3>Hi " + request.POST.get("refer-name") + '''!</h3>
+                        <p>Are you interested in going to Dartmouth College?  Do you want to find out what it's like to be a student here?</p>
+                        <p>At Sagely, we help prospective Dartmouth students like you get an "inside look" into what it's like to go to Dartmouth. We help you get personalized answers to your questions by connecting you directly with real Dartmouth students.</p>
+                        <p>''' + referer_name + ''' thought you might be interested in using Sagely and told us to get in touch with you! We Dartmouth students would love nothing more than to share our experiences, so give us a shot and check us out <a href="www.sagely.io">here</a>!</p>
+                        <p>Cheers!</p><p><b>The Sagely Team</b></p>'''
 
         from_email = settings.EMAIL_HOST_USER
         
         msg = EmailMultiAlternatives(subject, message, from_email, {email})
         msg.attach_alternative(html_message, "text/html")
         msg.send()
+
+        message_text = "Thanks for spreading the Sagely love! We just got in touch with " + request.user.firstname + ". :)"
+        messages.add_message(request, messages.INFO, message_text, fail_silently=True)
 
     return redirect(chat)
 
@@ -255,6 +253,9 @@ def report_person(request):
         msg.attach_alternative(html_message, "text/html")
         msg.send()
 
+        message_text = "Thanks for letting us know. We're on it!"
+        messages.add_message(request, messages.INFO, message_text, fail_silently=True)
+
     return redirect(chat)
 
 def submit_feedback(request):
@@ -275,5 +276,8 @@ def submit_feedback(request):
         msg = EmailMultiAlternatives(subject, message, from_email, {from_email})
         msg.attach_alternative(html_message, "text/html")
         msg.send()
+
+        message_text = "Thanks for your thoughts! We really appreciate it!"
+        messages.add_message(request, messages.INFO, message_text, fail_silently=True)
 
     return redirect(chat)

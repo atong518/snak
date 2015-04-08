@@ -21,7 +21,7 @@
       document.getElementById('college_info').style.display = 'none';
       document.getElementById('prospie_how').style.display = 'TEST';
       document.getElementById('college_how').style.display = 'none';
-      
+    document.getElementById('studentType').value = "prospie"
     });
 
     function toggleDisplayInfo() {
@@ -30,12 +30,14 @@
     document.getElementById('college_info').style.display = 'none';
     document.getElementById('prospie_how').style.display = '';
     document.getElementById('college_how').style.display = 'none';
+    document.getElementById('studentType').value = "prospie"
     }
     if (document.getElementById('c').checked) {
     document.getElementById('prospie_info').style.display = 'none';
     document.getElementById('college_info').style.display = '';
     document.getElementById('prospie_how').style.display = 'none';
     document.getElementById('college_how').style.display = '';
+    document.getElementById('studentType').value = "dartmouth"
     }
     }
   </script>
@@ -87,19 +89,35 @@
       <div class="row">      
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
-	  <a href="{% url 'sign_up' %}"> <div id="btn-signup" class="btn btn-primary btn-large">Sign Up Now</div></a>
-	  <br>
+    <form method="post" action="{% url 'sign_up' %}">
+      {% csrf_token %}
+      <input id="studentType" type="hidden" name="type" value="">
+      <input id="btn-signup" type="submit" class="btn btn-primary btn-large btn-signup-submit" value="Sign Up Now">
+    </form>
 	  <h4 class="centered">Been there, done that? <a href="{% url 'login' %}">Login</a></h4>
 	</div>
 	<div class="col-md-4"></div>
       </div>
-      <div class="row buffer-row"></div>
+      <div class="row buffer-row">
+	<div class="centered">
+	  <button type="button" class="btn btn-lg btn-default disabled" aria-label="Page Down">
+	    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+	  </button>
+	</div>
+      </div>
       <div class="row buffer-row"></div>
       <div class="row buffer-row"></div>
       <div class="row buffer-row"></div>
     </div>
   
     <div class="section">
+      <div class="row buffer-row">
+	<div class="centered">
+          <button type="button" class="btn btn-lg btn-default disabled" aria-label="Page Down">
+            <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
       <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
@@ -146,5 +164,6 @@
     </div>
   </div>
 </body>
+
 {% endblock %}
 

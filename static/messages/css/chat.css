@@ -20,6 +20,12 @@ body {
   bottom: 0;
 }
 
+#alert-message {
+  position: absolute;
+  width: 96.5%;
+  z-index: 1;
+}
+
 #message-box {
   height: 85%;
   position: relative;
@@ -116,14 +122,6 @@ textarea {
 #chatmenu {
   border-radius: 4px;
 }
-
-/*
-#confirmation-panel {
-  width: 200px;
-  display: none;
-  background-color: yellow;
-}
-*/
 
 #refer_text1 {
   margin-bottom: 10px;

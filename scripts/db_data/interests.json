@@ -5,22 +5,22 @@
 				"name": "Arts",
 				"children": [
 					{
-						"name": "General Art",
+						"name": "General Art"
 					},
 					{
-						"name": "Art History",
+						"name": "Art History"
 					},
 					{
-						"name": "Digital Arts",
+						"name": "Digital Arts"
 					},
 					{
-						"name": "Music",
+						"name": "Music"
 					},
 					{
-						"name": "Theater",
+						"name": "Theater"
 					},
 					{
-						"name": "Film/Media",
+						"name": "Film/Media"
 					}
 				]
 			},
@@ -28,34 +28,34 @@
 				"name": "Humanities",
 				"children": [
 					{
-						"name": "General Humanities",
+						"name": "General Humanities"
 					},
 					{
-						"name": "Languages",
+						"name": "Languages"
 					},
 					{
-						"name": "Culture Studies",
+						"name": "Culture Studies"
 					},
 					{
-						"name": "Literature",
+						"name": "Literature"
 					},
 					{
-						"name": "Classics",
+						"name": "Classics"
 					},
 					{
-						"name": "History",
+						"name": "History"
 					},
 					{
-						"name": "Religion",
+						"name": "Religion"
 					},
 					{
-						"name": "Women/Gender Studies",
+						"name": "Women/Gender Studies"
 					},
 					{
-						"name": "LGBT",
+						"name": "LGBT"
 					},
 					{
-						"name": "Philosophy",
+						"name": "Philosophy"
 					}
 				]
 			},
@@ -63,49 +63,49 @@
 				"name": "Social Sciences",
 				"children": [
 					{
-						"name": "General Social Science",
+						"name": "General Social Science"
 					},
 					{
-						"name": "Anthropology",
+						"name": "Anthropology"
 					},
 					{
-						"name": "International Relations",
+						"name": "International Relations"
 					},
 					{
-						"name": "Economics/Finance",
+						"name": "Economics/Finance"
 					},
 					{
-						"name": "Education",
+						"name": "Education"
 					},
 					{
-						"name": "Government",
+						"name": "Government"
 					},
 					{
-						"name": "Geography",
+						"name": "Geography"
 					},
 					{
-						"name": "Ethics",
+						"name": "Ethics"
 					},
 					{
-						"name": "Psychology",
+						"name": "Psychology"
 					},
 					{
-						"name": "Linguistics",
+						"name": "Linguistics"
 					},
 					{
-						"name": "Public Policy",
+						"name": "Public Policy"
 					},
 					{
-						"name": "Sociology",
+						"name": "Sociology"
 					},
 					{
-						"name": "Journalism",
+						"name": "Journalism"
 					},
 					{
-						"name": "Law",
+						"name": "Law"
 					},
 					{
-						"name": "Global Health",
+						"name": "Global Health"
 					}
 				]
 			},
@@ -113,37 +113,37 @@
 				"name": "Sciences",
 				"children": [
 					{
-						"name": "General Science",
+						"name": "General Science"
 					},
 					{
-						"name": "Agriculture",
+						"name": "Agriculture"
 					},
 					{
-						"name": "Biology",
+						"name": "Biology"
 					},
 					{
-						"name": "Chemistry",
+						"name": "Chemistry"
 					},
 					{
-						"name": "Computer Science",
+						"name": "Computer Science"
 					},
 					{
-						"name": "Earth",
+						"name": "Earth"
 					},
 					{
-						"name": "Environmental",
+						"name": "Environmental"
 					},
 					{
-						"name": "Mathematics",
+						"name": "Mathematics"
 					},
 					{
-						"name": "Neuroscience",
+						"name": "Neuroscience"
 					},
 					{
-						"name": "Physics",
+						"name": "Physics"
 					},
 					{
-						"name": "Pre-Health",
+						"name": "Pre-Health"
 					}
 				]
 			},
@@ -151,34 +151,34 @@
 				"name": "Engineering",
 				"children": [
 					{
-						"name": "General Engineering",
+						"name": "General Engineering"
 					},
 					{
-						"name": "Biomedical",
+						"name": "Biomedical"
 					},
 					{
-						"name": "Biotechnical",
+						"name": "Biotechnical"
 					},
 					{
-						"name": "Chemical",
+						"name": "Chemical"
 					},
 					{
-						"name": "Computer",
+						"name": "Computer"
 					},
 					{
-						"name": "Electrical",
+						"name": "Electrical"
 					},
 					{
-						"name": "Environmental",
+						"name": "Environmental"
 					},
 					{
-						"name": "Material Science",
+						"name": "Material Science"
 					},
 					{
-						"name": "Mechanical",
+						"name": "Mechanical"
 					},
 					{
-						"name": "Management",
+						"name": "Management"
 					}
 				]
 			}
@@ -191,13 +191,13 @@
 				"name": "Competition Based",
 				"children": [
 					{
-						"name": "Quiz Bowl",
+						"name": "Quiz Bowl"
 					},
 					{
-						"name": "Debate",
+						"name": "Debate"
 					},
 					{
-						"name": "Mock Trial",
+						"name": "Mock Trial"
 					}
 				]
 			},
@@ -206,30 +206,30 @@
 				"children": [
 					{
 						"name": "Dance",
-						"tooltip": "BFD, Ceili, DCDT, Fusion, RAAZ, Sheba, Sugarplum",
+						"tooltip": "BFD, Ceili, DCDT, Fusion, RAAZ, Sheba, Sugarplum"
 					},
 					{
 						"name": "Comedy",
-						"tooltip": "Casual Thursday, Dog Day",
+						"tooltip": "Casual Thursday, Dog Day"
 					},
 					{
 						"name": "Theater",
-						"tooltip": "Rude Mechanicals, DTC, Harlequins",
+						"tooltip": "Rude Mechanicals, DTC, Harlequins"
 					},
 					{
 						"name": "Band",
-						"tooltip": "Barbary Coast, Wind Ensemble",
+						"tooltip": "Barbary Coast, Wind Ensemble"
 					},
 					{
 						"name": "Orchestra",
-						"tooltip": "DSO, DCO",
+						"tooltip": "DSO, DCO"
 					},
 					{
-						"name": "A cappella",
+						"name": "A cappella"
 					},
 					{
 						"name": "Choir",
-						"tooltip": "Gospel Choir, Handel Society, JAC",
+						"tooltip": "Gospel Choir, Handel Society, JAC"
 					}
 				]
 			},
@@ -238,45 +238,45 @@
 				"children": [
 					{
 						"name": "Christianity",
-						"tooltip": "Agape, Aquinas, FCA",
+						"tooltip": "Agape, Aquinas, FCA"
 					},
 					{
 						"name": "Judaism",
-						"tooltip": "Hillel, Chabad",
+						"tooltip": "Hillel, Chabad"
 					},
 					{
-						"name": "Islam",
+						"name": "Islam"
 					},
 					{
 						"name": "Hinduism",
-						"tooltip": "Milan",
+						"tooltip": "Milan"
 					},
 					{
-						"name": "Other Religious Groups",
+						"name": "Other Religious Groups"
 					},
 					{
 						"name": "Asian Culture",
-						"tooltip": "DAO, DCCS, DJS, KSA, SoHK, VSA",
+						"tooltip": "DAO, DCCS, DJS, KSA, SoHK, VSA"
 					},
 					{
 						"name": "African Culture",
-						"tooltip": "DASA",
+						"tooltip": "DASA"
 					},
 					{
 						"name": "Latino/Latina Culture",
-						"tooltip": "LAL",
+						"tooltip": "LAL"
 					},
 					{
 						"name": "Native American Culture",
-						"tooltip": "NAD",
+						"tooltip": "NAD"
 					},
 					{
 						"name": "Other Culture Groups",
-						"tooltip": "DCC, ISA, MOSAIC",
+						"tooltip": "DCC, ISA, MOSAIC"
 					},
 					{
 						"name": "Language-Based Groups",
-						"tooltip": "French Club, German Club, etc.",
+						"tooltip": "French Club, German Club, etc."
 					}
 				]
 			},
@@ -284,31 +284,31 @@
 				"name": "Issue Awareness",
 				"children": [
 					{
-						"name": "Political Organizations",
+						"name": "Political Organizations"
 					},
 					{
 						"name": "International Issues Programs",
-						"tooltip": "DHE, Globemed, J Street U",
+						"tooltip": "DHE, Globemed, J Street U"
 					},
 					{
 						"name": "Environmental or Animal-Based Groups",
-						"tooltip": "DAWG",
+						"tooltip": "DAWG"
 					},
 					{
 						"name": "Mental Health Awareness",
-						"tooltip": "Active Minds",
+						"tooltip": "Active Minds"
 					},
 					{
 						"name": "Sexual Assault Awareness",
-						"tooltip": "MAV, SAPA",
+						"tooltip": "MAV, SAPA"
 					},
 					{
 						"name": "LGBTQ Groups",
-						"tooltip": "CGSE, Spectra",
+						"tooltip": "CGSE, Spectra"
 					},
 					{
 						"name": "Other Issue Awareness Organizations",
-						"tooltip": "DUVA, CoFIRED, NAACP, RAK, V-Day, WF",
+						"tooltip": "DUVA, CoFIRED, NAACP, RAK, V-Day, WF"
 					}
 				]
 			},
@@ -317,19 +317,19 @@
 				"children": [
 					{
 						"name": "Business",
-						"tooltip": "DEN, WIB",
+						"tooltip": "DEN, WIB"
 					},
 					{
 						"name": "Engineering",
-						"tooltip": "AISES, NSBE",
+						"tooltip": "AISES, NSBE"
 					},
 					{
 						"name": "Pre-Health",
-						"tooltip": "MAPS, NSS, Pre-Vet",
+						"tooltip": "MAPS, NSS, Pre-Vet"
 					},
 					{
 						"name": "Science",
-						"tooltip": "Biosoc, WISP, WICS",
+						"tooltip": "Biosoc, WISP, WICS"
 					}
 				]
 			},
@@ -337,13 +337,13 @@
 				"name": "Greek Life",
 				"children": [
 					{
-						"name": "Fraternties",
+						"name": "Fraternties"
 					},
 					{
-						"name": "Sororities",
+						"name": "Sororities"
 					},
 					{
-						"name": "Co-eds",
+						"name": "Co-eds"
 					}
 				]
 			},
@@ -352,15 +352,15 @@
 				"children": [
 					{
 						"name": "Undergraduate Societies",
-						"tooltip": "Amarna, Panarchy",
+						"tooltip": "Amarna, Panarchy"
 					},
 					{
 						"name": "Living Learning Communities",
-						"tooltip": "LLCs, Foley House",
+						"tooltip": "LLCs, Foley House"
 					},
 					{
 						"name": "Affinity Housing",
-						"tooltip": "La Casa, SLC, Cutter",
+						"tooltip": "La Casa, SLC, Cutter"
 					}
 				]
 			},
@@ -369,19 +369,19 @@
 				"children": [
 					{
 						"name": "Newspaper",
-						"tooltip": "The Dartmouth",
+						"tooltip": "The Dartmouth"
 					},
 					{
 						"name": "Academic Journals",
-						"tooltip": "DUJS, DBJ, DLJ",
+						"tooltip": "DUJS, DBJ, DLJ"
 					},
 					{
 						"name": "Yearbook",
-						"tooltip": "Aegis",
+						"tooltip": "Aegis"
 					},
 					{
 						"name": "Media",
-						"tooltip": "Dartmouth Broadcasting, DTV",
+						"tooltip": "Dartmouth Broadcasting, DTV"
 					}
 				]
 			},
@@ -389,10 +389,10 @@
 				"name": "Student Employment",
 				"children": [
 					{
-						"name": "Work Study",
+						"name": "Work Study"
 					},
 					{
-						"name": "Campus Jobs",
+						"name": "Campus Jobs"
 					}
 				]
 			},
@@ -400,15 +400,15 @@
 				"name": "Recreational",
 				"children": [
 					{
-						"name": "Intramural Sports",
+						"name": "Intramural Sports"
 					},
 					{
 						"name": "Outdoors-Related",
-						"tooltip": "DOC, Ledyard, Woodsmen",
+						"tooltip": "DOC, Ledyard, Woodsmen"
 					},
 					{
 						"name": "Gaming",
-						"tooltip": "Poker, Chess, CGA, CGC",
+						"tooltip": "Poker, Chess, CGA, CGC"
 					}
 				]
 			},
@@ -417,22 +417,22 @@
 				"children": [
 					{
 						"name": "Service/Philanthropy",
-						"tooltip": "DREAM, SEAD, Big Sib Little Sib",
+						"tooltip": "DREAM, SEAD, Big Sib Little Sib"
 					},
 					{
 						"name": "Military",
-						"tooltip": "ROTC",
+						"tooltip": "ROTC"
 					},
 					{
-						"name": "Student Government",
+						"name": "Student Government"
 					},
 					{
 						"name": "Emergency Medical Services",
-						"tooltip": "EMS, Ski Patrol",
+						"tooltip": "EMS, Ski Patrol"
 					},
 					{
 						"name": "Mentoring",
-						"tooltip": "FYPM, Link-Up",
+						"tooltip": "FYPM, Link-Up"
 					}
 				]
 			}
@@ -446,91 +446,91 @@
 				"children": [
 					{
 						"name": "Baseball",
-						"gender": "male",
+						"gender": "male"
 					},
 					{
 						"name": "Basketball",
-						"gender": "null",
+						"gender": "null"
 					},
 					{
 						"name": "Crew",
-						"gender": "female",
+						"gender": "female"
 					},
 					{
 						"name": "Crew (Heavyweight)",
-						"gender": "male",
+						"gender": "male"
 					},
 					{
 						"name": "Crew (Lightweight)",
-						"gender": "male",
+						"gender": "male"
 					},
 					{
 						"name": "Cross Country",
-						"gender": "null",
+						"gender": "null"
 					},
 					{
 						"name": "Equestrian",
-						"gender": "null",
+						"gender": "null"
 					},
 					{
 						"name": "Field Hockey",
-						"gender": "female",
+						"gender": "female"
 					},
 					{
 						"name": "Football",
-						"gender": "male",
+						"gender": "male"
 					},
 					{
 						"name": "Golf",
-						"gender": "null",
+						"gender": "null"
 					},
 					{
 						"name": "Ice Hockey",
-						"gender": "male",
+						"gender": "male"
 					},
 					{
 						"name": "Lacrosse",
-						"gender": "null",
+						"gender": "null"
 					},
 					{
 						"name": "Sailing",
-						"gender": "null",
+						"gender": "null"
 					},
 					{
 						"name": "Skiing (Alpine)",
-						"gender": "null",
+						"gender": "null"
 					},
 					{
 						"name": "Skiing (Nordic)",
-						"gender": "null",
+						"gender": "null"
 					},
 					{
 						"name": "Soccer",
-						"gender": "null",
+						"gender": "null"
 					},
 					{
 						"name": "Softball",
-						"gender": "female",
+						"gender": "female"
 					},
 					{
 						"name": "Squash",
-						"gender": "null",
+						"gender": "null"
 					},
 					{
 						"name": "Swimming/Diving",
-						"gender": "null",
+						"gender": "null"
 					},
 					{
 						"name": "Tennis",
-						"gender": "null",
+						"gender": "null"
 					},
 					{
 						"name": "Track and Field",
-						"gender": "null",
+						"gender": "null"
 					},
 					{
 						"name": "Volleyball",
-						"gender": "female",
+						"gender": "female"
 					}
 
 				]
@@ -539,79 +539,79 @@
 				"name": "Club",
 				"children": [
 					{
-						"name": "Badminton",
+						"name": "Badminton"
 					},
 					{
-						"name": "Baseball",
+						"name": "Baseball"
 					},
 					{
-						"name": "Basketball",
+						"name": "Basketball"
 					},
 					{
-						"name": "Boxing",
+						"name": "Boxing"
 					},
 					{
-						"name": "Cheer",
+						"name": "Cheer"
 					},
 					{
-						"name": "Cricket",
+						"name": "Cricket"
 					},
 					{
-						"name": "Cycling",
+						"name": "Cycling"
 					},
 					{
-						"name": "Dressage",
+						"name": "Dressage"
 					},
 					{
-						"name": "Endurance Racing",
+						"name": "Endurance Racing"
 					},
 					{
-						"name": "Fencing",
+						"name": "Fencing"
 					},
 					{
-						"name": "Field Hockey",
+						"name": "Field Hockey"
 					},
 					{
-						"name": "Figure Skating",
+						"name": "Figure Skating"
 					},
 					{
-						"name": "Ice Hockey",
+						"name": "Ice Hockey"
 					},
 					{
-						"name": "Lacrosse",
+						"name": "Lacrosse"
 					},
 					{
-						"name": "Rugby",
+						"name": "Rugby"
 					},
 					{
-						"name": "Soccer",
+						"name": "Soccer"
 					},
 					{
-						"name": "Squash",
+						"name": "Squash"
 					},
 					{
-						"name": "Swimming",
+						"name": "Swimming"
 					},
 					{
-						"name": "Table Tennis",
+						"name": "Table Tennis"
 					},
 					{
-						"name": "Tae Qwon Do",
+						"name": "Tae Kwon Do"
 					},
 					{
-						"name": "Tennis",
+						"name": "Tennis"
 					},
 					{
-						"name": "Triathlon",
+						"name": "Triathlon"
 					},
 					{
-						"name": "Ultimate Frisbee",
+						"name": "Ultimate Frisbee"
 					},
 					{
-						"name": "Volleyball",
+						"name": "Volleyball"
 					},
 					{
-						"name": "Water Polo",
+						"name": "Water Polo"
 					}
 				]
 			}

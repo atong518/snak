@@ -56,7 +56,6 @@ def _send_mail(email, activation_code):
     msg.send()
 
 def sign_up(request):
-    import pdb; pdb.set_trace()
     if request.method == "POST":
         prospieform = ProspieSignupForm(request.POST)
         collegeform = CollegeSignupForm(request.POST)

@@ -55,6 +55,5 @@ with open(os.path.join(FILE, "interests.json")) as jsonfile:
 	for child in json.load(jsonfile):
 		build_subtree(root_node, **child)
 
-
-
 buildMatrix()
+

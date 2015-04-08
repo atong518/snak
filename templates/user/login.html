@@ -3,6 +3,16 @@
 {% block content %}
 {% load staticfiles %}
 
+<div class="row buffer-row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <hr class="snak-divider">
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row buffer-row"></div>
+
 <div class="row">
   <div class="col-md-4"></div>
 
@@ -35,7 +45,7 @@
       <button type="submit" class="btn btn-primary">Login</button>
     </div>
     <div class="form-group col-sm-12"
-	 style="margin-bottom: 5px; text-align: center; font-size: 12px;">
+	 style="margin-bottom: 5px; text-align: center; font-size: 16px;">
       You no have login? <a href="{% url 'sign_up' %}">Sign up</a>, ya fool!
     </div>
 

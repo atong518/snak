@@ -101,6 +101,7 @@ class GenericUser(AbstractBaseUser):
     is_active = models.NullBooleanField(default=False)
     interests = models.ManyToManyField(Interest, null=True, related_name='user_set')
     gender = models.CharField(max_length=50, null=False, default="gender is a construct")
+    user_email = models.CharField(max_length=222, null=True)
     contact_comments = models.CharField(max_length=1000, null=True)
 
     objects = GenericUserManager()

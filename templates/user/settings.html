@@ -34,8 +34,13 @@
         <a href="{% url 'change_password' %}">here.</a>
       </div><br><br>
     </div>
-    <div class = "signup-submit-holder col-sm-4 col-sm-offset-4">
-      <input type="submit" class="btn btn-primary" value="Submit" name="college_signup">
+    <div class = "signup-submit-holder col-sm-offset-4">
+      <div class="col-sm-4">
+        <input type="button" class="btn btn-default" value="Cancel" onClick="javascript:history.go(-1);">
+      </div>
+      <div class="col-sm-1">
+        <input type="submit" class="btn btn-primary" value="Submit" name="college_signup">
+      </div>
     </div>
   </form>
 

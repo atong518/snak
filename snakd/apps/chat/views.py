@@ -39,8 +39,6 @@ def chat(request):
     # get all users matched with the logged-in user
     matched_users = GenericUser.objects.all() #CHANGE THIS ONCE WE HAVE A WAY TO GET MATCHED USERS
 
-    nudged = False
-    message = "hi"
     # Nudge person logic
     if request.method == "POST" and request.POST.get("reported-name") and request.POST.get("selected-thread-id"):
         # get user email
@@ -53,17 +51,13 @@ def chat(request):
         # in this thread) is > 5 days ago, and nudgedUser last_nudged is > 5 days ago, send 
         # email to nudgedUser.email
 
-        nudged = True
-        message = firstname + " " + lastname + " was nudged. You're not pushy at all.."
-
-        message_text = request.POST.get("reported-name") + " email=" + nudgedUser.email + " has been nudged!"
-        messages.add_message(request, messages.INFO, message_text)
+        message_text = "Thanks for letting us know! We've nudged " + firstname + " for you!"
+        messages.add_message(request, messages.INFO, message_text, fail_silently=True)
 
     return render(request,
                   'messages/chat.html',
                   {'inbox_threads' : inbox,
-                   'matched_users' : matched_users,
-                   'messages' : message})
+                   'matched_users' : matched_users})
 
 def check_for_new_messages(request):
     if request.method == 'POST' and len(request.POST.get('thread_id')) > 0:
@@ -232,6 +226,9 @@ def refer_friend(request):
         msg.attach_alternative(html_message, "text/html")
         msg.send()
 
+        message_text = "Thanks for spreading the Sagely love! We just got in touch with " + request.user.firstname + ". :)"
+        messages.add_message(request, messages.INFO, message_text, fail_silently=True)
+
     return redirect(chat)
 
 def report_person(request):
@@ -255,6 +252,9 @@ def report_person(request):
         msg.attach_alternative(html_message, "text/html")
         msg.send()
 
+        message_text = "Thanks for letting us know. We're on it!"
+        messages.add_message(request, messages.INFO, message_text, fail_silently=True)
+
     return redirect(chat)
 
 def submit_feedback(request):
@@ -275,5 +275,8 @@ def submit_feedback(request):
         msg = EmailMultiAlternatives(subject, message, from_email, {from_email})
         msg.attach_alternative(html_message, "text/html")
         msg.send()
+
+        message_text = "Thanks for your thoughts! We really appreciate it!"
+        messages.add_message(request, messages.INFO, message_text, fail_silently=True)
 
     return redirect(chat)

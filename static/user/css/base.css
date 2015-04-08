@@ -1,3 +1,7 @@
+html {
+  overflow-y: scroll;
+}
+
 body {
   background: #A6B09D; 
   color: #5F704D; 
@@ -68,6 +72,15 @@ img{
 
 .align-right {
   text-align: right;
+}
+
+#submitS {
+  float: right;
+}
+
+#submitCP {
+  float: right;
+  margin-right: 30px;
 }
 
 /*

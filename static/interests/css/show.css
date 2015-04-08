@@ -1,3 +1,8 @@
+.interests-row {
+  padding-left: 7%;
+  padding-top: 1%;
+}
+
 .round-button {
     height: 10px;
     width: 10px;
@@ -19,9 +24,14 @@
 }
 
 .rightbar {
-	/*background-color: black;*/
-	position: fixed;
-	right: 0%;
+  position: fixed;
+  right: 7%;
+  opacity: .9;
+  width: 30%;
+  height: 32.5%;
+  padding-top: 0;
+  min-height: 32.5%;
+  overflow-y: scroll;
 }
 
 .interests-well {
@@ -67,3 +77,38 @@
 .twitter-typeahead {
   width: 95%;
 }
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+ul li {
+  font-size: 28px;
+  text-align: center;
+}
+ul ul li {
+  border: none;
+  text-align: left;
+  font-size: 22px;
+}
+ul ul ul li {
+  font-size: 14px;
+  padding-left: 20px;
+}
+
+# Styling the interest list items
+#ul {
+#   list-style-type:none;
+#}
+### top level
+#ul li {
+#  font-size: 16px;
+#}
+## second level
+#ul ul li {
+#  font-size: 14px;
+#}
+## leaf level
+#ul ul ul li {
+#  font-size: 12px;
+#}

@@ -183,12 +183,12 @@ $(document).ready(function(){
   });
 
   // report person members population
-  $("#reportAPersonModal").on('show.bs.modal', function() {
+  $("#reportAPersonModal").on('shown.bs.modal', function() {
 	  getDropdownMembersOfThread("#members-to-report");
   });
 
   // nudge person members population
-  $("#nudgeAPersonModal").on('show.bs.modal', function() {
+  $("#nudgeAPersonModal").on('shown.bs.modal', function() {
 	  getDropdownMembersOfThread("#members-to-nudge");
   });
 

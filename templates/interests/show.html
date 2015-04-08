@@ -38,11 +38,12 @@ function getIStrings() {
     <div class="well interests-well">
       <div id="scrollable-dropdown-menu">
 	<input type="text" placeholder="Search for interests" class="form-control search-box" id="interests-searchbar" onkeypress="return interestEnteredFromSearch(event);">
+	<!--span class="glyphicon glyphicon-chevron-up pull-right up-arrow"></span-->
 	<input type="hidden" id="interest-id-searchbox" value="none">
 	<input type="hidden" id="interest-name-searchbox" value="none">
       </div>
-      <div class="list-of-interests">
-	<ul>
+      <div class="list-of-interests" id="list-of-interests">
+	<ul id="scrolling-list-of-interests">
 	  {% for interest in i_list.children %} 
           <div id="{{interest.id}}_jump" name="{{interest.name}}" style="hidden: true"></div>
 	  {%include "interests/interest_template.html" %}
@@ -50,21 +51,9 @@ function getIStrings() {
 	</ul>
       </div>
     </div>
-    <div class="midbar">
-  	<a class="chevron previousbutton"><span class="glyphicon glyphicon-chevron-up"></span></a><br>
-  	<a class="chevron nextbutton" ><span class="glyphicon glyphicon-chevron-down"></span></a>
-
-<!--	  href="#{{i_list.children.0.id}}_jump"  { % for interest in i_list.children %} 
-				<button class="round-button jumper {{interest.id}}_btn" href="#{{interest.id}}_jump" title="{{interest.name}}"></button><br><br>
-	    	<!-- <a class="jumper" href="#{{interest.id}}_jump">{{interest.name}}</a> <br>
-	    { % endfor %}-->
-    </div>
-
-
-    <div class="bottombar"></div>
   </div>
   
-  <div class="col-sm-4 well rightbar">
+  <div class="col-sm-4 well rightbar pull-right">
     <ul class="panel-body" id="interest-name-list"></ul>
     <form id="sendinterests" method="POST" action="/interest/update/">
       {% csrf_token %}

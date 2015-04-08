@@ -3,6 +3,13 @@ var interestlist = [];
 $(document).ready(function() {
 	UpdateInterestList();
     });
+$(".list-of-interests").scroll(function() {
+	var scrollHeight = $(".list-of-interests").scrollTop();
+	var innerHeight = $(".list-of-interests").innerHeight();
+	var domHeight = document.getElementById("list-of-interests").scrollHeight;
+	if (scrollHeight == 0) console.log("TOP");
+	if ((scrollHeight + innerHeight) >= domHeight) console.log("BOTTOM");
+    });
 
 function getInterestList() {
     var str_ids = "";

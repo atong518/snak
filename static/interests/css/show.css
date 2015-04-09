@@ -117,3 +117,7 @@ ul ul ul li {
   color: rgb(86, 61, 124);
 
 }
+
+.disabled-interest {
+  color: grey;
+}

@@ -27,6 +27,7 @@ UpdateInterestList = function() {
 		var listItem = '<div id="interest-list-' + val.id + '"><a class="glyphicon glyphicon-remove" aria-hidden="true" onclick="return removeInterest(event);"></a>  ';
 		listItem += val.name + '</div>';
 		$('#interest-name-list').append(listItem);
+		$("#interest-" + val.id).addClass("disabled-interest");
 	    });
 	if (interestlist.length < 3) {
 	    $("#submit-interests-btn").button('loading');
@@ -34,6 +35,7 @@ UpdateInterestList = function() {
 	else {
 	    $("#submit-interests-btn").button('reset');
 	}
+
     }
     else {
 	$("#interest-name-list").append("<h4>You need to select some interests friend!</h4>");
@@ -125,6 +127,7 @@ function interestSelectedFromSearch(element) {
     ids = $.map(interestlist, function(val, index) {return val.id});
     if ((x = $.inArray(id, ids)) != -1) {
 	interestlist.splice(x, 1);
+	$("#interest-" + id).removeClass("disabled-interest");
     } else {
 	jsn = {id: id, name: element.name, priority: 1};
 	interestlist.push(jsn);
@@ -138,6 +141,7 @@ function removeInterest(element) {
 	ids = $.map(interestlist, function(val, index) {return val.id});
 	if ((x = $.inArray(id, ids)) != -1) {
 	    interestlist.splice(x, 1);
+	    $("#interest-" + id).removeClass("disabled-interest");
 	}
 
 	UpdateInterestList();
@@ -159,6 +163,7 @@ $(".selectbtn").click(function(element) {
 	ids = $.map(interestlist, function(val, index) {return val.id});
 	if ((x = $.inArray(jsn.id, ids)) != -1) {
 	    interestlist.splice(x, 1);
+	    $("#interest-" + jsn.id).removeClass("disabled-interest");
 	} else {
 	    jsn["priority"] = 1;
 	    interestlist.push(jsn);
@@ -170,7 +175,8 @@ $(".selectbtn").click(function(element) {
 
 $(".selectbtn").mouseover(function(element) {
 	jsn = JSON.parse(element.toElement.firstElementChild.textContent);
-	$("#interest-tooltip-div").text(jsn["name"] + ": " + jsn["tooltip"]);
+	$("#interest-tooltip-div").text(jsn["tooltip"]);
+	$("#interest-tooltip-title").text("About " + jsn["name"]);
     });
     
 // Section management functions

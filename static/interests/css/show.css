@@ -63,6 +63,7 @@
 
 .list-of-interests {
   margin-left: 3%;
+  margin-right: 3%;
   margin-top: -3%;
   overflow: scroll;
   height: 85%;
@@ -106,4 +107,13 @@ ul ul ul li {
 #submit-interests-btn {
   width: 90%;
   height: 40px;
+}
+
+#interest-hover-box {
+  padding: 3%;
+  height: 50%;
+  position: fixed;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: rgb(86, 61, 124);
+
 }

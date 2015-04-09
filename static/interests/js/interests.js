@@ -167,6 +167,11 @@ $(".selectbtn").click(function(element) {
 	UpdateInterestList();
     });
     
+
+$(".selectbtn").mouseover(function(element) {
+	jsn = JSON.parse(element.toElement.firstElementChild.textContent);
+	$("#interest-tooltip-div").text(jsn["name"] + ": " + jsn["tooltip"]);
+    });
     
 // Section management functions
 updateTitle = function(newtitle) {

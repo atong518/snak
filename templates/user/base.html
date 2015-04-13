@@ -44,7 +44,7 @@ Then surround all code with
   <h4 id="non-active-user-error">Oh snap! You still need to confirm your email account!</h4>
   <p>You should have received an email from sagelyio@gmail.com with information 
     to confirm your account.  If you still haven't received this, click 
-    <a href="#">here</a> to resend the email :)<p>
+    <a href="{% url 'resend_confirmation_email' %}">here</a> to resend the email :)<p>
   <p>
 </div>
 {% endif %}

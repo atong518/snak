@@ -46,7 +46,7 @@ def _send_mail(email, activation_code):
     message = "Welcome to SnakDartmouth, we very much appreciate your signing up!\n"
     from_email = settings.EMAIL_HOST_USER
 
-    url = "http://127.0.0.1:8000/confirm_email/" + activation_code + "/" + email + "/"
+    url = "http://www.sagely.io/confirm_email/" + activation_code + "/" + email + "/"
     txt_message = message + "Click here to activate your account: " + url
     html_message = message + "\nClick "
     html_message += "<a href=\"" + url + "\">"

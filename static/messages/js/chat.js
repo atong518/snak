@@ -143,6 +143,8 @@ $(document).ready(function(){
       otherid: event.target.getAttribute("otherid")
     }
 
+    disable_btn("new-match-accept");
+
     deferred = $.post("new_thread/", requestdict)
 
     deferred.success(function (response) {
@@ -538,6 +540,10 @@ var Example = (function() {
 
     return that;
 }());
+
+disable_btn = function(id) {
+  $("#" + id)[0].disabled = true
+}
 
 // Example.show("something plz happen");
 

@@ -107,24 +107,30 @@ $(document).ready(function(){
 
   });
 
-  $("#leftMatch").click(function(event) {
+  manageButtons = function(current_index) {
     if(current_index == possibles.length-1) {
+      $("#rightMatch")[0].setAttribute("disabled", true)
+    } else {
       $("#rightMatch")[0].removeAttribute("disabled")
-    } else if(current_index == 1) {
-      $("#leftMatch")[0].setAttribute("disabled", true)
     }
-    current_index -= 1
-    updateModal(possibles[current_index])
+
+    if(current_index == 0) {
+      $("#leftMatch")[0].setAttribute("disabled", true)
+    } else {
+      $("#leftMatch")[0].removeAttribute("disabled")
+    }
+  }
+
+  $("#leftMatch").click(function(event) {
+    current_index -= 1;
+    updateModal(possibles[current_index]);
+    manageButtons(current_index);
   });
 
   $("#rightMatch").click(function(event) {
-    if(current_index == 0) {
-      $("#leftMatch")[0].removeAttribute("disabled")
-    } else if (current_index >= possibles.length-2) {
-      $("#rightMatch")[0].setAttribute("disabled", true)
-    }
-    current_index += 1
-    updateModal(possibles[current_index])
+    current_index += 1;
+    updateModal(possibles[current_index]);
+    manageButtons(current_index);
   });
 
 

@@ -8,14 +8,19 @@
 <script type="text/javascript">
 // logic to hide/show fields for Dartmouth Student vs. 'Prospie' signup
 window.onload = function() {
-  document.getElementById('prospie_form').style.display = '';
-  document.getElementById('college_form').style.display = 'none';
+  if("{{ student_type }}" == "dartmouth") {
+      $("#college_student")[0].click()
+      document.getElementById('prospie_form').style.display = 'none';
+      document.getElementById('college_form').style.display = '';
+  } else {
+    document.getElementById('prospie_form').style.display = '';
+    document.getElementById('college_form').style.display = 'none';
+  }
   initCountry('', 'countrySelect2', 'stateSelect2'); 
   initCountry('', 'countrySelect1', 'stateSelect1'); 
 }
 
 function toggleStudentType() {
-  console.log("as;dl");
   if (document.getElementById('prospie').checked) {
     document.getElementById('prospie_form').style.display = '';
     document.getElementById('college_form').style.display = 'none';
@@ -89,11 +94,6 @@ function toggleStudentType() {
 <script type="text/javascript">
   $("#prospie_password1")[0].setAttribute("minlength", 6)
   $("#id_password1")[0].setAttribute("minlength", 6)
-  $( window ).load(function() {
-    if ("{{ student_type }}" == "dartmouth") {
-      $("#college_student")[0].click()
-    };
-  });
 </script>
 
 {% endblock %}

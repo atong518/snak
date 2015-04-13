@@ -103,7 +103,7 @@ import dj_database_url
 # DATABASES['default'] = dj_database_url.config(default='postgres://USERNAME:PASSWORD@localhost/DBNAME')
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://nznobbvumguuzd:6m8WRiKTl_Ze3d9mOPhaSuZ6Vy@ec2-50-16-190-77.compute-1.amazonaws.com:5432/dabedq5i48j024')
+    'default': dj_database_url.config(default='postgres://eaodzubecepwhs:46BomxE-l9u9OJ3cXKcZCqLw4H@ec2-23-21-73-32.compute-1.amazonaws.com:5432/denn3499motecn')
     # 'default': dj_database_url.config()
 }
 

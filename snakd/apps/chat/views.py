@@ -50,43 +50,44 @@ def chat(request):
         firstname = request.POST.get("reported-name").split(" ")[0]
         lastname = request.POST.get("reported-name").split(" ")[1]
         nudgedUser = thread.members.filter(firstname=firstname, lastname=lastname).first()
-        # if last message sent by nudgedUser in this thread (or if they haven't sent a message
-        # in this thread) is > 5 days ago, and nudgedUser last_nudged is > 5 days ago, send 
-        # email to nudgedUser.email
 
         message_text = "Thanks for letting us know! We've nudged " + firstname + " for you!"
-
-        # look at snakd/apps/chat/models.py
-        # use thread to get number of members, disable if >2
-        # get last message time from thread.mostRecentMessage and compare sent_at with datetime.now()
-
-        # NO MORE GROUP CHATS
-        # need a thread model function to return last sent message,
-        # compare message to sender, only send nudge if they're the same
-        # fix thread user list?
+        
+        nudger = thread.mostRecentMessageRef().sender
+        if isinstance(nudger, CollegeUser):
+            message_text = "Don't nudge a prospie! They're really stressed at high school and have no time for you."
 
         # if last message is fewer than 5 days old, display wait message and don't send email
-        if thread.mostRecentMessage() > (date.today() - timedelta(days=5)):
+        elif thread.mostRecentMessage() > (date.today() - timedelta(days=3)):
             message_text = "Let's give " + firstname + " a little more time to answer!"
+
+        # only send nudge if the nudger has sent the last message
+        elif nudger == nudgedUser:
+            message_text = "Why don't you answer " + firstname + " first before nudging!"
+
+        # send email
         else:
-            issue = request.POST.get("report-issue-text")
-            subject = "REPORT RECEIVED"
-            message = "Reported by: " + request.user.firstname + " " + request.user.lastname
-            message += " (email: " + request.user.email + ")\n"
-            message += "Reported on: " + request.POST.get("reported-name")
-            message += "\nIssue: " + issue
+            # DEBUG THIS plz
             from_email = settings.EMAIL_HOST_USER
+            to_email = nudgedUser.email
 
-            html_message = "<h3>REPORT RECEIVED</h3>"
-            html_message += "<p><b>Reported by</b>: " + request.user.firstname + " " + request.user.lastname + " (" + request.user.email + ")</p>"
-            html_message += "<p><b>Reported on</b>: " + request.POST.get("reported-name") + "</p>"
-            html_message += "<p><b>Issue</b>: " + issue
+            subject = request.user.firstname + " needs your Sagely advice!"
 
-            # TODO: Should we send a copy of the email to the person who reported it as well?
-            msg = EmailMultiAlternatives(subject, message, from_email, {from_email})
+            message = "Hi " + firstname + "!\n"
+            message += "Greetings from Sagely! Your match " + request.user.firstname 
+            message += " asked us to check on you - it looks like you haven't gotten a chance to respond in the past few days! "
+            message += request.user.firstname + " is waiting for your advice! Head over to sagely.io to help!\n"
+            message += "The Sagely Team"
+
+            html_message =  "<h3>Hi " + firstname + '''!</h3>
+                        <p>Greetings from Sagely! Your match''' + request.user.firstname + '''</p>
+                        <p>asked us to check on you - it looks like you haven't gotten a chance to respond in the past few days!</p>
+                        <p>''' + request.user.firstname + ''' is waiting for your advice! Head <a href="www.sagely.io">here</a> to help!</p>
+                        <p>Cheers!</p><p><b>The Sagely Team</b></p>'''
+
+            msg = EmailMultiAlternatives(subject, message, from_email, {to_email})
             msg.attach_alternative(html_message, "text/html")
             msg.send()
-
         
         messages.add_message(request, messages.INFO, message_text, fail_silently=True)
 

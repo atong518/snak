@@ -70,6 +70,7 @@ $(document).ready(function(){
   });
 
   window.onload = function() {
+    // TODO don't fadeout if person was nudged
     $("#alert-message").delay(3000).fadeOut();
   }
 

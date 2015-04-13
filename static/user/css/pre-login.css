@@ -9,8 +9,9 @@ body {
 }
 
 .btn-success {
+ color: #5C755E;
  background-color: transparent;
- border-color: #DCDCC6;
+ border-color: #5C755E;
  border: 2px solid;
 }
 
@@ -18,25 +19,42 @@ body {
 .btn-success:focus,
 .btn-success:active,
 .btn-success.active {
-  color: #DCDCC6;
-  background-color: #DCDCC6;
-  border-color: #5F704D;
+  color: #5C755E;
+  background-color: #CDD1B6;
+  border-color: #5C755E;
 }
 
 .btn-success:hover,
 .btn-success:focus,
 .btn-success:active,
 .btn-success.hover {
-  color: #DCDCC6;
-  background-color: #DCDCC6;
-  border-color: #5F704D;
+  color: #5C755E;
+  background-color: #CDD1B6;
+  border-color: #5C755E;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.focus {
+  color: #5C755E;
+  background-color: #CDD1B6;
+  border-color: #5C755E;
 }
 
 
+ul.dropdown-menu {
+    background-color: #DCDCC6;
+}
+
+ul.dropdown {
+ background-color: #DCDCC6;
+}
+
 .btn-primary {
-  color: #6E2F10;
+  color: #52230C;
   background-color: transparent;
-  border-color: #5F704D;
+  border-color: #52230C;
   border: 2px solid;
 }
 
@@ -44,9 +62,9 @@ body {
 .btn-primary:focus,
 .btn-primary:active,
 .btn-primary.active {
-  color: #6E2F10;
-  background-color: #6E2F10;
-  border-color: #5F704D;
+  color: #52230C;
+  background-color: #626F83;
+  border-color: #52230C;
 }
 
 .btn-primary:hover,
@@ -54,16 +72,29 @@ body {
 .btn-primary:active,
 .btn-primary.hover {
   color: #52230C;
-  background-color: #52230C;
-  border-color: #5F704D;
+  background-color: #626F83;
+  border-color: #52230C;
+}
+
+#btn-toggle {	
+  width: 95%; 
+  margin-left: 2.5%;
+  padding: 32px 28px;
+  font-size: 28px;
+  line-height: normal;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
 }
 
 #btn-signup {
+  color: #52230C;
+  border-color: #52230C;
+  border: 2px solid;
   width: 95%;
   margin-left: 2.5%;
   padding: 32px 28px;
   font-size: 28px;
-  color: #5F704D;
   line-height: normal;
   -webkit-border-radius: 8px;
      -moz-border-radius: 8px;

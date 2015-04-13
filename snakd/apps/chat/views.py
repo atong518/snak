@@ -313,3 +313,17 @@ def submit_feedback(request):
         messages.add_message(request, messages.INFO, message_text, fail_silently=True)
 
     return redirect(chat)
+
+
+def reset_counter(request):
+    try:
+        user = _specify_class(request.user)
+        if isinstance(user, CollegeUser):
+            user.next_match = datetime.now()
+        user.save()
+    except:
+        pass
+    return redirect(chat)
+
+
+

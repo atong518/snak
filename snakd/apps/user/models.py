@@ -209,6 +209,14 @@ class CollegeUser(GenericUser):
     def collegeuser(self):
         return True
 
+    def available(self):
+        if datetime.now() > self.next_match:
+            return True
+        return False
+
+    def next_match_text(self):
+        return "Next available: " + self.next_match.strftime("%B %d, %Y")
+
 class ProspieUser(GenericUser):
     objects = ProspieUserManager()
 

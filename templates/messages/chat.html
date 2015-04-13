@@ -99,9 +99,20 @@ function getMatchedUserNames() {
     {% endfor %}
     </ul>
 
-    <form id="match-me" method="GET">
-      <button type="submit" class="btn btn-danger btn-large btn-match-me" id="btn-match-me">Match Me!</button>
-    </form>
+    {% if current_user.collegeuser %}
+      <form id="reset-counter" method="POST" action="{% url 'reset_counter' %}">
+        {% csrf_token %}
+        {% if current_user.available %}
+          <button type="submit" class="btn btn-info btn-large btn-match-me" id="btn-match-me" disabled>Waiting for matches!</button>
+        {% else %}
+          <button type="submit" class="btn btn-danger btn-large btn-match-me" id="btn-match-me" title="{{ current_user.next_match_text }}">Make me available!</button>
+        {% endif %}
+      </form>
+    {% else %}
+      <form id="match-me" method="GET">
+        <button type="submit" class="btn btn-danger btn-large btn-match-me" id="btn-match-me">Match Me!</button>
+      </form>
+    {% endif %}
   </div>
   <!--current message-->
   <div class="col-md-6 well box">

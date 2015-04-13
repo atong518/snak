@@ -38,6 +38,10 @@ def chat(request):
     user = GenericUser.objects.filter(id=user_pk)[0]
     user = _specify_class(user)
     matched_users = user.matches.all()
+    # force to interest select page if <3 interests
+    if (len(user.interests.all()) < 1):
+        return redirect("/interest/show")
+
 
     # message_text = "debug"
     # messages.add_message(request, messages.INFO, message_text, fail_silently=True)

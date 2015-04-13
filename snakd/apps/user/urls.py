@@ -36,6 +36,9 @@ urlpatterns = patterns('',
     # user authentication page
     url(r'^confirm_email/(?P<activation_code>\w+)/(?P<email>([a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+)/', views.confirm_email, name="confirm_email"),
 
+    # resend confirmation email
+    url('^resend_confirmation_email/$', views.resend_confirmation_email, name="resend_confirmation_email"),
+
     url(r'^settings/$', views.edit, name='settings'),
 
     url(r'^match/$', views.match, name='match'),

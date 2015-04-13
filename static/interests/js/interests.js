@@ -175,10 +175,18 @@ $(".selectbtn").click(function(element) {
 
 $(".selectbtn").mouseover(function(element) {
 	jsn = JSON.parse(element.toElement.firstElementChild.textContent);
-	$("#interest-tooltip-div").text(jsn["tooltip"]);
+	if (jsn["tooltip"] == null)
+	    $("#interest-tooltip-div").text("No extra information provided");
+	else
+	    $("#interest-tooltip-div").text(jsn["tooltip"]);
 	$("#interest-tooltip-title").text("About " + jsn["name"]);
     });
-    
+
+$(".selectbtn").mouseout(function(element) {
+	$("#interest-tooltip-title").text("About this interest");
+	$("#interest-tooltip-div").text("Hover over an interest to read more about it.");
+    });
+
 // Section management functions
 updateTitle = function(newtitle) {
     $(".topbar").text(newtitle)

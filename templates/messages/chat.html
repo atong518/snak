@@ -39,6 +39,14 @@ function getMatchedUserNames() {
   return names;
 }
 
+function is_college_user() {
+  if("{{ current_user.collegeuser }}" == "True") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 </script>
 <script type="text/javascript" src="{% static 'messages/js/chat.js' %}"></script>
 <script type="text/javascript" src="{% static 'messages/js/typeahead.jquery.js' %}"></script>
@@ -103,7 +111,7 @@ function getMatchedUserNames() {
       <form id="reset-counter" method="POST" action="{% url 'reset_counter' %}">
         {% csrf_token %}
         {% if current_user.available %}
-          <button type="submit" class="btn btn-info btn-large btn-match-me" id="btn-match-me" disabled>Waiting for matches!</button>
+          <button type="submit" class="btn btn-info btn-large btn-reset-counter" id="btn-reset-counter" disabled>Waiting for matches!</button>
         {% else %}
           <button type="submit" class="btn btn-danger btn-large btn-match-me" id="btn-match-me" title="{{ current_user.next_match_text }}">Make me available!</button>
         {% endif %}

@@ -215,7 +215,7 @@ class CollegeUser(GenericUser):
         return False
 
     def next_match_text(self):
-        return "Next available: " + self.next_match.strftime("%B %d, %Y")
+        return "Next available: " + self.next_match.strftime("%a, %B %d, %Y")
 
 class ProspieUser(GenericUser):
     objects = ProspieUserManager()

@@ -1,7 +1,0 @@
-# THIS FILE SHOULD NOT BE PUSHED TO GIT
-
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'sagelyio@gmail.com'
-EMAIL_HOST_PASSWORD = 'HackedOnEaster2015'
-EMAIL_PORT = 587

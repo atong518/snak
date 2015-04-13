@@ -122,7 +122,9 @@ function getMatchedUserNames() {
 <!-- TODO: Multiperson chats!  or not? I thought this wasn't a thing anymore  -->
 <!-- 	    <li><a data-toggle="modal" href="#addPersonToThread">Add a Person</a></li> -->
 	    <li><a data-toggle="modal" href="#reportAPersonModal">Report Conversation</a></li>
-	    <li><a data-toggle="modal" href="#nudgeAPersonModal">Nudge Person</a></li>
+      {% if not current_user.collegeuser %}
+  	    <li><a data-toggle="modal" href="#nudgeAPersonModal">Nudge Person</a></li>
+      {% endif %}
 	  </ul>
 	</div>
     </div>

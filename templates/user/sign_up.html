@@ -28,11 +28,7 @@ function toggleStudentType() {
 </script>
 
 <div class="row buffer-row">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-    <hr class="snak-divider">
-  </div>
-  <div class="col-md-2"></div>
+  <hr class="snak-divider">
 </div>
 
 <div class="row">
@@ -61,7 +57,7 @@ function toggleStudentType() {
       </div>
       {% endfor %}
       <div class="signup-submit-holder">
-        <input class="btn btn-primary" type="submit" value="Submit" name="prospie_signup">
+        <input class="btn btn-primary" type="submit" id="submitCP" value="Submit" name="prospie_signup">
       </div>
     </form>
     <form class="form-horizontal" data-toggle="validator" role="form" id="college_form" method="post" action=".">
@@ -75,10 +71,10 @@ function toggleStudentType() {
       </div>
       {% endfor %}
       <div class = "signup-submit-holder">
-        <input type="submit" class="btn btn-primary" value="Submit" name="college_signup">
+        <input type="submit" class="btn btn-primary" id="submitCP" value="Submit" name="college_signup">
       </div>
     </form>
-    <h5 class="centered">Already have an account? <a href="{% url 'login' %}">Login</a></h5>
+    <h4 class="centered">Already have an account? <a href="{% url 'login' %}">Login</a></h4>
 <!--    <a href="{% url 'splash' %}">Back</a>-->
   </div>
   <div class="col-md-4"></div>

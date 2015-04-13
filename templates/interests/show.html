@@ -37,8 +37,8 @@ function getIStrings() {
 </div>
 <div class="row interests-row">
   <div class="col-sm-7 lefthalf">
-    <div class="well interests-well">
-      <div id="scrollable-dropdown-menu">
+    <div class="well interests-well col-md-12">
+      <div id="scrollable-dropdown-menu row">
 	<input type="text" placeholder="Search for interests" class="form-control search-box" id="interests-searchbar" onkeypress="return interestEnteredFromSearch(event);">
 	<!--span class="glyphicon glyphicon-chevron-up pull-right up-arrow"></span-->
 	<input type="hidden" id="interest-id-searchbox" value="none">
@@ -53,7 +53,7 @@ function getIStrings() {
 	    {% endfor %}
 	  </ul>
 	</div>
-	<div id="interest-hover-box" class="col-md-offset-3 col-md-3">
+	<div id="interest-hover-box" class="col-md-3">
 	  <h4 id="interest-tooltip-title">About this interest</h4>
 	  <div id="interest-tooltip-div">Hover over an interest to read more about it.</div>
 	</div>

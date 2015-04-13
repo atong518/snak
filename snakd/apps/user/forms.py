@@ -52,7 +52,7 @@ class GenericSignupForm(UserCreationForm):
         cleaned_data = super(GenericSignupForm, self).clean()
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
-
+        email = cleaned_data.get('email').lower()
         if password1 and password2 and password1 == password2:
             print "pwd ok"
         else:

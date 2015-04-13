@@ -90,10 +90,10 @@ def chat(request):
             msg.send()
         
         messages.add_message(request, messages.INFO, message_text, fail_silently=True)
-
     return render(request, 'messages/chat.html',
                   {'inbox_threads' : inbox,
-                   'matched_users' : matched_users})
+                   'matched_users' : matched_users,
+                   'current_user' :  _specify_class(request.user)})
 
 def check_for_new_messages(request):
     if request.method == 'POST' and len(request.POST.get('thread_id')) > 0:

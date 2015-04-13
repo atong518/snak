@@ -206,7 +206,13 @@ class CollegeUser(GenericUser):
             intro += "<br>Here's a short bio about " + self.firstname + ": " + self.bio + "<br>"
         return intro
 
+    def collegeuser(self):
+        return True
+
 class ProspieUser(GenericUser):
     objects = ProspieUserManager()
+
+    def collegeuser(self):
+        return False
 
 

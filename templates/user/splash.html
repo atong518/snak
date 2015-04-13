@@ -21,7 +21,20 @@
       document.getElementById('college_info').style.display = 'none';
       document.getElementById('prospie_how').style.display = 'TEST';
       document.getElementById('college_how').style.display = 'none';
-    document.getElementById('studentType').value = "prospie"
+      document.getElementById('studentType').value = "prospie"
+    });
+
+    $('#downbutton').click(function(){
+      $.fn.fullpage.moveSectionDown();
+    });
+
+
+    $('#upbutton').click(function(){
+      $.fn.fullpage.moveSectionUp();
+    });
+
+    $.fn.fullpage({
+      fixedElements: '#downbutton, #upbutton'
     });
 
     function toggleDisplayInfo() {
@@ -96,7 +109,7 @@
       </div>
       <div class="row buffer-row">
 	<div class="centered">
-	  <button type="button" class="btn btn-lg btn-default disabled" aria-label="Page Down">
+	  <button type="button" class="btn btn-lg btn-default disabled" style="background: transparent; border-color: transparent;" id="downbutton" aria-label="Page Down">
 	    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 	  </button>
 	</div>
@@ -109,7 +122,7 @@
     <div class="section">
       <div class="row buffer-row">
 	<div class="centered">
-          <button type="button" class="btn btn-lg btn-default disabled" aria-label="Page Down">
+          <button type="button" class="btn btn-lg btn-default disabled" style="background: transparent; border-color: transparent;" id="upbutton" aria-label="Page Down">
             <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
           </button>
         </div>

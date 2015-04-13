@@ -15,12 +15,10 @@ from snakd.apps.user.views import login
 def sortInbox(inbox):
     for thread in range(len(inbox)-1,0,-1):
         for i in range(thread):
-            import pdb; pdb.set_trace()
             if inbox[i].mostRecentMessage() >inbox[i+1].mostRecentMessage():
                 temp = inbox[i]
                 inbox[i] = inbox[i+1]
                 inbox[i+1] = temp
-    import pdb; pdb.set_trace()
     return inbox
 
 
@@ -36,8 +34,10 @@ def chat(request):
     # inbox = Thread.objects.filter(members__id=user_pk)
     # inbox = sortInbox(inbox)
     inbox = Thread.objects.in_a_number_order(members__id=user_pk)
-    # get all users matched with the logged-in user
-    matched_users = GenericUser.objects.all() # TODO CHANGE THIS ONCE WE HAVE A WAY TO GET MATCHED USERS
+
+    user = GenericUser.objects.filter(id=user_pk)[0]
+    user = _specify_class(user)
+    matched_users = user.matches.all()
 
     # message_text = "debug"
     # messages.add_message(request, messages.INFO, message_text, fail_silently=True)
@@ -313,3 +313,17 @@ def submit_feedback(request):
         messages.add_message(request, messages.INFO, message_text, fail_silently=True)
 
     return redirect(chat)
+
+
+def reset_counter(request):
+    try:
+        user = _specify_class(request.user)
+        if isinstance(user, CollegeUser):
+            user.next_match = datetime.now()
+        user.save()
+    except:
+        pass
+    return redirect(chat)
+
+
+

@@ -255,7 +255,9 @@ $(document).ready(function(){
         populateThread(element.value.id)
     });
 
-
+  if(!is_college_user() && names.length == 0) {
+    $("#btn-match-me")[0].click()
+  }
 });
 
 function _poll(threadId) {

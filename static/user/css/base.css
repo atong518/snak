@@ -1,10 +1,18 @@
+/*
+  sage: #9C9F84
+  light green: 	#CDD1B6
+  green: #5C755E
+  blue: #626F83
+  red: #52230C
+*/
+
 html {
   overflow-y: scroll;
 }
 
 body {
-  background: #A6B09D; 
-  color: #5F704D; 
+  background: #9C9F84;
+  color: #5C755E;
   height: 100%;
   font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif; 
   padding: 10px;
@@ -37,7 +45,7 @@ a:active {
 
 
 .snak-divider {
-  border-top-color: rgb(110, 47, 16);
+  border-top-color: rgb(98, 111, 131);
   border-top-width: 3px;
 }
 
@@ -79,16 +87,18 @@ img{
 }
 
 #submitCP {
-  float: right;
-  margin-right: 30px;
+  color: #52230C;
+  background-color: transparent;
+  border-color: #52230C;
+  border: 2px solid;
+  float: center;
+  
 }
 
-/*
-
 .btn-success {
- color: #5F704D;
+ color: #5C755E;
  background-color: transparent;
- border-color: #5F704D;
+ border-color: #5C755E;
  border: 2px solid;
 }
 
@@ -96,27 +106,27 @@ img{
 .btn-success:focus,
 .btn-success:active,
 .btn-success.active {
-  color: #5F704D;
-  background-color: #DCDCC6;
-  border-color: #5F704D;
+  color: #5C755E;
+  background-color: #CDD1B6;
+  border-color: #5C755E;
 }
 
 .btn-success:hover,
 .btn-success:focus,
 .btn-success:active,
 .btn-success.hover {
-  color: #5F704D;
-  background-color: #DCDCC6;
-  border-color: #5F704D;
+  color: #5C755E;
+  background-color: #CDD1B6;
+  border-color: #5C755E;
 }
 
 .btn-success:hover,
 .btn-success:focus,
 .btn-success:active,
 .btn-success.focus {
-  color: #5F704D;
-  background-color: #DCDCC6;
-  border-color: #5F704D;
+  color: #5C755E;
+  background-color: #CDD1B6;
+  border-color: #5C755E;
 }
 
 
@@ -129,9 +139,9 @@ ul.dropdown {
 }
 
 .btn-primary {
-  color: #5F704D; 
+  color: #52230C;
   background-color: transparent;
-  border-color: #5F704D;
+  border-color: #52230C;
   border: 2px solid;
 }
 
@@ -139,18 +149,17 @@ ul.dropdown {
 .btn-primary:focus,
 .btn-primary:active,
 .btn-primary.active {
-  color: #5F704D;
-  background-color: #6E2F10;
-  border-color: #5F704D;
+  color: #52230C;
+  background-color: #626F83;
+  border-color: #52230C;
 }
 
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
 .btn-primary.hover {
-  color: #5F704D;
-  background-color: #6E2F10;
-  border-color: #5F704D;
+  color: #52230C;
+  background-color: #626F83;
+  border-color: #52230C;
 }
 
-*/

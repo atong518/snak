@@ -1,9 +1,8 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, render_to_response, redirect
 from snakd.apps.user.models import ProspieUser, CollegeUser, GenericUser
 from snakd.apps.user.forms import ProspieSignupForm, CollegeSignupForm, CollegeSettingsForm, ProspieSettingsForm
-from django.shortcuts import render_to_response, redirect
 from django.http import HttpResponse
-from django.template import RequestContext, loader
+from django.template import RequestContext, loader, Context
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login
 from django.conf import settings
@@ -14,17 +13,12 @@ from snakd.lib.match import bestmatches
 from snakd.lib.matrix import getMatrix
 from datetime import datetime, timedelta
 import json
-
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
 from snakd.apps.user.forms import ContactUsForm
-from django.template import RequestContext, Context
 #from django import newforms as forms
 from django import forms
 from django.forms.widgets import *
 from django.core.mail import send_mail, BadHeaderError
-
+from snakd.apps.chat.models import Thread
 
 # Create your views here.
 def splash(request):
@@ -230,4 +224,14 @@ def match(request):
             content_type='application/json')
     except:
         return HttpResponseRedirect('/')
+
+def about_match(request):
+    thread = Thread.objects.filter(id=request.GET['thread_id'])[0]
+    match = thread.members.exclude(email=request.user.email)[0]
+    match = _specify_class(match)
+    about = match.introText()
+    return HttpResponse(
+            json.dumps({"about": about}), 
+            content_type='application/json')
+
 

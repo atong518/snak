@@ -139,6 +139,7 @@ function is_college_user() {
 	    <li><a data-toggle="modal" href="#reportAPersonModal">Report Conversation</a></li>
       {% if not current_user.collegeuser %}
   	    <li><a data-toggle="modal" href="#nudgeAPersonModal">Nudge Person</a></li>
+        <li><a data-toggle="modal" href="#aboutYourMatchModal">About Your Match</a></li>
       {% endif %}
 	  </ul>
 	</div>
@@ -238,6 +239,24 @@ function is_college_user() {
       </div>
       <div class="modal-body">
         <div id="modal-apology"> It doesn't look like there are any new people for us to match you with. Check back soon, or else we can just email you the minute you've got someone to talk to!</div><br>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- About Your Match Modal -->
+<div id="aboutYourMatchModals">
+  <div class="modal fade" id="aboutYourMatchModal" tabindex="-1" role="dialog" aria-labelledby="myMatchModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">About Your Match!</h4>
+        </div>
+        <br><div style="text-align:center" id="about-your-match-modal-body"></div>
+        <div style="text-align:center" class="row">
+          <div class="modal-body" style="display: inline-block"></div>
+        </div>
       </div>
     </div>
   </div>

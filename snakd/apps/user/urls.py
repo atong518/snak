@@ -42,4 +42,6 @@ urlpatterns = patterns('',
     url(r'^settings/$', views.edit, name='settings'),
 
     url(r'^match/$', views.match, name='match'),
+
+    url(r'^about_match/$', views.about_match, name='about_match'),
 )

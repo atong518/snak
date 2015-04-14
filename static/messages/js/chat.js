@@ -201,6 +201,38 @@ $(document).ready(function(){
 	  getDropdownMembersOfThread("#members-to-nudge");
   });
 
+  $("#aboutYourMatchModal").on('show.bs.modal', function() {
+    // get id of the thread that is activated
+    var selectedThreadId = $(".active-link").attr("id");
+    
+    // ensure that there is a thread activated
+    if (typeof selectedThreadId == "undefined") {
+      alert("Please select a thread to send your message in!");
+    }
+    else {
+      selectedThreadId = selectedThreadId.split("-")[2];
+    }
+
+    $.ajax({
+      url : "/about_match/", // the endpoint
+        type : "GET", // http method
+        data : { thread_id : selectedThreadId }, // data sent with the post request
+    
+        // handle a successful response
+        success : function(json) {
+          if(json.about){
+            $("#about-your-match-modal-body")[0].innerHTML = json.about
+            $('#aboutYourMatchModal').modal('show');
+          }
+        },
+    
+        // handle a non-successful response
+        error : function(xhr,errmsg,err) {
+        }
+  });
+    getDropdownMembersOfThread("#members-to-nudge");
+  });
+
   // scroll down!
   scrollDown();
 

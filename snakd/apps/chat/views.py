@@ -8,7 +8,7 @@ from django.contrib import messages
 from snakd.apps.user.models import GenericUser, ProspieUser, CollegeUser
 from snakd.apps.chat.models import Thread, Message
 from snakd.apps.user.models import GenericUser
-from datetime import datetime, timedelta, date
+from datetime import datetime, timedelta
 
 from snakd.apps.user.views import login
 
@@ -43,10 +43,11 @@ def chat(request):
         return redirect("/interest/show")
 
 
-    # message_text = "debug"
-    # messages.add_message(request, messages.INFO, message_text, fail_silently=True)
-    
+    # confirmation_text = "debug"
+    # messages.add_message(request, messages.INFO, confirmation_text, fail_silently=True)
+
     # Nudge person logic
+    # TODO this happens every page request
     if request.method == "POST" and request.POST.get("reported-name") and request.POST.get("selected-thread-id"):
         # get user email
         threadId = request.POST.get("selected-thread-id")
@@ -55,23 +56,19 @@ def chat(request):
         lastname = request.POST.get("reported-name").split(" ")[1]
         nudgedUser = thread.members.filter(firstname=firstname, lastname=lastname).first()
 
-        message_text = "Thanks for letting us know! We've nudged " + firstname + " for you!"
-        
-        nudger = thread.mostRecentMessageRef().sender
-        if isinstance(nudger, CollegeUser):
-            message_text = "Don't nudge a prospie! They're really stressed at high school and have no time for you."
-
         # if last message is fewer than 5 days old, display wait message and don't send email
-        elif thread.mostRecentMessage() > (date.today() - timedelta(days=3)):
-            message_text = "Let's give " + firstname + " a little more time to answer!"
+        if thread.mostRecentMessage() > datetime.now() - timedelta(days=3):
+            confirmation_text = "Let's give " + firstname + " a little more time to answer!"
 
         # only send nudge if the nudger has sent the last message
-        elif nudger == nudgedUser:
-            message_text = "Why don't you answer " + firstname + " first before nudging!"
+        # TODO don't think this works
+        elif thread.mostRecentMessageRef().sender is nudgedUser:
+            confirmation_text = "Why don't you answer " + firstname + " first before nudging!"
 
         # send email
         else:
-            # DEBUG THIS plz
+            confirmation_text = "Thanks for letting us know! We've nudged " + firstname + " for you!"
+
             from_email = settings.EMAIL_HOST_USER
             to_email = nudgedUser.email
 
@@ -84,16 +81,17 @@ def chat(request):
             message += "The Sagely Team"
 
             html_message =  "<h3>Hi " + firstname + '''!</h3>
-                        <p>Greetings from Sagely! Your match''' + request.user.firstname + '''</p>
-                        <p>asked us to check on you - it looks like you haven't gotten a chance to respond in the past few days!</p>
+                        <p>Greetings from Sagely! Your match ''' + request.user.firstname + ''' asked us to check on you - it looks like you haven't gotten a chance to respond in the past few days!</p>
                         <p>''' + request.user.firstname + ''' is waiting for your advice! Head <a href="www.sagely.io">here</a> to help!</p>
-                        <p>Cheers!</p><p><b>The Sagely Team</b></p>'''
+                        <br></br><p>Cheers!</p><br></br><p><b>The Sagely Team</b></p>'''
 
             msg = EmailMultiAlternatives(subject, message, from_email, {to_email})
             msg.attach_alternative(html_message, "text/html")
-            msg.send()
+            # msg.send()
         
-        messages.add_message(request, messages.INFO, message_text, fail_silently=True)
+        # messages.add_message(request, messages.INFO, confirmation_text, fail_silently=True)
+
+
     return render(request, 'messages/chat.html',
                   {'inbox_threads' : inbox,
                    'matched_users' : matched_users,

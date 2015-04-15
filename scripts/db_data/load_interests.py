@@ -21,6 +21,7 @@ dic = {
 # create the root
 root_node, created = Interest.objects.get_or_create(hidden=True, **dic)
 
+# test code for creating dummy interests
 # count = 0
 # for name in ["Academics", "Athletics", "Extracurriculars"]:
 # 	dic["name"] = name

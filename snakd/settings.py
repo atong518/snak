@@ -46,7 +46,8 @@ INSTALLED_APPS = (
     'snakd.apps.chat',
     'scripts',
     'scripts.db_data',
-    'memoize'
+    'memoize',
+    'favicon'
 )
 
 MIDDLEWARE_CLASSES = (

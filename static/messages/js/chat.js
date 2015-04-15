@@ -468,6 +468,7 @@ function getDropdownMembersOfThread(divName) {
     var result;
     if (members.length == 1) { 
         result = '<input type="hidden"  name="reported-name" value="' + members[0].trim() + '">';
+        result += '<input type="hidden"  name="selected-thread-id" value="' + selectedThreadId + '">'
         $(divName).html(result + members[0].trim());
         return;
     }

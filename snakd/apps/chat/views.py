@@ -327,7 +327,9 @@ def reset_counter(request):
         user.save()
     except:
         pass
-    return redirect(chat)
+    return HttpResponse(
+            json.dumps({}),
+            content_type="application/json")
 
 
 

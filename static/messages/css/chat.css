@@ -20,6 +20,17 @@
   bottom: 0;
 }
 
+.btn-reset-counter {
+  color: #626F83
+  background-color: transparent;
+  border-color: #626F83;
+  border: 2px solid;
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+}
+
 #alert-message {
   position: absolute;
   width: 96.5%;

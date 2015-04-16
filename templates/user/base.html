@@ -28,6 +28,8 @@ Then surround all code with
 {% block extrastyle %}{% endblock %}
 {% block extra_js %}{% endblock %}
 
+
+<link rel="shortcut icon" href="../../static/app/ico/favicon.ico" />
 </head>
 
 <div class="row">
@@ -60,7 +62,7 @@ Then surround all code with
 
 <div class="row">
   <div class="col-md-12" id="footer">
-    <ul class="nav nav-pills pull-right">
+    <ul.a class="nav nav-pills pull-right">
       <li><a href="{% url 'splash' %}">Home</a></li>
       <li><a href="{% url 'aboutus' %}">About Us</a></li>
       {% if user.is_authenticated %}
@@ -70,7 +72,7 @@ Then surround all code with
       {% else %}
         <li><a href="{% url 'contactus' %}">Contact Us</a></li>
       {% endif %}
-    </ul>
+    </ul.a>
   </div>
 </div>
 

@@ -126,8 +126,8 @@ TEMPLATE_DIRS = [os.path.join(PROJECT_APP_ROOT, 'templates')]
 # Email confirmation stuffs
 from .email_settings import *
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'snakdartmouth@gmail.com'
-EMAIL_HOST_PASSWORD = 'dartmouth2015rules'
+EMAIL_HOST_USER = 'sagelyio@gmail.com'
+EMAIL_HOST_PASSWORD = 'HackedOnEaster2015'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

@@ -89,10 +89,12 @@ ul {
   padding-left: 0;
   padding-bottom: 20px;
 }
+
 ul li {
   font-size: 28px;
   text-align: center;
 }
+
 ul ul li {
   border: none;
   text-align: left;
@@ -106,6 +108,10 @@ ul ul ul li {
 #submit-interests-btn {
   width: 90%;
   height: 40px;
+  color: #52230C;
+  background-color: transparent;
+  border-color: #52230C;
+  border: 2px solid;
 }
 
 #interest-hover-box {

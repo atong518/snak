@@ -132,10 +132,12 @@ img{
 
 ul.dropdown-menu {
     background-color: #DCDCC6;
+    color: #CDD1B6;
 }
 
 ul.dropdown {
  background-color: #DCDCC6;
+  color: #CDD1B6;
 }
 
 .btn-primary {

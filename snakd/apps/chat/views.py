@@ -21,6 +21,19 @@ def sortInbox(inbox):
                 inbox[i+1] = temp
     return inbox
 
+def millisToDays(millis):
+    secs = millis / 1000
+    hours = secs / 3600
+    return hours / 24
+
+# http://stackoverflow.com/questions/6999726/how-can-i-convert-a-datetime-object-to-milliseconds-since-epoch-unix-time-in-p
+def unix_time(dt):
+    epoch = datetime.utcfromtimestamp(0)
+    delta = dt - epoch
+    return delta.total_seconds()
+
+def unix_time_millis(dt):
+    return unix_time(dt) * 1000.0
 
 def chat(request):
     # get logged in user id
@@ -38,17 +51,16 @@ def chat(request):
     user = GenericUser.objects.filter(id=user_pk)[0]
     user = _specify_class(user)
     matched_users = user.matches.all()
-    # force to interest select page if <3 interests
-    if (len(user.interests.all()) < 1):
+    # force to interest select page if fewer than 3 interests
+    if (len(user.interests.all()) < 3): # this used to be 1?
         return redirect("/interest/show")
-
 
     # confirmation_text = "debug"
     # messages.add_message(request, messages.INFO, confirmation_text, fail_silently=True)
 
     # Nudge person logic
     # TODO this happens every page request
-    if request.method == "POST" and request.POST.get("reported-name") and request.POST.get("selected-thread-id"):
+    if request.method == "POST" and request.POST.get("nudge-a-person")=="true" and request.POST.get("reported-name") and request.POST.get("selected-thread-id"):
         # get user email
         threadId = request.POST.get("selected-thread-id")
         thread = Thread.objects.get(pk=threadId)
@@ -56,8 +68,8 @@ def chat(request):
         lastname = request.POST.get("reported-name").split(" ")[1]
         nudgedUser = thread.members.filter(firstname=firstname, lastname=lastname).first()
 
-        # if last message is fewer than 5 days old, display wait message and don't send email
-        if thread.mostRecentMessage() > datetime.now() - timedelta(days=3):
+        # if last message is fewer than 3 days old, display wait message and don't send email
+        if millisToDays(thread.mostRecentMessage()) < millisToDays(unix_time_millis(datetime.now())) + 3:
             confirmation_text = "Let's give " + firstname + " a little more time to answer!"
 
         # only send nudge if the nudger has sent the last message
@@ -89,7 +101,8 @@ def chat(request):
             msg.attach_alternative(html_message, "text/html")
             # msg.send()
         
-        # messages.add_message(request, messages.INFO, confirmation_text, fail_silently=True)
+        # confirmation_text = request.POST.get("nudge-a-person")=="true"
+        messages.add_message(request, messages.INFO, confirmation_text, fail_silently=True)
 
 
     return render(request, 'messages/chat.html',

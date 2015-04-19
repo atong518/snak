@@ -39,7 +39,7 @@ class GenericSignupForm(UserCreationForm):
             
 
     def save_user(self, data):
-        user = GenericUser.objects.create_user(email=data['email'],
+        user = GenericUser.objects.create_user(email=data['email'].lower(),
                                                firstname=data['firstname'],
                                                lastname=data['lastname'],
                                                homecountry=data['homecountry'],
@@ -86,7 +86,7 @@ class CollegeSignupForm(GenericSignupForm):
         fields = GenericSignupForm.Meta.fields + ['bio'] + ['max_match_frequency']
 
     def save_user(self, data):
-        user = CollegeUser.objects.create_user(email=data['email'],
+        user = CollegeUser.objects.create_user(email=data['email'].lower(),
                                                firstname=data['firstname'],
                                                lastname=data['lastname'],
                                                homecountry=data['homecountry'],
@@ -118,7 +118,7 @@ class CollegeSignupForm(GenericSignupForm):
             'placeholder': 'Email',
             'pattern':'^[a-zA-Z0-9._\'-]+[0-9]@'+'dartmouth.edu'+'$',
             'data-error': "Please provide a full first.m.last.##@dartmouth.edu email address",
-            'required': 'true'})
+            'required': 'true'})#.lower()
         self.fields['max_match_frequency'].widget = Select(attrs={
             'class': 'form-control',
             'required': 'true',
@@ -147,7 +147,7 @@ class ProspieSignupForm(GenericSignupForm):
         fields = GenericSignupForm.Meta.fields
 
     def save_user(self, data):
-        user = ProspieUser.objects.create_user(email=data['email'],
+        user = ProspieUser.objects.create_user(email=data['email'].lower(),
                                                firstname=data['firstname'],
                                                lastname=data['lastname'],
                                                homecountry=data['homecountry'],
@@ -210,7 +210,7 @@ class GenericSettingsForm(UserChangeForm):
             'class': 'form-control',
             'initial': kwargs.get('email', "Email"),
             'data-valid-error': "Yikes, that email address is invalid",
-            'required': 'true'})
+            'required': 'true'})#.lower()
         self.fields['firstname'].widget = TextInput(attrs={
             'class': 'form-control',
             'placeholder': 'First Name',
@@ -238,7 +238,7 @@ class CollegeSettingsForm(GenericSettingsForm):
 
     def update_user(self, data):
         user = self.instance
-        user.email = data['email']
+        user.email = data['email'].lower()
         user.bio = data['bio']
         user.max_match_frequency = data['max_match_frequency']
         user.firstname = data['firstname']
@@ -266,7 +266,7 @@ class ProspieSettingsForm(GenericSettingsForm):
 
     def update_user(self, data):
         user = self.instance
-        user.email = data['email']
+        user.email = data['email'].lower()
         user.firstname = data['firstname']
         user.lastname = data['lastname']
         user.firstname = data['firstname']

@@ -356,7 +356,7 @@ function _poll(threadId) {
 			text = val[0];
 			sender_email = val[1];
 
-			messages_html += '<div class="row" style="margin-top: 10px">';
+			messages_html += '<div class="row">';
 			if (sender_email == getLoggedInUserEmail()) 
 			    messages_html += '<p class="chat-message sent pull-right">';
 			else
@@ -365,8 +365,8 @@ function _poll(threadId) {
 		    });
 
 		$("#thread-" + threadId).html(messages_html);
-		//		console.log("checked...");
-		if (SCROLL_BOOLEAN == "true") {
+
+		if (SCROLL_BOOLEAN != "false") {
 		    scrollDown();
 		}
 

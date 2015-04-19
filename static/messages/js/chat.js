@@ -71,7 +71,6 @@ $(document).ready(function(){
   });
 
   window.onload = function() {
-    // TODO don't fadeout if person was nudged
     $("#alert-message").delay(3000).fadeOut();
   }
 
@@ -220,7 +219,7 @@ $(document).ready(function(){
 
   // nudge person members population
   $("#nudgeAPersonModal").on('show.bs.modal', function() {
-	  getDropdownMembersOfThread("#members-to-nudge");
+	  getDropdownMembersOfThread("#members-to-nudge", true);
   });
 
   $("#aboutYourMatchModal").on('show.bs.modal', function() {
@@ -435,10 +434,10 @@ function sendMessage() {
     
     // ensure that there is a thread activated
     if (typeof selectedThreadId == "undefined") {
-	alert("Please select a thread to send your message in!");
+      alert("Please select a thread to send your message in!");
     }
     else {
-	selectedThreadId = selectedThreadId.split("-")[2];
+      selectedThreadId = selectedThreadId.split("-")[2];
     }
     
     // get text of message to be sent
@@ -512,7 +511,12 @@ function _addedToThread(addedUserName) {
     
 }
 
-function getDropdownMembersOfThread(divName) {
+function getDropdownMembersOfThread(divName, nudge) {
+    if (typeof nudge == "undefined") {
+      nudge = false;
+    }
+    //nudge = typeof boolean !== 'undefined' ? a : false;
+
     var selectedThreadId = $(".active-link").attr("id");
     if (typeof selectedThreadId == "undefiend") {
       alert("Please select a thread to report someone from!");
@@ -526,11 +530,12 @@ function getDropdownMembersOfThread(divName) {
     var result;
     if (members.length == 1) { 
         result = '<input type="hidden"  name="reported-name" value="' + members[0].trim() + '">';
-        result += '<input type="hidden"  name="selected-thread-id" value="' + selectedThreadId + '">'
+        result += '<input type="hidden"  name="selected-thread-id" value="' + selectedThreadId + '">';
+        result += '<input type="hidden"  name="nudge-a-person" value="' + nudge + '">';
         $(divName).html(result + members[0].trim());
         return;
     }
-    
+    // this code isn't reached without group chats
     result = '<select class="form-control" name="reported-name">';
     for (var index=0; index < members.length; index++) {
         result += '<option value="' + members[index].trim() + '">' + members[index].trim() + "</option>";

@@ -11,28 +11,6 @@
   margin: 0;
 }
 
-.button-success {
-  color: white;
-  border: 1px solid;
-  border-color: #398439;
-  border-radius: 2px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  background: #5cb85c;
-}
-
-.button-success:hover {
-  color: white;
-  border: 1px solid;
-  border-color: #398439;
-  border-radius: 2px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  background: #449d44;
-}
-
-.button-success:active {
-  background-color: #fff;
-}
-
 #btn-match-me {
   width: 100%;
   margin: 0;

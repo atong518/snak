@@ -11,12 +11,18 @@ html {
 }
 
 body {
-  background: #9C9F84;
+
+  background-image: url("../jpg/DHall.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;	
   color: #5C755E;
   height: 100%;
   font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif; 
   padding: 10px;
 }
+
+
 
 a:link {
   color: #52230C;
@@ -34,6 +40,10 @@ a:active {
   color: #52230C;
 }
 
+
+a div h1 {
+ color: #5C755E;
+}
 
 .header-row {
   height: 5%;
@@ -165,3 +175,36 @@ ul.dropdown {
   border-color: #52230C;
 }
 
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active {
+  box-shadow: none;
+  outline: 0 none;
+  border: 0 none;
+  color: #5C755E;
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.hover {
+  box-shadow: none;
+  outline: 0 none;
+  border: 0 none;
+  color: #5C755E;
+}
+
+.btn-default {
+  box-shadow: none;
+  outline: 0 none;
+  border: 0 none;
+  color: #5C755E;
+}
+
+#btn-logo {
+  background-color: transparent;
+  width: 95%;
+  margin-left: 2.5%;
+  box-shadow: none;		
+}

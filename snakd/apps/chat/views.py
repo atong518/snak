@@ -56,7 +56,8 @@ def chat(request):
         lastname = request.POST.get("reported-name").split(" ")[1]
         nudgedUser = thread.members.filter(firstname=firstname, lastname=lastname).first()
 
-        # if last message is fewer than 5 days old, display wait message and don't send email
+        # if last message is fewer than 3 days old, display wait message and don't send email
+        # TODO change to millisecond integer comparison
         if thread.mostRecentMessage() > datetime.now() - timedelta(days=3):
             confirmation_text = "Let's give " + firstname + " a little more time to answer!"
 

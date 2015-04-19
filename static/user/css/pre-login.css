@@ -100,3 +100,37 @@ ul.dropdown {
      -moz-border-radius: 8px;
           border-radius: 8px;
 }
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active {
+  box-shadow: none;
+  outline: 0 none;
+  border: 0 none;
+  color: #5C755E;
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.hover {
+  box-shadow: none;
+  outline: 0 none;
+  border: 0 none;
+  color: #5C755E;
+}
+
+.btn-default {
+  box-shadow: none;
+  outline: 0 none;
+  border: 0 none;
+  color: #5C755E;
+}
+
+#btn-logo {
+  background-color: transparent;
+  width: 95%;
+  margin-left: 2.5%;
+  box-shadow: none;
+}

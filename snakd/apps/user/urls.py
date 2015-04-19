@@ -44,4 +44,8 @@ urlpatterns = patterns('',
     url(r'^match/$', views.match, name='match'),
 
     url(r'^about_match/$', views.about_match, name='about_match'),
+
+    url(r'^send_password_email/$', views.send_password_email, name='send_password_email'),
+
+    url(r'^reset_password/$', views.reset_password, name='reset_password'),
 )

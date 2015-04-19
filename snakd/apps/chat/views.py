@@ -265,7 +265,7 @@ def refer_friend(request):
         msg.attach_alternative(html_message, "text/html")
         msg.send()
 
-        message_text = "Thanks for spreading the Sagely love! We just got in touch with " + request.user.firstname + ". :)"
+        message_text = "Thanks for spreading the Sagely love! We just got in touch with " + request.POST.get("refer-name") + ". :)"
         messages.add_message(request, messages.INFO, message_text, fail_silently=True)
 
     return redirect(chat)

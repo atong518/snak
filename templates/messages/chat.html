@@ -81,7 +81,6 @@ function is_college_user() {
       	<ul class="dropdown-menu" role="menu">
       	  <li><a href="{% url 'settings' %}">Change Settings</a></li>
           <li><a href="{% url 'change_password' %}">Change Password</a></li>
-          <li><a href="{% url 'send_password_email' %}">Reset Password</a></li>
       	  <li><a href="/interest/show/">Adjust Interests</a></li>
       	  <li><a data-toggle="modal" href="#sendFeedbackModal">Submit Feedback</a></li>
       	  <li><a data-toggle="modal" href="#referAFriendModal">Refer a Prospie</a></li>
@@ -105,16 +104,23 @@ function is_college_user() {
     </ul>
 
     {% if current_user.collegeuser %}
-      {% if current_user.available %}
-        <button type="submit" class="btn btn-info btn-large btn-reset-counter">Waiting for matches!</button>
+      {% if current_user.is_active %}
+        {% if current_user.available %}
+          <button type="submit" class="btn btn-info btn-large btn-reset-counter">Waiting for matches!</button>
+        {% else %}
+          <button type="submit" class="btn btn-danger btn-large btn-reset-counter" id="reset-counter" title="{{ current_user.next_match_text }}">Make me available!</button>
+        {% endif %}
       {% else %}
-        <button type="submit" class="btn btn-danger btn-large btn-reset-counter" id="reset-counter" title="{{ current_user.next_match_text }}">Make me available!</button>
+        <button type="submit" class="btn btn-danger btn-large btn-reset-counter" disabled>
+          Confirm your Email
+        </button>
       {% endif %}
     {% else %}
       <form id="match-me" method="GET">
         <button type="submit" class="btn btn-danger btn-large btn-match-me" id="btn-match-me">Match Me!</button>
       </form>
     {% endif %}
+
   </div>
   <!--current message-->
   <div class="col-md-6 well box">
@@ -154,10 +160,11 @@ function is_college_user() {
 	    <p class="chat-message sent pull-right">{{ message }}</p>
             {% else %}
             <p class="chat-message received pull-left">{{ message }}</p>
-            {% endif %}
-	  </div>
-	  {% endfor %}
-	</div>
+          {% endif %}
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
 	{% endfor %}
 	<div class="clearfix" style="margin: 5px;"></div>
       </div>
@@ -355,6 +362,21 @@ function is_college_user() {
       </div>
       <p class="modal-body">
       You are now available for prospies to find you! We'll let you know when you get a match. 
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Confrim email to match modal -->
+<div class="modal fade" id="confirmEmail" tabindex="-1" role="dialog" aria-labelledby="confirmEmail" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title" id="myModalLabel">Hold on!</h4>
+      </div>
+      <p class="modal-body">
+        Please confirm your email before we can match you with another Dartmouth student!
       </p>
     </div>
   </div>

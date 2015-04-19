@@ -58,6 +58,7 @@ $.ajaxSetup({
 // -------------------------------------------------------------------------------------------------
 
 var SET_INTERVAL;
+var SCROLL_BOOLEAN;
 
 $(document).ready(function(){
    // hit submit button on 'enter' keypress
@@ -94,12 +95,16 @@ $(document).ready(function(){
     deferred = $.get("/match/", {})
 
     deferred.success(function (response) {
-      possibles = response.possibles
-      current_index = 0
-      updateModal(possibles[current_index])
-      $("#leftMatch")[0].setAttribute("disabled", true)
-      if (current_index >= possibles.length-1) {
-        $("#rightMatch")[0].setAttribute("disabled", true)
+      if(response.allow_matches){
+        possibles = response.possibles
+        current_index = 0
+        updateModal(possibles[current_index])
+        $("#leftMatch")[0].setAttribute("disabled", true)
+        if (current_index >= possibles.length-1) {
+          $("#rightMatch")[0].setAttribute("disabled", true)
+        }
+      } else {
+        $('#confirmEmail').modal('show');
       }
     });
 
@@ -181,7 +186,21 @@ $(document).ready(function(){
     $("#addPersonToThread").modal('hide');
 
     return false;
-  });  
+  });
+
+  // scrolling stuff
+  var lastScrollTop = 0;
+  $("#message-box").scroll(function(event){
+	  var st = $(this).scrollTop();
+	  if (st > lastScrollTop){
+	      // downscroll code
+	      SCROLL_BOOLEAN = "true";
+	  } else {
+	      // upscroll code
+	      SCROLL_BOOLEAN = "false";
+	  }
+	  lastScrollTop = st;
+      });
 
   // add user
   $("#add-person-to-thread-form").on('submit', function(event) {
@@ -337,31 +356,35 @@ function _poll(threadId) {
 			text = val[0];
 			sender_email = val[1];
 
-			messages_html += '<div class="row" style="margin-top: 10px">';
+			messages_html += '<div class="row">';
 			if (sender_email == getLoggedInUserEmail()) 
 			    messages_html += '<p class="chat-message sent pull-right">';
 			else
-			    messages_html += '<p class="chat-message received">';			    
+			    messages_html += '<p class="chat-message received pull-left">';			    
 			messages_html += text + '</p></div>';
 		    });
 
 		$("#thread-" + threadId).html(messages_html);
-		console.log("checked...");
+
+		if (SCROLL_BOOLEAN != "false") {
+		    scrollDown();
+		}
+
 	    },
 
 		error : function(xhr, errmsg, err) {
-		$('#message-content').html("<div class= 'alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-					   " <a href='#' class='close'>&times;</a></div>");
+		$('#message-content').html("<div class= 'alert-box alert radius' data-alert>Oops! We have encountered an error!  Try refreshing the page. "+errmsg+
+					   " </div>");
 		console.log(xhr.status + ": " + xhr.responseText);
 	    }
-	});    
+	});       
 }
 
 function longPollForThread(threadId) {
     if (typeof SET_INTERVAL != 'undefined')
 	clearInterval(SET_INTERVAL);
 
-    // SET_INTERVAL = setInterval(_poll, 500, threadId);
+    SET_INTERVAL = setInterval(_poll, 500, threadId);
     scrollDown();
 }
 
@@ -370,6 +393,7 @@ function scrollDown() {
     var chat_box = $('#message-box');
     var height = chat_box[0].scrollHeight;
     chat_box.scrollTop(height);
+    //    chat_box.scrollIntoViewIfNeeded();
 }
 
 function populateThread(threadId) {
@@ -416,6 +440,12 @@ function sendMessage() {
     
     // get text of message to be sent
     var message_text = $("#message-input-box").val();
+
+    // get timestamp to apply to message to be sent
+    var date = new Date();
+    var timestamp = date.getTime();
+
+    console.log("MESSAGE BEING SENT AT:" + timestamp);
     
     // clear text of input
     $("#message-input-box").val('');
@@ -424,6 +454,7 @@ function sendMessage() {
 	    url : "send_chat_message/", // the endpoint
 		type : "POST", // http method
 		data : { message_text : message_text,
+		    timestamp : timestamp,
 		    thread_id : selectedThreadId }, // data sent with the post request
 		
 	      // handle a successful response
@@ -451,7 +482,7 @@ function _sentMessageToDjango(json, selectedThreadId) {
     console.log(json); // log the returned json to the console
     console.log("huzzah"); // another sanity check
     
-    scrollDown();
+    SCROLL_BOOLEAN = "true";
 }
 
 function _addedToThread(addedUserName) {

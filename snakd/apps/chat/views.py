@@ -119,9 +119,12 @@ def send_chat_message(request):
     if request.method == 'POST' and len(request.POST.get('message_text')) > 0:
         text = request.POST.get('message_text')
         thread_id = request.POST.get('thread_id')
+        time = request.POST.get('timestamp')
+
         response_data = {}
         thread = get_object_or_404(Thread, pk=thread_id)
         message = Message(text=text, sender=request.user, thread=thread)
+        message.timestamp = time
         message.save()
 
         response_data["result"] = "message sent successfully!"
@@ -262,7 +265,7 @@ def refer_friend(request):
         msg.attach_alternative(html_message, "text/html")
         msg.send()
 
-        message_text = "Thanks for spreading the Sagely love! We just got in touch with " + request.user.firstname + ". :)"
+        message_text = "Thanks for spreading the Sagely love! We just got in touch with " + request.POST.get("refer-name") + ". :)"
         messages.add_message(request, messages.INFO, message_text, fail_silently=True)
 
     return redirect(chat)

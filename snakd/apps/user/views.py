@@ -136,6 +136,36 @@ def login(request):
                   {'email': email,
                    'has_error': has_error})
 
+
+def send_password_email(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        subject = "Sagely Password Reset"
+        from_email = settings.EMAIL_HOST_USER
+        html_message = "Reset your password <a href='http://www.sagely.io/reset_password/?email=" + email + "'>here</a>.<br><br>The Sagely Team"
+        msg = EmailMultiAlternatives(subject, html_message, from_email, {email})
+        msg.attach_alternative(html_message, "text/html")
+        msg.send()
+
+        return redirect("/chat/")
+    else:
+        return render(request,
+            'user/email_reset.html')
+
+def reset_password(request):
+    if request.method == "POST":
+        user = GenericUser.objects.filter(id=request.POST.get("user_id"))[0]
+        user.set_password(request.POST.get("new-password-1"))
+        user.save()
+        return redirect("/chat/")
+    else:
+        email = request.GET.get('email', '')
+        user = GenericUser.objects.filter(email__iexact=email)[0]
+        user = _specify_class(user)
+        return render(request,
+              'user/reset_password.html',
+              {'user_id': user.id})
+
 def change_password(request):
     error = ""
     if request.POST:

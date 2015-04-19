@@ -1,0 +1,52 @@
+{% extends "user/base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<head>
+  <link rel="stylesheet" type="text/css" href="../../static/user/css/pre-login.css">
+</head>
+
+<div class="row buffer-row">
+  <hr class="snak-divider">
+</div>
+
+<div class="row">
+  <form class="form-horizontal col-md-4 col-md-offset-4"
+	data-toggle="validator"
+	form="form"
+	name="PasswordResetForm"
+	action=""
+	method="post">
+    <h3 class="form-group col-sm-12" style="text-align:center;">
+      Reset Password
+    </h3>
+    <p class="form-group col-sm-12" style="text-align:center;">
+    Give us your email and click the link we send you!
+    </p>
+	
+	<input type="hidden" name="user_id" value="{{user_id}}">
+    
+    {% csrf_token %}
+    
+    <input type="email"
+	   name="email"
+	   id="new-password-1"
+	   placeholder="Email"
+	   class="form-control form-group"
+	   minlength=6
+	   required>
+
+
+    <div class="form-group centered">
+      <button type="submit" id="submitCP" class="btn btn-primary btn-lg">DO IT</button>
+    </div>
+
+    <div class="form-group col-sm-12" id="old-password-error" style="text-align: center; color: red;">
+      <h3>{{ error }}</h3>
+    </div>
+
+  </form>
+</div>
+
+
+{% endblock %}

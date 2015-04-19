@@ -31,6 +31,7 @@ function getIStrings() {
 
 {% block content %}
 {% load customtags %}
+<link rel="stylesheet" type="text/css" href="../../static/user/css/pre-login.css">
 <link rel="stylesheet" type="text/css" href="{% static 'interests/css/show.css' %}" />
 <div class="row buffer-row">
   <hr class="snak-divider">
@@ -49,7 +50,7 @@ function getIStrings() {
 	  <ul id="scrolling-list-of-interests">
 	    {% for interest in i_list.children %} 
             <div id="{{interest.id}}_jump" name="{{interest.name}}" style="hidden: true"></div>
-	    {%include "interests/interest_template.html" %}
+	    {% include "interests/interest_template.html" %}
 	    {% endfor %}
 	  </ul>
 	</div>

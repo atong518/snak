@@ -104,14 +104,11 @@ function is_college_user() {
     </ul>
 
     {% if current_user.collegeuser %}
-      <form id="reset-counter" method="POST" action="{% url 'reset_counter' %}">
-        {% csrf_token %}
-        {% if current_user.available %}
-          <button type="submit" class="btn btn-info btn-large btn-reset-counter" id="btn-reset-counter" disabled>Waiting for matches!</button>
-        {% else %}
-          <button type="submit" class="btn btn-danger btn-large btn-match-me" id="btn-match-me" title="{{ current_user.next_match_text }}">Make me available!</button>
-        {% endif %}
-      </form>
+      {% if current_user.available %}
+        <button type="submit" class="btn btn-info btn-large btn-reset-counter">Waiting for matches!</button>
+      {% else %}
+        <button type="submit" class="btn btn-danger btn-large btn-reset-counter" id="reset-counter" title="{{ current_user.next_match_text }}">Make me available!</button>
+      {% endif %}
     {% else %}
       <form id="match-me" method="GET">
         <button type="submit" class="btn btn-danger btn-large btn-match-me" id="btn-match-me">Match Me!</button>
@@ -136,11 +133,11 @@ function is_college_user() {
     <ul class="dropdown-menu" style="right: 35; left: auto;" role="menu" aria-labelledby="plusmenu">
 <!-- TODO: Multiperson chats!  or not? I thought this wasn't a thing anymore  -->
 <!-- 	    <li><a data-toggle="modal" href="#addPersonToThread">Add a Person</a></li> -->
-	    <li><a data-toggle="modal" href="#reportAPersonModal">Report Conversation</a></li>
       {% if not current_user.collegeuser %}
   	    <li><a data-toggle="modal" href="#nudgeAPersonModal">Nudge Person</a></li>
-        <li><a data-toggle="modal" href="#aboutYourMatchModal">About Your Match</a></li>
       {% endif %}
+      <li><a data-toggle="modal" href="#aboutYourMatchModal">About Your Match</a></li>
+      <li><a data-toggle="modal" href="#reportAPersonModal">Report Conversation</a></li>
 	  </ul>
 	</div>
     </div>
@@ -344,6 +341,20 @@ function is_college_user() {
 	  <button type="submit" value="Send" class="btn btn-primary" id="nudge-a-person-button">Wink wink, nudge nudge :)</button>
 	</form>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Waiting for match modal -->
+<div class="modal fade" id="waitingForMatchModal" tabindex="-1" role="dialog" aria-labelledby="waitingForMatchModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+  <h4 class="modal-title" id="myModalLabel">Get ready!</h4>
+      </div>
+      <p class="modal-body">
+      You are now available for prospies to find you! We'll let you know when you get a match. 
+      </p>
     </div>
   </div>
 </div>

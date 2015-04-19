@@ -1,3 +1,5 @@
+.dropdown-toggle:active, .open .dropdown-toggle {background:#CDD1B6 !important; color:  #5C755E !important}
+
 #inbox {
   height: 75%;
   position: relative;
@@ -10,9 +12,19 @@
 }
 
 #btn-match-me {
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+  color: white;
+  background-color: #626F83;
+  border-color: white;
+}
+
+.btn-reset-counter {
   color: #626F83
   background-color: transparent;
-  border-color:	#626F83;
+  border-color: #626F83;
   border: 2px solid;
   width: 100%;
   margin: 0;
@@ -59,6 +71,15 @@
   background-color: #7dafda;
   border: 1px solid #5596cf;
   color: white;
+}
+
+.active-link:active {
+  background-color: #7dafda;
+  /* TODO double check this and the hover one */
+}
+
+.active-link:hover {
+  background-color: #7dafda;
 }
 
 #scrollable-dropdown-menu .tt-dropdown-menu {
@@ -133,4 +154,7 @@ textarea {
 
 #btn-send-message {
   max-height: 100px;
+  color: white;
+  background-color: #52230C;
+  border-color: white;
 }

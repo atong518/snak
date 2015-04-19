@@ -3,6 +3,12 @@
 {% block content %}
 {% load staticfiles %}
 
+<link rel="stylesheet" type="text/css" href="../../static/user/css/pre-login.css">
+
+<div class="row buffer-row">
+  <hr class="snak-divider">
+</div>
+
 {% if user.is_authenticated %}
 <div class="row">
 <div class="col-sm-4"></div>

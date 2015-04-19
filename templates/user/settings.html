@@ -4,42 +4,51 @@
 {% block content %}
 {% load staticfiles %}
 
-  <form class="form-horizontal" data-toggle="validator" role="form" id="settings_form" method="post" action=".">
-    {% csrf_token %}
+<link rel="stylesheet" type="text/css" href="../../static/user/css/pre-login.css">
+
+<div class="row buffer-row">
+  <hr class="snak-divider">
+</div>
+
+<div class="row buffer-row"></div>
+<div class="row buffer-row"></div>
+
+<form class="form-horizontal" data-toggle="validator" role="form" id="settings_form" method="post" action=".">
+  {% csrf_token %}
+  {% for field in settings_form %}
+  {% if field.name != "password" %}
+  <div class="form-group">
+    <div class="col-sm-4 col-sm-offset-4">
+      {{ field }}
+      <div class="help-block with-errors"></div>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+  <div class="password"> 
+    <div class="col-sm-4 col-sm-offset-4">
+      Please enter your password to make settings changes:
+      <div class="help-block with-errors"></div>
+    </div>
     {% for field in settings_form %}
-      {% if field.name != "password" %}
-        <div class="form-group">
-          <div class="col-sm-4 col-sm-offset-4">
-            {{ field }}
-            <div class="help-block with-errors"></div>
-          </div>
-        </div>
-      {% endif %}
-    {% endfor %}
-    <div class="password"> 
-        <div class="col-sm-4 col-sm-offset-4">
-          Please enter your password to make settings changes:
-        <div class="help-block with-errors"></div>
-      </div>
-      {% for field in settings_form %}
-        {% if field.name == "password" %}
-          <div class="form-group">
-            <div class="col-sm-4 col-sm-offset-4">
-              {{ field }}
-            </div>
-          </div>
-        {% endif %}
-      {% endfor %}
+    {% if field.name == "password" %}
+    <div class="form-group">
       <div class="col-sm-4 col-sm-offset-4">
-        Or change your password
-        <a href="{% url 'change_password' %}">here.</a>
-      </div><br><br>
+        {{ field }}
+      </div>
     </div>
-    <div class = "signup-submit-holder col-sm-offset-4 col-sm-4">
-        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Cancel</button>
-        <input type="submit" id="submitS" class="btn btn-primary" value="Submit" name="college_signup">
-    </div>
-  </form>
+    {% endif %}
+    {% endfor %}
+    <div class="col-sm-4 col-sm-offset-4">
+      Or change your password
+      <a href="{% url 'change_password' %}">here.</a>
+    </div><br><br>
+  </div>
+  <div class="form-group centered">
+    <button type="button" class="btn btn-success btn-lg" onClick="javascript:history.go(-1);">Cancel</button>
+    <button type="submit" id="submitCP" class="btn btn-primary btn-lg" value="Submit" name="college_signup">Submit</button>
+  </div>
+</form>
 
 <script type="text/javascript">
 $("#password")[0].setAttribute("minlength", 6)

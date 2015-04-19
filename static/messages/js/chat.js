@@ -298,6 +298,30 @@ $(document).ready(function(){
   if(!is_college_user() && names.length == 0) {
     $("#btn-match-me")[0].click()
   }
+
+  $("#reset-counter").click(function(event) {
+    $.ajax({
+        url : "reset_counter/",
+        type : "POST",
+        data : {},
+
+        success : function(json) {
+
+        },
+
+        error : function(xhr, errmsg, err) {
+
+        }
+      });   
+  })
+
+  $(".btn-reset-counter").click(function(event) {
+    $("#waitingForMatchModal").modal('show'); 
+  });
+
+  $('#waitingForMatchModal').on('hidden.bs.modal', function () {
+    location.reload();
+  })
 });
 
 function _poll(threadId) {
@@ -468,6 +492,7 @@ function getDropdownMembersOfThread(divName) {
     var result;
     if (members.length == 1) { 
         result = '<input type="hidden"  name="reported-name" value="' + members[0].trim() + '">';
+        result += '<input type="hidden"  name="selected-thread-id" value="' + selectedThreadId + '">'
         $(divName).html(result + members[0].trim());
         return;
     }

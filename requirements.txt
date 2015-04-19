@@ -11,6 +11,7 @@ django-bootstrap3==5.0.3
 django-jquery==1.9.1
 django-memoize==1.1.2
 django-toolbelt==0.0.1
+django-favicon==0.1.1
 gearbox==0.0.7
 gunicorn==19.1.1
 MarkupSafe==0.23

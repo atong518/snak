@@ -251,7 +251,7 @@ class CollegeSettingsForm(GenericSettingsForm):
         self.fields['max_match_frequency'].widget = Select(attrs={
             'class': 'form-control',
             'required': 'true',
-            'initial': MAX_MATCH_FREQS[5]})
+            'initial': MAX_MATCH_FREQS[0]})
         self.fields['max_match_frequency'].widget.choices = MAX_MATCH_FREQS
         self.fields['bio'].widget = Textarea(attrs={
             'class': 'form-control',

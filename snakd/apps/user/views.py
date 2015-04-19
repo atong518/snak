@@ -37,7 +37,7 @@ def _specify_class(user):
 def _send_mail(email, activation_code):
     # Email shenanigans
     subject = "Sagely Email Verification"
-    message = "Welcome to SnakDartmouth, we very much appreciate your signing up!\n"
+    message = "Welcome to Sagely, thank you for signing up!!\n"
     from_email = settings.EMAIL_HOST_USER
 
     url = "http://www.sagely.io/confirm_email/" + activation_code + "/" + email + "/"

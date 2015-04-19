@@ -360,7 +360,7 @@ function _poll(threadId) {
 			if (sender_email == getLoggedInUserEmail()) 
 			    messages_html += '<p class="chat-message sent pull-right">';
 			else
-			    messages_html += '<p class="chat-message received">';			    
+			    messages_html += '<p class="chat-message received pull-left">';			    
 			messages_html += text + '</p></div>';
 		    });
 

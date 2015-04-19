@@ -161,7 +161,7 @@ function auth_message() {
 	{% for thread in inbox_threads %}
  	<div id="thread-{{ thread.pk }}" class="thread thread-messages">
           {% for message in thread.message_set.all %}
-	  <div class="row" style="margin-top: 10px">
+	  <div class="row">
             {% if message.sender == user %}
 	    <p class="chat-message sent pull-right">{{ message }}</p>
             {% else %}

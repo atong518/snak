@@ -30,14 +30,8 @@ class Interest(models.Model):
  			"id": self.id
  		}
 
-	# https://docs.djangoproject.com/en/1.7/topics/db/examples/many_to_many/
-	# http://stackoverflow.com/questions/13341173/django-get-objects-from-a-many-to-many-field
-	# def getFrequency(self):
-	# 	return len(self.user_set.all())
-
-# does this need to be in a new file?
-# class SportsInterest(Interest):
-# 	gender = models.CharField(max_length = 20)
+	def getFrequency(self):
+		return len(self.user_set.all())
 
 
 class SerializedDataField(models.TextField):
@@ -57,9 +51,6 @@ class SerializedDataField(models.TextField):
 
 class InterestMatrix(models.Model):
 	matrix = SerializedDataField(null=True)
-
-
-
 
 
 

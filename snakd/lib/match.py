@@ -16,10 +16,12 @@ def match(matrix, user1, user2):
     for int1 in ints1:
         for int2 in ints2:
             dist = matrix.getValFromInts(int1, int2)
-            score += 100 / math.pow(3, dist) #* int1.getFrequency())
-            # right now, direct match is 9x more points than a sibling match
 
-    return score / max(len(ints1), 1)
+            freq = max(int1.getFrequency() + int2.getFrequency() / 4, 1)
+            score += 100 / (math.pow( math.sqrt(5), dist) + freq)
+            # right now, direct match is 5x more points than a sibling match
+
+    return score / max(len(ints1) + len(ints2), 1)
 
 
 def heapsort(iterable):

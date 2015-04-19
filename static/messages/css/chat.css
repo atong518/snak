@@ -73,6 +73,15 @@
   color: white;
 }
 
+.active-link:active {
+  background-color: #7dafda;
+  /* TODO double check this and the hover one */
+}
+
+.active-link:hover {
+  background-color: #7dafda;
+}
+
 #scrollable-dropdown-menu .tt-dropdown-menu {
   max-height: 150px;
   overflow-y: auto;

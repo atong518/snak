@@ -5,22 +5,22 @@
 				"name": "Arts",
 				"children": [
 					{
-						"name": "General Art"
-					},
-					{
 						"name": "Art History"
 					},
 					{
 						"name": "Digital Arts"
 					},
 					{
+						"name": "Film and Media"
+					},
+					{
 						"name": "Music"
 					},
 					{
-						"name": "Theater"
+						"name": "Studio Art"
 					},
 					{
-						"name": "Film/Media"
+						"name": "Theater"
 					}
 				]
 			},
@@ -28,34 +28,37 @@
 				"name": "Humanities",
 				"children": [
 					{
-						"name": "General Humanities"
+						"name": "African and African American Studies"
 					},
 					{
-						"name": "Languages"
+						"name": "Asian and Middle Eastern Studies"
 					},
 					{
 						"name": "Culture Studies"
 					},
 					{
-						"name": "Literature"
+						"name": "Classical Studies"
 					},
 					{
-						"name": "Classics"
+						"name": "English Literature"
 					},
 					{
 						"name": "History"
 					},
 					{
+						"name": "Latin American and Caribbean Studies"
+					},
+					{
+						"name": "LGBT Studies"
+					},
+					{
+						"name": "Native American Studies"
+					},
+					{
 						"name": "Religion"
 					},
 					{
-						"name": "Women/Gender Studies"
-					},
-					{
-						"name": "LGBT"
-					},
-					{
-						"name": "Philosophy"
+						"name": "Women's and Gender Studies"
 					}
 				]
 			},
@@ -63,13 +66,7 @@
 				"name": "Social Sciences",
 				"children": [
 					{
-						"name": "General Social Science"
-					},
-					{
 						"name": "Anthropology"
-					},
-					{
-						"name": "International Relations"
 					},
 					{
 						"name": "Economics/Finance"
@@ -78,25 +75,22 @@
 						"name": "Education"
 					},
 					{
-						"name": "Government"
+						"name": "Ethics"
 					},
 					{
 						"name": "Geography"
 					},
 					{
-						"name": "Ethics"
+						"name": "Global Health"
 					},
 					{
-						"name": "Psychology"
+						"name": "Government/Political Science"
+					},
+					{
+						"name": "International Relations"
 					},
 					{
 						"name": "Linguistics"
-					},
-					{
-						"name": "Public Policy"
-					},
-					{
-						"name": "Sociology"
 					},
 					{
 						"name": "Journalism"
@@ -105,16 +99,57 @@
 						"name": "Law"
 					},
 					{
-						"name": "Global Health"
+						"name": "Psychology"
+					},
+					{
+						"name": "Public Policy"
+					},
+					{
+						"name": "Sociology"
+					}
+				]
+			},
+			{
+				"name": "Languages",
+				"children": [
+					{
+						"name": "Arabic"
+					},
+					{
+						"name": "Chinese"
+					},
+					{
+						"name": "French"
+					},
+					{
+						"name": "German"
+					},
+					{
+						"name": "Hebrew"
+					},
+					{
+						"name": "Italian"
+					},
+					{
+						"name": "Japanese"
+					},
+					{
+						"name": "Latin"
+					},
+					{
+						"name": "Portuguese"
+					},
+					{
+						"name": "Russian"
+					},
+					{
+						"name": "Spanish"
 					}
 				]
 			},
 			{
 				"name": "Sciences",
 				"children": [
-					{
-						"name": "General Science"
-					},
 					{
 						"name": "Agriculture"
 					},
@@ -128,10 +163,10 @@
 						"name": "Computer Science"
 					},
 					{
-						"name": "Earth"
+						"name": "Earth Sciences"
 					},
 					{
-						"name": "Environmental"
+						"name": "Environmental Studies"
 					},
 					{
 						"name": "Mathematics"
@@ -151,34 +186,28 @@
 				"name": "Engineering",
 				"children": [
 					{
-						"name": "General Engineering"
+						"name": "Biomedical Engineering"
 					},
 					{
-						"name": "Biomedical"
+						"name": "Biotechnology"
 					},
 					{
-						"name": "Biotechnical"
+						"name": "Chemical Engineering"
 					},
 					{
-						"name": "Chemical"
+						"name": "Computer Engineering"
 					},
 					{
-						"name": "Computer"
+						"name": "Electrical Engineering"
 					},
 					{
-						"name": "Electrical"
+						"name": "Environmental Engineering"
 					},
 					{
-						"name": "Environmental"
+						"name": "Materials Science"
 					},
 					{
-						"name": "Material Science"
-					},
-					{
-						"name": "Mechanical"
-					},
-					{
-						"name": "Management"
+						"name": "Mechanical Engineering"
 					}
 				]
 			}
@@ -205,40 +234,45 @@
 				"name": "Performance Groups",
 				"children": [
 					{
-						"name": "Dance",
-						"tooltip": "BFD, Ceili, DCDT, Fusion, RAAZ, Sheba, Sugarplum"
-					},
-					{
-						"name": "Comedy",
-						"tooltip": "Casual Thursday, Dog Day"
-					},
-					{
-						"name": "Theater",
-						"tooltip": "Rude Mechanicals, DTC, Harlequins"
+						"name": "A cappella",
+						"tooltip": "A lot."
 					},
 					{
 						"name": "Band",
-						"tooltip": "Barbary Coast, Wind Ensemble"
+						"tooltip": "Marching Band, Barbary Coast Jazz Ensemble, Wind Ensemble"
+					},					
+					{
+						"name": "Choir",
+						"tooltip": "Gospel Choir, Handel Society, Jabulani African Chorus (JAC)"
+					},
+					{
+						"name": "Comedy",
+						"tooltip": "Casual Thursday, Dog Day Players"
+					},
+					{
+						"name": "Dance",
+						"tooltip": "Ballet Folklorico de Dartmouth(BFD), Ceili, Dartmouth Chinese Dance Troupe (DCDT), Fusion, Raaz, Sheba, Sugarplum"
 					},
 					{
 						"name": "Orchestra",
-						"tooltip": "DSO, DCO"
+						"tooltip": "Dartmouth Symphony Orchestra (DSO), Dartmouth Wind Symphony, Dartmouth Brass Society, Dartmouth Chamber Orchestra (DCO)"
 					},
 					{
-						"name": "A cappella"
-					},
-					{
-						"name": "Choir",
-						"tooltip": "Gospel Choir, Handel Society, JAC"
+						"name": "Theater Performance",
+						"tooltip": "Rude Mechanicals, Displaced Theater Company (DTC), Harlequins"
 					}
 				]
 			},
 			{
-				"name": "Culture-Based Organization",
+				"name": "Religious Groups",
 				"children": [
 					{
 						"name": "Christianity",
-						"tooltip": "Agape, Aquinas, FCA"
+						"tooltip": "Agape, Aquinas House, Fellowship of Christian Athletes (FCA)"
+					},
+					{
+						"name": "Hinduism",
+						"tooltip": "Milan"
 					},
 					{
 						"name": "Judaism",
@@ -248,35 +282,36 @@
 						"name": "Islam"
 					},
 					{
-						"name": "Hinduism",
-						"tooltip": "Milan"
-					},
-					{
 						"name": "Other Religious Groups"
+					}
+				]
+			},
+			{
+				"name": "Culture-Based Organization",
+				"children": [
+					{
+						"name": "African Culture",
+						"tooltip": "Dartmouth African Students Association (DASA)"
 					},
 					{
 						"name": "Asian Culture",
-						"tooltip": "DAO, DCCS, DJS, KSA, SoHK, VSA"
-					},
-					{
-						"name": "African Culture",
-						"tooltip": "DASA"
-					},
-					{
-						"name": "Latino/Latina Culture",
-						"tooltip": "LAL"
-					},
-					{
-						"name": "Native American Culture",
-						"tooltip": "NAD"
-					},
-					{
-						"name": "Other Culture Groups",
-						"tooltip": "DCC, ISA, MOSAIC"
+						"tooltip": "Dartmouth Asian Organization (DAO), Chinese Culture Society, Japan Society, Korean Students Association (KSA), Students of Hong Kong, Vietnamese Students Association"
 					},
 					{
 						"name": "Language-Based Groups",
 						"tooltip": "French Club, German Club, etc."
+					},
+					{
+						"name": "Latino/Latina Culture",
+						"tooltip": "La Alianza Latina (LAL)"
+					},
+					{
+						"name": "Native American Culture",
+						"tooltip": "Native Americans at Dartmouth (NAD)"
+					},
+					{
+						"name": "Other Culture Groups",
+						"tooltip": "Dartmouth Caribbean Connection (DCC), International Students' Association (ISA), MOSAIC"
 					}
 				]
 			},
@@ -284,31 +319,32 @@
 				"name": "Issue Awareness",
 				"children": [
 					{
-						"name": "Political Organizations"
+						"name": "Environmental or Animal-Based Groups",
+						"tooltip": "Dartmouth Animal Welfare Group (DAWG)"
+					},
+					{
+						"name": "LGBTQ Awareness",
+						"tooltip": "Center for Gender Studies and Student Engagement (CGSE), Spectra, Alliance"
 					},
 					{
 						"name": "International Issues Programs",
-						"tooltip": "DHE, Globemed, J Street U"
-					},
-					{
-						"name": "Environmental or Animal-Based Groups",
-						"tooltip": "DAWG"
+						"tooltip": "Dartmouth Humanitarian Engineering (DHE), GlobeMed, J Street U"
 					},
 					{
 						"name": "Mental Health Awareness",
 						"tooltip": "Active Minds"
 					},
 					{
-						"name": "Sexual Assault Awareness",
-						"tooltip": "MAV, SAPA"
+						"name": "Political Organizations",
+						"tooltip": "College Democrats, College Republicans, College Libertarians"
 					},
 					{
-						"name": "LGBTQ Groups",
-						"tooltip": "CGSE, Spectra"
+						"name": "Sexual Assault Awareness",
+						"tooltip": "Mentors Against Violence (MAV), Sexual Assault Peer Advisors (SAPA), Sexual Assault Awareness Program (SAAP)"
 					},
 					{
 						"name": "Other Issue Awareness Organizations",
-						"tooltip": "DUVA, CoFIRED, NAACP, RAK, V-Day, WF"
+						"tooltip": "Undergraduate Veterans Association, CoFIRED, NAACP, Random Acts of Kindness, V-Day, Women's Forum, Men's Forum"
 					}
 				]
 			},
@@ -317,19 +353,19 @@
 				"children": [
 					{
 						"name": "Business",
-						"tooltip": "DEN, WIB"
+						"tooltip": "Dartmouth Entrepreneurial Network (DEN), Women in Business (WIB), Alliance"
 					},
 					{
 						"name": "Engineering",
-						"tooltip": "AISES, NSBE"
+						"tooltip": "American Indian Science and Engineering Society (AISES), National Society of Black Engineers (NBSE)"
 					},
 					{
 						"name": "Pre-Health",
-						"tooltip": "MAPS, NSS, Pre-Vet"
+						"tooltip": "Minority Association of Pre-Health Professionals, Nathan Smith Society, Pre-Vet Society"
 					},
 					{
-						"name": "Science",
-						"tooltip": "Biosoc, WISP, WICS"
+						"name": "Sciences",
+						"tooltip": "Hacker Club, Society of Biological Sciences, Women in Science Program, Women in Computer Science"
 					}
 				]
 			},
@@ -337,13 +373,13 @@
 				"name": "Greek Life",
 				"children": [
 					{
-						"name": "Fraternties"
+						"name": "Fraternities"
 					},
 					{
 						"name": "Sororities"
 					},
 					{
-						"name": "Co-eds"
+						"name": "Co-ed"
 					}
 				]
 			},
@@ -351,16 +387,19 @@
 				"name": "Residential-Based",
 				"children": [
 					{
-						"name": "Undergraduate Societies",
-						"tooltip": "Amarna, Panarchy"
+						"name": "Affinity Housing",
+						"tooltip": "La Casa, Chinese Language House, Max Kade German Center, Cutter Shabazz"
 					},
 					{
 						"name": "Living Learning Communities",
-						"tooltip": "LLCs, Foley House"
 					},
 					{
-						"name": "Affinity Housing",
-						"tooltip": "La Casa, SLC, Cutter"
+						"name": "Special Interests Housing",
+						"tooltip": "Foley House, Sustainable Living Center (SLC)"
+					},
+					{
+						"name": "Undergraduate Societies",
+						"tooltip": "Amarna, Panarchy"
 					}
 				]
 			},
@@ -368,20 +407,24 @@
 				"name": "Publications",
 				"children": [
 					{
-						"name": "Newspaper",
-						"tooltip": "The Dartmouth"
-					},
-					{
 						"name": "Academic Journals",
-						"tooltip": "DUJS, DBJ, DLJ"
+						"tooltip": "Undergraduate Journal of Science (DUJS), Dartmouth Business Journal, Dartmouth Law Journal"
 					},
 					{
-						"name": "Yearbook",
-						"tooltip": "Aegis"
+						"name": "Humor and Satire",
+						"tooltip": "Jack-O-Lantern"
 					},
 					{
 						"name": "Media",
-						"tooltip": "Dartmouth Broadcasting, DTV"
+						"tooltip": "Dartmouth Broadcasting, DTV, 99 Rock"
+					},
+					{
+						"name": "Newspapers",
+						"tooltip": "The Dartmouth, Dartmouth Review" 
+					},
+					{
+						"name": "Yearbook",
+						"tooltip": "The Aegis"
 					}
 				]
 			},
@@ -389,10 +432,10 @@
 				"name": "Student Employment",
 				"children": [
 					{
-						"name": "Work Study"
+						"name": "Campus Jobs"
 					},
 					{
-						"name": "Campus Jobs"
+						"name": "Work Study"
 					}
 				]
 			},
@@ -400,15 +443,15 @@
 				"name": "Recreational",
 				"children": [
 					{
+						"name": "Gaming",
+						"tooltip": "Poker, Chess, Computer Gaming Association, Creative Gaming"
+					},
+					{
 						"name": "Intramural Sports"
 					},
 					{
-						"name": "Outdoors-Related",
-						"tooltip": "DOC, Ledyard, Woodsmen"
-					},
-					{
-						"name": "Gaming",
-						"tooltip": "Poker, Chess, CGA, CGC"
+						"name": "The Great Outdoors",
+						"tooltip": "Outing Club, Ledyard Canoe Club, Woodsmen's Team, Bait and Bullet, Mountaineering Club"
 					}
 				]
 			},
@@ -416,23 +459,23 @@
 				"name": "Miscellaneous",
 				"children": [
 					{
-						"name": "Service/Philanthropy",
-						"tooltip": "DREAM, SEAD, Big Sib Little Sib"
+						"name": "Medical Response",
+						"tooltip": "Emergency Medical Services (EMS), Ski Patrol"
+					},
+					{
+						"name": "Mentoring",
+						"tooltip": "First-Year Peer Mentors (FYPM), Link-Up"
 					},
 					{
 						"name": "Military",
 						"tooltip": "ROTC"
 					},
 					{
+						"name": "Service/Philanthropy",
+						"tooltip": "DREAM, Summer Enrichment at Dartmouth (SEAD), Big Sib Little Sib"
+					},
+					{
 						"name": "Student Government"
-					},
-					{
-						"name": "Emergency Medical Services",
-						"tooltip": "EMS, Ski Patrol"
-					},
-					{
-						"name": "Mentoring",
-						"tooltip": "FYPM, Link-Up"
 					}
 				]
 			}
@@ -539,79 +582,79 @@
 				"name": "Club",
 				"children": [
 					{
-						"name": "Badminton"
+						"name": "Club Badminton"
 					},
 					{
-						"name": "Baseball"
+						"name": "Club Baseball"
 					},
 					{
-						"name": "Basketball"
+						"name": "Club Basketball"
 					},
 					{
-						"name": "Boxing"
+						"name": "Club Boxing"
 					},
 					{
-						"name": "Cheer"
+						"name": "Club Cheer"
 					},
 					{
-						"name": "Cricket"
+						"name": "Club Cricket"
 					},
 					{
-						"name": "Cycling"
+						"name": "Club Cycling"
 					},
 					{
-						"name": "Dressage"
+						"name": "Club Dressage"
 					},
 					{
-						"name": "Endurance Racing"
+						"name": "Club Endurance Racing"
 					},
 					{
-						"name": "Fencing"
+						"name": "Club Fencing"
 					},
 					{
-						"name": "Field Hockey"
+						"name": "Club Field Hockey"
 					},
 					{
-						"name": "Figure Skating"
+						"name": "Club Figure Skating"
 					},
 					{
-						"name": "Ice Hockey"
+						"name": "Club Ice Hockey"
 					},
 					{
-						"name": "Lacrosse"
+						"name": "Club Lacrosse"
 					},
 					{
-						"name": "Rugby"
+						"name": "Club Rugby"
 					},
 					{
-						"name": "Soccer"
+						"name": "Club Soccer"
 					},
 					{
-						"name": "Squash"
+						"name": "Club Squash"
 					},
 					{
-						"name": "Swimming"
+						"name": "Club Swimming"
 					},
 					{
-						"name": "Table Tennis"
+						"name": "Club Table Tennis"
 					},
 					{
-						"name": "Tae Kwon Do"
+						"name": "Club Tae Kwon Do"
 					},
 					{
-						"name": "Tennis"
+						"name": "Club Tennis"
 					},
 					{
-						"name": "Triathlon"
+						"name": "Club Triathlon"
 					},
 					{
-						"name": "Ultimate Frisbee"
+						"name": "Club Ultimate Frisbee"
 					},
 					{
-						"name": "Volleyball"
+						"name": "Club Volleyball"
 					},
 					{
-						"name": "Water Polo"
+						"name": "Club Water Polo"
 					}
 				]
 			}

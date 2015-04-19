@@ -94,12 +94,16 @@ $(document).ready(function(){
     deferred = $.get("/match/", {})
 
     deferred.success(function (response) {
-      possibles = response.possibles
-      current_index = 0
-      updateModal(possibles[current_index])
-      $("#leftMatch")[0].setAttribute("disabled", true)
-      if (current_index >= possibles.length-1) {
-        $("#rightMatch")[0].setAttribute("disabled", true)
+      if(response.allow_matches){
+        possibles = response.possibles
+        current_index = 0
+        updateModal(possibles[current_index])
+        $("#leftMatch")[0].setAttribute("disabled", true)
+        if (current_index >= possibles.length-1) {
+          $("#rightMatch")[0].setAttribute("disabled", true)
+        }
+      } else {
+        $('#confirmEmail').modal('show');
       }
     });
 

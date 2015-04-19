@@ -47,6 +47,9 @@ Then surround all code with
   <p>You should have received an email from sagelyio@gmail.com with information 
     to confirm your account.  If you still haven't received this, click 
     <a href="{% url 'resend_confirmation_email' %}">here</a> to resend the email :)<p>
+    {% if user.collegeuser %} 
+      <p>You won't be matched until you verify your email!<p>
+    {% endif %}
   <p>
 </div>
 {% endif %}

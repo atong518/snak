@@ -233,24 +233,29 @@ def match(request):
         try:
             if isinstance(user, CollegeUser):
                 opplist = ProspieUser.objects.filter().exclude(
-                    matches__id__contains=user.id)
+                    matches__id__contains=user.id).exclude(
+                    is_active=False)
             else:
-                opplist = CollegeUser.objects.filter(
-                    next_match__lte=datetime.now()).exclude(
-                    matches__id__contains=user.id)
+                if user.is_active:
+                    opplist = CollegeUser.objects.filter(
+                        next_match__lte=datetime.now()).exclude(
+                        matches__id__contains=user.id).exclude(
+                        is_active=False)
+                elif len(user.matches.all()) > 0:
+                    return HttpResponse(
+                        json.dumps({"possibles": [],
+                                    "allow_matches": False}), 
+                        content_type='application/json')
             matrix = getMatrix()
             possibleusers = bestmatches(matrix, user, opplist)
-            # TODO: Gross hack caused by async request:
-            # Django can't template the model since we determine
-            # the match at a different time. This will work but
-            # it's definitely not ideal...
             possibles = []
             for usr in possibleusers:
                 possibles.append(usr.matchInfo())
         except:
             possibles = []
         return HttpResponse(
-            json.dumps({"possibles": possibles}), 
+            json.dumps({"possibles": possibles,
+                        "allow_matches": True}), 
             content_type='application/json')
     except:
         return HttpResponseRedirect('/')

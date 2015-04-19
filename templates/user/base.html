@@ -35,23 +35,14 @@ Then surround all code with
 <div class="row">
   <div class="col-md-2"></div>
   <div class="col-md-8">
-    <h1 id="logo">Sagely.io</h1>
+    <a href="{% url 'splash' %}"><div class="btn" id="btn-logo"><h1 id="logo">Sagely.io</h1></div></a>
   </div>
   <div class="col-md-2"></div>
 </div>
 
 {% if user.is_authenticated %}
 {% if not user.is_active %}
-<div class="alert alert-danger alert-dismissible fade in" role="alert">
-  <h4 id="non-active-user-error">Oh snap! You still need to confirm your email account!</h4>
-  <p>You should have received an email from sagelyio@gmail.com with information 
-    to confirm your account.  If you still haven't received this, click 
-    <a href="{% url 'resend_confirmation_email' %}">here</a> to resend the email :)<p>
-    {% if user.collegeuser %} 
-      <p>You won't be matched until you verify your email!<p>
-    {% endif %}
-  <p>
-</div>
+<div id="auth-banner"></div>
 {% endif %}
 <div class="row">
   <div class="col-md-offset-8 col-md-2" align="right">

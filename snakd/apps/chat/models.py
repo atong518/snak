@@ -8,7 +8,7 @@ class ThreadManager(models.Manager):
     def in_a_number_order(self, *args, **kwargs):
         qs = self.get_queryset().filter(*args, **kwargs)
         try:
-            new = sorted(qs, key=lambda n: (n.message_set.first().sent_at, n.message_set.first().sent_at), reverse=True)
+            new = sorted(qs, key=lambda n: (n.message_set.first().timestamp, n.message_set.first().timestamp), reverse=True)
             return new
         except:
             return qs
@@ -17,13 +17,14 @@ class Thread(models.Model):
     members = models.ManyToManyField(GenericUser)
     subject = models.CharField(max_length=200, blank=True, default="")
     started_at = models.DateTimeField("started at" , null=True, blank=True, default=datetime.now())
+    timestamp = models.BigIntegerField(null=True)
     objects = ThreadManager()
 
     def __unicode__(self):
         return self.subject
 
     def mostRecentMessage(self):
-        return self.message_set.last().sent_at
+        return self.message_set.last().timestamp
 
     def mostRecentMessageRef(self):
         return self.message_set.last()
@@ -36,10 +37,10 @@ class Message(models.Model):
     thread = models.ForeignKey(Thread)
     text = models.TextField()
     sender = models.ForeignKey(GenericUser, related_name='sent_messages', verbose_name="Sender")
-    sent_at = models.DateTimeField("sent at", null=True, blank=True, default=datetime.now())
+    timestamp = models.BigIntegerField(null=True)
 
     def __unicode__(self):
         return self.text
 
-    class Meta:
-        ordering = ['-sent_at']
+#    class Meta:
+#        ordering = ['-sent_at']

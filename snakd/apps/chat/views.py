@@ -119,9 +119,12 @@ def send_chat_message(request):
     if request.method == 'POST' and len(request.POST.get('message_text')) > 0:
         text = request.POST.get('message_text')
         thread_id = request.POST.get('thread_id')
+        time = request.POST.get('timestamp')
+
         response_data = {}
         thread = get_object_or_404(Thread, pk=thread_id)
         message = Message(text=text, sender=request.user, thread=thread)
+        message.timestamp = time
         message.save()
 
         response_data["result"] = "message sent successfully!"

@@ -350,8 +350,8 @@ function _poll(threadId) {
 	    },
 
 		error : function(xhr, errmsg, err) {
-		$('#message-content').html("<div class= 'alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-					   " <a href='#' class='close'>&times;</a></div>");
+		$('#message-content').html("<div class= 'alert-box alert radius' data-alert>Oops! We have encountered an error!  Try refreshing the page. "+errmsg+
+					   " </div>");
 		console.log(xhr.status + ": " + xhr.responseText);
 	    }
 	});    
@@ -361,7 +361,7 @@ function longPollForThread(threadId) {
     if (typeof SET_INTERVAL != 'undefined')
 	clearInterval(SET_INTERVAL);
 
-    // SET_INTERVAL = setInterval(_poll, 500, threadId);
+    SET_INTERVAL = setInterval(_poll, 500, threadId);
     scrollDown();
 }
 
@@ -370,6 +370,7 @@ function scrollDown() {
     var chat_box = $('#message-box');
     var height = chat_box[0].scrollHeight;
     chat_box.scrollTop(height);
+    //    chat_box.scrollIntoViewIfNeeded();
 }
 
 function populateThread(threadId) {
@@ -416,6 +417,12 @@ function sendMessage() {
     
     // get text of message to be sent
     var message_text = $("#message-input-box").val();
+
+    // get timestamp to apply to message to be sent
+    var date = new Date();
+    var timestamp = date.getTime();
+
+    console.log("MESSAGE BEING SENT AT:" + timestamp);
     
     // clear text of input
     $("#message-input-box").val('');
@@ -424,6 +431,7 @@ function sendMessage() {
 	    url : "send_chat_message/", // the endpoint
 		type : "POST", // http method
 		data : { message_text : message_text,
+		    timestamp : timestamp,
 		    thread_id : selectedThreadId }, // data sent with the post request
 		
 	      // handle a successful response

@@ -58,6 +58,7 @@ $.ajaxSetup({
 // -------------------------------------------------------------------------------------------------
 
 var SET_INTERVAL;
+var SCROLL_BOOLEAN;
 
 $(document).ready(function(){
    // hit submit button on 'enter' keypress
@@ -185,7 +186,21 @@ $(document).ready(function(){
     $("#addPersonToThread").modal('hide');
 
     return false;
-  });  
+  });
+
+  // scrolling stuff
+  var lastScrollTop = 0;
+  $("#message-box").scroll(function(event){
+	  var st = $(this).scrollTop();
+	  if (st > lastScrollTop){
+	      // downscroll code
+	      SCROLL_BOOLEAN = "true";
+	  } else {
+	      // upscroll code
+	      SCROLL_BOOLEAN = "false";
+	  }
+	  lastScrollTop = st;
+      });
 
   // add user
   $("#add-person-to-thread-form").on('submit', function(event) {
@@ -350,7 +365,11 @@ function _poll(threadId) {
 		    });
 
 		$("#thread-" + threadId).html(messages_html);
-		console.log("checked...");
+		//		console.log("checked...");
+		if (SCROLL_BOOLEAN == "true") {
+		    scrollDown();
+		}
+
 	    },
 
 		error : function(xhr, errmsg, err) {
@@ -358,7 +377,7 @@ function _poll(threadId) {
 					   " </div>");
 		console.log(xhr.status + ": " + xhr.responseText);
 	    }
-	});    
+	});       
 }
 
 function longPollForThread(threadId) {
@@ -463,7 +482,7 @@ function _sentMessageToDjango(json, selectedThreadId) {
     console.log(json); // log the returned json to the console
     console.log("huzzah"); // another sanity check
     
-    scrollDown();
+    SCROLL_BOOLEAN = "true";
 }
 
 function _addedToThread(addedUserName) {

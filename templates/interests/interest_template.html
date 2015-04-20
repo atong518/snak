@@ -1,7 +1,7 @@
 {% load customtags %}
 
 <li> 
-  <a class="selectbtn" id="interest-{{interest.id}}">
+  <a class="selectbtn {{interest.hidden|yesno:'disabled, '}}" id="interest-{{interest.id}}">
     {{interest.name}}
     <div style="display: none;">{{interest|dumpsjs}}</div>
   </a>

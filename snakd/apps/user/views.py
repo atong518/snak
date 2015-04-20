@@ -59,6 +59,12 @@ def resend_confirmation_email(request):
 
 def sign_up(request):
     if request.method == "POST":
+        existing_user = GenericUser.objects.filter(email=request.POST.get('email'))
+        if existing_user:
+            confirmation_text = "Oops! We already have an account with that email. Maybe try logging in?"
+            messages.add_message(request, messages.INFO, confirmation_text, fail_silently=True)
+            redirect('sign_up')
+
         prospieform = ProspieSignupForm(request.POST)
         collegeform = CollegeSignupForm(request.POST)
         studenttype = request.POST.get("type", "prospie")
@@ -129,7 +135,9 @@ def login(request):
             auth_login(request, user)
             return redirect("/chat/")
         else:
-            has_error = "block"
+            confirmation_text = "Oops! We had some trouble logging you in. Try again?"
+            messages.add_message(request, messages.INFO, confirmation_text, fail_silently=True)
+            return redirect("login")
 
     return render(request,
                   'user/login.html',

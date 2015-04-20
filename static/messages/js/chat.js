@@ -75,8 +75,9 @@ $(document).ready(function(){
   }
 
 
-  $("#auth-banner")[0].innerHTML = auth_message();
-
+  if($("#auth-banner").length == 1){
+    $("#auth-banner")[0].innerHTML = auth_message();
+  }
   // start all threads as hidden
   $('.thread').each(function() {
     $(this).hide();

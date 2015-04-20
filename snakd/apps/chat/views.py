@@ -12,6 +12,36 @@ from datetime import datetime, timedelta
 
 from snakd.apps.user.views import login
 
+# list of mobile User Agents
+mobile_uas = [
+    'w3c ','acs-','alav','alca','amoi','audi','avan','benq','bird','blac',
+    'blaz','brew','cell','cldc','cmd-','dang','doco','eric','hipt','inno',
+    'ipaq','java','jigs','kddi','keji','leno','lg-c','lg-d','lg-g','lge-',
+    'maui','maxo','midp','mits','mmef','mobi','mot-','moto','mwbp','nec-',
+    'newt','noki','oper','palm','pana','pant','phil','play','port','prox',
+    'qwap','sage','sams','sany','sch-','sec-','send','seri','sgh-','shar',
+    'sie-','siem','smal','smar','sony','sph-','symb','t-mo','teli','tim-',
+    'tosh','tsm-','upg1','upsi','vk-v','voda','wap-','wapa','wapi','wapp',
+    'wapr','webc','winw','winw','xda','xda-'
+    ]
+ 
+mobile_ua_hints = [ 'SymbianOS', 'Opera Mini', 'iPhone' ]
+
+def mobileBrowser(request):
+    ''' Super simple device detection, returns True for mobile devices '''
+ 
+    mobile_browser = False
+    ua = request.META['HTTP_USER_AGENT'].lower()[0:4]
+ 
+    if (ua in mobile_uas):
+        mobile_browser = True
+    else:
+        for hint in mobile_ua_hints:
+            if request.META['HTTP_USER_AGENT'].find(hint) > 0:
+                mobile_browser = True
+
+    return mobile_browser
+ 
 def sortInbox(inbox):
     for thread in range(len(inbox)-1,0,-1):
         for i in range(thread):
@@ -104,8 +134,12 @@ def chat(request):
         # confirmation_text = request.POST.get("nudge-a-person")=="true"
         messages.add_message(request, messages.INFO, confirmation_text, fail_silently=True)
 
-
-    return render(request, 'messages/chat.html',
+    if not mobileBrowser(request):
+        template = 'messages/chat.html'
+    else:
+        template = 'messages/chat_mobile.html'
+    template = 'messages/chat_mobile.html'
+    return render(request, template,
                   {'inbox_threads' : inbox,
                    'matched_users' : matched_users,
                    'current_user' :  _specify_class(request.user)})

@@ -22,9 +22,9 @@
 }
 
 .btn-reset-counter {
-  color: #626F83
-  background-color: transparent;
-  border-color: #626F83;
+  color: white;
+  background-color: #626F83;
+  border-color: white;
   border: 2px solid;
   width: 100%;
   margin: 0;

@@ -22,7 +22,11 @@ body {
   padding: 10px;
 }
 
+.aboutus-well {
+  padding: 10;
+  opacity: .8;
 
+}
 
 a:link {
   color: #52230C;

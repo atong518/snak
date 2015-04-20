@@ -344,6 +344,8 @@ $(document).ready(function(){
   $('#waitingForMatchModal').on('hidden.bs.modal', function () {
     location.reload();
   })
+
+  
 });
 
 function _poll(threadId) {

@@ -127,7 +127,7 @@ def login(request):
     email = password = ''
     has_error = "none"
     if request.POST:
-        email = request.POST.get('email')
+        email = request.POST.get('email').lower()
         password = request.POST.get('password')
         
         user = authenticate(email=email, password=password)

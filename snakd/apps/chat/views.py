@@ -138,7 +138,7 @@ def chat(request):
         template = 'messages/chat.html'
     else:
         template = 'messages/chat_mobile.html'
-    template = 'messages/chat_mobile.html'
+    # template = 'messages/chat_mobile.html'
     return render(request, template,
                   {'inbox_threads' : inbox,
                    'matched_users' : matched_users,

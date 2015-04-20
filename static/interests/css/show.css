@@ -134,6 +134,7 @@ ul ul ul li {
   margin-left: 24.7%;
   width: 24.8%;
   min-height: 125px;
+  max-height: 250px;
   background-color: white;
   padding-top: 1%;
   height: 12%;
@@ -144,6 +145,7 @@ ul ul ul li {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  overflow-y: scroll;
 }
 
 .disabled-interest {

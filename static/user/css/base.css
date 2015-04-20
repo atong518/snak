@@ -4,6 +4,7 @@
   green: #5C755E
   blue: #626F83
   red: #52230C
+  black: #000000
 */
 
 html {
@@ -11,7 +12,6 @@ html {
 }
 
 body {
-
   background-image: url("../jpg/DHall.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;

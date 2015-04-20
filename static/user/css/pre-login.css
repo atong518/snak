@@ -1,3 +1,13 @@
+/*
+  sage: #9C9F84
+  light green:  #CDD1B6
+  green: #5C755E
+  blue: #626F83
+  red: #52230C
+  black: #000000
+*/
+
+
 .info-holder{
         text-align: center
 }
@@ -6,6 +16,11 @@ body {
   background-image: url("../jpg/DHall.jpg");
   background-repeat: repeat-y;
   background-size: 100% 100%;
+}
+
+.glyphicon {
+  font-size: 40px;
+  color: #626F83;
 }
 
 .btn-success {
@@ -93,7 +108,7 @@ ul.dropdown {
   border: 2px solid;
   width: 95%;
   margin-left: 2.5%;
-  padding: 32px 28px;
+  padding: 28px 28px;
   font-size: 28px;
   line-height: normal;
   -webkit-border-radius: 8px;

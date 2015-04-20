@@ -33,6 +33,9 @@ class Interest(models.Model):
 	def getFrequency(self):
 		return len(self.user_set.all())
 
+	class Meta:
+		ordering = ['name']
+
 
 class SerializedDataField(models.TextField):
     """Because Django for some reason feels its needed to repeatedly call

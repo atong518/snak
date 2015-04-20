@@ -1,5 +1,6 @@
 [{
 		"name": "Academics",
+		"hidden": "false",
 		"children": [
 			{
 				"name": "Arts",
@@ -215,6 +216,7 @@
 	},
 	{
 		"name": "Extracurriculars",
+		"hidden": "false",
 		"children": [
 			{
 				"name": "Competition Based",
@@ -483,6 +485,7 @@
 	},
 	{
 		"name": "Sports",
+		"hidden": "false",
 		"children": [
 			{
 				"name": "Varsity",

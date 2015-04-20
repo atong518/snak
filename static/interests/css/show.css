@@ -97,12 +97,19 @@ ul li {
   text-align: center;
 }
 
+.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
 ul ul li {
+
   border: none;
   text-align: left;
   font-size: 22px;
 }
 ul ul ul li {
+
   font-size: 14px;
   padding-left: 20px;
 }

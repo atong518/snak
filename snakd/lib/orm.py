@@ -21,6 +21,7 @@ def GetInterestTree():
 		l["weight"] = node.weight
 		l["id"] = node.id
 		l["children"] = []
+		l["hidden"] = node.hidden
 		for child in children:
 			l["children"].append(GetSubtree(child))
 		return l

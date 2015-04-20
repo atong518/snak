@@ -64,37 +64,10 @@ function auth_message() {
 <div class="row buffer-row">
   <hr class="snak-divider">
 </div>
-<div class="row col-md-offset-2 col-md-8" id="chatroom-messages-row">
-  {% if messages %}
-  {% for message in messages %}
-  <div class="alert alert-success alert-info fade in" role="alert" id="alert-message">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-    <strong>{{ message }}</strong>
-  </div>
-  {% endfor %}
-  {% endif %}
-</div>
 
 <div class="row" style="height:90%; padding: 10px;" id="chat-room">
   <!--left navbar-->
-  <div class="col-md-2 col-md-offset-2 well" id="inbox">    
-    <!--chat menu dropdown-->
-    <div class="btn-group btn-group-justified" id="btn-chat-menu">
-      <div class="btn-group" id="btn-chat-menu">
-        <button type="button" class="btn btn-large dropdown-toggle button-success btn-success" id="chatmenu" data-toggle="dropdown" aria-expanded="false">
-          Menu <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="{% url 'settings' %}">Change Settings</a></li>
-          <li><a href="{% url 'change_password' %}">Change Password</a></li>
-          <li><a href="/interest/show/">Adjust Interests</a></li>
-          <li><a data-toggle="modal" href="#sendFeedbackModal">Submit Feedback</a></li>
-          <li><a data-toggle="modal" href="#referAFriendModal">Refer a Prospie</a></li>
-          <li><a href="{% url 'logout' %}">Logout</a></li>
-        </ul>
-      </div>
-    </div>
-
+<!--   <div class="col-md-2 col-md-offset-2 well" id="inbox">    
     <ul class="nav nav-pills nav-stacked" style="overflow-y: scroll">
     {% for thread in inbox_threads %}
       <li role="presentation"><a class="inbox-message" href="#" 
@@ -125,36 +98,27 @@ function auth_message() {
       </form>
     {% endif %}
 
-  </div>
+  </div> -->
   <!--current message-->
-  <div class="col-md-6 well box">
+  <div class="col-xs-12 well box">
+
+
     <div class="row" id="thread-title-bar">
       <!--Title of message-->
-      <div class="col-md-10" style="padding-left: 0px;">
+      <div class="col-xs-10" style="padding-left: 0px;">
   {% for thread in inbox_threads %}
   <div class="thread" id="members-in-thread-{{ thread.pk }}">
     <h5>{{ thread | userlist:user | joinby:", " }}</h5>
   </div>
   {% endfor %}
       </div>
-      <div class="col-md-2" style="padding: 0;">
+      <div class="col-xs-2" style="padding: 0;">
   <!--plus menu-->
-  <div class="dropdown">
-    <button class="btn btn-success dropdown-toggle pull-right button-success" type="button" id="plusmenu" data-toggle="dropdown" aria-expanded="false">+</button>
-    <ul class="dropdown-menu" style="right: 35; left: auto;" role="menu" aria-labelledby="plusmenu">
-<!-- TODO: Multiperson chats!  or not? I thought this wasn't a thing anymore  -->
-<!--      <li><a data-toggle="modal" href="#addPersonToThread">Add a Person</a></li> -->
-      {% if not current_user.collegeuser %}
-        <li><a data-toggle="modal" href="#nudgeAPersonModal">Nudge Person</a></li>
-      {% endif %}
-      <li><a data-toggle="modal" href="#aboutYourMatchModal">About Your Match</a></li>
-      <li><a data-toggle="modal" href="#reportAPersonModal">Report Conversation</a></li>
-    </ul>
-  </div>
     </div>
     </div>
-    <div id="message-box" class="row" style="margin-bottom: 5px;">
-      <!--previously sent/received messages-->
+
+
+    <div id="message-box" class="row" style="margin-bottom: 50px;">
       <div id="message-content">
   {% for thread in inbox_threads %}
   <div id="thread-{{ thread.pk }}" class="thread thread-messages">
@@ -172,17 +136,18 @@ function auth_message() {
   <div class="clearfix" style="margin: 5px;"></div>
       </div>
     </div>
+    
     <form id="send-message-form" method="POST">
       {% csrf_token %}
       <div class="input-group" id="send-message-row">
   <textarea class="form-control custom-control" id="message-input-box" rows="1" style="height: 1em;"></textarea>
-  <!--input class="form-control" type="text" id="message-input-box"-->
   <span class="input-group-btn">
     <input type="submit" id="btn-send-message" value="Send" class="btn btn-success button-success"/>
   </span>
       </div>
     </form>
   </div>
+
 </div>
 
 <!-- Add Person to Thread Modal -->

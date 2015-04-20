@@ -6,6 +6,7 @@
 
 {% block extrastyle %}
   <link rel="stylesheet" type="text/css" href="{% static 'messages/css/chat.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'messages/css/chat_mobile.css' %}" />
 {% endblock %}
 
 
@@ -55,6 +56,7 @@ function auth_message() {
 </script>
 
 <script type="text/javascript" src="{% static 'messages/js/chat.js' %}"></script>
+<script type="text/javascript" src="{% static 'messages/js/chat_mobile.js' %}"></script>
 <script type="text/javascript" src="{% static 'messages/js/typeahead.jquery.js' %}"></script>
 
 
@@ -62,113 +64,92 @@ function auth_message() {
 
 {% block content %}
 
-<div class="row" style="height:90%; padding: 10px;" id="chat-room">
-  <!--left navbar-->
-<!--   <div class="col-md-2 col-md-offset-2 well" id="inbox">    
-    <ul class="nav nav-pills nav-stacked" style="overflow-y: scroll">
-    {% for thread in inbox_threads %}
-      <li role="presentation"><a class="inbox-message" href="#" 
-         onclick="populateThread({{ thread.pk }})" 
-         id="thread-link-{{ thread.pk }}">
-    {% if thread.members.count == 1 %}myself {% endif %}
+<div class="row" id="chat-room">
+  <!--collapse menu button-->
+  <button id="top-menu-dropdown" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+  </button>
 
-    {{ thread | userlist:user | joinby:", " }}
-      </a></li>
-    {% endfor %}
-    </ul>
+  <!--collapse menu-->
+  <div class="collapse" id="collapseExample">
+    <ul id="collapse-menu-list" class="nav nav-pills nav-stacked" style="overflow-y: scroll">
+      <!--thread buttons-->
+      <li role="presentation">Threads</li>
+      {% for thread in inbox_threads %}
+      <li role="presentation">
+	<a class="inbox-message" href="#" onclick="populateThread({{ thread.pk }})" id="thread-link-{{ thread.pk }}">
+	  {% if thread.members.count == 1 %}myself {% endif %}	  
+	  {{ thread | userlist:user | joinby:", " }}
+        </a></li>
+      {% endfor %}
 
-    {% if current_user.collegeuser %}
+      <!--match me button-->
+      {% if current_user.collegeuser %}
       {% if current_user.is_active %}
-        {% if current_user.available %}
-          <button type="submit" class="btn btn-info btn-large btn-reset-counter">Waiting for matches!</button>
-        {% else %}
-          <button type="submit" class="btn btn-danger btn-large btn-reset-counter" id="reset-counter" title="{{ current_user.next_match_text }}">Make me available!</button>
-        {% endif %}
+      {% if current_user.available %}
+      
+      <button type="submit" class="btn btn-info match-btn">Waiting for matches!</button>
       {% else %}
-        <button type="submit" class="btn btn-danger btn-large btn-reset-counter" disabled>
-          Confirm your Email
-        </button>
+      <button type="submit" class="btn btn-danger match-btn" id="reset-counter" title="{{ current_user.next_match_text }}">Make me available!</button>
       {% endif %}
-    {% else %}
+      {% else %}
+      <button type="submit" class="btn btn-danger match-btn" disabled>
+        Confirm your Email
+      </button>
+      {% endif %}
+      {% else %}
       <form id="match-me" method="GET">
-        <button type="submit" class="btn btn-danger btn-large btn-match-me" id="btn-match-me">Match Me!</button>
+        <button type="submit" class="btn btn-danger btn-large match-btn" id="btn-match-me">Match Me!</button>
       </form>
     {% endif %}
 
-  </div> -->
+  </div>
+
   <!--current message-->
   <div class="col-xs-12 well box">
-
-
     <div class="row" id="thread-title-bar">
       <!--Title of message-->
       <div class="col-xs-10" style="padding-left: 0px;">
-  {% for thread in inbox_threads %}
-  <div class="thread" id="members-in-thread-{{ thread.pk }}">
-    <h5>{{ thread | userlist:user | joinby:", " }}</h5>
-  </div>
-  {% endfor %}
+	{% for thread in inbox_threads %}
+	<div class="thread" id="members-in-thread-{{ thread.pk }}">
+	  <h5>{{ thread | userlist:user | joinby:", " }}</h5>
+	</div>
+	{% endfor %}
       </div>
-      <div class="col-xs-2" style="padding: 0;">
-  <!--plus menu-->
-    </div>
     </div>
 
-
-    <div id="message-box" class="row" style="margin-bottom: 50px;">
-      <div id="message-content">
-  {% for thread in inbox_threads %}
-  <div id="thread-{{ thread.pk }}" class="thread thread-messages">
-          {% for message in thread.message_set.all %}
-    <div class="row">
-            {% if message.sender == user %}
-      <p class="chat-message sent pull-right">{{ message }}</p>
-            {% else %}
-            <p class="chat-message received pull-left">{{ message }}</p>
+   
+  <div id="message-box" class="row" style="margin-bottom: 50px;">
+    <div id="message-content">
+      {% for thread in inbox_threads %}
+      <div id="thread-{{ thread.pk }}" class="thread thread-messages">
+        {% for message in thread.message_set.all %}
+	<div class="row">
+          {% if message.sender == user %}
+	  <p class="chat-message sent pull-right">{{ message }}</p>
+          {% else %}
+          <p class="chat-message received pull-left">{{ message }}</p>
           {% endif %}
-          </div>
+        </div>
         {% endfor %}
-    </div>
-  {% endfor %}
-  <div class="clearfix" style="margin: 5px;"></div>
       </div>
-    </div>
-
-    <form id="send-message-form" method="POST">
-      {% csrf_token %}
-      <div class="input-group" id="send-message-row">
-  <textarea class="form-control custom-control" id="message-input-box" rows="1" style="height: 1em;"></textarea>
-  <span class="input-group-btn">
-    <input type="submit" id="btn-send-message" value="Send" class="btn btn-success button-success"/>
-  </span>
-      </div>
-    </form>
-  </div>
-
-</div>
-
-<!-- Add Person to Thread Modal -->
-<div class="modal fade" id="addPersonToThread" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add to this Thread</h4>
-      </div>
-      <div class="modal-body">
-        <form id="add-person-to-thread-form" method="POST">
-          {% csrf_token %}
-          <div id="scrollable-dropdown-menu">
-            <input class="form-control" type="text" id="add-person-to-thread-input" placeholder="Search by name..." autocomplete="off"/>
-          </div>
-          <br>
-          <button type="submit" value="Send" class="btn btn-primary">Do ittttt</button>
-        </form>
-      </div>
+      {% endfor %}
+      <div class="clearfix" style="margin: 5px;"></div>
     </div>
   </div>
+  
+  <form id="send-message-form" method="POST">
+    {% csrf_token %}
+    <div class="input-group" id="send-message-row">
+      <textarea class="form-control custom-control" id="message-input-box" rows="1" style="height: 1em;"></textarea>
+      <span class="input-group-btn">
+	<input type="submit" id="btn-send-message" value="Send" class="btn btn-success button-success"/>
+      </span>
+    </div>
+  </form>
 </div>
 
+</div>
 <!-- New Match Modal -->
 <div id="newMatchModals">
   <div class="modal fade" id="newMatchModal" tabindex="-1" role="dialog" aria-labelledby="myMatchModalLabel" aria-hidden="true">
@@ -227,92 +208,6 @@ function auth_message() {
         <div style="text-align:center" class="row">
           <div class="modal-body" style="display: inline-block"></div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Refer a friend modal -->
-<div class="modal fade" id="referAFriendModal" tabindex="-1" role="dialog" aria-labelledby="myReferAFriendModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <h4 class="modal-title" id="myModalLabel">Refer a Prospective Dartmouth Student!</h4>
-      </div>
-      <div class="modal-body">
-  <p><b>re&middot; fer</b>: <i>verb</i> <br>
-    1. To direct the attention or thoughts of <br>
-    2. To mention or allude to <br>
-    3. To be a dope human and spread the Sagely luv <3</p>
-  <form id="refer-a-friend-form" method="POST" action="/chat/refer_friend/">
-    {% csrf_token %}
-    <input class="form-control" id="refer_text1" type="text" name="refer-name" id="refer-a-friend-name" placeholder="Friend's Name"/>
-    <input class="form-control" type="text" name="refer-email" id="refer-a-friend-email" placeholder="Friend's email" /><br>
-    <button type="submit" value="Send" class="btn btn-primary">REFERRRRRRR</button>
-  </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Report a person modal -->
-<div class="modal fade" id="reportAPersonModal" tabindex="-1" role="dialog" aria-labelledby="reportAPersonModal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <h4 class="modal-title" id="myModalLabel">Report a Person</h4>
-      </div>
-      <div class="modal-body">
-  <form id="report-a-person-form" method="POST" action="/chat/report_person/">
-    {% csrf_token %}
-    <p>Did someone cause a kerfuffle?  What would you like to say about the following hooligan: <div id="members-to-report"></div></p>
-    <br>
-    <textarea rows="4" class="form-control" type="text" name="report-issue-text" id="report-issue-text" placeholder="Tell us what happened :(" ></textarea><br>
-    <button type="submit" value="Send" class="btn btn-primary">LET US AT 'EM</button>
-  </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Submit Feedback modal -->
-<div class="modal fade" id="sendFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="sendFeedbackModal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <h4 class="modal-title" id="myModalLabel">Submit Feedback</h4>
-      </div>
-      <div class="modal-body">
-  <form id="report-a-person-form" method="POST" action="/chat/submit_feedback/">
-    {% csrf_token %}
-    <p>Tell us what's on your mind!</p>
-    <br>
-    <textarea rows="4" class="form-control" type="text" name="send-feedback-text" id="send-feedback-text" placeholder="Thank you!" ></textarea><br>
-    <button type="submit" value="Send" class="btn btn-primary">Submit</button>
-  </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Nudge a person modal -->
-<div class="modal fade" id="nudgeAPersonModal" tabindex="-1" role="dialog" aria-labelledby="nudgeAPersonModal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <h4 class="modal-title" id="myModalLabel">Nudge a Person</h4>
-      </div>
-      <div class="modal-body">
-  <form id="nudge-a-person-form" method="POST" action=".">
-    {% csrf_token %}
-    <p>Someone a little slow on the response?  Would you like us to give the following a little nudge for you? <div id="members-to-nudge"></div></p>
-    <br>
-    <button type="submit" value="Send" class="btn btn-primary" id="nudge-a-person-button">Wink wink, nudge nudge :)</button>
-  </form>
       </div>
     </div>
   </div>

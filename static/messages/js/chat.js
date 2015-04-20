@@ -129,6 +129,10 @@ $(document).ready(function(){
     }
   }
 
+  // TODO: this shouldn't be here lol -DS
+  $("#top-menu-dropdown").click(function(event) {
+	  $(".box").toggle();
+      });
   $("#leftMatch").click(function(event) {
     current_index -= 1;
     updateModal(possibles[current_index]);

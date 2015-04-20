@@ -139,7 +139,9 @@ def chat(request):
     else:
         template = 'messages/chat_mobile.html'
 
-    # template = 'messages/chat_mobile.html'
+    # THIS IS FOR DEBUGGING MOBILE CHAT ON DESKTOP - SHOULD BE COMMENTED
+    # OUT IN ALL PRODUCTION BUILDS
+    template = 'messages/chat_mobile.html'
 
     return render(request, template,
                   {'inbox_threads' : inbox,

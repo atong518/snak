@@ -342,7 +342,11 @@ $(document).ready(function(){
   })
 
   $(".btn-reset-counter").click(function(event) {
-    $("#waitingForMatchModal").modal('show'); 
+    if allow_matches() {
+      $("#waitingForMatchModal").modal('show'); 
+    } else {
+      $('#confirmEmail').modal('show');
+    }
   });
 
   $('#waitingForMatchModal').on('hidden.bs.modal', function () {

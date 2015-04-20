@@ -242,7 +242,7 @@ def refer_friend(request):
     # Send referral email
     if request.method == "POST" and request.user.is_authenticated():
         email = request.POST.get("refer-email")
-        subject = "Want to know what it's like to go to Dartmouth College?"
+        subject = "Want to know what it's like to go to Dartmouth?"
 
         referer_name = request.user.firstname + " " + request.user.lastname
 

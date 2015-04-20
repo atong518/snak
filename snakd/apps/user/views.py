@@ -22,6 +22,7 @@ from snakd.apps.chat.models import Thread
 
 # Create your views here.
 def splash(request):
+    import pdb; pdb.set_trace()
     if request.user.is_authenticated():
         return redirect("/chat/")
 

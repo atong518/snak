@@ -61,6 +61,21 @@ function auth_message() {
 {% endblock %}
 
 {% block content %}
+<head>
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-61893953-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+</head>
+
 <div class="row buffer-row">
   <hr class="snak-divider">
 </div>
@@ -112,7 +127,7 @@ function auth_message() {
     {% if current_user.collegeuser %}
       {% if current_user.is_active %}
         {% if current_user.available %}
-          <button type="submit" class="btn btn-info btn-large btn-reset-counter">Waiting for matches!</button>
+          <button type="submit" class="btn btn-info btn-large btn-reset-counter" data-toggle="modal" data-target="#availableForMatchModal">Available for matches!</button>
         {% else %}
           <button type="submit" class="btn btn-danger btn-large btn-reset-counter" id="reset-counter" title="{{ current_user.next_match_text }}">Make me available!</button>
         {% endif %}
@@ -366,7 +381,21 @@ function auth_message() {
   <h4 class="modal-title" id="myModalLabel">Get ready!</h4>
       </div>
       <p class="modal-body">
-      You are now available for prospies to find you! We'll let you know when you get a match. 
+      You are now available for prospies to find you! We'll shoot you an email when you get matched! 
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Waiting for match modal -->
+<div class="modal fade" id="availableForMatchModal" tabindex="-1" role="dialog" aria-labelledby="availableForMatchModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+  <h4 class="modal-title" id="myModalLabel">Hang on!</h4>
+      </div>
+      <p class="modal-body">
+      You're currently available! We'll shoot you an email when you get matched!
       </p>
     </div>
   </div>

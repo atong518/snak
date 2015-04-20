@@ -31,7 +31,6 @@ function getIStrings() {
 
 {% block content %}
 {% load customtags %}
-<link rel="stylesheet" type="text/css" href="../../static/user/css/pre-login.css">
 <link rel="stylesheet" type="text/css" href="{% static 'interests/css/show.css' %}" />
 <div class="row buffer-row">
   <hr class="snak-divider">
@@ -41,12 +40,15 @@ function getIStrings() {
     <div class="well interests-well col-md-12">
       <div id="scrollable-dropdown-menu row">
 	<input type="text" placeholder="Search for interests" class="form-control search-box" id="interests-searchbar" onkeypress="return interestEnteredFromSearch(event);">
-	<!--span class="glyphicon glyphicon-chevron-up pull-right up-arrow"></span-->
 	<input type="hidden" id="interest-id-searchbox" value="none">
 	<input type="hidden" id="interest-name-searchbox" value="none">
+	<div class="row">
+	  <div id="up-arrow-support"></div>
+	  <span class="glyphicon glyphicon-chevron-up pull-right up-arrow"></span>
+	</div>
       </div>
       <div class="list-of-interests row" id="list-of-interests">
-	<div class="col-md-6">
+	<div class="col-md-6" id="interest-list-outside-div">
 	  <ul id="scrolling-list-of-interests">
 	    {% for interest in i_list.children %} 
             <div id="{{interest.id}}_jump" name="{{interest.name}}" style="hidden: true"></div>
@@ -59,6 +61,9 @@ function getIStrings() {
 	  <div id="interest-tooltip-div">Hover over an interest to read more about it.</div>
 	  <p id="interest-disclaimer">*This may not be a comprehensive list of all the options that Dartmouth offers in this area</p>
 	</div>
+      </div>
+      <div class="row">
+	  <span class="glyphicon glyphicon-chevron-down pull-right down-arrow"></span>
       </div>
     </div>
   </div>

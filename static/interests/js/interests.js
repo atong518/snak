@@ -2,13 +2,25 @@ var interestlist = [];
 
 $(document).ready(function() {
 	UpdateInterestList();
+	$(".up-arrow").css("display", "none");
     });
 $(".list-of-interests").scroll(function() {
 	var scrollHeight = $(".list-of-interests").scrollTop();
 	var innerHeight = $(".list-of-interests").innerHeight();
 	var domHeight = document.getElementById("list-of-interests").scrollHeight;
-	if (scrollHeight == 0) console.log("TOP");
-	if ((scrollHeight + innerHeight) >= domHeight) console.log("BOTTOM");
+	$(".up-arrow").show();
+	$(".down-arrow").show();
+	$("#up-arrow-support").hide(); // to prevent the interest tooltip box from jumping
+	                               // when the up arrow is hidden/shown
+	if (scrollHeight == 0){
+	    console.log("TOP");
+	    $(".up-arrow").hide();
+	    $("#up-arrow-support").show();
+	}
+	else if ((scrollHeight + innerHeight) >= domHeight) {
+	    console.log("BOTTOM");
+	    $(".down-arrow").hide();
+	}
     });
 
 function getInterestList() {

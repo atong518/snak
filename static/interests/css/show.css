@@ -50,9 +50,21 @@
 }
 
 .up-arrow {
-  margin-right: 3%;
-  font-size: 30px;
-  margin-bottom: 0;
+  font-size: 20px;
+  margin-right: 50%;
+  color: rgb(51, 122, 183);
+}
+.down-arrow {
+  font-size: 20px;
+  margin-right: 50.5%;
+  margin-top: -5%;
+  color: rgb(51, 122, 183);
+}
+#up-arrow-support {
+  height: 20px;
+}
+#interest-list-outside-div {
+  position: relative;
 }
 .search-box {
   margin: 3%;
@@ -134,6 +146,7 @@ ul ul ul li {
   margin-left: 24.7%;
   width: 24.8%;
   min-height: 125px;
+  max-height: 250px;
   background-color: white;
   padding-top: 1%;
   height: 12%;
@@ -144,6 +157,7 @@ ul ul ul li {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  overflow-y: scroll;
 }
 
 .disabled-interest {

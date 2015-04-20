@@ -37,10 +37,14 @@
 }
 
 .interests-well {
-  padding: 0;
+  padding: 10;
   opacity: .8;
   height: 65%;
   font-color: black;
+}
+
+#scrollable-dropdown-menu {
+  height: 65%;
 }
 
 .selectbtn {
@@ -57,7 +61,7 @@
 .down-arrow {
   font-size: 20px;
   margin-right: 50.5%;
-  margin-top: -5%;
+  margin-top: -7%;
   color: rgb(51, 122, 183);
 }
 #up-arrow-support {
@@ -77,7 +81,7 @@
   margin-right: 3%;
   margin-top: -3%;
   overflow: scroll;
-  height: 85%;
+  height: 80%; /*85%*/
 }
 
 .tt-dropdown-menu {
@@ -149,7 +153,6 @@ ul ul ul li {
   max-height: 250px;
   background-color: white;
   padding-top: 1%;
-  height: 12%;
   position: fixed;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #2E3A2F;
@@ -157,7 +160,7 @@ ul ul ul li {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  overflow-y: scroll;
+  padding: 10px;
 }
 
 .disabled-interest {

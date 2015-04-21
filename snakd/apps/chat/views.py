@@ -12,7 +12,6 @@ from datetime import datetime, timedelta
 
 from snakd.apps.user.views import login
 
-# test
 # list of mobile User Agents
 mobile_uas = [
     'w3c ','acs-','alav','alca','amoi','audi','avan','benq','bird','blac',

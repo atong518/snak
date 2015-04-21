@@ -55,7 +55,7 @@ def resend_confirmation_email(request):
 
     _send_mail(user.email, user.activation_code)
 
-    return redirect("/interest/show")
+    return redirect("/interest/show/")
 
 def sign_up(request):
     if request.method == "POST":

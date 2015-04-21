@@ -83,7 +83,7 @@ def chat(request):
     matched_users = user.matches.all()
     # force to interest select page if fewer than 3 interests
     if (len(user.interests.all()) < 3): # this used to be 1?
-        return redirect("/interest/show")
+        return redirect("/interest/show/")
 
     # confirmation_text = "debug"
     # messages.add_message(request, messages.INFO, confirmation_text, fail_silently=True)

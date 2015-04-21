@@ -342,7 +342,7 @@ $(document).ready(function(){
   })
 
   $(".btn-reset-counter").click(function(event) {
-    if allow_matches() {
+	  if (allow_matches()) {
       $("#waitingForMatchModal").modal('show'); 
     } else {
       $('#confirmEmail').modal('show');

@@ -26,10 +26,12 @@ SECRET_KEY = 'ws-v4)b0r92@&alae894)(+6j#giv&-2uswqm=vg2oolm38f@e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+
 TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
 
+APPEND_SLASH = True
 
 # Application definition
 

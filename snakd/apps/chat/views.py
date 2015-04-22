@@ -96,15 +96,18 @@ def chat(request):
         thread = Thread.objects.get(pk=threadId)
         firstname = request.POST.get("reported-name").split(" ")[0]
         lastname = request.POST.get("reported-name").split(" ")[1]
-        nudgedUser = thread.members.filter(firstname=firstname, lastname=lastname).first()
+        nudgedUser = thread.members.filter(firstname=firstname, lastname=lastname).first() # could nudge the wrong person if they have the same name
 
         # if last message is fewer than 3 days old, display wait message and don't send email
-        if millisToDays(thread.mostRecentMessage()) < millisToDays(unix_time_millis(datetime.now())) + 3:
+        try:
+            if millisToDays(thread.mostRecentMessage()) < millisToDays(unix_time_millis(datetime.now())) + 3:
+                confirmation_text = "Let's give " + firstname + " a little more time to answer!"
+        except:
             confirmation_text = "Let's give " + firstname + " a little more time to answer!"
 
         # only send nudge if the nudger has sent the last message
         # TODO don't think this works
-        elif thread.mostRecentMessageRef().sender is nudgedUser:
+        if thread.mostRecentMessageRef().sender is nudgedUser:
             confirmation_text = "Why don't you answer " + firstname + " first before nudging!"
 
         # send email

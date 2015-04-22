@@ -159,7 +159,12 @@ class ProspieSignupForm(GenericSignupForm):
 
     def __init__(self, *args, **kwargs):
         super(ProspieSignupForm, self).__init__(*args, **kwargs)
-
+        self.fields['email'].widget = EmailInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Email',
+            'pattern':'^((?!\@dartmouth\.edu).)*$',
+            'data-error': "You're not a prospie! Try signing up as a College Student!",
+            'required': 'true'})#.lower()   
         self.fields['gender'].widget = Select(attrs={
             'class': 'form-control',
             'required': 'true',

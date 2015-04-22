@@ -17,11 +17,22 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $('#fullpage').fullpage();
-      document.getElementById('prospie_info').style.display = 'TEST';
-      document.getElementById('college_info').style.display = 'none';
-      document.getElementById('prospie_how').style.display = 'TEST';
-      document.getElementById('college_how').style.display = 'none';
-      document.getElementById('studentType').value = "prospie"
+      if (window.location.hash.substr(1) == "student"){
+        document.getElementById('prospie_info').style.display = 'none';
+        document.getElementById('college_info').style.display = '';
+        document.getElementById('prospie_how').style.display = 'none';
+        document.getElementById('college_how').style.display = '';
+        document.getElementById('studentType').value = "dartmouth";
+        $("#c")[0].click()
+      }
+      else {
+        document.getElementById('prospie_info').style.display = '';
+        document.getElementById('college_info').style.display = 'none';
+        document.getElementById('prospie_how').style.display = '';
+        document.getElementById('college_how').style.display = 'none';
+        document.getElementById('studentType').value = "prospie";
+        $("#p")[0].click()
+      }
     });
 
     $('#downbutton').click(function(){
@@ -106,10 +117,10 @@
 	  <form class="form-horizontal">
 	    <div class="form-group">
 	      <div class="btn-group btn-group-justified" data-toggle="buttons">
-		<label class="btn btn-success active col-sm-6" id="btn-toggle" style="white-space: normal;">
-		  <input onchange="javascript:toggleDisplayInfo();" type="radio" name="student-type" id="p" autocomplete="off" value="p" checked>Prospective Dartmouth Student
+		<label class="btn btn-success active col-sm-6" id="btn-toggle-c" style="white-space: normal;">
+		  <input onchange="javascript:toggleDisplayInfo();" type="radio" name="student-type" id="p" autocomplete="off" value="p">Prospective Dartmouth Student
 		</label>
-		<label class="btn btn-success col-sm-6" id="btn-toggle" style="white-space: normal;">
+		<label class="btn btn-success col-sm-6" id="btn-toggle-p" style="white-space: normal;">
 		  <input onchange="javascript:toggleDisplayInfo();" type="radio" name="student-type" id="c" autocomplete="off" value="c">Current Dartmouth Student
 		</label>
 	      </div>

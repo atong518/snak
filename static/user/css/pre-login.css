@@ -96,8 +96,19 @@ ul.dropdown {
   border-color: #52230C;
 }
 
-#btn-toggle {	
+#btn-toggle-p {	
   width: 95%; 
+  margin-left: 2.5%;
+  padding: 32px 28px;
+  font-size: 28px;
+  line-height: normal;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+}
+
+#btn-toggle-c {
+  width: 95%;
   margin-left: 2.5%;
   padding: 32px 28px;
   font-size: 28px;

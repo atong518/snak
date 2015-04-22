@@ -13,12 +13,15 @@ from snakd.lib.match import bestmatches
 from snakd.lib.matrix import getMatrix
 from datetime import datetime, timedelta
 import json
+import re
 from snakd.apps.user.forms import ContactUsForm
 #from django import newforms as forms
 from django import forms
 from django.forms.widgets import *
 from django.core.mail import send_mail, BadHeaderError
 from snakd.apps.chat.models import Thread
+
+
 
 # Create your views here.
 def splash(request):
@@ -101,9 +104,16 @@ def howto(request):
 def aboutus(request):
     return render(request, 'user/aboutus.html', {})
 
+def validateE(email):
+    if len(email) > 6:
+        if re.match('\w[\w\.-]*@\w[\w\.-]+\.\w+', email) != None:
+            return 1
+    return 0
+
 def contactus(request):
     if request.method == "POST":
         contactform = ContactUsForm(request.POST)
+        validateE(contactform.cleaned_data['user_email'])
         if  request.POST.get("contactus_button") is not None and contactform.is_valid():
             # Email shenanigans                                                                                                   
             subject = "Sagely.io Contact Us Comment from " + contactform.cleaned_data['user_email']

@@ -409,6 +409,7 @@ function populateState(selectId, countrySelectId) {
   // If the country has no states, change the select to a text box
   if ( ! foundState ) {
     document.getElementById(selectId).style.display = 'none';
+    
   }
 }
 

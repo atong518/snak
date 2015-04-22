@@ -111,7 +111,7 @@ def chat(request):
         else:
             confirmation_text = "Thanks for letting us know! We've nudged " + firstname + " for you!"
 
-            from_email = settings.EMAIL_HOST_USER
+            from_email = "sagelyio@gmail.com"
             to_email = nudgedUser.email
 
             subject = request.user.firstname + " needs your Sagely advice!"
@@ -243,7 +243,7 @@ def _send_match_notification(user, match):
             message += "<br>"
         message += "Head to <a href='http://www.sagely.io'>sagely.io</a> to respond! " + user.firstname + " is waiting ;)<br><br>"
         message += "The Sagely Team"
-        from_email = settings.EMAIL_HOST_USER
+        from_email = "sagelyio@gmail.com"
         msg = EmailMultiAlternatives(subject, message, from_email, {match.email})
         msg.attach_alternative(message, "text/html")
         msg.send()
@@ -310,7 +310,7 @@ def refer_friend(request):
                         <p>''' + referer_name + ''' thought you might be interested in using Sagely and told us to get in touch with you! We Dartmouth students would love nothing more than to share our experiences, so give us a shot and check us out <a href="http://www.sagely.io/">here</a>!</p>
                         <p>Cheers!</p><p><b>The Sagely Team</b></p>'''
 
-        from_email = settings.EMAIL_HOST_USER
+        from_email = "sagelyio@gmail.com"
         
         msg = EmailMultiAlternatives(subject, message, from_email, {email})
         msg.attach_alternative(html_message, "text/html")
@@ -330,7 +330,7 @@ def report_person(request):
         message += " (email: " + request.user.email + ")\n"
         message += "Reported on: " + request.POST.get("reported-name")
         message += "\nIssue: " + issue
-        from_email = settings.EMAIL_HOST_USER
+        from_email = "sagelyio@gmail.com"
 
         html_message = "<h3>REPORT RECEIVED</h3>"
         html_message += "<p><b>Reported by</b>: " + request.user.firstname + " " + request.user.lastname + " (" + request.user.email + ")</p>"
@@ -355,7 +355,7 @@ def submit_feedback(request):
         message = "Submitted by: " + request.user.firstname + " " + request.user.lastname
         message += " (email: " + request.user.email + ")\n"
         message += "\nFeedback: " + issue
-        from_email = settings.EMAIL_HOST_USER
+        from_email = "sagelyio@gmail.com"
 
         html_message = "<h3>REPORT RECEIVED</h3>"
         html_message += "<p><b>Submitted by</b>: " + request.user.firstname + " " + request.user.lastname + " (" + request.user.email + ")</p>"

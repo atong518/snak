@@ -120,7 +120,7 @@ ga('send', 'pageview');
 <!--     <div id="scrollable-dropdown-menu ">
       <input class="form-control" type="text" id="switch-to-chat-input" placeholder="Search by name..." autocomplete="off"/>
     </div> -->
-    <ul class="nav nav-pills nav-stacked" style="overflow-y: scroll">
+    <ul class="nav nav-pills nav-stacked" >
     {% for thread in inbox_threads %}
       <li role="presentation"><a class="inbox-message" href="#" 
 				 onclick="populateThread({{ thread.pk }})" 

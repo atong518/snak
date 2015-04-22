@@ -109,7 +109,7 @@ def contactus(request):
             subject = "Sagely.io Contact Us Comment from " + contactform.cleaned_data['user_email']
             message = contactform.cleaned_data['contact_comments']
 #            txt_message = message + contactform.cleaned_data['user_email']
-            email = settings.EMAIL_HOST_USER
+            email = "sagelyio@gmail.com"
             msg = EmailMultiAlternatives(subject, message, email, {email})
             msg.send()
             return redirect("/thankyou/")
@@ -149,7 +149,7 @@ def send_password_email(request):
     if request.method == "POST":
         email = request.POST.get("email")
         subject = "Sagely Password Reset"
-        from_email = settings.EMAIL_HOST_USER
+        from_email = "sagelyio@gmail.com"
         html_message = "Reset your password <a href='http://www.sagely.io/reset_password/?email=" + email + "'>here</a>.<br><br>The Sagely Team"
         msg = EmailMultiAlternatives(subject, html_message, from_email, {email})
         msg.attach_alternative(html_message, "text/html")

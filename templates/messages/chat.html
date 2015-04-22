@@ -199,7 +199,7 @@ ga('send', 'pageview');
     <form id="send-message-form" method="POST">
       {% csrf_token %}
       <div class="input-group" id="send-message-row">
-	<textarea class="form-control custom-control" id="message-input-box" rows="1" style="height: 1em;"></textarea>
+	<textarea class="form-control custom-control" id="message-input-box" rows="1" style="height: 1em; overflow:hidden;"></textarea>
 	<!--input class="form-control" type="text" id="message-input-box"-->
 	<span class="input-group-btn">
 	  <input type="submit" id="btn-send-message" value="Send" class="btn btn-success button-success"/>

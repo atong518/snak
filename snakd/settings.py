@@ -124,10 +124,17 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = [os.path.join(PROJECT_APP_ROOT, 'templates')]
 
 # Email confirmation stuffs
-from .email_settings import *
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'sagelyio@gmail.com'
-EMAIL_HOST_PASSWORD = 'HackedOnEaster2015'
+# from .email_settings import *
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'sagelyio@gmail.com'
+# EMAIL_HOST_PASSWORD = 'HackedOnEaster2015'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+
+# HEROKU EMAIL SETTINGS
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'sendgrid_username'
+EMAIL_HOST_PASSWORD = 'sendgrid_password'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

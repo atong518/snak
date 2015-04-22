@@ -1,4 +1,7 @@
 .dropdown-toggle:active, .open .dropdown-toggle {background:#CDD1B6 !important; color:  #5C755E !important}
+.row {
+  margin: 0;
+}			 
 
 #inbox {
   height: 75%;

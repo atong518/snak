@@ -95,9 +95,11 @@ $(document).ready(function(){
 
   $("#match-me").submit(function(event) {
     event.preventDefault();
-    deferred = $.get("/match/", {})
-
+    $("#loading_div").modal("toggle");
+    deferred = $.get("/match/", {});
+    
     deferred.success(function (response) {
+      $("#loading_div").modal("toggle");
       if(response.allow_matches){
         possibles = response.possibles
         current_index = 0

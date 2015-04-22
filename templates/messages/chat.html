@@ -423,4 +423,20 @@ ga('send', 'pageview');
   </div>
 </div>
 
+<!-- Loading matches modal -->
+<div class="modal fade" id="loading_div" tabindex="-1" role="dialog" aria-labelledby="loading_div" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title" id="myModalLabel" style="text-align: center">Chillax homie, we are percolating on your interests to find you a righteous match.</h4>
+      </div>
+      <p class="modal-body" style="width: 50%; margin: 0 auto;">
+	<img src="{% static 'user/jpg/loading_matches.gif' %}" /></p>
+      <p style="text-align: center">This could take up to 30 seconds.  Like I said, chillax.</p>
+    </div>
+  </div>
+</div>
+
+
 {% endblock %}

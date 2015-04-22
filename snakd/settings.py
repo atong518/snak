@@ -24,9 +24,9 @@ STATIC_ROOT = 'staticfiles'
 SECRET_KEY = 'ws-v4)b0r92@&alae894)(+6j#giv&-2uswqm=vg2oolm38f@e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
 

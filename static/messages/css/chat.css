@@ -160,3 +160,9 @@ textarea {
   border-color: white;
 }
 
+#no-messages-alert-btn {
+  margin-top: 10%;
+  padding-top: 10px;
+  height: 25%;
+  font-size: 25px;
+}

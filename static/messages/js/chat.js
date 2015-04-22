@@ -362,6 +362,14 @@ $(document).ready(function(){
 });
 
 function _poll(threadId) {
+    if (typeof threadId === "undefined") {
+	$('#message-content').html(
+				   "<div id='no-messages-alert-btn' class= 'btn btn-block btn-info' data-alert>" + 
+				   "Heyyy you don't have any chats yet.<br>  Just hang tight" +
+				   " until you get matched :)" +
+				   " </div>");
+	return;
+    }
     $.ajax({
 	    url : "check_for_new_messages/",
 		type : "POST",

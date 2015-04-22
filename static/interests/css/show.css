@@ -82,6 +82,7 @@
   margin-top: -3%;
   overflow: scroll;
   height: 80%; /*85%*/
+  overflow-x: hidden;
 }
 
 .tt-dropdown-menu {

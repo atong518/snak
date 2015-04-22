@@ -136,7 +136,7 @@ ga('send', 'pageview');
         {% if current_user.available %}
           <button type="submit" class="btn btn-info btn-large btn-reset-counter" data-toggle="modal" data-target="#availableForMatchModal">Available for matches!</button>
         {% else %}
-          <button type="submit" class="btn btn-danger btn-large btn-reset-counter" id="reset-counter" title="{{ current_user.next_match_text }}">Make me available!</button>
+          <button type="submit" class="btn btn-danger btn-large btn-reset-counter" id="reset-counter" title="{{ current_user.next_match_text }}" data-toggle="modal" data-target="#waitingForMatchModal">Make me available!</button>
         {% endif %}
       {% else %}
         <button type="submit" class="btn btn-danger btn-large btn-reset-counter" disabled>

@@ -129,7 +129,7 @@ def chat(request):
 
             msg = EmailMultiAlternatives(subject, message, from_email, {to_email})
             msg.attach_alternative(html_message, "text/html")
-            # msg.send()
+            msg.send()
         
         # confirmation_text = request.POST.get("nudge-a-person")=="true"
         messages.add_message(request, messages.INFO, confirmation_text, fail_silently=True)
@@ -307,7 +307,7 @@ def refer_friend(request):
         html_message =  "<h3>Hi " + request.POST.get("refer-name") + '''!</h3>
                         <p>Are you interested in going to Dartmouth College?  Do you want to find out what it's like to be a student here?</p>
                         <p>At Sagely, we help prospective Dartmouth students like you get an "inside look" into what it's like to go to Dartmouth. We help you get personalized answers to your questions by connecting you directly with real Dartmouth students.</p>
-                        <p>''' + referer_name + ''' thought you might be interested in using Sagely and told us to get in touch with you! We Dartmouth students would love nothing more than to share our experiences, so give us a shot and check us out <a href="www.sagely.io">here</a>!</p>
+                        <p>''' + referer_name + ''' thought you might be interested in using Sagely and told us to get in touch with you! We Dartmouth students would love nothing more than to share our experiences, so give us a shot and check us out <a href="http://www.sagely.io/">here</a>!</p>
                         <p>Cheers!</p><p><b>The Sagely Team</b></p>'''
 
         from_email = settings.EMAIL_HOST_USER

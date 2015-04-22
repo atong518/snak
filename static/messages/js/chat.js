@@ -341,6 +341,7 @@ $(document).ready(function(){
       });   
   })
 
+
   $(".btn-reset-counter").click(function(event) {
 	  if (allow_matches()) {
       $("#waitingForMatchModal").modal('show'); 
@@ -349,9 +350,13 @@ $(document).ready(function(){
     }
   });
 
-  $('#waitingForMatchModal').on('hidden.bs.modal', function () {
-    location.reload();
-  })
+  // $(".btn-reset-counter").click(function(event) {
+  //   $("#waitingForMatchModal").modal('show'); 
+  // });
+
+  // $('#waitingForMatchModal').on('hidden.bs.modal', function () {
+  //   location.reload();
+  // })
 
   
 });

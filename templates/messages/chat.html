@@ -126,8 +126,10 @@ ga('send', 'pageview');
 				 onclick="populateThread({{ thread.pk }})" 
 				 id="thread-link-{{ thread.pk }}">
 	  {% if thread.members.count == 1 %}myself {% endif %}
-
-    {{ thread | userlist:user | joinby:", " }}
+	  {% for member in thread.members.count %}
+	  <div style="display: none;" id="bio-thread-{{ user.id }}"></div>
+	  {% endfor %}
+	  {{ thread | userlist:user | joinby:", " }}
       </a></li>
     {% endfor %}
     </ul>
@@ -172,7 +174,6 @@ ga('send', 'pageview');
       {% if not current_user.collegeuser %}
   	    <li><a data-toggle="modal" href="#nudgeAPersonModal">Nudge Person</a></li>
       {% endif %}
-      <li><a data-toggle="modal" href="#aboutYourMatchModal">About Your Match</a></li>
       <li><a data-toggle="modal" href="#reportAPersonModal">Report Conversation</a></li>
 	  </ul>
 	</div>

@@ -48,6 +48,11 @@ class GenericSignupForm(UserCreationForm):
                                                password=data['password1'])
         return user
 
+    def checkstate(self):
+        cleaned_data = super(GenericSignupForm, self).clean()
+        if cleaned_data.get('homecountry') != "United States":
+            del self.errors['homestate']
+
     def clean_password(self):
         cleaned_data = super(GenericSignupForm, self).clean()
         password1 = cleaned_data.get("password1")
@@ -60,6 +65,15 @@ class GenericSignupForm(UserCreationForm):
 
         # always return the cleaned data
         return super().clean()
+
+    def clean_state(self):
+        console.log("TEST")
+        cleaned_data = super(GenericSignupForm, self).clean()
+        country = cleaned_data.get("homecountry")
+        state = cleaned_data.get("homestate")
+        if country == "United States" and not state:
+            raise forms.ValidationError("State is a required field.")
+        return cleaned_data
 
     def __init__(self, *args, **kwargs):
         super(GenericSignupForm, self).__init__(*args, **kwargs)

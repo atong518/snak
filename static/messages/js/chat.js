@@ -342,21 +342,14 @@ $(document).ready(function(){
   })
 
 
-  $(".btn-reset-counter").click(function(event) {
-	  if (allow_matches()) {
-      $("#waitingForMatchModal").modal('show'); 
-    } else {
-      $('#confirmEmail').modal('show');
-    }
-  });
-
+  // makes 2 modals appear
   // $(".btn-reset-counter").click(function(event) {
-  //   $("#waitingForMatchModal").modal('show'); 
+	 //  if (allow_matches()) {
+  //     $("#waitingForMatchModal").modal('show'); 
+  //   } else {
+  //     $('#confirmEmail').modal('show');
+  //   }
   // });
-
-  // $('#waitingForMatchModal').on('hidden.bs.modal', function () {
-  //   location.reload();
-  // })
 
   
 });

@@ -35,12 +35,11 @@ def bestmatches(matrix, user, opplist):
     for opp in opplist:
         score = match(matrix, user, opp)
         options.append((-1*score, opp))
-    heapsort(options)
+    options = heapsort(options)
     length = min(len(options), 5)
     matches = []
     for i in range(0, length):
         matches.append(options[i][1])
     return matches
-
 
 

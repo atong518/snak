@@ -132,6 +132,9 @@ TEMPLATE_DIRS = [os.path.join(PROJECT_APP_ROOT, 'templates')]
 # EMAIL_USE_TLS = True
 
 # HEROKU EMAIL SETTINGS
+EMAIL_HOST='smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 AUTH_USER_MODEL = "user.GenericUser"
 

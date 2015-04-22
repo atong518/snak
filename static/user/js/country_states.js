@@ -11,7 +11,6 @@ var state = '\
 US:AK:Alaska|\
 US:AL:Alabama|\
 US:AR:Arkansas|\
-US:AS:American Samoa|\
 US:AZ:Arizona|\
 US:CA:California|\
 US:CO:Colorado|\
@@ -19,9 +18,7 @@ US:CT:Connecticut|\
 US:DC:D.C.|\
 US:DE:Delaware|\
 US:FL:Florida|\
-US:FM:Micronesia|\
 US:GA:Georgia|\
-US:GU:Guam|\
 US:HI:Hawaii|\
 US:IA:Iowa|\
 US:ID:Idaho|\
@@ -33,11 +30,9 @@ US:LA:Louisiana|\
 US:MA:Massachusetts|\
 US:MD:Maryland|\
 US:ME:Maine|\
-US:MH:Marshall Islands|\
 US:MI:Michigan|\
 US:MN:Minnesota|\
 US:MO:Missouri|\
-US:MP:Marianas|\
 US:MS:Mississippi|\
 US:MT:Montana|\
 US:NC:North Carolina|\
@@ -52,8 +47,6 @@ US:OH:Ohio|\
 US:OK:Oklahoma|\
 US:OR:Oregon|\
 US:PA:Pennsylvania|\
-US:PR:Puerto Rico|\
-US:PW:Palau|\
 US:RI:Rhode Island|\
 US:SC:South Carolina|\
 US:SD:South Dakota|\
@@ -61,15 +54,11 @@ US:TN:Tennessee|\
 US:TX:Texas|\
 US:UT:Utah|\
 US:VA:Virginia|\
-US:VI:Virgin Islands|\
 US:VT:Vermont|\
 US:WA:Washington|\
 US:WI:Wisconsin|\
 US:WV:West Virginia|\
 US:WY:Wyoming|\
-US:AA:Military Americas|\
-US:AE:Military Europe/ME/Canada|\
-US:AP:Military Pacific|\
 ';
 
 // Country data table

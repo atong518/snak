@@ -38,7 +38,7 @@ def _send_mail(email, activation_code):
     # Email shenanigans
     subject = "Sagely Email Verification"
     message = "Welcome to Sagely, thank you for signing up!!\n"
-    from_email = settings.EMAIL_HOST_USER
+    from_email = "sagelyio@gmail.com"
 
     url = "http://www.sagely.io/confirm_email/" + activation_code + "/" + email + "/"
     txt_message = message + "Click here to activate your account: " + url

@@ -306,6 +306,8 @@ class ContactUsForm(ModelForm):
         self.fields['user_email'].widget = TextInput(attrs={
             'class': 'form-control',
             'placeholder': 'Email',
+            'pattern':'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',
+            'data-error': "Please enter a valid email address",
             'required': 'true',
             'name': 'user_email'})
         self.fields['contact_comments'].widget = Textarea(attrs={

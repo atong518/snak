@@ -127,7 +127,7 @@ def chat(request):
 
             html_message =  "<h3>Hi " + firstname + '''!</h3>
                         <p>Greetings from Sagely! Your match ''' + request.user.firstname + ''' asked us to check on you - it looks like you haven't gotten a chance to respond in the past few days!</p>
-                        <p>''' + request.user.firstname + ''' is waiting for your advice! Head <a href="www.sagely.io">here</a> to help!</p>
+                        <p>''' + request.user.firstname + ''' is waiting for your advice! Head <a href="http://www.sagely.io/">here</a> to help!</p>
                         <br></br><p>Cheers!</p><br></br><p><b>The Sagely Team</b></p>'''
 
             msg = EmailMultiAlternatives(subject, message, from_email, {to_email})
@@ -244,7 +244,7 @@ def _send_match_notification(user, match):
             for interest in user.interests.all():
                 message += "   - " + interest.name + "<br>"
             message += "<br>"
-        message += "Head to <a href='http://www.sagely.io'>sagely.io</a> to respond! " + user.firstname + " is waiting ;)<br><br>"
+        message += "Head to <a href='http://www.sagely.io/'>sagely.io</a> to respond! " + user.firstname + " is waiting ;)<br><br>"
         message += "The Sagely Team"
         from_email = "sagelyio@gmail.com"
         msg = EmailMultiAlternatives(subject, message, from_email, {match.email})

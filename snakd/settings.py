@@ -26,6 +26,10 @@ SECRET_KEY = 'ws-v4)b0r92@&alae894)(+6j#giv&-2uswqm=vg2oolm38f@e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> katie
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []

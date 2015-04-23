@@ -132,7 +132,7 @@ def chat(request):
 
             msg = EmailMultiAlternatives(subject, message, from_email, {to_email})
             msg.attach_alternative(html_message, "text/html")
-            msg.send()
+            #msg.send()
         
         # confirmation_text = request.POST.get("nudge-a-person")=="true"
         messages.add_message(request, messages.INFO, confirmation_text, fail_silently=True)

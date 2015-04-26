@@ -17,6 +17,14 @@
   ga('create', 'UA-61893953-1', 'auto');
   ga('send', 'pageview');
 
+  $('#submitCP').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'submit');
+  });
+
+  $('#cancel-btn').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'cancel');
+  });
+
 </script>
 
 </head>
@@ -59,7 +67,7 @@
     </div><br><br>
   </div>
   <div class="form-group centered">
-    <button type="button" class="btn btn-success btn-lg" onClick="javascript:history.go(-1);">Cancel</button>
+    <button type="button" class="btn btn-success btn-lg" onClick="javascript:history.go(-1);" id="cancel-btn">Cancel</button>
     <button type="submit" id="submitCP" class="btn btn-primary btn-lg" value="Submit" name="college_signup">Submit</button>
   </div>
 </form>

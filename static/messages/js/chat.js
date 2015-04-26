@@ -229,8 +229,7 @@ $(document).ready(function(){
 	  getDropdownMembersOfThread("#members-to-nudge", true);
   });
 
-  $("#aboutYourMatchModal").on('show.bs.modal', function() {
-    // get id of the thread that is activated
+  $("#aboutYourMatchBtn").click(function() {
     var selectedThreadId = $(".active-link").attr("id");
     
     // ensure that there is a thread activated
@@ -258,8 +257,7 @@ $(document).ready(function(){
         error : function(xhr,errmsg,err) {
         }
   });
-    getDropdownMembersOfThread("#members-to-nudge");
-  });
+  })
 
   // scroll down!
   scrollDown();
@@ -405,7 +403,7 @@ function longPollForThread(threadId) {
     if (typeof SET_INTERVAL != 'undefined')
 	clearInterval(SET_INTERVAL);
 
-    SET_INTERVAL = setInterval(_poll, 500, threadId);
+    // SET_INTERVAL = setInterval(_poll, 500, threadId);
     scrollDown();
 }
 

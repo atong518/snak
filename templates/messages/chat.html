@@ -126,8 +126,7 @@ ga('send', 'pageview');
 				 onclick="populateThread({{ thread.pk }})" 
 				 id="thread-link-{{ thread.pk }}">
 	  {% if thread.members.count == 1 %}myself {% endif %}
-
-    {{ thread | userlist:user | joinby:", " }}
+	  {{ thread | userlist:user | joinby:", " }}
       </a></li>
     {% endfor %}
     </ul>

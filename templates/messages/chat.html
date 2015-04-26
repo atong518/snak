@@ -70,17 +70,77 @@ function auth_message() {
 {% block content %}
 <head>
 
-<!-- Google Analytics -->
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  <!-- Google Analytics -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'UA-61893953-1', 'auto');
-ga('send', 'pageview');
+  ga('create', 'UA-61893953-1', 'auto');
+  ga('send', 'pageview');
 
-</script>
+  $('#change-settings-btn').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'change settings');
+  });
+
+  $('#change-password-btn').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'change password');
+  });
+
+  $('#adjust-interest-btn').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'adjust interest');
+  });
+
+  $('#submit-feedback-btn').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'submit feedback');
+  });
+
+  $('#refer-prospie-btn').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'refer prospie');
+  });
+
+  $('#logout-btn').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'logout');
+  });
+
+  $('.btn-reset-counter').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'reset counter');
+  });
+
+  $('#nudge-btn').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'nudge');
+  });
+
+  $('#about-match-btn').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'about match');
+  });
+
+  $('#report-person-btn').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'report person');
+  });
+
+  $('#nudge-a-person-button').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'nudge follow through');
+  });
+
+  $('#new-match-accept').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'accept new match');
+  });
+
+  $('#refer-follow-through').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'refer follow through');
+  });
+
+  $('#report-follow-through').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'report follow through');
+  });
+
+  $('#btn-send-message').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'send message');
+  });
+
+  </script>
 </head>
 
 <div class="row buffer-row">
@@ -108,12 +168,12 @@ ga('send', 'pageview');
       	  Menu <span class="caret"></span>
       	</button>
       	<ul class="dropdown-menu" role="menu">
-      	  <li><a href="{% url 'settings' %}">Edit Profile</a></li>
-          <li><a href="{% url 'change_password' %}">Change Password</a></li>
-      	  <li><a href="/interest/show/">Adjust Interests</a></li>
-      	  <li><a data-toggle="modal" href="#sendFeedbackModal">Submit Feedback</a></li>
-      	  <li><a data-toggle="modal" href="#referAFriendModal">Refer a Prospie</a></li>
-          <li><a href="{% url 'logout' %}">Logout</a></li>
+      	  <li><a href="{% url 'settings' %}" id="change-settings-btn">Change Settings</a></li>
+          <li><a href="{% url 'change_password' %}" id="change-password-btn">Change Password</a></li>
+      	  <li><a href="/interest/show/" id="adjust-interest-btn">Adjust Interests</a></li>
+      	  <li><a data-toggle="modal" href="#sendFeedbackModal" id="submit-feedback-btn">Submit Feedback</a></li>
+      	  <li><a data-toggle="modal" href="#referAFriendModal" id="refer-prospie-btn">Refer a Prospie</a></li>
+          <li><a href="{% url 'logout' %}" id="logout-btn">Logout</a></li>
       	</ul>
       </div>
     </div>
@@ -169,10 +229,10 @@ ga('send', 'pageview');
 <!-- TODO: Multiperson chats!  or not? I thought this wasn't a thing anymore  -->
 <!-- 	    <li><a data-toggle="modal" href="#addPersonToThread">Add a Person</a></li> -->
       {% if not current_user.collegeuser %}
-  	    <li><a data-toggle="modal" href="#nudgeAPersonModal">Nudge Person</a></li>
+  	    <li><a data-toggle="modal" href="#nudgeAPersonModal" id="nudge-btn">Nudge Person</a></li>
       {% endif %}
-      <li><a data-toggle="modal" id="aboutYourMatchBtn">About Your Match</a></li>
-      <li><a data-toggle="modal" href="#reportAPersonModal">Report Conversation</a></li>
+      <li><a data-toggle="modal" id="aboutYourMatchBtn" id="about-match-btn">About Your Match</a></li>
+      <li><a data-toggle="modal" href="#reportAPersonModal" id="report-person-btn">Report Conversation</a></li>
 	  </ul>
 	</div>
     </div>
@@ -311,7 +371,7 @@ ga('send', 'pageview');
 	  {% csrf_token %}
 	  <input class="form-control" id="refer_text1" type="text" name="refer-name" id="refer-a-friend-name" placeholder="Friend's Name"/>
 	  <input class="form-control" type="text" name="refer-email" id="refer-a-friend-email" placeholder="Friend's email" /><br>
-	  <button type="submit" value="Send" class="btn btn-primary">REFERRRRRRR</button>
+	  <button type="submit" value="Send" class="btn btn-primary" id="refer-follow-through">REFERRRRRRR</button>
 	</form>
       </div>
     </div>
@@ -332,7 +392,7 @@ ga('send', 'pageview');
 	  <p>Did someone cause a kerfuffle?  What would you like to say about the following hooligan: <div id="members-to-report"></div></p>
 	  <br>
 	  <textarea rows="4" class="form-control" type="text" name="report-issue-text" id="report-issue-text" placeholder="Tell us what happened :(" ></textarea><br>
-	  <button type="submit" value="Send" class="btn btn-primary">LET US AT 'EM</button>
+	  <button type="submit" value="Send" class="btn btn-primary" id="report-follow-through">LET US AT 'EM</button>
 	</form>
       </div>
     </div>
@@ -433,7 +493,7 @@ ga('send', 'pageview');
       </div>
       <p class="modal-body" style="width: 50%; margin: 0 auto;">
 	<img src="{% static 'user/jpg/loading_matches.gif' %}" /></p>
-      <p style="text-align: center">This could take up to 30 seconds.  Like I said, chillax.</p>
+      <p style="text-align: center">This could take up to 30 seconds. Like I said, chillax.</p>
     </div>
   </div>
 </div>

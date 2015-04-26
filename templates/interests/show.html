@@ -43,6 +43,10 @@ function getIStrings() {
   ga('create', 'UA-61893953-1', 'auto');
   ga('send', 'pageview');
 
+  $('#submit-interests-btn').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'submit');
+  });
+
   </script>
 </head>
 

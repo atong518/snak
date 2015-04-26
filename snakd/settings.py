@@ -136,8 +136,8 @@ TEMPLATE_DIRS = [os.path.join(PROJECT_APP_ROOT, 'templates')]
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'app33155373@heroku.com'
-EMAIL_HOST_PASSWORD = 'ifz3yrey'
-EMAIL_PORT = 465
+EMAIL_HOST_PASSWORD = 'Dartmouth15'
+EMAIL_PORT = 587
 EMAIL_USE_SSL = True
 
 AUTH_USER_MODEL = "user.GenericUser"

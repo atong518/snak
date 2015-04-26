@@ -1,3 +1,37 @@
+/*
+  sage: #9C9F84
+  light green:  #CDD1B6
+  green: #5C755E
+  blue: #626F83
+  red: #52230C
+  black: #000000
+*/
+
+.btn-danger {
+ color: white;
+ background-color: #626F83;
+ border-color: white;
+ border: 2px solid;
+}
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active,
+.btn-danger.active {
+  color: white;
+  background-color: #626F83;
+  border-color: white;
+}
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active,
+.btn-danger.hover {
+  color: white;
+  background-color: #626F83;
+  border-color: white;
+}
+
 .dropdown-toggle:active, .open .dropdown-toggle {background:#CDD1B6 !important; color:  #5C755E !important}
 .row {
   margin: 0;
@@ -159,13 +193,14 @@ textarea {
 #btn-send-message {
   max-height: 100px;
   color: white;
-  background-color: #52230C;
+  background-color: #5C755E;
   border-color: white;
 }
 
 #no-messages-alert-btn {
   margin-top: 10%;
   padding-top: 10px;
+  padding-bottom: 10px;
   height: 25%;
   font-size: 25px;
 }

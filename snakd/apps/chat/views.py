@@ -244,7 +244,7 @@ def _send_match_notification(user, match):
             for interest in user.interests.all():
                 message += "   - " + interest.name + "<br>"
             message += "<br>"
-        message += "Head to <a href='http://www.sagely.io/'>sagely.io</a> to respond! " + user.firstname + " is waiting ;)<br><br>"
+        message += "Head to <a href='http://www.sagely.io/'>sagely.io</a> to respond! " + user.firstname + " is waiting.<br><br>"
         message += "The Sagely Team"
         from_email = "sagelyio@gmail.com"
         msg = EmailMultiAlternatives(subject, message, from_email, {match.email})

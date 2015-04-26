@@ -403,7 +403,7 @@ function longPollForThread(threadId) {
     if (typeof SET_INTERVAL != 'undefined')
 	clearInterval(SET_INTERVAL);
 
-    // SET_INTERVAL = setInterval(_poll, 500, threadId);
+    SET_INTERVAL = setInterval(_poll, 500, threadId);
     scrollDown();
 }
 

@@ -29,7 +29,7 @@ def match(matrix, user1, user2):
             # direct match is 5x more points than a sibling match
             score += max( (100 / (math.pow( math.sqrt(5), dist))) - freq, 1)
             
-    return score / max(len(ints1) + len(ints2), 1)
+    return score / max(len(ints1) + len(ints2) / 2, 1)
 
 
 def heapsort(iterable):

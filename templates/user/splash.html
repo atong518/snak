@@ -16,7 +16,11 @@
 
   <script type="text/javascript">
     $(document).ready(function() {
-      $('#fullpage').fullpage();
+      $('#fullpage').fullpage({
+        loopBottom: true,
+        loopTop: true,
+        navigation: true
+      });
       if (window.location.hash.substr(1) == "student"){
         document.getElementById('prospie_info').style.display = 'none';
         document.getElementById('college_info').style.display = '';
@@ -200,6 +204,57 @@
 	</div>
 	<div class="col-md-3"></div>
       </div>
+      <div class="row buffer-row">
+        <div class="centered">
+          <button type="button" class="btn btn-lg btn-default disabled" style="background: transparent; border-color: transparent;" id="downbutton" aria-label="Page Down">
+            <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+      <div class="row buffer-row"></div>
+      <div class="row buffer-row"></div>
+      <div class="row buffer-row"></div>
+      <div class="row buffer-row"></div>
+      <div class="row buffer-row"></div>
+      <div class="row buffer-row"></div>
+      <div class="row half-buffer-row"></div>
+    </div>
+    <div class="section">
+      <div class="row buffer-row">
+        <div class="centered">
+          <button type="button" class="btn btn-lg btn-default disabled" style="background: transparent; border-color: transparent;" id="upbutton" aria-label="Page Down">
+            <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+          <a href="{% url 'splash' %}"><div class="btn" id="btn-logo"><h1 id="logo">Sagely.io</h1></div></a>
+	</div>
+	<div class="col-md-2"></div>
+      </div>
+      <div class="row buffer-row">
+	<hr class="snak-divider">
+      </div>
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <h1 align="center"><b>How You Are Matched</b></h1>
+      </div>
+      <div class="col-md-3"></div>
+      <div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+	  <p align="center"><img src="../../static/user/jpg/match.jpg" alt="Matching" class="img-rounded" width="300" height="300" align="center"></p>
+	</div>
+	<div class="col-md-4"></div>
+      </div>
+      <div class="row buffer-row"></div>
+      <div class="row buffer-row"></div>
+      <div class="row buffer-row"></div>
+      <div class="row buffer-row"></div>
+      <div class="row buffer-row"></div>
+      <div class="row buffer-row"></div>
       <div class="row buffer-row"></div>
       <div class="row buffer-row"></div>
       <div class="row buffer-row"></div>

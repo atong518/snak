@@ -57,6 +57,9 @@ a div h1 {
   height: 3%;
 }
 
+.half-buffer-row {
+  height: 1.5%;
+}
 
 .snak-divider {
   border-top-color: rgb(98, 111, 131);

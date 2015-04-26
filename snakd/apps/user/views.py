@@ -62,7 +62,7 @@ def resend_confirmation_email(request):
 
 def sign_up(request):
     if request.method == "POST":
-        existing_user = GenericUser.objects.filter(email=request.POST.get('email'))
+        existing_user = GenericUser.objects.filter(email__iexact=request.POST.get('email'))
         if existing_user:
             confirmation_text = "Oops! We already have an account with that email. Maybe try logging in?"
             messages.add_message(request, messages.INFO, confirmation_text, fail_silently=True)
@@ -254,12 +254,11 @@ def match(request):
                     matches__id__contains=user.id).exclude(
                     is_active=False)
             else:
-                if user.is_active:
-                    opplist = CollegeUser.objects.filter(
-                        next_match__lte=datetime.now()).exclude(
-                        matches__id__contains=user.id).exclude(
-                        is_active=False)
-                elif len(user.matches.all()) > 0:
+                opplist = CollegeUser.objects.filter(
+                    next_match__lte=datetime.now()).exclude(
+                    matches__id__contains=user.id).exclude(
+                    is_active=False)
+                if (not user.is_active) and len(user.matches.all()) > 0:
                     return HttpResponse(
                         json.dumps({"possibles": [],
                                     "allow_matches": False}), 

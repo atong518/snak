@@ -51,8 +51,7 @@ UpdateInterestList = function() {
     }
     else {
 	$("#interest-name-list").append("<h4>You need to select some interests friend!</h4>");
-	$("#interest-name-list").append("<p>To add interests, either search for them using the searchbar");
-	$("#interest-name-list").append(" or click to select them from the list</p>");
+	$("#interest-name-list").append("<p>To add interests, either search for them using the searchbar or click to select them from the list</p>");
 	$("#submit-interests-btn").button('loading');
     }
 };

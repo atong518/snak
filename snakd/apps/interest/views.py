@@ -51,11 +51,14 @@ def show(request):
 def update(request):
 	interest_string = request.POST.get("interest_list")
 	user = getUser(request)
+	for interest in user.interests.all():
+		interest.freq -= 1
 	user.interests.clear()
 	if len(interest_string) > 0:
 		interests = interest_string.split(",");
 		for interest in interests:
 			intr = Interest.objects.filter(id=interest)
+			intr[0].freq += 1
 			user.interests.add(intr[0])
 
 		user.save()

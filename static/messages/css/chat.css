@@ -7,6 +7,34 @@
   black: #000000
 */
 
+
+.btn-info {
+ color: white;
+ background-color: #626F83;
+ border-color: white;
+ border: 2px solid;
+}
+
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active,
+.btn-info.active {
+  color: white;
+  background-color: #626F83;
+  border-color: white;
+}
+
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active,
+.btn-info.hover {
+  color: white;
+  background-color: #626F83;
+  border-color: white;
+}
+
+
+
 .btn-danger {
  color: white;
  background-color: #626F83;

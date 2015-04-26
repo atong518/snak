@@ -1,0 +1,96 @@
+{% extends "messages/mobile_base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% load customtags %}
+
+{% block extra_js %}
+<script>
+// These functions live here rather than in the js file because 
+// they deal with django variables, which I don't know how to pass
+// to the separate js file :( -ds
+function getCurrentUserInterests() {
+  return {{ user_interests|safe }};
+}
+
+function getMainCategories() {
+  return {{i_list.children|dumpsjs|safe}};
+}
+
+function getIList() {
+  return {{all_interests|dumpsjs|safe}};
+}
+
+function getIStrings() {
+  return "{{all_interests_string}}".split(",");
+}
+</script>
+<script type="text/javascript" src="{% static 'messages/js/typeahead.jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'interests/js/jquery.waypoints.min.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+{% load customtags %}
+
+<head>
+  <!-- Google Analytics -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61893953-1', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+</head>
+
+<link rel="stylesheet" type="text/css" href="../../static/user/css/pre-login.css">
+<link rel="stylesheet" type="text/css" href="{% static 'interests/css/show.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'interests/css/show_mobile.css' %}" />
+<div class="header-row">
+  <h1 style="text-align: center; font-size: 100px;">Sagely</h1>
+  <h1 style="text-align: center; font-size: 50px;">Select your interests</h1>
+</div>
+<div class="row interests-row">
+  <div class="col-sm-7 lefthalf">
+    <div class="well interests-well col-md-12">
+      <div id="scrollable-dropdown-menu row">
+	<input type="text" placeholder="Search for interests" class="form-control search-box" id="interests-searchbar" onkeypress="return interestEnteredFromSearch(event);">
+	<input type="hidden" id="interest-id-searchbox" value="none">
+	<input type="hidden" id="interest-name-searchbox" value="none">
+	<div class="row">
+	  <div id="up-arrow-support"></div>
+	  <span class="glyphicon glyphicon-chevron-up pull-right up-arrow"></span>
+	</div>
+      </div>
+      <div class="list-of-interests row" id="list-of-interests">
+	<div class="col-md-6" id="interest-list-outside-div">
+	  <ul id="scrolling-list-of-interests">
+	    {% for interest in i_list.children %} 
+            <div id="{{interest.id}}_jump" name="{{interest.name}}" style="hidden: true"></div>
+	    {% include "interests/interest_template.html" %}
+	    {% endfor %}
+	  </ul>
+	</div>
+      </div>
+      <div class="row">
+	  <span class="glyphicon glyphicon-chevron-down pull-right down-arrow"></span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-sm-4 well rightbar pull-right">
+    <ul class="panel-body" id="interest-name-list"></ul>
+    <form id="sendinterests" method="POST" action="/interest/update/">
+      {% csrf_token %}
+      <input type="hidden" name="interest_list" id="to_send_interest_list" value="empty">
+      <button class="btn btn-primary" type="submit" id="submit-interests-btn" data-loading-text="Select at least 3 interests to continue!">Submit</button>
+    </form>
+  </div>
+  
+</div>
+
+<script type ="text/javascript" src="{% static 'interests/js/interests.js' %}"></script>
+{% endblock %}

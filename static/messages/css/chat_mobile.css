@@ -2,7 +2,7 @@
   width: 100%;
 }
 #top-menu-dropdown {
-  height: 15%;
+  height: 10%;
   width: 100%;
   font-size: 60px;
 }
@@ -28,7 +28,7 @@
   font-size: 40px;
 }
 .box {
-  height: 86%;
+  height: 90%;
   margin-bottom: 0;
 }
 #chat-room {
@@ -46,4 +46,9 @@ h5 {
 }
 li > a {
   font-size: 40px;
+}
+input[type='text'],
+input[type='number'],
+textarea {
+  font-size: 16px;
 }

@@ -1,0 +1,22 @@
+.form-control {
+  height: 125px;
+  font-size: 45px;
+  margin-top: 3%;
+}
+.row {
+  padding-left: 3%;
+}
+#studentTypeToggles {
+  height: 150px;
+}
+.btn-success {
+  font-size: 40px;
+}
+.btn-primary {
+  height: 125px;
+  width: 40%;
+  font-size: 45px;
+}
+.centered {
+  font-size: 30px;
+}

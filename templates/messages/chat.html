@@ -108,7 +108,7 @@ ga('send', 'pageview');
       	  Menu <span class="caret"></span>
       	</button>
       	<ul class="dropdown-menu" role="menu">
-      	  <li><a href="{% url 'settings' %}">Change Settings</a></li>
+      	  <li><a href="{% url 'settings' %}">Edit Profile</a></li>
           <li><a href="{% url 'change_password' %}">Change Password</a></li>
       	  <li><a href="/interest/show/">Adjust Interests</a></li>
       	  <li><a data-toggle="modal" href="#sendFeedbackModal">Submit Feedback</a></li>
@@ -171,6 +171,10 @@ ga('send', 'pageview');
       {% if not current_user.collegeuser %}
   	    <li><a data-toggle="modal" href="#nudgeAPersonModal">Nudge Person</a></li>
       {% endif %}
+<<<<<<< HEAD
+=======
+      <li><a data-toggle="modal" id="aboutYourMatchBtn">About Your Match</a></li>
+>>>>>>> 3891a8a50af8b563e00a7fe22f32491360e3b08d
       <li><a data-toggle="modal" href="#reportAPersonModal">Report Conversation</a></li>
 	  </ul>
 	</div>

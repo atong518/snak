@@ -16,6 +16,23 @@
   ga('create', 'UA-61893953-1', 'auto');
   ga('send', 'pageview');
 
+  $('#login-link').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'login');
+  });
+
+  $('#college_student').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'college student');
+  });
+
+  $('#prospie').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'prospie');
+  });
+
+  $('#submitCP').on('click', function() {
+    ga('send', 'event', 'button', 'click', 'submit');
+  });
+
+
   </script>
 </head>
 
@@ -105,7 +122,7 @@ function toggleStudentType() {
         <input type="submit" class="btn btn-primary btn-lg" id="submitCP" value="Submit" name="college_signup">
       </div>
     </form>
-    <h4 class="centered">Already have an account? <a href="{% url 'login' %}">Login</a></h4>
+    <h4 class="centered">Already have an account? <a href="{% url 'login' %}" id="login-link">Login</a></h4>
 <!--    <a href="{% url 'splash' %}">Back</a>-->
   </div>
   <div class="col-md-4"></div>

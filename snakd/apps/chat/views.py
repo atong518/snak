@@ -279,6 +279,7 @@ def new_thread(request):
             datetime.now() + 
             timedelta(days=c_user.max_match_frequency)
         )
+        c_user.save()
 
         newthread = Thread()
         newthread.save()

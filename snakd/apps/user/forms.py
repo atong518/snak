@@ -130,7 +130,7 @@ class CollegeSignupForm(GenericSignupForm):
         self.fields['email'].widget = EmailInput(attrs={
             'class': 'form-control',
             'placeholder': 'Email',
-            'pattern':'^[a-zA-Z0-9._\'-]+[0-9]@'+'dartmouth.edu'+'$',
+            'pattern':'^[a-zA-Z0-9._\'-]+[0-9]@'+'[dD]artmouth.edu'+'$',
             'data-error': "Please provide a full first.m.last.##@dartmouth.edu email address",
             'required': 'true'})#.lower()
         self.fields['max_match_frequency'].widget = Select(attrs={
@@ -176,7 +176,7 @@ class ProspieSignupForm(GenericSignupForm):
         self.fields['email'].widget = EmailInput(attrs={
             'class': 'form-control',
             'placeholder': 'Email',
-            'pattern':'^((?!\@dartmouth\.edu).)*$',
+            'pattern':'^((?!\@[Dd]artmouth\.edu).)*$',
             'data-error': "You're not a prospie! Try signing up as a College Student!",
             'required': 'true'})#.lower()   
         self.fields['gender'].widget = Select(attrs={

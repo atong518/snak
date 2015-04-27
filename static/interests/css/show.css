@@ -134,6 +134,8 @@ ul ul ul li {
 #submit-interests-btn {
   width: 90%;
   height: 40px;
+  max-height: 40px;
+  font-size: 26px;
   color: #52230C;
   background-color: transparent;
   border-color: #52230C;

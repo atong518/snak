@@ -1,3 +1,12 @@
+// FIREFOX IS LEGIT A LIL BITCH. -ds
+var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+// Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
+var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
+var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+// At least Safari 3+: "[object HTMLElementConstructor]"
+var isChrome = !!window.chrome && !isOpera;              // Chrome 1+
+var isIE = /*@cc_on!@*/false || !!document.documentMode;   // At least IE6
+
 var interestlist = [];
 
 $(document).ready(function() {
@@ -43,13 +52,23 @@ UpdateInterestList = function() {
 	    });
 	if (interestlist.length < 3) {
 	    $("#submit-interests-btn").button('loading');
-	    $("#submit-interests-btn").css("height", "200px");
-	    $("#submit-interests-btn").css("font-size", "30px");
+	    if (!isFirefox) {
+		$("#submit-interests-btn").css("height", "200px");
+		$("#submit-interests-btn").css("font-size", "30px");
+	    }
+	    else {
+		$("#submit-interests-btn").css("font-size", "14px");
+	    }
 	}
 	else {
 	    $("#submit-interests-btn").button('reset');
-	    $("#submit-interests-btn").css("height", "75px");
-	    $("#submit-interests-btn").css("font-size", "40px");
+	    if (!isFirefox) {
+		$("#submit-interests-btn").css("height", "75px");
+		$("#submit-interests-btn").css("font-size", "40px");
+	    }
+	    else {
+		$("#submit-interests-btn").css("font-size", "14px");
+	    }
 	}
 
     }
@@ -174,7 +193,19 @@ function interestEnteredFromSearch(event) {
 }
 
 $(".selectbtn").click(function(element) {
-	jsn = JSON.parse(element.toElement.firstElementChild.textContent);
+	// this still throws a json parsing error in firefox for
+	// the second-tier interests (i.e. 'Arts', 'Engineering')
+	// such that no tooltip info is shown in the hover box
+	// on the right, but there isn't currently any tooltip info
+	// in the db for second-tier interests, so like fuck it
+	// am i right? -DS
+	var target = element.toElement || element.currentTarget;
+	var str = target.firstElementChild.textContent;
+	var data =  str.replace(/null/i, "\"null\"");
+	var arr = data.split("{");
+	var d = "{" + arr.splice(arr.length-1).join().trim();
+
+	jsn = $.parseJSON(data);
 	ids = $.map(interestlist, function(val, index) {return val.id});
 	if ((x = $.inArray(jsn.id, ids)) != -1) {
 	    interestlist.splice(x, 1);
@@ -189,8 +220,15 @@ $(".selectbtn").click(function(element) {
     
 
 $(".selectbtn").mouseover(function(element) {
-	jsn = JSON.parse(element.toElement.firstElementChild.textContent);
-	if (jsn["tooltip"] == null)
+	// see long-ass comment on $(".selectbtn").click() function ^^^ -DS
+	var target = element.toElement || element.currentTarget;
+	var str = target.firstElementChild.textContent;
+	var data =  str.replace(/null/i, "\"null\"");
+	var arr = data.split("{");
+	var d = "{" + arr.splice(arr.length-1).join().trim();
+
+	jsn = $.parseJSON(d);
+	if (jsn["tooltip"] == "null")
 	    $("#interest-tooltip-div").text("No extra information provided");
 	else
 	    $("#interest-tooltip-div").text(jsn["tooltip"]);

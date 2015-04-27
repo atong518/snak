@@ -224,19 +224,21 @@ function auth_message() {
       </div>
       <div class="col-md-2" style="padding: 0;">
 	<!--plus menu-->
+	{% if current_user.matches.count != 0 %}
 	<div class="dropdown">
 	  <button class="btn btn-success dropdown-toggle pull-right button-success" type="button" id="plusmenu" data-toggle="dropdown" aria-expanded="false">+</button>
-    <ul class="dropdown-menu" style="right: 35; left: auto;" role="menu" aria-labelledby="plusmenu">
+	  <ul class="dropdown-menu" style="right: 35; left: auto;" role="menu" aria-labelledby="plusmenu">
 <!-- TODO: Multiperson chats!  or not? I thought this wasn't a thing anymore  -->
 <!-- 	    <li><a data-toggle="modal" href="#addPersonToThread">Add a Person</a></li> -->
-      {% if not current_user.collegeuser %}
+            {% if not current_user.collegeuser %}
   	    <li><a data-toggle="modal" href="#nudgeAPersonModal" id="nudge-btn">Nudge Person</a></li>
-      {% endif %}
-      <li><a data-toggle="modal" id="aboutYourMatchBtn" id="about-match-btn">About Your Match</a></li>
-      <li><a data-toggle="modal" href="#reportAPersonModal" id="report-person-btn">Report Conversation</a></li>
+            {% endif %}
+            <li><a data-toggle="modal" id="aboutYourMatchBtn" id="about-match-btn">About Your Match</a></li>
+            <li><a data-toggle="modal" href="#reportAPersonModal" id="report-person-btn">Report Conversation</a></li>
 	  </ul>
 	</div>
-    </div>
+	{% endif %}
+      </div>
     </div>
     <div id="message-box" class="row" style="margin-bottom: 5px;">
       <!--previously sent/received messages-->

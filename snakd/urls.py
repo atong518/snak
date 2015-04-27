@@ -8,5 +8,5 @@ urlpatterns = patterns('',
     url(r'^interest/', include('snakd.apps.interest.urls')),
     url(r'chat/', include('snakd.apps.chat.urls')),
     url(r'^', include('favicon.urls')),
-    url(r'^.*', errorhandler, name="fourohfour"),
+    url(r'^.*', errorhandler, name="fourohfour")
 )

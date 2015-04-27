@@ -19,7 +19,6 @@
       $('#fullpage').fullpage({
         loopBottom: true,
         loopTop: true,
-        navigation: true
       });
       if (window.location.hash.substr(1) == "student"){
         document.getElementById('prospie_info').style.display = 'none';
@@ -220,47 +219,6 @@
       <div class="row buffer-row"></div>
       <div class="row buffer-row"></div>
       <div class="row half-buffer-row"></div>
-    </div>
-    <div class="section">
-      <div class="row buffer-row">
-        <div class="centered">
-          <button type="button" class="btn btn-lg btn-default disabled" style="background: transparent; border-color: transparent;" id="upbutton" aria-label="Page Down">
-            <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-          </button>
-        </div>
-      </div>
-      <div class="row">
-	<div class="col-md-2"></div>
-	<div class="col-md-8">
-          <a href="{% url 'splash' %}"><div class="btn" id="btn-logo"><h1 id="logo">Sagely.io</h1></div></a>
-	</div>
-	<div class="col-md-2"></div>
-      </div>
-      <div class="row buffer-row">
-	<hr class="snak-divider">
-      </div>
-      <div class="row">
-	<div class="col-md-6 col-md-offset-3">
-          <h1 align="center"><b>How You're  Matched</b></h1>
-	</div>
-      </div>
-      <div class="row buffer-row" style="padding-left: 3%; padding-right: 3%; background-color: white; opacity: .8; height: 60%; width: 75%; margin-left: 12.5%; padding-top: 25px;">
-        <div class="col-md-6">
-          <h4>We start by comparing each of your interests to each of the interests your potential match's interests.  </h4>
-          <b><h4>1.</b> Each comparison receives a weighted Individual Interest Comparison Score (IICS).  The IICS is calculated by two factors - similarity and frequency:</h4>
-          <li><h5><b>Similarity</b> - the more similar two interests are, the higher the IICS.  We calculate similarity by measuring the "distance" in our interest tree from one interest to the other.  The shorter the distance, the lower the IICS.  If the two interests are identical, we give this an extra big boost.  This allows for "fuzzy" matches.  In other words, even if we don't have someone with exactly your interests to match you with, we can do better than just giving you a rando.  For example, if you are interested in specifically Computer Science, it is still more useful to talk to someone interested in Math than someone interested in Studio Art.</h5></li>
-          <li><h5><b>Frequency</b> - the less common a particular interest is in our database, the more important it is in our matching algorithm.  For instance, if you indicate you're interested in Bowling Club, and there's only one Dartmouth Student signed up who'se also interested in Bowling Club (which would be awful, bowling is awesome), we want to make sure you get matched with that person.</h5></li>
-        </div>
-        <div class="col-md-6">
-	  <br><br>
-          <b><h4 style="margin-top: 15px;">2.</b> Once we've calculated the IICS of each of your interests compared with each of the potential matches, we then scale that score by the number of interests you and your potential match have.  If you've indicated interest in a lot of things, it shouldn't always weight you higher than someone who's only focused on a few extracurriculars!  #WeSupportPointyPeople #WeAloSupportWellRoundedPpl.  This total score, what we call the ProspieIndexScore (PSI when we're in a hurry/want to sound smarter than we are) is then used to calculate your overall top matches!</h4>
-          <b><h4>3.</b> Finally, because we know computer algorithms are not perfect, instead of forcing you on one person, we give you your top 5 potential matches to choose from.  We are generous like that.</h4>
-        </div>
-      </div>
-
-      <div class="row buffer-row"></div>
-      <div class="row buffer-row"></div>
-      <div class="row buffer-row"></div>
     </div>
   </div>
 </body>

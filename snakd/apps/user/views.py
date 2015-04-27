@@ -140,6 +140,9 @@ def howto(request):
 def aboutus(request):
     return render(request, 'user/aboutus.html', {})
 
+def howmatchingworks(request):
+    return render(request, 'user/howmatchingworks.html', {})
+
 def validateE(email):
     if len(email) > 6:
         if re.match('\w[\w\.-]*@\w[\w\.-]+\.\w+', email) != None:

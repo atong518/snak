@@ -43,9 +43,13 @@ UpdateInterestList = function() {
 	    });
 	if (interestlist.length < 3) {
 	    $("#submit-interests-btn").button('loading');
+	    $("#submit-interests-btn").css("height", "200px");
+	    $("#submit-interests-btn").css("font-size", "30px");
 	}
 	else {
 	    $("#submit-interests-btn").button('reset');
+	    $("#submit-interests-btn").css("height", "75px");
+	    $("#submit-interests-btn").css("font-size", "40px");
 	}
 
     }

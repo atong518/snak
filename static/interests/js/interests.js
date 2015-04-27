@@ -7,6 +7,12 @@ var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Const
 var isChrome = !!window.chrome && !isOpera;              // Chrome 1+
 var isIE = /*@cc_on!@*/false || !!document.documentMode;   // At least IE6
 
+// determine if device is mobile
+var isMobile = 0;
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    isMobile = 1;
+}
+
 var interestlist = [];
 
 $(document).ready(function() {
@@ -52,21 +58,24 @@ UpdateInterestList = function() {
 	    });
 	if (interestlist.length < 3) {
 	    $("#submit-interests-btn").button('loading');
-	    if (!isFirefox) {
+	    console.log("mobile=" + isMobile);
+	    if (isMobile) {
 		$("#submit-interests-btn").css("height", "200px");
-		$("#submit-interests-btn").css("font-size", "30px");
+		$("#submit-interests-btn").css("font-size", "24px");
 	    }
 	    else {
+		$("#submit-interests-btn").css("height", "75px");
 		$("#submit-interests-btn").css("font-size", "14px");
 	    }
 	}
 	else {
 	    $("#submit-interests-btn").button('reset');
-	    if (!isFirefox) {
-		$("#submit-interests-btn").css("height", "75px");
-		$("#submit-interests-btn").css("font-size", "40px");
+	    if (isMobile) {
+		$("#submit-interests-btn").css("height", "100px");
+		$("#submit-interests-btn").css("font-size", "34px");
 	    }
 	    else {
+		$("#submit-interests-btn").css("height", "75px");
 		$("#submit-interests-btn").css("font-size", "14px");
 	    }
 	}

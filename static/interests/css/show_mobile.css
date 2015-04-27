@@ -10,7 +10,8 @@
   height: 80%;
 }
 #submit-interests-btn {
-  height: 75px;
+  height: 300px;
+  max-height: 300px;
   white-space: normal;
 }
 ul li {

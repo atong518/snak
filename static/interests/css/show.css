@@ -65,7 +65,7 @@
   color: rgb(51, 122, 183);
 }
 #up-arrow-support {
-  height: 20px;
+  height: 40px;
 }
 #interest-list-outside-div {
   position: relative;
@@ -150,8 +150,8 @@ ul ul ul li {
 #interest-hover-box {
   margin-top: 3%;
   margin-right: 3%;
-  margin-left: 24.7%;
-  width: 24.8%;
+  margin-left: 23%;
+  width: 24%;
   min-height: 125px;
   max-height: 250px;
   background-color: white;

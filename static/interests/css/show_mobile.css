@@ -11,6 +11,7 @@
 }
 #submit-interests-btn {
   height: 75px;
+  white-space: normal;
 }
 ul li {
   font-size: 42px;
@@ -26,4 +27,7 @@ ul ul ul li {
 }
 h4 {
   font-size: 26px;
+}
+.btn {
+  white-space: normal;
 }

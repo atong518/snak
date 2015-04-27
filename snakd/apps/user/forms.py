@@ -126,7 +126,7 @@ class CollegeSignupForm(GenericSignupForm):
              'class': 'form-control'})
         self.fields['bio'].widget = Textarea(attrs={
             'class': 'form-control',
-            'placeholder': 'Tell us about yourself!'})
+            'placeholder': 'Tell us about yourself! Just a few sentences will do.'})
         self.fields['email'].widget = EmailInput(attrs={
             'class': 'form-control',
             'placeholder': 'Email',
@@ -274,7 +274,7 @@ class CollegeSettingsForm(GenericSettingsForm):
         self.fields['max_match_frequency'].widget.choices = MAX_MATCH_FREQS
         self.fields['bio'].widget = Textarea(attrs={
             'class': 'form-control',
-            'placeholder': 'Tell us about yourself!'})
+            'placeholder': 'Tell us about yourself! Just a few sentences will do.'})
 
 class ProspieSettingsForm(GenericSettingsForm):
     class Meta():

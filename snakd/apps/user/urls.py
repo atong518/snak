@@ -27,6 +27,9 @@ urlpatterns = patterns('',
     # login page
     url(r'^login/$', views.login, name='login'),
 
+    # how matching works page
+    url(r'^howmatchingworks/$', views.howmatchingworks, name='howmatchingworks'),
+
     # logout
     url(r'^logout/$', 'django.contrib.auth.views.logout',{'next_page': 'login'}, name="logout"),
 

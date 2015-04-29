@@ -310,7 +310,7 @@ def nudge_person(request):
 
         else:
             confirmation_text = "Thanks for letting us know! We've nudged " + firstname + " for you!"
-            confirmation_text = str(thread.mostRecentMessageRef().sender.email) + " " + str(nudgedUser.email) + " " + str(thread.mostRecentMessageRef().sender.email.strip() == nudgedUser.email.strip())
+            # confirmation_text = str(thread.mostRecentMessageRef().sender.email) + " " + str(nudgedUser.email) + " " + str(thread.mostRecentMessageRef().sender.email.strip() == nudgedUser.email.strip())
 
             from_email = "sagelyio@gmail.com"
             to_email = nudgedUser.email

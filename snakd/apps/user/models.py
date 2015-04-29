@@ -4,11 +4,12 @@ from snakd.apps.interest.models import Interest
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
-from datetime import datetime
+from datetime import datetime, timedelta
 #from django import newforms as forms
 from django import forms
 from django.forms.widgets import *
 from django.core.mail import send_mail, BadHeaderError
+import datetime as dtime
 
 # Create your models here.
 class GenericUserManager(BaseUserManager):
@@ -217,10 +218,19 @@ class CollegeUser(GenericUser):
     def next_match_text(self):
         return "Next available: " + self.next_match.strftime("%a, %B %d, %Y")
 
+
 class ProspieUser(GenericUser):
     objects = ProspieUserManager()
+    last_match_date = models.DateTimeField(null=False, default=dtime.date.today() - timedelta(days=1))
+    daily_matches = models.IntegerField(null=False, default=0)
 
     def collegeuser(self):
         return False
 
+    def match_eligible(self):
+        day = dtime.date.today()
+        dt2 = datetime.combine(day, dtime.time(0, 0))
+        if self.last_match_date == dt2 and self.daily_matches > 2:
+            return False
+        return True
 

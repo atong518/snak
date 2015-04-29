@@ -100,7 +100,7 @@ $(document).ready(function(){
     
     deferred.success(function (response) {
       $("#loading_div").modal("toggle");
-      if(response.allow_matches){
+      if(response.allow_matches == "True"){
         possibles = response.possibles
         current_index = 0
         updateModal(possibles[current_index])
@@ -108,8 +108,10 @@ $(document).ready(function(){
         if (current_index >= possibles.length-1) {
           $("#rightMatch")[0].setAttribute("disabled", true)
         }
-      } else {
+      } else if (response.allow_matches == "not active")  {
         $('#confirmEmail').modal('show');
+      } else if (response.allow_matches == "ineligible")  {
+        $('#ineligibleModal').modal('show');
       }
     });
 

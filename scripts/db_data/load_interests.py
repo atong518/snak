@@ -44,7 +44,7 @@ buildMatrix()
 Editing interests test cases:
 1) add a new interest
 get_or_create() takes care of this
-already built into the algorithm
+already built into the algorithm so don't have to do anything
 
 2) delete an interest
 deleted interest will be left out of new dist matrix, but will need to be deleted from the 
@@ -62,14 +62,14 @@ i.save()
 NOW that the name is changed in the db, the json file can be reloaded
 
 4) two interests with the same name, change a tooltip
+I think this is just more easily done manually as well
+	but could use:
 try:
 	get_or_create(name="name_of_two_interests")
 except Interest.MultipleObjectsReturned:
 	get_or_create(tooltip="tooltip_of_one")
-ACTUALLY I think this is just more easily done manually as well
 
 5) two interests had the same name, one was changed in json
 do step 3 first, but use tooltip or parent as an identifier in get_or_create()
 can double check with id field: id = models.AutoField(primary_key=True)
 '''
-

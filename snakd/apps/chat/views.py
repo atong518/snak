@@ -159,7 +159,7 @@ def check_for_new_messages(request):
         
         messages = thread.message_set.all()
         for message in messages:
-            response_data.append([message.text, message.sender.email])
+            response_data.append([message.text, message.sender.email, message.timestamp])
 
         return HttpResponse(
             json.dumps(response_data),
@@ -293,7 +293,7 @@ def new_thread(request):
         newthread.save()
         newthread.members.add(user1)
         newthread.members.add(user2)
-        m = Message(thread=newthread, text=dic['message'], sender=user1)
+        m = Message(thread=newthread, text=dic['message'], sender=user1, timestamp=dic['timestamp'])
         m.save()
         return HttpResponse(
             json.dumps({"threadid": newthread.id}),

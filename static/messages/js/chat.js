@@ -160,8 +160,12 @@ $(document).ready(function(){
 
   $("#new-thread-form").submit(function(event) {
     event.preventDefault();
+    var date = new Date();
+    var timestamp = date.getTime();
+
     requestdict = {
       message: event.target.elements[0].value,
+      timestamp: timestamp,
       otherid: event.target.getAttribute("otherid")
     }
 
@@ -373,6 +377,7 @@ function _poll(threadId) {
 		success : function(json) {
 		var messages_html = "";
 		// for each message
+		json.sort(function(a,b) { return parseFloat(a[2]) - parseFloat(b[2]) } );
 		$.each(json, function(index, val) {
 			text = val[0];
 			sender_email = val[1];

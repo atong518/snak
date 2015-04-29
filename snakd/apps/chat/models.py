@@ -41,5 +41,6 @@ class Message(models.Model):
 
     def __unicode__(self):
         return self.text
-#    class Meta:
-#        ordering = ['-sent_at']
+
+    class Meta:
+        ordering = ['timestamp']

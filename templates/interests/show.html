@@ -88,7 +88,7 @@ function getIStrings() {
     </div>
   </div>
   
-  <div class="col-sm-4 well rightbar pull-right">
+  <div class="col-sm-4 well rightbar pull-right" style="overflow-x:hidden;">
     <ul class="panel-body" id="interest-name-list"></ul>
     <form id="sendinterests" method="POST" action="/interest/update/">
       {% csrf_token %}

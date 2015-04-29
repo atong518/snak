@@ -185,7 +185,7 @@ def _send_match_notification(user, match):
         if isinstance(user, CollegeUser):
             subject = "Meet your Sage(ly)!"
         else:
-            subject = "Ready to give Sagely advice?"
+            subject = "Meet " + user.firstname + ", your new prospie match on Sagely!"
         message = "Hi " + match.firstname + ",<br><br>"
         message += "Great news, you got matched with " + user.firstname + "!<br><br>"
         if user.interests.all():

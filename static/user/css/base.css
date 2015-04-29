@@ -7,6 +7,10 @@
   black: #000000
 */
 
+.nav-pills > .active > a, .nav-pills > .active > a:hover {
+    background-color: #fffff !important;
+}
+
 html {
   overflow-y: scroll;
 }

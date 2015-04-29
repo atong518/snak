@@ -254,7 +254,7 @@ def confirm_email(request, activation_code, email):
         user.is_active = True
         user.save()
     
-    return redirect("/chat/")
+    return render(request, 'user/password_confirmation.html', {})
 
 def edit(request):
     try:

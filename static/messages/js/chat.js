@@ -100,7 +100,8 @@ $(document).ready(function(){
     
     deferred.success(function (response) {
       $("#loading_div").modal("toggle");
-      if(response.allow_matches == "True"){
+      debugger
+      if(response.allow_matches == "true"){
         possibles = response.possibles
         current_index = 0
         updateModal(possibles[current_index])

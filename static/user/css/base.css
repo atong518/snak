@@ -7,8 +7,16 @@
   black: #000000
 */
 
-.nav-pills > .active > a, .nav-pills > .active > a:hover {
-    background-color: #fffff !important;
+.nav-pills > li > a {
+  font-size: 16px;
+}
+
+.nav-pills-star > li > a {
+  font-size: 12px;
+}
+	
+.nav-pills-star > li > a:hover {
+    background-color: #fff;
 }
 
 html {

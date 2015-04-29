@@ -9,6 +9,7 @@ from snakd.apps.user.models import GenericUser, ProspieUser, CollegeUser
 from snakd.apps.chat.models import Thread, Message
 from snakd.apps.user.models import GenericUser
 from datetime import datetime, timedelta
+import datetime as dtime
 
 from snakd.apps.user.views import login
 
@@ -211,6 +212,7 @@ def _specify_class(user):
 def new_thread(request):
     # TODO: Where do we get the subject?
     try:
+        import pdb; pdb.set_trace()
         uid = request.session.get("_auth_user_id")
         user1 = GenericUser.objects.get(id=uid)  
         dic = request.POST.dict()
@@ -219,7 +221,9 @@ def new_thread(request):
         user2 = _specify_class(user2)      
         if isinstance(user1, CollegeUser):
             c_user = user1
+            p_user = user2
         else:
+            p_user = user1
             c_user = user2
         user1.matches.add(user2)
         _send_match_notification(user1, user2)
@@ -306,7 +310,7 @@ def nudge_person(request):
 
         else:
             confirmation_text = "Thanks for letting us know! We've nudged " + firstname + " for you!"
-            confirmation_text = str(thread.mostRecentMessageRef().sender.email) + " " + str(nudgedUser.email) + " " + str(thread.mostRecentMessageRef().sender.email.strip() == nudgedUser.email.strip())
+            # confirmation_text = str(thread.mostRecentMessageRef().sender.email) + " " + str(nudgedUser.email) + " " + str(thread.mostRecentMessageRef().sender.email.strip() == nudgedUser.email.strip())
 
             from_email = "sagelyio@gmail.com"
             to_email = nudgedUser.email

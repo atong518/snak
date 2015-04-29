@@ -297,41 +297,43 @@ def nudge_person(request):
         lastname = request.POST.get("reported-name").split(" ")[1]
         nudgedUser = thread.members.filter(firstname=firstname, lastname=lastname).first() # could nudge the wrong person if they have the same name
 
-        # if last message is fewer than 3 days old, display wait message and don't send email
+        
         try:
-            if millisToDays(thread.mostRecentMessage()) < millisToDays(unix_time_millis(datetime.now())) + 3:
+            # only send nudge if the nudger has sent the last message
+            if thread.mostRecentMessageRef().sender.email.strip() == nudgedUser.email.strip():
+                confirmation_text = "Why don't you answer " + firstname + " first before nudging!"
+
+            # if last message is fewer than 3 days old, display wait message and don't send email
+            elif millisToDays(thread.mostRecentMessage()) < millisToDays(unix_time_millis(datetime.now())) + 3:
                 confirmation_text = "Let's give " + firstname + " a little more time to answer!"
+            
+            # otherwise send the email
+            else:
+                confirmation_text = "Thanks for letting us know! We've nudged " + firstname + " for you!"
+                # confirmation_text = str(thread.mostRecentMessageRef().sender.email) + " " + str(nudgedUser.email) + " " + str(thread.mostRecentMessageRef().sender.email.strip() == nudgedUser.email.strip())
+
+                from_email = "sagelyio@gmail.com"
+                to_email = nudgedUser.email
+
+                subject = request.user.firstname + " needs your Sagely advice!"
+
+                message = "Hi " + firstname + "!\n"
+                message += "Greetings from Sagely! Your match " + request.user.firstname 
+                message += " asked us to check on you - it looks like you haven't gotten a chance to respond in the past few days! "
+                message += request.user.firstname + " is waiting for your advice! Head over to sagely.io to help!\n"
+                message += "The Sagely Team"
+
+                html_message =  "<h3>Hi " + firstname + '''!</h3>
+                            <p>Greetings from Sagely! Your match ''' + request.user.firstname + ''' asked us to check on you - it looks like you haven't gotten a chance to respond in the past few days!</p>
+                            <p>''' + request.user.firstname + ''' is waiting for your advice! Head <a href="http://www.sagely.io/">here</a> to help!</p>
+                            <br></br><p>Cheers!</p><br></br><p><b>The Sagely Team</b></p>'''
+
+                # send email
+                msg = EmailMultiAlternatives(subject, message, from_email, {to_email})
+                msg.attach_alternative(html_message, "text/html")
+                #msg.send()
         except:
-            confirmation_text = "Let's give " + firstname + " a little more time to answer!"
-
-        # only send nudge if the nudger has sent the last message
-        if thread.mostRecentMessageRef().sender.email.strip() == nudgedUser.email.strip():
-            confirmation_text = "Why don't you answer " + firstname + " first before nudging!"
-
-        else:
-            confirmation_text = "Thanks for letting us know! We've nudged " + firstname + " for you!"
-            # confirmation_text = str(thread.mostRecentMessageRef().sender.email) + " " + str(nudgedUser.email) + " " + str(thread.mostRecentMessageRef().sender.email.strip() == nudgedUser.email.strip())
-
-            from_email = "sagelyio@gmail.com"
-            to_email = nudgedUser.email
-
-            subject = request.user.firstname + " needs your Sagely advice!"
-
-            message = "Hi " + firstname + "!\n"
-            message += "Greetings from Sagely! Your match " + request.user.firstname 
-            message += " asked us to check on you - it looks like you haven't gotten a chance to respond in the past few days! "
-            message += request.user.firstname + " is waiting for your advice! Head over to sagely.io to help!\n"
-            message += "The Sagely Team"
-
-            html_message =  "<h3>Hi " + firstname + '''!</h3>
-                        <p>Greetings from Sagely! Your match ''' + request.user.firstname + ''' asked us to check on you - it looks like you haven't gotten a chance to respond in the past few days!</p>
-                        <p>''' + request.user.firstname + ''' is waiting for your advice! Head <a href="http://www.sagely.io/">here</a> to help!</p>
-                        <br></br><p>Cheers!</p><br></br><p><b>The Sagely Team</b></p>'''
-
-            # send email
-            msg = EmailMultiAlternatives(subject, message, from_email, {to_email})
-            msg.attach_alternative(html_message, "text/html")
-            msg.send()
+            pass
         
         messages.add_message(request, messages.INFO, confirmation_text, fail_silently=True)
 

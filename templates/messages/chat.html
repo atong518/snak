@@ -435,7 +435,6 @@ function auth_message() {
 	<form id="nudge-a-person-form" method="POST" action="/chat/nudge_person/">
 	  {% csrf_token %}
 	  <p>Someone a little slow on the response?  Would you like us to give the following a little nudge for you? <div id="members-to-nudge"></div></p>
-    <!--<input type="hidden" value="nudge-true" name="nudge-value" />-->
 	  <br>
 	  <button type="submit" value="Send" class="btn btn-primary" id="nudge-a-person-button">Wink wink, nudge nudge :)</button>
 	</form>

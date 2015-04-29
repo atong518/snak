@@ -357,11 +357,11 @@
 				"name": "Pre-Professional Organizations",
 				"children": [
 					{
-						"name": "Business",
+						"name": "Business Societies",
 						"tooltip": "Dartmouth Entrepreneurial Network (DEN), Women in Business (WIB), Alliance"
 					},
 					{
-						"name": "Engineering",
+						"name": "Engineering Societies",
 						"tooltip": "American Indian Science and Engineering Society (AISES), National Society of Black Engineers (NBSE)"
 					},
 					{
@@ -369,7 +369,7 @@
 						"tooltip": "Minority Association of Pre-Health Professionals, Nathan Smith Society, Pre-Vet Society"
 					},
 					{
-						"name": "Sciences",
+						"name": "Science Societies",
 						"tooltip": "Hacker Club, Society of Biological Sciences, Women in Science Program, Women in Computer Science"
 					}
 				]

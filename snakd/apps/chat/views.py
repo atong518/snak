@@ -281,6 +281,14 @@ def new_thread(request):
         )
         c_user.save()
 
+
+        if p_user.last_match_date == dtime.date.today():
+            p_user.daily_matches += 1
+        else:
+            p_user.last_match_date = dtime.date.today()
+            p_user.daily_matches = 1
+        p_user.save()
+
         newthread = Thread()
         newthread.save()
         newthread.members.add(user1)

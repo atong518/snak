@@ -302,6 +302,12 @@ def match(request):
                         json.dumps({"possibles": [],
                                     "allow_matches": False}), 
                         content_type='application/json')
+                elif not user.match_eligible():
+                    return HttpResponse(
+                        json.dumps({"possibles": [],
+                                    "allow_matches": "ineligible"}), 
+                        content_type='application/json')
+
             matrix = getMatrix()
             possibleusers = bestmatches(matrix, user, opplist)
             possibles = []

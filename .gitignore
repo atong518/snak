@@ -4,3 +4,4 @@ staticfiles
 .idea/workspace.xml
 *~
 tmp/
+email_settings.py

@@ -1,0 +1,25 @@
+.form-control {
+  height: 150px;
+  font-size: 60px;
+  margin-top: 3%;
+}
+.row {
+  padding-left: 3%;
+}
+.btn-success {
+  font-size: 40px;
+}
+.btn-primary {
+  height: 125px;
+  width: 40%;
+  font-size: 45px;
+}
+.centered {
+  font-size: 30px;
+}
+.col-sm-12 {
+  margin-top: 10%;
+}
+body {
+  font-size: 45px;
+}

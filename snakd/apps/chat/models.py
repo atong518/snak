@@ -8,7 +8,7 @@ class ThreadManager(models.Manager):
     def in_a_number_order(self, *args, **kwargs):
         qs = self.get_queryset().filter(*args, **kwargs)
         try:
-            new = sorted(qs, key=lambda n: (n.message_set.first().timestamp, n.message_set.first().timestamp), reverse=True)
+            new = sorted(qs, key=lambda n: (n.message_set.first().timestamp, n.message_set.first().timestamp))
             return new
         except:
             return qs

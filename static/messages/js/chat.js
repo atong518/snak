@@ -99,6 +99,7 @@ $(document).ready(function(){
     deferred = $.get("/match/", {});
     
     deferred.success(function (response) {
+
       $("#loading_div").modal("toggle");
       if(response.allow_matches == true){
         possibles = response.possibles
@@ -228,7 +229,7 @@ $(document).ready(function(){
 
   // nudge person members population
   $("#nudgeAPersonModal").on('show.bs.modal', function() {
-	  getDropdownMembersOfThread("#members-to-nudge", true);
+	  getDropdownMembersOfThread("#members-to-nudge");
   });
 
   $("#aboutYourMatchBtn").click(function() {
@@ -530,12 +531,7 @@ function _addedToThread(addedUserName) {
     
 }
 
-function getDropdownMembersOfThread(divName, nudge) {
-    if (typeof nudge == "undefined") {
-      nudge = false;
-    }
-    //nudge = typeof boolean !== 'undefined' ? a : false;
-
+function getDropdownMembersOfThread(divName) {
     var selectedThreadId = $(".active-link").attr("id");
     if (typeof selectedThreadId == "undefiend") {
       alert("Please select a thread to report someone from!");
@@ -550,7 +546,6 @@ function getDropdownMembersOfThread(divName, nudge) {
     if (members.length == 1) { 
         result = '<input type="hidden"  name="reported-name" value="' + members[0].trim() + '">';
         result += '<input type="hidden"  name="selected-thread-id" value="' + selectedThreadId + '">';
-        result += '<input type="hidden"  name="nudge-a-person" value="' + nudge + '">';
         $(divName).html(result + members[0].trim());
         return;
     }

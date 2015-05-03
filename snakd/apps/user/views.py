@@ -9,7 +9,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.contrib.auth import update_session_auth_hash
-from snakd.lib.match import bestmatches
+from snakd.lib.match import bestmatches, randommatches
 from snakd.lib.matrix import getMatrix
 from datetime import datetime, timedelta
 import json
@@ -308,8 +308,12 @@ def match(request):
                                     "allow_matches": "ineligible"}), 
                         content_type='application/json')
 
-            matrix = getMatrix()
-            possibleusers = bestmatches(matrix, user, opplist)
+            if request.POST.get("match-type") == "random":
+                possibleusers = randommatches(user, opplist)
+            else:
+                matrix = getMatrix()
+                possibleusers = bestmatches(matrix, user, opplist)
+
             possibles = []
             for usr in possibleusers:
                 possibles.append(usr.matchInfo())

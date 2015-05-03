@@ -212,7 +212,6 @@ def _specify_class(user):
 def new_thread(request):
     # TODO: Where do we get the subject?
     try:
-        import pdb; pdb.set_trace()
         uid = request.session.get("_auth_user_id")
         user1 = GenericUser.objects.get(id=uid)  
         dic = request.POST.dict()
@@ -307,10 +306,9 @@ def nudge_person(request):
             elif millisToDays(thread.mostRecentMessage()) < millisToDays(unix_time_millis(datetime.now())) + 3:
                 confirmation_text = "Let's give " + firstname + " a little more time to answer!"
             
-            # otherwise send the email
+            # otherwise write and send the email
             else:
                 confirmation_text = "Thanks for letting us know! We've nudged " + firstname + " for you!"
-                # confirmation_text = str(thread.mostRecentMessageRef().sender.email) + " " + str(nudgedUser.email) + " " + str(thread.mostRecentMessageRef().sender.email.strip() == nudgedUser.email.strip())
 
                 from_email = "sagelyio@gmail.com"
                 to_email = nudgedUser.email
@@ -328,12 +326,11 @@ def nudge_person(request):
                             <p>''' + request.user.firstname + ''' is waiting for your advice! Head <a href="http://www.sagely.io/">here</a> to help!</p>
                             <br></br><p>Cheers!</p><br></br><p><b>The Sagely Team</b></p>'''
 
-                # send email
                 msg = EmailMultiAlternatives(subject, message, from_email, {to_email})
                 msg.attach_alternative(html_message, "text/html")
-                #msg.send()
+                msg.send() # send email
         except:
-            pass
+            return redirect(chat)
         
         messages.add_message(request, messages.INFO, confirmation_text, fail_silently=True)
 

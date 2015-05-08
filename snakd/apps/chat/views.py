@@ -1,4 +1,4 @@
-import json
+import json, time
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import RequestContext
 from django.http import HttpResponse
@@ -108,7 +108,7 @@ def check_for_new_messages(request):
         
         messages = thread.message_set.all()
         for message in messages:
-            response_data.append([message.text, message.sender.email])
+            response_data.append([message.text, message.sender.email, message.timestamp])
 
         return HttpResponse(
             json.dumps(response_data),
@@ -122,12 +122,12 @@ def send_chat_message(request):
     if request.method == 'POST' and len(request.POST.get('message_text')) > 0:
         text = request.POST.get('message_text')
         thread_id = request.POST.get('thread_id')
-        time = request.POST.get('timestamp')
+#        time = request.POST.get('timestamp')
 
         response_data = {}
         thread = get_object_or_404(Thread, pk=thread_id)
         message = Message(text=text, sender=request.user, thread=thread)
-        message.timestamp = time
+        message.timestamp = int(time.time() * 1000)
         message.save()
 
         response_data["result"] = "message sent successfully!"
@@ -185,7 +185,7 @@ def _send_match_notification(user, match):
         if isinstance(user, CollegeUser):
             subject = "Meet your Sage(ly)!"
         else:
-            subject = "Ready to give Sagely advice?"
+            subject = "Meet " + user.firstname + ", your new prospie match on Sagely!"
         message = "Hi " + match.firstname + ",<br><br>"
         message += "Great news, you got matched with " + user.firstname + "!<br><br>"
         if user.interests.all():
@@ -212,7 +212,6 @@ def _specify_class(user):
 def new_thread(request):
     # TODO: Where do we get the subject?
     try:
-        import pdb; pdb.set_trace()
         uid = request.session.get("_auth_user_id")
         user1 = GenericUser.objects.get(id=uid)  
         dic = request.POST.dict()
@@ -245,7 +244,7 @@ def new_thread(request):
         newthread.save()
         newthread.members.add(user1)
         newthread.members.add(user2)
-        m = Message(thread=newthread, text=dic['message'], sender=user1)
+        m = Message(thread=newthread, text=dic['message'], sender=user1, timestamp=dic['timestamp'])
         m.save()
         return HttpResponse(
             json.dumps({"threadid": newthread.id}),
@@ -307,10 +306,9 @@ def nudge_person(request):
             elif millisToDays(thread.mostRecentMessage()) < millisToDays(unix_time_millis(datetime.now())) + 3:
                 confirmation_text = "Let's give " + firstname + " a little more time to answer!"
             
-            # otherwise send the email
+            # otherwise write and send the email
             else:
                 confirmation_text = "Thanks for letting us know! We've nudged " + firstname + " for you!"
-                # confirmation_text = str(thread.mostRecentMessageRef().sender.email) + " " + str(nudgedUser.email) + " " + str(thread.mostRecentMessageRef().sender.email.strip() == nudgedUser.email.strip())
 
                 from_email = "sagelyio@gmail.com"
                 to_email = nudgedUser.email
@@ -328,12 +326,11 @@ def nudge_person(request):
                             <p>''' + request.user.firstname + ''' is waiting for your advice! Head <a href="http://www.sagely.io/">here</a> to help!</p>
                             <br></br><p>Cheers!</p><br></br><p><b>The Sagely Team</b></p>'''
 
-                # send email
                 msg = EmailMultiAlternatives(subject, message, from_email, {to_email})
                 msg.attach_alternative(html_message, "text/html")
-                #msg.send()
+                msg.send() # send email
         except:
-            pass
+            return redirect(chat)
         
         messages.add_message(request, messages.INFO, confirmation_text, fail_silently=True)
 

@@ -6,7 +6,7 @@ from snakd.apps.interest.models import Interest
 from snakd.apps.user.models import GenericUser, CollegeUser
 
 from heapq import heappush, heappop
-import math
+import math, random
 
 def match(matrix, user1, user2):
     score = 0.0
@@ -49,5 +49,22 @@ def bestmatches(matrix, user, opplist):
     for i in range(0, length):
         matches.append(options[i][1])
     return matches
+
+def randommatches(user, opplist):
+    options = []
+    unique_rands = random.sample(range(len(opplist)), 5)
+    
+    for r in unique_rands:
+        options.append( opplist[r] )
+    
+    length = min(len(options), 5)
+    matches = []
+    for i in range(0, length):
+        matches.append(options[i][1])
+
+    return matches
+
+
+
 
 

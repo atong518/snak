@@ -400,8 +400,7 @@ function _poll(threadId) {
 	    },
 
 		error : function(xhr, errmsg, err) {
-		$('#message-content').html("<div class= 'alert-box alert radius' data-alert>Oops! We have encountered an error!  Try refreshing the page. "+errmsg+
-					   " </div>");
+		$('#message-content').html("<div class= 'alert-box alert radius' data-alert>Oops! We have encountered an error!  Try refreshing the page. " +	" </div>");
 		console.log(xhr.status + ": " + xhr.responseText);
 	    }
 	});       
